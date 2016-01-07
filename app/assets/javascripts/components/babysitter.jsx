@@ -13,6 +13,7 @@ var BabysitterUser = React.createClass({
   handleChange: function(event) {
     var userId = event.target.value;
     console.log('Requested User ID: ', userId);
+
     var state = {
        value: userId
     };
@@ -24,14 +25,15 @@ var BabysitterUser = React.createClass({
         {
             console.log("Successfully fetched user data.", result);
             state.data = result;
-
-
+            console.log("Setting state to: ", state);
+            this.setState(state);
         }.bind(this));
     }
-
-    console.log("Setting state to: ", state);
-    this.setState(state);
-
+    else
+    {
+        console.log("Setting state to: ", state);
+        this.setState(state);
+    }
   },
 
   render: function() {
