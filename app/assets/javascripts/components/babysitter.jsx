@@ -6,21 +6,16 @@ var BabysitterUser = React.createClass({
   getInitialState: function() {
     return {
       value: this.props.requestedUserId,
-      id: '',
-      firstName: '',
-      lastName: '',
-      emailAddress: '',
-      tokens: [],
-      sitters: []
+      data: this.props.data
     };
   },
 
   handleChange: function(event) {
     var userId = event.target.value;
     console.log('Requested User ID: ', userId);
-
-    // the default is that the state is wiped clean
-    var state = {};
+    var state = {
+       value: userId
+    };
 
     if (this.uuidRegEx.test(userId))
     {
@@ -28,32 +23,15 @@ var BabysitterUser = React.createClass({
         $.get(this.userUrl + userId, function(result)
         {
             console.log("Successfully fetched user data.", result);
-            // onsuccess, set the state to the result
-            state = result;
-            state.value = userId;
-            console.log("Setting state to: ", state);
-            this.setState(state);
+            state.data = result;
+
+
         }.bind(this));
     }
-    else
-    {
-        state.value = userId;
-        console.log("Setting state to: ", state);
-        this.setState(state);
-    }
 
-  },
+    console.log("Setting state to: ", state);
+    this.setState(state);
 
-  // Once the component is mounted, populate the state with data from the service
-  componentDidMount: function() {
-      console.log("Componment mounted. Initial load from service...");
-      $.get(this.userUrl + this.props.requestedUserId, function(result)
-      {
-          if (this.isMounted()) {
-              result['requestedUserId'] = this.props.requestedUserId;
-              this.setState(result);
-          }
-      }.bind(this));
   },
 
   render: function() {
@@ -62,11 +40,11 @@ var BabysitterUser = React.createClass({
           <div>Get  user with ID: <input type="text" value={this.state.value} onChange={this.handleChange} /></div>
           <p/><p/>
           <div>
-            User {this.state.id}: {this.state.firstName} {this.state.lastName} ({this.state.emailAddress})
+            User {this.state.data.id}: {this.state.data.firstName} {this.state.data.lastName} ({this.state.data.emailAddress})
           </div>
 
-          <TokenTable tokens={this.state.tokens} />
-          <SitterTable sitters={this.state.sitters} />
+          <TokenTable tokens={this.state.data.tokens} />
+          <SitterTable sitters={this.state.data.sitters} />
       </div>
     );
   }

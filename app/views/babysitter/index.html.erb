@@ -1,4 +1,4 @@
 <h1>Babysitter#index</h1>
 <p>Find me in app/views/babysitter/index.html.erb</p>
 
-<%= react_component('BabysitterUser', {requestedUserId: '1b4513be-8f5c-4e26-bca1-a8c9f562da14'}, { prerender: true }) %>
+<%= react_component('BabysitterUser', { requestedUserId: @initial_user_id, data: @initial_user_data }, { prerender: true }) %>
