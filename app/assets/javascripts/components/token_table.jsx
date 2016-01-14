@@ -1,16 +1,3 @@
-var TokenRow = React.createClass({
-    render: function() {
-        return (
-            <tr>
-                <td>{this.props.id}</td>
-                <td>{this.props.status}</td>
-                <td>{this.props.purchaseDate}</td>
-                <td>{this.props.redemptionDate}</td>
-            </tr>
-        );
-    }
-});
-
 var TokenTable = React.createClass({
 
     render: function() {
@@ -34,6 +21,19 @@ var TokenTable = React.createClass({
                     <tbody>{rows}</tbody>
                 </table>
             </div>
+        );
+    }
+});
+
+var TokenRow = React.createClass({
+    render: function() {
+        return (
+            <tr>
+                <td>{this.props.id}</td>
+                <td>{this.props.status}</td>
+                <td>{this.props.purchaseDate}</td>
+                <td>{this.props.redemptionDate}</td>
+            </tr>
         );
     }
 });

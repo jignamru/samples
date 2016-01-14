@@ -1,69 +1,85 @@
-var BabysitterUser = React.createClass({
+// BabysitterApp
+// -Header
+// --Manage Sitters Button - Manage Sitters Page
+// --Account Settings Button -> Account Settings Page
+// -Page (see below)
 
-  userUrl: 'http://localhost:8080/babysitter/users/',
-  uuidRegEx: /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i,
+// Pages ----
+//   ---error message / notification
+// 1. Login Page
+//   ---emailInput
+//   ---passwordInput
+//   ---login button
+//   ---forgot password button
+// 2. Landing Page
+// 3. Request Sitter Details
+// 4. Request Status Page
+// 5. Account Settings Page
+//   ---Log Out
+//   ---Buy Tokens
+//   ---Documentation
+//   ---Support/Contact
+// 6. Request History
 
-  getInitialState: function() {
-    return {
-      value: this.props.requestedUserId,
-      data: this.props.data
-    };
-  },
+var BabySitterApp = React.createClass({
 
-  handleChange: function(event) {
-    var userId = event.target.value;
-    console.log('Requested User ID: ', userId);
+    authenticationUrl: 'http://localhost:8080/babysitter/users/authenticate',
 
-    var state = {
-       value: userId
-    };
+    getInitialState: function() {
+        return {
+            errorMessage: null,
+            userId: null,
+            page: 'login'
+        };
+    },
 
-    if (this.uuidRegEx.test(userId))
-    {
-        console.log("Value matched UUID format. Requesting data from API.");
-        $.get(this.userUrl + userId, function(result)
-        {
-            console.log("Successfully fetched user data.", result);
-            state.data = result;
-            console.log("Setting state to: ", state);
-            this.setState(state);
-        }.bind(this));
+    handleLogin: function(emailAddress, password) {
+        $.ajax({
+            context: this,
+            type: 'POST',
+            url: this.authenticationUrl,
+            data: {
+                emailAddress: emailAddress,
+                password: password,
+                deviceId: 'a device id'
+            },
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function(result)
+            {
+                console.log("Login successful. Result: ", result);
+                var newState = Object.assign(this.state, { page: 'landing', userId: result.userId });
+                this.setState(newState);
+            }
+        });
+    },
+
+    render: function() {
+
+        var page;
+        if (this.state.page === 'login')
+            page = <LoginPage handleLogin={this.handleLogin} />;
+        else if (this.state.page === 'landing')
+            page = <LandingPage userId={this.state.userId} />
+
+        return (
+            <div className="babysitter-app-wrapper">
+                <BabySitterAppHeader />
+                <div className='error-message'>{this.state.errorMessage}</div>
+                {page}
+            </div>
+        );
     }
-    else
-    {
-        console.log("Setting state to: ", state);
-        this.setState(state);
-    }
-  },
-
-  render: function() {
-    return (
-      <div>
-          <div>Get  user with ID: <input type="text" value={this.state.value} onChange={this.handleChange} /></div>
-          <p/><p/>
-          <div>
-            User {this.state.data.id}: {this.state.data.firstName} {this.state.data.lastName} ({this.state.data.emailAddress})
-          </div>
-
-          <TokenTable tokens={this.state.data.tokens} />
-          <SitterTable sitters={this.state.data.sitters} />
-      </div>
-    );
-  }
 });
 
-//var ParentView = React.createClass({
-//
-//});
-//
+var BabySitterAppHeader = React.createClass({
+    render: function() {
+        return (
+            <div className="babysitter-app-header-wrapper">
+                <div>SitterDone Header</div>
+            </div>
+        );
+    }
+});
 
 
-
-// ParentSearchBar
-// -SearchBar
-
-// ParentView
-// -SitterTable
-// --SitterRow
-// -TokenTable
-// --TokenRow
