@@ -35,7 +35,7 @@ var BabySitterLogin = React.createClass({
             <div className="user-login-wrapper">
                 <div>Email: <input type="text" onChange={this.handleEmailChange} onLoad={this.handleEmailChange} value={this.state.email} /></div>
                 <div>Password: <input type="password" onChange={this.handlePasswordChange} value={this.state.password} /></div>
-                <button onClick={this.handleLogin} >Login</button>
+                <button onClick={this.handleLogin}>Login</button>
             </div>
         );
     }

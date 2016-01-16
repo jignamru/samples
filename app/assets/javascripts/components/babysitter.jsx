@@ -23,12 +23,9 @@
 
 var BabySitterApp = React.createClass({
 
-    authenticationUrl: 'http://localhost:8080/babysitter/users/authenticate',
-
     getInitialState: function() {
         return {
             errorMessage: null,
-            userId: null,
             page: 'login'
         };
     },
@@ -37,34 +34,46 @@ var BabySitterApp = React.createClass({
         $.ajax({
             context: this,
             type: 'POST',
-            url: this.authenticationUrl,
+            url: '/authenticate',
             data: {
                 emailAddress: emailAddress,
-                password: password,
-                deviceId: 'a device id'
+                password: password
             },
             contentType: 'application/json',
             dataType: 'json',
             success: function(result)
             {
                 console.log("Login successful. Result: ", result);
-                var newState = Object.assign(this.state, { page: 'landing', userId: result.userId });
-                this.setState(newState);
+                this.gotoPage('landing');
             }
         });
     },
 
+    gotoPage: function(page) {
+        this.setState(Object.assign(this.state, { page: page }));
+        history.pushState(this.state, page, '#' + page);
+    },
+
+    componentDidMount: function() {
+        // make sure the browser knows which page we're on when we're starting out
+        history.pushState(this.state, this.state.page, '#' + this.state.page);
+    },
+
     render: function() {
+
+        var header = this.state.userId ? <BabySitterAppHeader gotoPage={this.gotoPage} /> : null;
 
         var page;
         if (this.state.page === 'login')
             page = <LoginPage handleLogin={this.handleLogin} />;
         else if (this.state.page === 'landing')
-            page = <LandingPage userId={this.state.userId} />
+            page = <LandingPage gotoPage={this.gotoPage} />
+        else if (this.state.page === 'account_settings')
+            page = <AccountSettingsPage gotoPage={this.gotoPage} />
 
         return (
             <div className="babysitter-app-wrapper">
-                <BabySitterAppHeader />
+                {header}
                 <div className='error-message'>{this.state.errorMessage}</div>
                 {page}
             </div>
@@ -73,13 +82,16 @@ var BabySitterApp = React.createClass({
 });
 
 var BabySitterAppHeader = React.createClass({
+
+    gotoPage: function() {
+        this.props.gotoPage('account_settings');
+    },
+
     render: function() {
         return (
             <div className="babysitter-app-header-wrapper">
-                <div>SitterDone Header</div>
+                <div>SitterDone Header - <button onClick={this.gotoPage}>Account Settings</button></div>
             </div>
         );
     }
 });
-
-

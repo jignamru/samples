@@ -1,7 +1,5 @@
 var LandingPage = React.createClass({
 
-    userUrl: 'http://localhost:8080/babysitter/users/',
-
     getInitialState: function() {
         return {
             data: {},
@@ -12,13 +10,13 @@ var LandingPage = React.createClass({
     componentDidMount: function() {
 
         // fetch user data
-        $.get(this.userUrl + this.props.userId, function(result) {
+        $.get('/user', function(result) {
             console.log("Successfully fetched user data. Result: ", result);
             this.setState(Object.assign(this.state, { data: result }));
         }.bind(this));
 
         // fetch sitters for this user
-        $.get(this.userUrl + this.props.userId + '/sitters', function(result) {
+        $.get('/sitters', function(result) {
             console.log("Successfully fetched user sitter data. Result: ", result);
             this.setState(Object.assign(this.state, { sitters: result }));
         }.bind(this));
@@ -29,10 +27,15 @@ var LandingPage = React.createClass({
             <div className='landing-page'>
                 <div>Welcome back, {this.state.data.firstName} {this.state.data.lastName}!</div>
                 <hr />
-                <div>Your user ID is: {this.state.data.id}</div>
                 <div>Your email address is: {this.state.data.emailAddress}</div>
                 <div>You have {this.state.data.tokens ? this.state.data.tokens.length : 0} tokens</div>
                 <div>You have {this.state.sitters.length} sitters</div>
+
+                <hr />
+                // TODO Conditionally - button to buy more tokens -->
+                // TODO Conditionally - button to add a sitter -->
+
+                <button onClick={this.handleScheduleSitter}>Schedule a Sitter</button>
             </div>
         );
     }
