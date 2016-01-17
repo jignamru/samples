@@ -16,9 +16,14 @@ var AccountSettingsPage = React.createClass({
         this.props.handleLogout();
     },
 
+    gotoPage: function() {
+        this.props.gotoPage('landing');
+    },
+
     render: function() {
         return (
             <div className="account-settings-page">
+                <BabySitterAppHeader back='landing' gotoPage={this.gotoPage} />
                 <div>Your Account</div>
                 <hr />
                 <button onClick={this.handleDocumentation}>Documentation</button>

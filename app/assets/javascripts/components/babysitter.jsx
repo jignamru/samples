@@ -89,11 +89,6 @@ var BabySitterApp = React.createClass({
     },
 
     render: function() {
-
-        var header = this.state.page && this.state.page !== 'login' ?
-            <BabySitterAppHeader page={this.state.page} gotoPage={this.gotoPage} handleLogout={this.handleLogout} /> :
-            null;
-
         var page;
         if (this.state.page === 'login')
             page = <LoginPage handleLogin={this.handleLogin} />;
@@ -101,10 +96,11 @@ var BabySitterApp = React.createClass({
             page = <LandingPage gotoPage={this.gotoPage} />
         else if (this.state.page === 'account_settings')
             page = <AccountSettingsPage gotoPage={this.gotoPage} handleLogout={this.handleLogout} />
+        else if (this.state.page === 'add_sitter')
+            page = <AddSitterPage gotoPage={this.gotoPage} />
 
         return (
             <div className="babysitter-app-wrapper">
-                {header}
                 <div className='error-message'>{this.state.errorMessage}</div>
                 {page}
             </div>
@@ -114,26 +110,27 @@ var BabySitterApp = React.createClass({
 
 var BabySitterAppHeader = React.createClass({
 
-    gotoLanding: function() {
-        this.props.gotoPage('landing');
+    propTypes: {
+        back: React.PropTypes.string,
+        forward: React.PropTypes.string,
+        forwardLabel: React.PropTypes.string,
+        gotoPage: React.PropTypes.func
     },
 
-    gotoAccountSettings: function() {
-        this.props.gotoPage('account_settings');
+    goBack: function() {
+        this.props.gotoPage(this.props.back);
+    },
+
+    goForward: function() {
+        this.props.gotoPage(this.props.forward);
     },
 
     render: function() {
-        var homeButton = this.props.page !== 'landing' ?
-            <button onClick={this.gotoLanding}>Home</button> :
-            null;
-
-        var accountButton = this.props.page !== 'account_settings' ?
-            <button onClick={this.gotoAccountSettings}>Account</button> :
-            null;
-
+        var backButton = this.props.back ? <button onClick={this.goBack}>Back</button> : null;
+        var forwardButton = this.props.forward ? <button onClick={this.goForward}>{this.props.forwardLabel}</button> : null;
         return (
-            <div className="babysitter-app-header-wrapper">
-                <div>{homeButton} - SitterDone Header - {accountButton}</div>
+            <div className="babysitter-app-header">
+                <div>{backButton} - SitterDone Header - {forwardButton}</div>
             </div>
         );
     }
