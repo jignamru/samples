@@ -2,7 +2,8 @@ require 'rest-client'
 
 class BabysitterController < ApplicationController
   respond_to :json
-  skip_before_action :verify_authenticity_token, only: [:goto_page]
+
+  skip_before_action :verify_authenticity_token, only: [:goto_page, :logout, :authenticate]
 
   AUTHENTICATE_URL = 'http://localhost:8080/babysitter/users/authenticate'
   USER_URL         = 'http://localhost:8080/babysitter/users/'
@@ -55,6 +56,9 @@ class BabysitterController < ApplicationController
   def logout
     Rails.logger.debug("Logging user out. Resetting session.")
     reset_session
+
+    # we don't need to return anything for a successful save
+    return render json: {}
   end
 
   def user

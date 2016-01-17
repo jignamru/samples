@@ -49,6 +49,21 @@ var BabySitterApp = React.createClass({
         });
     },
 
+    handleLogout: function() {
+        $.ajax({
+            context: this,
+            type: 'POST',
+            url: '/logout',
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function(result)
+            {
+                console.log("logout successful. Result: ", result);
+                this.gotoPage('login');
+            }
+        });
+    },
+
     gotoPage: function(page) {
         this.setState(Object.assign(this.state, { page: page }));
         history.pushState(this.state, page, '#' + page);
@@ -75,7 +90,9 @@ var BabySitterApp = React.createClass({
 
     render: function() {
 
-        var header = this.state.page && this.state.page !== 'login' ? <BabySitterAppHeader page={this.state.page} gotoPage={this.gotoPage} /> : null;
+        var header = this.state.page && this.state.page !== 'login' ?
+            <BabySitterAppHeader page={this.state.page} gotoPage={this.gotoPage} handleLogout={this.handleLogout} /> :
+            null;
 
         var page;
         if (this.state.page === 'login')
@@ -83,7 +100,7 @@ var BabySitterApp = React.createClass({
         else if (this.state.page === 'landing')
             page = <LandingPage gotoPage={this.gotoPage} />
         else if (this.state.page === 'account_settings')
-            page = <AccountSettingsPage gotoPage={this.gotoPage} />
+            page = <AccountSettingsPage gotoPage={this.gotoPage} handleLogout={this.handleLogout} />
 
         return (
             <div className="babysitter-app-wrapper">
@@ -106,8 +123,14 @@ var BabySitterAppHeader = React.createClass({
     },
 
     render: function() {
-        var homeButton = this.props.page !== 'landing' ? <button onClick={this.gotoLanding}>Home</button> : null;
-        var accountButton = this.props.page !== 'account_settings' ? <button onClick={this.gotoAccountSettings}>Account</button> : null;
+        var homeButton = this.props.page !== 'landing' ?
+            <button onClick={this.gotoLanding}>Home</button> :
+            null;
+
+        var accountButton = this.props.page !== 'account_settings' ?
+            <button onClick={this.gotoAccountSettings}>Account</button> :
+            null;
+
         return (
             <div className="babysitter-app-header-wrapper">
                 <div>{homeButton} - SitterDone Header - {accountButton}</div>
