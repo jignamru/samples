@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post 'authenticate' => 'babysitter#authenticate'
   get  'user'         => 'babysitter#user'
   get  'sitters'      => 'babysitter#sitters'
+  post 'add_sitter'   => 'babysitter#add_sitter'
   post 'logout'       => 'babysitter#logout'
 
   # The priority is based upon order of creation: first created -> highest priority.
