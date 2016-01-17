@@ -8,7 +8,6 @@ var LoginPage = React.createClass({
     }
 });
 
-// TODO use a real device ID once we're on a device
 // TODO the form will still have a value in the email field after a page refresh, but this isn't finding it's way into state
 var BabySitterLogin = React.createClass({
     getInitialState: function() {

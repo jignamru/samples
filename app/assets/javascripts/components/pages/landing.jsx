@@ -27,15 +27,15 @@ var LandingPage = React.createClass({
             <div className='landing-page'>
                 <div>Welcome back, {this.state.data.firstName} {this.state.data.lastName}!</div>
                 <hr />
-                <div>Your email address is: {this.state.data.emailAddress}</div>
-                <div>You have {this.state.data.tokens ? this.state.data.tokens.length : 0} tokens</div>
-                <div>You have {this.state.sitters.length} sitters</div>
-
-                <hr />
-                // TODO Conditionally - button to buy more tokens -->
-                // TODO Conditionally - button to add a sitter -->
-
                 <button onClick={this.handleScheduleSitter}>Schedule a Sitter</button>
+                <hr />
+                <div>You Have</div>
+                <div>{this.state.data.tokens ? this.state.data.tokens.length : 0} tokens</div>
+                <button>Buy More Tokens</button>
+                <hr />
+                <div>You Have</div>
+                <div>{this.state.sitters ? this.state.sitters.length : 0} sitters</div>
+                <button>Add a Sitter</button>
             </div>
         );
     }
