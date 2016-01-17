@@ -2,12 +2,32 @@ require 'rest-client'
 
 class BabysitterController < ApplicationController
   respond_to :json
+  skip_before_action :verify_authenticity_token, only: [:goto_page]
 
   AUTHENTICATE_URL = 'http://localhost:8080/babysitter/users/authenticate'
   USER_URL         = 'http://localhost:8080/babysitter/users/'
 
   def index
-    #session[:user_id] = @current_user.id
+    user_id = session[:user_id]
+
+    @page = session[:page] if user_id.present?
+    Rails.logger.debug("Session page: #{@page}")
+    @page ||= 'login'
+    Rails.logger.debug("Initial page: #{@page}")
+    session[:page] = @page
+  end
+
+  def goto_page
+    request_body = JSON.parse(request.body.read)
+    page = request_body['page']
+
+    if session[:user_id].present?
+      Rails.logger.debug("Saving page to session. Page: #{page}")
+      session[:page] = page
+    end
+
+    # we don't need to return anything for a successful save
+    return render json: {}
   end
 
   def authenticate
@@ -19,13 +39,22 @@ class BabysitterController < ApplicationController
     # TODO check the response status code
     response_body = JSON.parse(response.body)
 
+    Rails.logger.debug("Successful login. Resetting session to prepare storage.")
+    reset_session
+
     # Save the user ID to the session; we will use this later
     # TODO we need to save the token from the service as well
     user_id = response_body['userId']
     Rails.logger.debug("User ID: #{user_id}")
     session[:user_id] = user_id
 
-    return render json: response_body
+    # we don't need to return anything for a successful authentication
+    return render json: {}
+  end
+
+  def logout
+    Rails.logger.debug("Logging user out. Resetting session.")
+    reset_session
   end
 
   def user

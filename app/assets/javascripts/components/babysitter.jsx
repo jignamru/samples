@@ -26,7 +26,7 @@ var BabySitterApp = React.createClass({
     getInitialState: function() {
         return {
             errorMessage: null,
-            page: 'login'
+            page: this.props.initialPage
         };
     },
 
@@ -52,6 +52,20 @@ var BabySitterApp = React.createClass({
     gotoPage: function(page) {
         this.setState(Object.assign(this.state, { page: page }));
         history.pushState(this.state, page, '#' + page);
+        $.ajax({
+            context: this,
+            type: 'POST',
+            url: '/goto_page',
+            data: {
+                page: page
+            },
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function(result)
+            {
+                console.log("Page saved to session.");
+            }
+        });
     },
 
     componentDidMount: function() {
@@ -61,7 +75,7 @@ var BabySitterApp = React.createClass({
 
     render: function() {
 
-        var header = this.state.userId ? <BabySitterAppHeader gotoPage={this.gotoPage} /> : null;
+        var header = this.state.page && this.state.page !== 'login' ? <BabySitterAppHeader page={this.state.page} gotoPage={this.gotoPage} /> : null;
 
         var page;
         if (this.state.page === 'login')
@@ -83,14 +97,20 @@ var BabySitterApp = React.createClass({
 
 var BabySitterAppHeader = React.createClass({
 
-    gotoPage: function() {
+    gotoLanding: function() {
+        this.props.gotoPage('landing');
+    },
+
+    gotoAccountSettings: function() {
         this.props.gotoPage('account_settings');
     },
 
     render: function() {
+        var homeButton = this.props.page !== 'landing' ? <button onClick={this.gotoLanding}>Home</button> : null;
+        var accountButton = this.props.page !== 'account_settings' ? <button onClick={this.gotoAccountSettings}>Account</button> : null;
         return (
             <div className="babysitter-app-header-wrapper">
-                <div>SitterDone Header - <button onClick={this.gotoPage}>Account Settings</button></div>
+                <div>{homeButton} - SitterDone Header - {accountButton}</div>
             </div>
         );
     }
