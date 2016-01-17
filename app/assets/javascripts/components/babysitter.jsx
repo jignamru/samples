@@ -44,6 +44,7 @@ var BabySitterApp = React.createClass({
             success: function(result)
             {
                 console.log("Login successful. Result: ", result);
+                $('meta[name="csrf-token"]').attr('content', result['newCSRFToken']);
                 this.gotoPage('landing');
             }
         });
@@ -59,6 +60,7 @@ var BabySitterApp = React.createClass({
             success: function(result)
             {
                 console.log("logout successful. Result: ", result);
+                $('meta[name="csrf-token"]').attr('content', result['newCSRFToken']);
                 this.gotoPage('login');
             }
         });

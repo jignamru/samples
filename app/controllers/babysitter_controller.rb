@@ -3,7 +3,7 @@ require 'rest-client'
 class BabysitterController < ApplicationController
   respond_to :json
 
-  skip_before_action :verify_authenticity_token, only: [:goto_page, :logout, :authenticate]
+  #skip_before_action :verify_authenticity_token, only: [:goto_page, :logout, :authenticate]
 
   AUTHENTICATE_URL = 'http://localhost:8080/babysitter/users/authenticate'
   USER_URL         = 'http://localhost:8080/babysitter/users/'
@@ -50,6 +50,15 @@ class BabysitterController < ApplicationController
     session[:user_id] = user_id
 
     # we don't need to return anything for a successful authentication
+    return render json: { newCSRFToken: form_authenticity_token }
+  end
+
+  def add_sitter
+    request_body = JSON.parse(request.body.read)
+    Rails.logger.debug("Request body: #{request_body}")
+
+    raise "No active session." if !session[:user_id]
+
     return render json: {}
   end
 
@@ -58,8 +67,12 @@ class BabysitterController < ApplicationController
     reset_session
 
     # we don't need to return anything for a successful save
-    return render json: {}
+    return render json: { newCSRFToken: form_authenticity_token }
   end
+
+  ############
+  #  GET URLs
+  #######
 
   def user
     user_id = session[:user_id]
@@ -80,5 +93,7 @@ class BabysitterController < ApplicationController
 
     return render json: response.body
   end
+
+
 
 end
