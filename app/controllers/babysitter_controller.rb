@@ -3,8 +3,6 @@ require 'rest-client'
 class BabysitterController < ApplicationController
   respond_to :json
 
-  #skip_before_action :verify_authenticity_token, only: [:goto_page, :logout, :authenticate]
-
   AUTHENTICATE_URL = 'http://localhost:8080/babysitter/users/authenticate'
   USER_URL         = 'http://localhost:8080/babysitter/users/'
 
@@ -17,6 +15,10 @@ class BabysitterController < ApplicationController
     Rails.logger.debug("Initial page: #{@page}")
     session[:page] = @page
   end
+
+  ########################################
+  #  AJAX POST URLs
+  ########################################
 
   def goto_page
     request_body = JSON.parse(request.body.read)
@@ -57,9 +59,18 @@ class BabysitterController < ApplicationController
     request_body = JSON.parse(request.body.read)
     Rails.logger.debug("Request body: #{request_body}")
 
-    raise "No active session." if !session[:user_id]
+    user_id = session[:user_id]
+    Rails.logger.debug("User ID: #{user_id}")
+    raise "No active session." if user_id.blank?
 
-    return render json: {}
+    add_sitter_url = "#{USER_URL}#{user_id}/sitters"
+    Rails.logger.debug("Add sitter URL: #{add_sitter_url}")
+
+    response = RestClient.post(add_sitter_url, request_body.to_json, content_type: :json, accept: :json)
+    Rails.logger.debug("Response: #{response}")
+    response_body = JSON.parse(response.body)
+
+    return render json: response_body
   end
 
   def logout
@@ -70,9 +81,9 @@ class BabysitterController < ApplicationController
     return render json: { newCSRFToken: form_authenticity_token }
   end
 
-  ############
-  #  GET URLs
-  #######
+  ########################################
+  #  AJAX GET URLs
+  ########################################
 
   def user
     user_id = session[:user_id]

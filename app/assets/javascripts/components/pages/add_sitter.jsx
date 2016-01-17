@@ -16,7 +16,6 @@ var AddSitterPage = React.createClass({
             success: function(result)
             {
                 console.log("Successfully added sitter. Result: ", result);
-                this.props.gotoPage('add_sitter_success');
             }
         });
     },
