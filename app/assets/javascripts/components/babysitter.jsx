@@ -6,12 +6,6 @@
 
 // Pages ----
 //   ---error message / notification
-// 1. Login Page
-//   ---emailInput
-//   ---passwordInput
-//   ---login button
-//   ---forgot password button
-// 2. Landing Page
 // 3. Request Sitter Details
 // 4. Request Status Page
 // 5. Account Settings Page
@@ -26,6 +20,7 @@ var BabySitterApp = React.createClass({
     getInitialState: function() {
         return {
             errorMessage: null,
+            previousPage: this.props.initialPage,
             page:         this.props.initialPage,
             userData:     {},
             sitterData:   []
@@ -69,7 +64,9 @@ var BabySitterApp = React.createClass({
     },
 
     gotoPage: function(page) {
-        this.setState(Object.assign(this.state, { page: page }));
+        console.log("Navigating to page: ", page);
+        console.log("Previous page: ", this.state.page);
+        this.setState(Object.assign(this.state, { page: page, previousPage: this.state.page }));
         history.pushState(this.state, page, '#' + page);
         $.ajax({
             context: this,
@@ -117,39 +114,19 @@ var BabySitterApp = React.createClass({
             page = <AddSitterPage gotoPage={this.gotoPage} />
         else if (this.state.page === 'manage_sitters')
             page = <ManageSittersPage gotoPage={this.gotoPage} sitterData={this.state.sitterData} />
+        else if (this.state.page === 'about_us')
+            page = <AboutUsPage gotoPage={this.gotoPage} />
+        else if (this.state.page === 'contact_support')
+            page = <ContactSupportPage gotoPage={this.gotoPage} />
+        else if (this.state.page === 'documentation')
+            page = <DocumentationPage gotoPage={this.gotoPage} />
+        else
+            page = <NotFoundPage comingFrom={this.state.previousPage} gotoPage={this.gotoPage} />;
 
         return (
             <div className="babysitter-app-wrapper">
                 <div className='error-message'>{this.state.errorMessage}</div>
                 {page}
-            </div>
-        );
-    }
-});
-
-var BabySitterAppHeader = React.createClass({
-
-    propTypes: {
-        back: React.PropTypes.string,
-        forward: React.PropTypes.string,
-        forwardLabel: React.PropTypes.string,
-        gotoPage: React.PropTypes.func
-    },
-
-    goBack: function() {
-        this.props.gotoPage(this.props.back);
-    },
-
-    goForward: function() {
-        this.props.gotoPage(this.props.forward);
-    },
-
-    render: function() {
-        var backButton = this.props.back ? <button onClick={this.goBack}>Back</button> : null;
-        var forwardButton = this.props.forward ? <button onClick={this.goForward}>{this.props.forwardLabel}</button> : null;
-        return (
-            <div className="babysitter-app-header">
-                <div>{backButton} - SitterDone Header - {forwardButton}</div>
             </div>
         );
     }
