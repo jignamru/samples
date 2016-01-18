@@ -1,5 +1,9 @@
 var AddSitterPage = React.createClass({
 
+    propTypes: {
+        gotoPage:     React.PropTypes.func
+    },
+
     handleAddSitter: function() {
         $.ajax({
             context: this,

@@ -114,6 +114,8 @@ var BabySitterApp = React.createClass({
             page = <AddSitterPage gotoPage={this.gotoPage} />
         else if (this.state.page === 'manage_sitters')
             page = <ManageSittersPage gotoPage={this.gotoPage} sitterData={this.state.sitterData} />
+        else if (this.state.page === 'schedule_sitter')
+            page = <ScheduleSitterPage gotoPage={this.gotoPage} />
         else if (this.state.page === 'about_us')
             page = <AboutUsPage gotoPage={this.gotoPage} />
         else if (this.state.page === 'contact_support')
