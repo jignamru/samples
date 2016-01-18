@@ -26,7 +26,9 @@ var BabySitterApp = React.createClass({
     getInitialState: function() {
         return {
             errorMessage: null,
-            page: this.props.initialPage
+            page:         this.props.initialPage,
+            userData:     {},
+            sitterData:   []
         };
     },
 
@@ -43,9 +45,9 @@ var BabySitterApp = React.createClass({
             dataType: 'json',
             success: function(result)
             {
-                console.log("Login successful. Result: ", result);
                 $('meta[name="csrf-token"]').attr('content', result['newCSRFToken']);
                 this.gotoPage('landing');
+                this.loadUserAndSitterData();
             }
         });
     },
@@ -59,8 +61,8 @@ var BabySitterApp = React.createClass({
             dataType: 'json',
             success: function(result)
             {
-                console.log("logout successful. Result: ", result);
                 $('meta[name="csrf-token"]').attr('content', result['newCSRFToken']);
+                this.replaceState(this.getInitialState());
                 this.gotoPage('login');
             }
         });
@@ -85,9 +87,22 @@ var BabySitterApp = React.createClass({
         });
     },
 
+    loadUserAndSitterData: function() {
+        // fetch user data
+        $.get('/user', function(result) {
+            this.setState(Object.assign(this.state, { userData: result }));
+        }.bind(this));
+
+        // fetch sitters for this user
+        $.get('/sitters', function(result) {
+            this.setState(Object.assign(this.state, { sitterData: result }));
+        }.bind(this));
+    },
+
     componentDidMount: function() {
         // make sure the browser knows which page we're on when we're starting out
         history.pushState(this.state, this.state.page, '#' + this.state.page);
+        this.loadUserAndSitterData();
     },
 
     render: function() {
@@ -95,11 +110,13 @@ var BabySitterApp = React.createClass({
         if (this.state.page === 'login')
             page = <LoginPage handleLogin={this.handleLogin} />;
         else if (this.state.page === 'landing')
-            page = <LandingPage gotoPage={this.gotoPage} />
+            page = <LandingPage gotoPage={this.gotoPage} userData={this.state.userData} sitterData={this.state.sitterData} />
         else if (this.state.page === 'account_settings')
             page = <AccountSettingsPage gotoPage={this.gotoPage} handleLogout={this.handleLogout} />
         else if (this.state.page === 'add_sitter')
             page = <AddSitterPage gotoPage={this.gotoPage} />
+        else if (this.state.page === 'manage_sitters')
+            page = <ManageSittersPage gotoPage={this.gotoPage} sitters={this.state.sitterData} />
 
         return (
             <div className="babysitter-app-wrapper">
