@@ -6,6 +6,10 @@ var LandingPage = React.createClass({
         sitterData:    React.PropTypes.arrayOf(React.PropTypes.object).isRequired
     },
 
+    handleManageSitters: function() {
+        this.props.gotoPage('manage_sitters');
+    },
+
     handleScheduleSitter: function() {
         this.props.gotoPage('schedule_sitter');
     },
@@ -32,7 +36,7 @@ var LandingPage = React.createClass({
                 <hr />
                 <div>You Have</div>
                 <div>{this.props.sitterData ? this.props.sitterData.length : 0} sitters</div>
-                <button onClick={this.handleAddSitter}>Add a Sitter</button>
+                <button onClick={this.handleManageSitters}>Manage Sitters</button> <button onClick={this.handleAddSitter}>Add a Sitter</button>
             </div>
         );
     }
