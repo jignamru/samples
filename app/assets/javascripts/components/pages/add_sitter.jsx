@@ -8,10 +8,10 @@ var AddSitterPage = React.createClass({
             contentType: 'application/json',
             dataType: 'json',
             data: {
-                firstName: this.refs.firstName.getDOMNode().value,
-                lastName: this.refs.lastName.getDOMNode().value,
-                emailAddress: this.refs.emailAddress.getDOMNode().value,
-                phoneNumber: this.refs.phoneNumber.getDOMNode().value
+                firstName: this.refs.firstName.value,
+                lastName: this.refs.lastName.value,
+                emailAddress: this.refs.emailAddress.value,
+                phoneNumber: this.refs.phoneNumber.value
             },
             success: function(result)
             {
