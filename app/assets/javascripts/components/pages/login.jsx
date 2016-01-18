@@ -1,4 +1,9 @@
 var LoginPage = React.createClass({
+
+    propTypes: {
+        handleLogin: React.PropTypes.func.isRequired
+    },
+
     render: function() {
         return (
             <div className='login-page'>
@@ -10,6 +15,10 @@ var LoginPage = React.createClass({
 
 // TODO the form will still have a value in the email field after a page refresh, but this isn't finding it's way into state
 var BabySitterLogin = React.createClass({
+
+    propTypes: {
+        handleLogin: React.PropTypes.func.isRequired
+    },
 
     handleEmailChange: function(event) {
         // TODO use this for validation

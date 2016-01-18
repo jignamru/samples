@@ -1,9 +1,13 @@
 var SitterTable = React.createClass({
 
+    propTypes: {
+        sitterData: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
+    },
+
     render: function() {
         var rows = [];
-        this.props.sitters.forEach(function(sitter) {
-            rows.push(<SitterRow data={sitter} key={sitter.id} />);
+        this.props.sitterData.forEach(function(sitter) {
+            rows.push(<SitterRow sitter={sitter} key={sitter.id} />);
         });
 
         return (
@@ -28,12 +32,16 @@ var SitterTable = React.createClass({
 
 var SitterRow = React.createClass({
 
+    propTypes: {
+        sitter: React.PropTypes.object.isRequired
+    },
+
     render: function() {
         return (
             <tr>
-                <td>{this.props.data.firstName} {this.props.data.lastName}</td>
-                <td>{this.props.data.emailAddress}</td>
-                <td>{this.props.data.phoneNumber}</td>
+                <td>{this.props.sitter.firstName} {this.props.sitter.lastName}</td>
+                <td>{this.props.sitter.emailAddress}</td>
+                <td>{this.props.sitter.phoneNumber}</td>
             </tr>
         );
     }
