@@ -64,6 +64,7 @@ var BabySitterApp = React.createClass({
     },
 
     gotoPage: function(page) {
+        // update the state of the component as well as the session
         this.setState(Object.assign(this.state, { page: page, previousPage: this.state.page }));
         $.ajax({
             context: this,
@@ -82,11 +83,15 @@ var BabySitterApp = React.createClass({
     },
 
     navigate: function() {
+        // parse the page out of the hash
         var pageHash = window.location.hash;
         var pageMatch = pageHash.match(/#(\w+)/);
         var page = pageMatch[1];
+
         console.log("Navigating to page: ", page);
         console.log("Previous page: ", this.state.page);
+
+        // goto the page we parsed
         this.gotoPage(page);
     },
 
@@ -103,13 +108,18 @@ var BabySitterApp = React.createClass({
     },
 
     componentDidMount: function() {
-        // make sure the browser knows which page we're on when we're starting out
-        window.addEventListener('hashchange', this.navigate, false);
+        // start loading the user data
         this.loadUserAndSitterData();
+
+        // add a window listener to detect hash changes; this is how we navigate
+        window.addEventListener('hashchange', this.navigate, false);
+
+        // make sure the browser knows which page we're on when we're starting out
         window.location.hash = this.state.page;
     },
 
     componentWillUnmount: function() {
+        // unregister the hash change listener
         window.removeEventListener('hashchange', this.navigate);
     },
 
@@ -133,6 +143,8 @@ var BabySitterApp = React.createClass({
             page = <ContactSupportPage />
         else if (this.state.page === 'documentation')
             page = <DocumentationPage />
+        else if (this.state.page === 'buy_tokens')
+            page = <BuyTokensPage />
         else
             page = <NotFoundPage comingFrom={this.state.previousPage} />;
 
