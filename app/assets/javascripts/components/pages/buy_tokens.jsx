@@ -6,6 +6,7 @@ var BuyTokensPage = React.createClass({
                 Buy Tokens Placeholder
 
                 <form action="/charge" method="POST">
+                  <input type="hidden" name="authenticity_token" value={this.props.authenticityToken} />
                   <script
                     src="https://checkout.stripe.com/checkout.js" className="stripe-button"
                     data-key="pk_test_DFBtMYDJOssZa2Aq9tTRkLxm"

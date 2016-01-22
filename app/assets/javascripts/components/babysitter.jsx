@@ -78,6 +78,10 @@ var BabySitterApp = React.createClass({
             success: function(result)
             {
                 console.log("Page saved to session.");
+                // hacky, but force a reload of the page if we have gone to the buy tokens page to make the stripe button appear
+                if (page === 'buy_tokens') {
+                    location.reload();
+                }
             }
         });
     },
@@ -144,7 +148,9 @@ var BabySitterApp = React.createClass({
         else if (this.state.page === 'documentation')
             page = <DocumentationPage />
         else if (this.state.page === 'buy_tokens')
-            page = <BuyTokensPage />
+            page = <BuyTokensPage authenticityToken={this.props.authenticityToken} />
+        else if (this.state.page === 'purchase_confirmation')
+            page = <PurchaseConfirmationPage />
         else
             page = <NotFoundPage comingFrom={this.state.previousPage} />;
 

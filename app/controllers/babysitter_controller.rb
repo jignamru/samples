@@ -3,7 +3,7 @@ require 'rest-client'
 class BabysitterController < ApplicationController
   respond_to :json
 
-  before_action :require_session_user, only: [:user, :sitters, :add_sitter, :schedule_sitter]
+  before_action :require_session_user, only: [:user, :sitters, :add_sitter, :schedule_sitter, :charge]
   before_action :parse_request_body_as_json, only: [:goto_page, :authenticate, :add_sitter, :schedule_sitter]
 
   AUTHENTICATE_URL = 'http://localhost:8080/babysitter/users/authenticate'
@@ -22,6 +22,19 @@ class BabysitterController < ApplicationController
   ########################################
   #  AJAX POST URLs
   ########################################
+
+  def charge
+
+    # call service to make the charge
+    purchase_tokens_url = "#{USER_URL}#{@user_id}/tokens"
+    # TODO plan should be a parameter
+    response = RestClient.post(purchase_tokens_url, { stripeToken: params['stripeToken'], tokenPlan: 'FIVE' }.to_json, content_type: :json, accept: :json)
+    Rails.logger.debug("Response: #{response}")
+    response_body = JSON.parse(response.body) if response.body.present?
+
+    session[:page] = 'purchase_confirmation'
+    return redirect_to root_path
+  end
 
   def goto_page
     page = @request_body['page']

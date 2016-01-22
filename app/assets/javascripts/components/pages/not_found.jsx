@@ -7,7 +7,7 @@ var NotFoundPage = React.createClass({
     render: function() {
         return (
             <div className="not-found-page">
-                <BabySitterAppHeader back={this.props.comingFrom} />
+                <BabySitterAppHeader back='landing' />
                 Oops! We couldn't find that page. Please contact support if the problem persists.
             </div>
         );
