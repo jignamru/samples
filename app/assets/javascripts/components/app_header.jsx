@@ -3,16 +3,15 @@ var BabySitterAppHeader = React.createClass({
     propTypes: {
         back: React.PropTypes.string,
         forward: React.PropTypes.string,
-        forwardLabel: React.PropTypes.string,
-        gotoPage: React.PropTypes.func
+        forwardLabel: React.PropTypes.string
     },
 
     goBack: function() {
-        this.props.gotoPage(this.props.back);
+        window.location.hash = this.props.back;
     },
 
     goForward: function() {
-        this.props.gotoPage(this.props.forward);
+        window.location.hash = this.props.forward;
     },
 
     render: function() {

@@ -1,9 +1,5 @@
 var AddSitterPage = React.createClass({
 
-    propTypes: {
-        gotoPage:     React.PropTypes.func
-    },
-
     handleAddSitter: function() {
         $.ajax({
             context: this,
@@ -27,7 +23,7 @@ var AddSitterPage = React.createClass({
     render: function() {
         return (
             <div className="add-sitter-page">
-                <BabySitterAppHeader back='landing' gotoPage={this.props.gotoPage} />
+                <BabySitterAppHeader back='landing' />
                 Add Sitter Placeholder
                 <div className="add-sitter-wrapper">
                     <div>First Name: <input type="text" ref="firstName" /></div>

@@ -41,8 +41,8 @@ var BabySitterApp = React.createClass({
             success: function(result)
             {
                 $('meta[name="csrf-token"]').attr('content', result['newCSRFToken']);
-                this.gotoPage('landing');
                 this.loadUserAndSitterData();
+                window.location.hash = 'landing';
             }
         });
     },
@@ -58,16 +58,13 @@ var BabySitterApp = React.createClass({
             {
                 $('meta[name="csrf-token"]').attr('content', result['newCSRFToken']);
                 this.replaceState(this.getInitialState());
-                this.gotoPage('login');
+                window.location.hash = 'login';
             }
         });
     },
 
     gotoPage: function(page) {
-        console.log("Navigating to page: ", page);
-        console.log("Previous page: ", this.state.page);
         this.setState(Object.assign(this.state, { page: page, previousPage: this.state.page }));
-        history.pushState(this.state, page, '#' + page);
         $.ajax({
             context: this,
             type: 'POST',
@@ -84,6 +81,15 @@ var BabySitterApp = React.createClass({
         });
     },
 
+    navigate: function() {
+        var pageHash = window.location.hash;
+        var pageMatch = pageHash.match(/#(\w+)/);
+        var page = pageMatch[1];
+        console.log("Navigating to page: ", page);
+        console.log("Previous page: ", this.state.page);
+        this.gotoPage(page);
+    },
+
     loadUserAndSitterData: function() {
         // fetch user data
         $.get('/user', function(result) {
@@ -98,8 +104,13 @@ var BabySitterApp = React.createClass({
 
     componentDidMount: function() {
         // make sure the browser knows which page we're on when we're starting out
-        history.pushState(this.state, this.state.page, '#' + this.state.page);
+        window.addEventListener('hashchange', this.navigate, false);
         this.loadUserAndSitterData();
+        window.location.hash = this.state.page;
+    },
+
+    componentWillUnmount: function() {
+        window.removeEventListener('hashchange', this.navigate);
     },
 
     render: function() {
@@ -107,23 +118,23 @@ var BabySitterApp = React.createClass({
         if (this.state.page === 'login')
             page = <LoginPage handleLogin={this.handleLogin} />;
         else if (this.state.page === 'landing')
-            page = <LandingPage gotoPage={this.gotoPage} userData={this.state.userData} sitterData={this.state.sitterData} />
+            page = <LandingPage userData={this.state.userData} sitterData={this.state.sitterData} />
         else if (this.state.page === 'account_settings')
-            page = <AccountSettingsPage gotoPage={this.gotoPage} handleLogout={this.handleLogout} />
+            page = <AccountSettingsPage handleLogout={this.handleLogout} />
         else if (this.state.page === 'add_sitter')
-            page = <AddSitterPage gotoPage={this.gotoPage} />
+            page = <AddSitterPage />
         else if (this.state.page === 'manage_sitters')
-            page = <ManageSittersPage gotoPage={this.gotoPage} sitterData={this.state.sitterData} />
+            page = <ManageSittersPage sitterData={this.state.sitterData} />
         else if (this.state.page === 'schedule_sitter')
-            page = <ScheduleSitterPage gotoPage={this.gotoPage} />
+            page = <ScheduleSitterPage />
         else if (this.state.page === 'about_us')
-            page = <AboutUsPage gotoPage={this.gotoPage} />
+            page = <AboutUsPage />
         else if (this.state.page === 'contact_support')
-            page = <ContactSupportPage gotoPage={this.gotoPage} />
+            page = <ContactSupportPage />
         else if (this.state.page === 'documentation')
-            page = <DocumentationPage gotoPage={this.gotoPage} />
+            page = <DocumentationPage />
         else
-            page = <NotFoundPage comingFrom={this.state.previousPage} gotoPage={this.gotoPage} />;
+            page = <NotFoundPage comingFrom={this.state.previousPage} />;
 
         return (
             <div className="babysitter-app-wrapper">

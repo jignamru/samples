@@ -1,31 +1,30 @@
 var LandingPage = React.createClass({
 
     propTypes: {
-        gotoPage:      React.PropTypes.func.isRequired,
         userData:      React.PropTypes.object.isRequired,
         sitterData:    React.PropTypes.arrayOf(React.PropTypes.object).isRequired
     },
 
     handleManageSitters: function() {
-        this.props.gotoPage('manage_sitters');
+        window.location.hash = 'manage_sitters';
     },
 
     handleScheduleSitter: function() {
-        this.props.gotoPage('schedule_sitter');
+        window.location.hash = 'schedule_sitter';
     },
 
     handleBuyTokens: function() {
-        this.props.gotoPage('buy_tokens');
+        window.location.hash = 'buy_tokens';
     },
 
     handleAddSitter: function() {
-        this.props.gotoPage('add_sitter');
+        window.location.hash = 'add_sitter';
     },
 
     render: function() {
         return (
             <div className='landing-page'>
-                <BabySitterAppHeader forward='account_settings' forwardLabel='Account' gotoPage={this.props.gotoPage} />
+                <BabySitterAppHeader forward='account_settings' forwardLabel='Account' />
                 <div>Welcome back, {this.props.userData.firstName} {this.props.userData.lastName}!</div>
                 <hr />
                 <button onClick={this.handleScheduleSitter}>Schedule a Sitter</button>

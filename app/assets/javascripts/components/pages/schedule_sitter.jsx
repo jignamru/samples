@@ -1,10 +1,6 @@
 // TODO this should check to make sure we have tokens
 var ScheduleSitterPage = React.createClass({
 
-    propTypes: {
-        gotoPage: React.PropTypes.func
-    },
-
     handleScheduleSitter: function() {
         console.log("Scheduling sitter...");
         $.ajax({
@@ -28,7 +24,7 @@ var ScheduleSitterPage = React.createClass({
     render: function() {
         return (
             <div className="schedule-sitter-page">
-                <BabySitterAppHeader back='landing' gotoPage={this.props.gotoPage} />
+                <BabySitterAppHeader back='landing' />
                 Ready to schedule a sitter? Great! Just enter the following details, and we'll take care of the rest.
 
                 <div>Start date and time: <input type="text" ref="startDateTime" /></div>

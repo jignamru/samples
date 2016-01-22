@@ -1,26 +1,25 @@
 var AccountSettingsPage = React.createClass({
 
     propTypes: {
-        handleLogout: React.PropTypes.func,
-        gotoPage:     React.PropTypes.func
+        handleLogout: React.PropTypes.func
     },
 
     handleDocumentation: function() {
-        this.props.gotoPage('documentation');
+        window.location.hash = 'documentation';
     },
 
     handleContactSupport: function() {
-        this.props.gotoPage('contact_support');
+        window.location.hash = 'contact_support';
     },
 
     handleAboutUs: function() {
-        this.props.gotoPage('about_us');
+        window.location.hash = 'about_us';
     },
 
     render: function() {
         return (
             <div className="account-settings-page">
-                <BabySitterAppHeader back='landing' gotoPage={this.props.gotoPage} />
+                <BabySitterAppHeader back='landing' />
                 <div>Your Account</div>
                 <hr />
                 <button onClick={this.handleDocumentation}>Documentation</button>
