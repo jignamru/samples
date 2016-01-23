@@ -4,7 +4,7 @@ class BabysitterController < ApplicationController
   respond_to :json
 
   before_action :require_session_user, only: [:user, :sitters, :add_sitter, :schedule_sitter, :charge]
-  before_action :parse_request_body_as_json, only: [:goto_page, :authenticate, :add_sitter, :schedule_sitter]
+  before_action :parse_request_body_as_json, only: [:goto_page, :authenticate, :add_sitter, :schedule_sitter, :sign_up]
 
   AUTHENTICATE_URL = 'http://localhost:8080/babysitter/users/authenticate'
   USER_URL         = 'http://localhost:8080/babysitter/users/'
@@ -14,7 +14,7 @@ class BabysitterController < ApplicationController
 
     @page = session[:page] if user_id.present?
     Rails.logger.debug("Session page: #{@page}")
-    @page ||= 'login'
+    @page ||= ''
     Rails.logger.debug("Initial page: #{@page}")
     session[:page] = @page
   end
@@ -22,6 +22,21 @@ class BabysitterController < ApplicationController
   ########################################
   #  AJAX POST URLs
   ########################################
+
+  def sign_up
+    create_account_url = USER_URL
+    response = RestClient.post(create_account_url, @request_body.to_json, content_type: :json, accept: :json)
+    Rails.logger.debug("Response: #{response}")
+    response_body = JSON.parse(response.body) if response.body.present?
+
+    reset_session
+
+    user_id = response_body['userId']
+    Rails.logger.debug("User ID: #{user_id}")
+    session[:user_id] = user_id
+
+    return render json: { newCSRFToken: form_authenticity_token }
+  end
 
   def charge
 
@@ -63,7 +78,6 @@ class BabysitterController < ApplicationController
     Rails.logger.debug("User ID: #{user_id}")
     session[:user_id] = user_id
 
-    # we don't need to return anything for a successful authentication
     return render json: { newCSRFToken: form_authenticity_token }
   end
 

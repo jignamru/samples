@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get                       'babysitter/index'
 
+  post 'sign_up'         => 'babysitter#sign_up'
   post 'charge'          => 'babysitter#charge'
   post 'goto_page'       => 'babysitter#goto_page'
   post 'authenticate'    => 'babysitter#authenticate'

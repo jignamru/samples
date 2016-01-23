@@ -27,6 +27,23 @@ var BabySitterApp = React.createClass({
         };
     },
 
+    handleSignUp: function(data) {
+        $.ajax({
+            context: this,
+            type: 'POST',
+            url: '/sign_up',
+            data: data,
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function(result)
+            {
+                $('meta[name="csrf-token"]').attr('content', result['newCSRFToken']);
+                this.loadUserAndSitterData();
+                window.location.hash = 'landing';
+            }
+        });
+    },
+
     handleLogin: function(emailAddress, password) {
         $.ajax({
             context: this,
@@ -151,6 +168,10 @@ var BabySitterApp = React.createClass({
             page = <BuyTokensPage authenticityToken={this.props.authenticityToken} />
         else if (this.state.page === 'purchase_confirmation')
             page = <PurchaseConfirmationPage />
+        else if (this.state.page === 'sign_up')
+            page = <SignUpPage handleSignUp={this.handleSignUp} />
+        else if (this.state.page === '')
+            page = <IndexPage />
         else
             page = <NotFoundPage comingFrom={this.state.previousPage} />;
 
