@@ -1,20 +1,3 @@
-// BabysitterApp
-// -Header
-// --Manage Sitters Button - Manage Sitters Page
-// --Account Settings Button -> Account Settings Page
-// -Page (see below)
-
-// Pages ----
-//   ---error message / notification
-// 3. Request Sitter Details
-// 4. Request Status Page
-// 5. Account Settings Page
-//   ---Log Out
-//   ---Buy Tokens
-//   ---Documentation
-//   ---Support/Contact
-// 6. Request History
-
 var BabySitterApp = React.createClass({
 
     getInitialState: function() {
@@ -75,7 +58,7 @@ var BabySitterApp = React.createClass({
             {
                 $('meta[name="csrf-token"]').attr('content', result['newCSRFToken']);
                 this.replaceState(this.getInitialState());
-                window.location.hash = 'login';
+                window.location.hash = '';
             }
         });
     },
@@ -94,9 +77,8 @@ var BabySitterApp = React.createClass({
             dataType: 'json',
             success: function(result)
             {
-                console.log("Page saved to session.");
-                // hacky, but force a reload of the page if we have gone to the buy tokens page to make the stripe button appear
-                if (page === 'buy_tokens') {
+                // TODO hacky. force a reload of the page if we have gone to the buy tokens page to make the stripe button appear
+                if (page === 'payment') {
                     location.reload();
                 }
             }
@@ -121,7 +103,10 @@ var BabySitterApp = React.createClass({
         $.get('/user', function(result) {
             this.setState(Object.assign(this.state, { userData: result }));
         }.bind(this));
+        this.loadSitterData();
+    },
 
+    loadSitterData: function() {
         // fetch sitters for this user
         $.get('/sitters', function(result) {
             this.setState(Object.assign(this.state, { sitterData: result }));
@@ -146,14 +131,12 @@ var BabySitterApp = React.createClass({
 
     render: function() {
         var page;
-        if (this.state.page === 'login')
-            page = <LoginPage handleLogin={this.handleLogin} />;
-        else if (this.state.page === 'landing')
+        if (this.state.page === 'landing')
             page = <LandingPage userData={this.state.userData} sitterData={this.state.sitterData} />
         else if (this.state.page === 'account_settings')
             page = <AccountSettingsPage handleLogout={this.handleLogout} />
         else if (this.state.page === 'add_sitter')
-            page = <AddSitterPage />
+            page = <AddSitterPage loadSitterData={this.loadSitterData} />
         else if (this.state.page === 'manage_sitters')
             page = <ManageSittersPage sitterData={this.state.sitterData} />
         else if (this.state.page === 'schedule_sitter')
@@ -165,13 +148,15 @@ var BabySitterApp = React.createClass({
         else if (this.state.page === 'documentation')
             page = <DocumentationPage />
         else if (this.state.page === 'buy_tokens')
-            page = <BuyTokensPage authenticityToken={this.props.authenticityToken} />
+            page = <BuyTokensPage />
+        else if (this.state.page === 'payment')
+            page = <PaymentPage authenticityToken={this.props.authenticityToken} />
         else if (this.state.page === 'purchase_confirmation')
             page = <PurchaseConfirmationPage />
         else if (this.state.page === 'sign_up')
             page = <SignUpPage handleSignUp={this.handleSignUp} />
         else if (this.state.page === '')
-            page = <IndexPage />
+            page = <IndexPage handleLogin={this.handleLogin} />
         else
             page = <NotFoundPage comingFrom={this.state.previousPage} />;
 

@@ -1,5 +1,9 @@
 var AddSitterPage = React.createClass({
 
+    propTypes: {
+        loadSitterData: React.PropTypes.func.isRequired
+    },
+
     handleAddSitter: function() {
         $.ajax({
             context: this,
@@ -15,7 +19,8 @@ var AddSitterPage = React.createClass({
             },
             success: function(result)
             {
-                console.log("Successfully added sitter. Result: ", result);
+                window.location.hash = 'manage_sitters';
+                this.props.loadSitterData();
             }
         });
     },
@@ -30,6 +35,7 @@ var AddSitterPage = React.createClass({
                     <div>Last Name: <input type="text" ref="lastName" /></div>
                     <div>Email Address: <input type="text" ref="emailAddress" /></div>
                     <div>Phone Number: <input type="text" ref="phoneNumber" /></div>
+                    <div>By checking, you acknowledge that you know this person and have permission to contact this person through SitterDone: <input type="checkbox" ref="acknowledgement" onChange={this.handleAcknowledgement} /></div>
                     <button onClick={this.handleAddSitter}>Add New Sitter</button>
                 </div>
             </div>

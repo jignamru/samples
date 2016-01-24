@@ -20,13 +20,14 @@ var AccountSettingsPage = React.createClass({
         return (
             <div className="account-settings-page">
                 <BabySitterAppHeader back='landing' />
-                <div>Your Account</div>
-                <hr />
-                <button onClick={this.handleDocumentation}>Documentation</button>
-                <button onClick={this.handleContactSupport}>Contact Support</button>
-                <button onClick={this.handleAboutUs}>About Us</button>
-                <hr />
-                <button onClick={this.props.handleLogout}>Log Out</button>
+                <h1>Your Account</h1>
+                <ul>
+                    <li><button onClick={this.handleDocumentation}>Documentation</button></li>
+                    <li><button onClick={this.handleContactSupport}>Contact Support</button></li>
+                    <li><button onClick={this.handleAboutUs}>About Us</button></li>
+                    <li><hr /></li>
+                    <li><button onClick={this.props.handleLogout}>Log Out</button></li>
+                </ul>
             </div>
         );
     }

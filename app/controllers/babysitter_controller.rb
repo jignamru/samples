@@ -31,7 +31,7 @@ class BabysitterController < ApplicationController
 
     reset_session
 
-    user_id = response_body['userId']
+    user_id = response_body['id']
     Rails.logger.debug("User ID: #{user_id}")
     session[:user_id] = user_id
 
