@@ -1,1 +1,7 @@
-<%= react_component('BabySitterApp', { initialPage: @page, authenticityToken: form_authenticity_token }, { prerender: true }) %>
+<%=
+    react_component('BabySitterApp', {
+            initialPage: @initial_page,
+            authenticityToken: form_authenticity_token,
+            paymentPlans: @payment_plans
+        }, { prerender: true })
+%>

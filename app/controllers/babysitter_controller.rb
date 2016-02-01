@@ -3,11 +3,13 @@ require 'rest-client'
 class BabysitterController < ApplicationController
   respond_to :json
 
-  before_action :require_session_user, only: [:user, :sitters, :add_sitter, :schedule_sitter, :charge]
+  before_action :require_session_user, only: [:user, :sitters, :add_sitter, :schedule_sitter, :buy_tokens, :charge]
   before_action :parse_request_body_as_json, only: [:goto_page, :authenticate, :add_sitter, :schedule_sitter, :sign_up]
+  before_action :get_payment_plans, only: [:index, :payment, :charge]
 
-  AUTHENTICATE_URL = 'http://localhost:8080/babysitter/users/authenticate'
-  USER_URL         = 'http://localhost:8080/babysitter/users/'
+  AUTHENTICATE_URL  = 'http://localhost:8080/babysitter/users/authenticate'
+  USER_URL          = 'http://localhost:8080/babysitter/users/'
+  PAYMENT_PLANS_URL = 'http://localhost:8080/babysitter/paymentPlans/'
 
   def index
     user_id = session[:user_id]
@@ -19,9 +21,31 @@ class BabysitterController < ApplicationController
     session[:page] = @page
   end
 
+  def payment
+  end
+
   ########################################
   #  AJAX POST URLs
   ########################################
+
+  def authenticate
+    response = RestClient.post(AUTHENTICATE_URL, @request_body.to_json, content_type: :json, accept: :json)
+    Rails.logger.debug("Response: #{response}")
+    # TODO check the response status code
+    response_body = JSON.parse(response.body)
+
+    Rails.logger.debug("Successful login. Resetting session to prepare storage.")
+    reset_session
+
+    # Save the user ID to the session; we will use this later
+    # TODO we need to save the token from the service as well
+    user_id = response_body['userId']
+    Rails.logger.debug("User ID: #{user_id}")
+    session[:user_id] = user_id
+    session[:page] = 'landing'
+
+    return render json: { newCSRFToken: form_authenticity_token }
+  end
 
   def sign_up
     create_account_url = USER_URL
@@ -38,19 +62,6 @@ class BabysitterController < ApplicationController
     return render json: { newCSRFToken: form_authenticity_token }
   end
 
-  def charge
-
-    # call service to make the charge
-    purchase_tokens_url = "#{USER_URL}#{@user_id}/tokens"
-    # TODO plan should be a parameter
-    response = RestClient.post(purchase_tokens_url, { stripeToken: params['stripeToken'], tokenPlan: 'FIVE' }.to_json, content_type: :json, accept: :json)
-    Rails.logger.debug("Response: #{response}")
-    response_body = JSON.parse(response.body) if response.body.present?
-
-    session[:page] = 'purchase_confirmation'
-    return redirect_to root_path
-  end
-
   def goto_page
     page = @request_body['page']
 
@@ -63,22 +74,16 @@ class BabysitterController < ApplicationController
     return render json: {}
   end
 
-  def authenticate
-    response = RestClient.post(AUTHENTICATE_URL, @request_body.to_json, content_type: :json, accept: :json)
+  def charge
+    # call service to make the charge
+    purchase_tokens_url = "#{USER_URL}#{@user_id}/tokens"
+    # TODO plan should be a parameter
+    response = RestClient.post(purchase_tokens_url, { stripeToken: params['stripeToken'], tokenPlan: 'FIVE' }.to_json, content_type: :json, accept: :json)
     Rails.logger.debug("Response: #{response}")
-    # TODO check the response status code
-    response_body = JSON.parse(response.body)
+    response_body = JSON.parse(response.body) if response.body.present?
 
-    Rails.logger.debug("Successful login. Resetting session to prepare storage.")
-    reset_session
-
-    # Save the user ID to the session; we will use this later
-    # TODO we need to save the token from the service as well
-    user_id = response_body['userId']
-    Rails.logger.debug("User ID: #{user_id}")
-    session[:user_id] = user_id
-
-    return render json: { newCSRFToken: form_authenticity_token }
+    session[:page] = 'purchase_confirmation'
+    return redirect_to root_path
   end
 
   def add_sitter
@@ -143,6 +148,13 @@ class BabysitterController < ApplicationController
     def parse_request_body_as_json
       @request_body = JSON.parse(request.body.read)
       Rails.logger.debug("Request body: #{@request_body}")
+    end
+
+    def get_payment_plans
+      payment_plan_response = RestClient.get(PAYMENT_PLANS_URL)
+      Rails.logger.debug("Response: #{payment_plan_response}")
+      @payment_plans = JSON.parse(payment_plan_response.body)
+      Rails.logger.debug("Payment plans: #{@payment_plans}")
     end
 
 end

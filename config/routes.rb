@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  get                       'babysitter/index'
+  get 'babysitter/index'
+  get 'payment'          => 'babysitter#payment'
 
   post 'sign_up'         => 'babysitter#sign_up'
   post 'charge'          => 'babysitter#charge'
