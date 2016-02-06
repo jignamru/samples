@@ -25,7 +25,6 @@ var LandingPage = React.createClass({
         return (
             <div className='landing-page'>
                 <BabySitterAppHeader forward='account_settings' forwardLabel='Account' />
-                <h1>SitterDone</h1>
                 <div>Welcome back, {this.props.userData.firstName} {this.props.userData.lastName}!</div>
                 <hr />
                 <button onClick={this.handleScheduleSitter}>Schedule a Sitter</button>

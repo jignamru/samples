@@ -14,11 +14,11 @@ class BabysitterController < ApplicationController
   def index
     user_id = session[:user_id]
 
-    @page = session[:page] if user_id.present?
-    Rails.logger.debug("Session page: #{@page}")
-    @page ||= ''
-    Rails.logger.debug("Initial page: #{@page}")
-    session[:page] = @page
+    @initial_page = session[:page] if user_id.present?
+    Rails.logger.debug("Session page: #{@initial_page}")
+    @initial_page ||= ''
+    Rails.logger.debug("Initial page: #{@initial_page}")
+    session[:page] = @initial_page
   end
 
   def payment
