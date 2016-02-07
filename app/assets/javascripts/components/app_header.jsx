@@ -15,13 +15,17 @@ var BabySitterAppHeader = React.createClass({
     },
 
     render: function() {
-        var backButton = this.props.back ? <button className="back" onClick={this.goBack}>Back</button> : null;
-        var forwardButton = this.props.forward ? <button className="forward" onClick={this.goForward}>{this.props.forwardLabel}</button> : null;
+        var backButton = this.props.back ? <a className="back" onClick={this.goBack}>&lt;&lt;Back</a> : null;
+        var forwardButton = this.props.forward ? <a className="forward" onClick={this.goForward}>{this.props.forwardLabel}&gt;&gt;</a> : null;
         return (
             <div className="babysitter-app-header">
-                <div className="button-wrapper-left">{backButton}</div>
-                <div className="title">SitterDone</div>
-                <div className="button-wrapper-right">{forwardButton}</div>
+                <table>
+                    <tr>
+                        <td className="button-wrapper-left">{backButton}</td>
+                        <td className="title-wrapper">SitterDone</td>
+                        <td className="button-wrapper-right">{forwardButton}</td>
+                    </tr>
+                </table>
             </div>
         );
     }

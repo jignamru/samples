@@ -42,7 +42,7 @@ var IndexPage = React.createClass({
                     <button onClick={this.handleLogin}>Login</button>
                 </div>
                 <hr />
-                <em>Don't have an account yet? No problem! Sign-up is quick and easy</em>
+                <div><em>Don't have an account yet? No problem! Sign-up is quick and easy</em></div>
                 <button onClick={this.gotoSignUp}>Sign Up</button>
             </div>
         );

@@ -3,16 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
-
+    margin: 0;
+    min-height: 480px;
     background: #529797; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(left top, #529797, #B9F6F6); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(bottom right, #529797, #B9F6F6); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(bottom right, #529797, #B9F6F6); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to bottom right, #529797, #B9F6F6); /* Standard syntax */
-
-    overflow: hidden;
-    padding: 30px 0 100px;
-
     font-family: 'Merriweather Sans', sans-serif;
 }
 
@@ -25,10 +22,8 @@ body {
 }
 
 div.babysitter-app-wrapper {
-
-
+    padding: 20px 10px;
     color: #000404;
-
     font-size: small;
 
     h1 {
@@ -72,24 +67,32 @@ div.babysitter-app-wrapper {
 }
 
 .babysitter-app-header {
+    width: 100%;
+    margin-bottom: 20px;
 
-    .title {
-        float: none;
-        text-align: center;
-        color: #073236;
-        font-size: xx-large;
-        font-family: 'Molle', cursive;
-        border-bottom: 1px solid #073236;
-        @extend .clearfix;
+    table {
+        width: 100%;
+        .title-wrapper {
+            width: 50%;
+            text-align: center;
+            color: #073236;
+            font-size: xx-large;
+            font-family: 'Molle', cursive;
+            border-bottom: 1px solid #073236;
+        }
+
+        .button-wrapper-left,
+        .button-wrapper-right {
+            width: 25%;
+        }
+
+        .button-wrapper-left {
+            text-align: left;
+        }
+
+        .button-wrapper-right {
+            text-align: right;
+        }
     }
 
-    .button-wrapper-left {
-        float: left;
-        @extend .clearfix;
-    }
-
-    .button-wrapper-right {
-        float: right;
-        @extend .clearfix;
-    }
 }
