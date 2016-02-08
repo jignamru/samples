@@ -7,9 +7,10 @@ class BabysitterController < ApplicationController
   before_action :parse_request_body_as_json, only: [:goto_page, :authenticate, :add_sitter, :schedule_sitter, :sign_up]
   before_action :get_payment_plans, only: [:index, :payment, :charge]
 
-  AUTHENTICATE_URL  = 'http://localhost:8080/babysitter/users/authenticate'
-  USER_URL          = 'http://localhost:8080/babysitter/users/'
-  PAYMENT_PLANS_URL = 'http://localhost:8080/babysitter/paymentPlans/'
+  BABYSITTER_API_URL = Rails.application.config.babysitter_api_url
+  AUTHENTICATE_URL  = BABYSITTER_API_URL + 'users/authenticate'
+  USER_URL          = BABYSITTER_API_URL + 'users/'
+  PAYMENT_PLANS_URL = BABYSITTER_API_URL + 'paymentPlans/'
 
   def index
     user_id = session[:user_id]

@@ -40,4 +40,6 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.log_level = :debug
+
+  config.babysitter_api_url = 'http://babysitter-integration.elasticbeanstalk.com/'
 end
