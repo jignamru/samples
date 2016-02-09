@@ -7,20 +7,7 @@ var BuyTokensPage = React.createClass({
 
     handleProceedToPayment: function() {
         console.log("Loading the stripe form...");
-        $.ajax({
-            context: this,
-            type: 'GET',
-            url: '/payment',
-            data: {
-                page: page
-            },
-            contentType: 'application/json',
-            dataType: 'json',
-            success: function(result)
-            {
-                console.log(result);
-            }
-        });
+        $('.stripe-form-wrapper').load('/payment');
     },
 
     render: function() {

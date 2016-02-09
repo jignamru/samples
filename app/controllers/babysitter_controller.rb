@@ -23,6 +23,8 @@ class BabysitterController < ApplicationController
   end
 
   def payment
+    expires_now
+    return render partial: 'payment'
   end
 
   ########################################
