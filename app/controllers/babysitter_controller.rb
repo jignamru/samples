@@ -23,7 +23,16 @@ class BabysitterController < ApplicationController
   end
 
   def payment
+    # Make sure this never gets cached
     expires_now
+
+    @plan_id = params[:plan]
+    plan = @payment_plans.select{|p| p['plan'] == @plan_id}.first
+
+    Rails.logger.debug("Payment plan for #{@plan_id} tokens: #{plan}")
+    @number_of_tokens = plan['numberOfTokens']
+    @plan_cost = plan['costInDollars']
+
     return render partial: 'payment'
   end
 
@@ -78,10 +87,13 @@ class BabysitterController < ApplicationController
   end
 
   def charge
+    plan_id = params[:plan_id]
+    # TODO throw exception if plan_id blank
+    # TODO validation that plan_id matches what user chose before?
+
     # call service to make the charge
     purchase_tokens_url = "#{USER_URL}#{@user_id}/tokens"
-    # TODO plan should be a parameter
-    response = RestClient.post(purchase_tokens_url, { stripeToken: params['stripeToken'], tokenPlan: 'FIVE' }.to_json, content_type: :json, accept: :json)
+    response = RestClient.post(purchase_tokens_url, { stripeToken: params['stripeToken'], tokenPlan: plan_id }.to_json, content_type: :json, accept: :json)
     Rails.logger.debug("Response: #{response}")
     response_body = JSON.parse(response.body) if response.body.present?
 

@@ -7,7 +7,9 @@ var BuyTokensPage = React.createClass({
 
     handleProceedToPayment: function() {
         console.log("Loading the stripe form...");
-        $('.stripe-form-wrapper').load('/payment');
+        var plan = this.refs.numberOfTokens.value;
+        console.log("Plan selected: ", plan);
+        $('.stripe-form-wrapper').load('/payment?plan=' + plan);
     },
 
     render: function() {
@@ -47,7 +49,7 @@ var BuyTokensPage = React.createClass({
                 </table>
 
                 <div>How many tokens would you like to purchase?</div>
-                <select>
+                <select ref="numberOfTokens">
                     {options}
                 </select>
 
