@@ -24,5 +24,10 @@ module BabysitterApp
     config.active_record.raise_in_transactional_callbacks = true
 
     config.react.addons = true # defaults to false
+
+    # All secret/dynamic values read from ENV (i.e. set by IDE, ElasticBeanstalk, or .bashrc)
+    config.babysitter_api_url  = ENV['BABYSITTER_API_URL']
+    config.strip_io_public_key = ENV['STRIPE_IO_PUBLIC_KEY']
+
   end
 end

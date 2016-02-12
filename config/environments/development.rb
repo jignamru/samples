@@ -41,5 +41,4 @@ Rails.application.configure do
 
   config.log_level = :debug
 
-  config.babysitter_api_url = 'http://babysitter-integration.elasticbeanstalk.com/'
 end
