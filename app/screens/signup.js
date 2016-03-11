@@ -18,8 +18,11 @@ var SignUp = React.createClass({
       // todo
     }
   },
+  handleSignup: function() {
+    // to do: API hookup
+  },
   goBack: function() {
-    this.props.navigator.pop()
+    this.props.navigator.pop();
   },
   render: function() {
     return (
@@ -63,9 +66,13 @@ var SignUp = React.createClass({
 	                />
 	            </View>
 	    	</View>
-            <View style={styles.signup}>
-                <Text style={styles.whiteFont}>Done</Text>
-            </View>
+	    	<TouchableHighlight
+              style={styles.button}
+              onPress={this.handleSignup}>
+	            <View style={styles.signup}>
+	                <Text style={styles.whiteFont}>Done</Text>
+	            </View>
+            </TouchableHighlight>
             <TouchableHighlight
               style={styles.button}
               onPress={this.goBack}>
