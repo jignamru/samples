@@ -1,5 +1,7 @@
 'use strict';
 var React = require('react-native');
+var CheckBox = require('react-native-checkbox');
+var GLOBAL = require('../common/globals');
 
 var {
   AppRegistry,
@@ -15,11 +17,43 @@ var {
 var SignUp = React.createClass({
   getInitialState: function() {
     return {
-      // todo
+      fullname: null,
+      phone: null,
+      email: null,
+      password: null,
+      confirmPassword: null,
+      tosAccept: null
     }
   },
+  handleSignup: function() {
+    var [firstName, lastName] = this.state.fullname.split(' ');
+    var data = JSON.stringify({
+            firstName:    firstName,
+            lastName:     lastName,
+            phoneNumber:  this.state.phone,
+            emailAddress: this.state.email,
+            newPassword:  this.state.password,
+            tosAccept:    this.state.tosAccept
+          });
+    console.log(data);
+    fetch( GLOBAL.BABYSITTER_API_URL + "users/", {
+          method: "POST",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: data
+        })
+        .then((response) => response.text())
+        .then((responseText) => {
+          console.log(responseText);
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+  },
   goBack: function() {
-    this.props.navigator.pop()
+    this.props.navigator.pop();
   },
   render: function() {
     return (
@@ -41,8 +75,20 @@ var SignUp = React.createClass({
 	                    placeholder="First and last name"
 	                    placeholderTextColor="#FFF"
 	                    value={this.state.fullname}
+                      onChangeText={text => this.state.fullname = text}
 	                />
 	            </View>
+                <View style={styles.inputContainer}>
+                    <Image style={styles.inputPhone} source={require('../images/icons/phone.png')}/>
+                    <TextInput 
+                        style={[styles.input, styles.whiteFont]}
+                        placeholder="Mobile number"
+                        placeholderTextColor="#FFF"
+                        value={this.state.phone}
+                        onChangeText={text => this.state.phone = text}
+                    />
+              </View>
+
 	            <View style={styles.inputContainer}>
 	                <Image style={styles.inputEmail} source={require('../images/icons/email.png')}/>
 	                <TextInput 
@@ -50,22 +96,47 @@ var SignUp = React.createClass({
 	                    placeholder="Email"
 	                    placeholderTextColor="#FFF"
 	                    value={this.state.email}
+                      onChangeText={text => this.state.email = text}
 	                />
 	            </View>
-	            <View style={styles.inputContainer}>
-	                <Image style={styles.inputPassword} source={require('../images/icons/password.png')}/>
-	                <TextInput
-	                    password={true}
-	                    style={[styles.input, styles.whiteFont]}
-	                    placeholder="Password"
-	                    placeholderTextColor="#FFF"
-	                    value={this.state.password}
-	                />
-	            </View>
+              <View style={styles.inputContainer}>
+                  <Image style={styles.inputPassword} source={require('../images/icons/password.png')}/>
+                  <TextInput
+                      password={true}
+                      style={[styles.input, styles.whiteFont]}
+                      placeholder="Password"
+                      placeholderTextColor="#FFF"
+                      value={this.state.password}
+                      onChangeText={text => this.state.password = text}
+                  />
+              </View>
+              <View style={styles.inputContainer}>
+                  <Image style={styles.inputPassword} source={require('../images/icons/password.png')}/>
+                  <TextInput
+                      password={true}
+                      style={[styles.input, styles.whiteFont]}
+                      placeholder="Confirm Password"
+                      placeholderTextColor="#FFF"
+                      value={this.state.confirmPassword}
+                      onChangeText={text => this.state.confirmPassword = text}
+                  />
+              </View>
+              <View style={styles.inputContainer}>
+                <CheckBox
+                  label='I have read and accept the terms of service'
+                  labelStyle={styles.whiteFont}
+                  checked={false}
+                  onChange={(checked) => this.state.tosAccept = checked}
+                />
+              </View>
 	    	</View>
-            <View style={styles.signup}>
-                <Text style={styles.whiteFont}>Done</Text>
-            </View>
+	    	<TouchableHighlight
+              style={styles.button}
+              onPress={this.handleSignup}>
+	            <View style={styles.signup}>
+	                <Text style={styles.whiteFont}>Done</Text>
+	            </View>
+            </TouchableHighlight>
             <TouchableHighlight
               style={styles.button}
               onPress={this.goBack}>
