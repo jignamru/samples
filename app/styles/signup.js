@@ -62,6 +62,11 @@ module.exports = StyleSheet.create({
       width: 20,
       height: 20
     },
+    inputPhone: {
+      marginLeft: 15,
+      width: 22,
+      height: 29
+    },
     inputContainer: {
         padding: 10,
         marginTop: 20,

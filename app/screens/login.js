@@ -1,6 +1,7 @@
 'use strict';
 var React = require('react-native');
 var GLOBAL = require('../common/globals');
+var SignUpScreen = require('./signup');
 var {
   AppRegistry,
   StyleSheet,
@@ -12,7 +13,6 @@ var {
   Navigator
 } = React;
 
-var SignUpScreen = require('./signup');
 
 var Login = React.createClass({
   getInitialState: function() {
@@ -21,7 +21,7 @@ var Login = React.createClass({
       password: null
     }
   },
-  _handleLogin: function() {
+  handleLogin: function() {
     fetch( GLOBAL.BABYSITTER_API_URL + "users/authenticate", {
           method: "POST",
           headers: {
@@ -80,7 +80,7 @@ var Login = React.createClass({
                 </View>
             </View>
             <TouchableHighlight
-              onPress={this._handleLogin}>
+              onPress={this.handleLogin}>
               <View style={styles.signin}>
                   <Text style={styles.whiteFont}>Sign In</Text>
               </View>
