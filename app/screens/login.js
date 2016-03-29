@@ -2,6 +2,8 @@
 var React = require('react-native');
 var GLOBAL = require('../common/globals');
 var SignUpScreen = require('./signup');
+//var CookieManager = require('react-native-cookies');
+
 var {
   AppRegistry,
   StyleSheet,
@@ -36,6 +38,7 @@ var Login = React.createClass({
         .then((response) => response.text())
         .then((responseText) => {
           console.log(responseText);
+
         })
         .catch((error) => {
           console.warn(error);

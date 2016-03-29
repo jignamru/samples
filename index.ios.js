@@ -6,24 +6,38 @@ var {
 } = React;
 
 var LoginScreen = require('./app/screens/login');
-var SignUpScreen = require('./app/screens/signup');
+var WelcomeScreen = require('./app/screens/welcome');
+//var CookieManager = require('react-native-cookies');
+
 
 var BabysitterApp = React.createClass({
+  getInitialState: function() {
+    return {
+      loggedIn: false
+    }
+  },
   render: function() {
-    return (
-        <Navigator
-  //        style={styles.container}
-          initialRoute={{id: 'login'}}
-          renderScene={this.navigatorRenderScene}/>
-    );
+    if( this.loggedIn ) {
+      return (
+          <Navigator
+            initialRoute={{id: 'welcome'}}
+            renderScene={this.navigatorRenderScene}/>
+      );
+    } else {
+      return (
+          <Navigator
+            initialRoute={{id: 'login'}}
+            renderScene={this.navigatorRenderScene}/>
+      );
+    }
   },
 
   navigatorRenderScene(route, nav) {
     switch (route.id) {
       case 'login':
         return (<LoginScreen navigator={nav} title="login"/>);
-      case 'signup':
-        return (<SignUpScreen navigator={nav} title="signup" />);
+      case 'welcome':
+        return (<WelcomeScreen navigator={nav} title="welcome" />);
     }
   }
 });
