@@ -31,14 +31,13 @@ var Login = React.createClass({
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            username: this.state.username,
-            password: this.state.password
+            emailAddress: this.state.username,
+            password:     this.state.password
           })
         })
-        .then((response) => response.text())
-        .then((responseText) => {
-          console.log(responseText);
-
+        .then((response) => response.json() )
+        .then((responseJson) => {
+          console.log('Response', responseJson);
         })
         .catch((error) => {
           console.warn(error);
@@ -59,7 +58,7 @@ var Login = React.createClass({
             <View style={styles.inputs}>
                 <View style={styles.inputContainer}>
                     <Image style={styles.inputUsername} source={require('../images/icons/name.png')}/>
-                    <TextInput 
+                    <TextInput
                         style={[styles.input, styles.whiteFont]}
                         placeholder="Username"
                         placeholderTextColor="#FFF"
@@ -102,4 +101,3 @@ var Login = React.createClass({
 var styles = require('../styles/login');
 
 module.exports = Login;
-
