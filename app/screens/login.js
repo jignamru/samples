@@ -6,6 +6,7 @@ var SignUpScreen = require('./signup');
 
 var {
   AppRegistry,
+  AsyncStorage,
   StyleSheet,
   View,
   Text,
@@ -15,14 +16,51 @@ var {
   Navigator
 } = React;
 
+var STORAGE_KEY = '@BabysitterApp:userId';
 
 var Login = React.createClass({
+
+  /**
+   * Asynchronously store the a user ID to disk.
+   */
+  async _setUserId(userId) {
+     try {
+       await AsyncStorage.setItem(STORAGE_KEY, userId);
+       console.log('Saved user ID to disk.')
+     } catch (error) {
+       console.log('AsyncStorage error: ', error.message);
+     }
+  },
+
+  /**
+   * Asynchronously read the user ID from disk.
+   */
+  async _getUserId() {
+    try {
+      var value = await AsyncStorage.getItem(STORAGE_KEY);
+      if (value !== null) {
+        this.setState({ userId: value });
+        console.log('Recovered user ID from disk: ' + value);
+      } else {
+        console.log('Initialized with no user ID on disk.');
+      }
+    } catch (error) {
+      console.log('AsyncStorage error: ', error.message);
+    }
+  },
+
+  componentWillMount: function() {
+    this._getUserId().done();
+    // TODO if the state contains a user ID
+  },
+
   getInitialState: function() {
     return {
       username: null,
       password: null
     }
   },
+
   handleLogin: function() {
     fetch( GLOBAL.BABYSITTER_API_URL + "users/authenticate", {
           method: "POST",
@@ -38,16 +76,19 @@ var Login = React.createClass({
         .then((response) => response.json() )
         .then((responseJson) => {
           console.log('Response', responseJson);
+          this._setUserId(responseJson.userId);
         })
         .catch((error) => {
           console.warn(error);
         });
   },
+
   gotoSignup: function() {
     this.props.navigator.push({
       id: 'signup'
     })
   },
+
   render: function() {
     return (
         <View style={styles.container}>
