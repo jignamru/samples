@@ -22,7 +22,7 @@ var Home = React.createClass({
 		//TODO get user info?
 	},
 
-	_handleLogout: function(){
+	handleLogout: function(){
 		User._logout().done();
 		this.props.navigator.push({
 			id: 'login'
@@ -35,7 +35,7 @@ var Home = React.createClass({
 	            <Image style={styles.bg} source={require('../images/bg-12.png')} />
 	            <Text style={[styles.title, styles.whiteFont]}>Welcome!</Text>
                  <TouchableHighlight
-	              onPress={this._handleLogout}>
+	              onPress={this.handleLogout}>
 	              <View style={styles.logout}>
 	                  <Text style={styles.whiteFont}>Log out</Text>
 	              </View>
