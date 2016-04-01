@@ -1,6 +1,7 @@
 'use strict';
 var React = require('react-native');
 var CheckBox = require('react-native-checkbox');
+var User = require('../common/user');
 var GLOBAL = require('../common/globals');
 
 var {
@@ -15,6 +16,7 @@ var {
 } = React;
 
 var SignUp = React.createClass({
+
   getInitialState: function() {
     return {
       fullname: null,
@@ -44,9 +46,18 @@ var SignUp = React.createClass({
           },
           body: data
         })
-        .then((response) => response.text())
-        .then((responseText) => {
-          console.log(responseText);
+        .then((response) => response.json())
+        .then((responseJson) => {
+          console.log('Response:',responseJson);
+          if(responseJson.id) {
+            User._setUserId(responseJson.id).done();
+            this.props.navigator.push({
+              id: 'home'
+            })
+          } else {
+            console.log('Message:', responseJson.message);
+            // TODO display error message to user
+          }
         })
         .catch((error) => {
           console.warn(error);
