@@ -7,15 +7,14 @@ var {
 
 var LoginScreen = require('./app/screens/login');
 var SignUpScreen = require('./app/screens/signup');
+var HomeScreen = require('./app/screens/home');
+
 
 var BabysitterApp = React.createClass({
   render: function() {
-    return (
-        <Navigator
-  //        style={styles.container}
-          initialRoute={{id: 'login'}}
-          renderScene={this.navigatorRenderScene}/>
-    );
+    return <Navigator
+            initialRoute={{id: 'login'}}
+            renderScene={this.navigatorRenderScene}/>
   },
 
   navigatorRenderScene(route, nav) {
@@ -24,6 +23,8 @@ var BabysitterApp = React.createClass({
         return (<LoginScreen navigator={nav} title="login"/>);
       case 'signup':
         return (<SignUpScreen navigator={nav} title="signup" />);
+      case 'home':
+        return (<HomeScreen navigator={nav} title="home" />);
     }
   }
 });
