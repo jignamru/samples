@@ -28,19 +28,42 @@ var Home = React.createClass({
 			id: 'login'
 		})
 	},
+	goToSettings: function(){
+		// User._logout().done();
+		// this.props.navigator.push({
+		// 	id: 'login'
+		// })
+	},
 
     render: function() {
 	    return (
 	        <View style={styles.container}>
-	            <Image style={styles.bg} source={require('../images/bg-12.png')} />
-	            <Text style={[styles.title, styles.whiteFont]}>Welcome!</Text>
-                 <TouchableHighlight
-	              onPress={this.handleLogout}>
-	              <View style={styles.logout}>
-	                  <Text style={styles.whiteFont}>Log out</Text>
-	              </View>
-            	</TouchableHighlight>
-
+	        	<View style={styles.introContainer}>
+		            <Image style={styles.introBg} source={require('../images/bg-top-welcome.png')} />
+		            <Text style={styles.title}>Welcome!</Text>
+		        </View>
+		        <View style={styles.actionsContainer}>
+		        	<View style={[styles.box, styles.requestSitterBox]}>
+		        		<Text style={[styles.boxLabel, styles.whiteFont]}>REQUEST A SITTER</Text>
+		        	</View>
+		        	<View style={[styles.box, styles.addSitterBox]}>
+		        		<Text style={[styles.boxLabel, styles.whiteFont]}>ADD NEW SITTER</Text>
+		        	</View>
+            	</View>
+            	<View style={styles.footer}>
+            	<TouchableHighlight
+		              onPress={this.goToSettings}>
+		              <View style={[styles.logout, styles.footerItem]}>
+		                  <Text>SETTINGS</Text>
+		              </View>
+	            	</TouchableHighlight>
+            		<TouchableHighlight
+		              onPress={this.handleLogout}>
+		              <View style={[styles.logout, styles.footerItem]}>
+		                  <Text>LOG OUT</Text>
+		              </View>
+	            	</TouchableHighlight>
+            	</View>
             </View>
 
 	    )

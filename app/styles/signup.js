@@ -2,6 +2,7 @@
 var React = require('react-native');
 var Dimensions = require('Dimensions');
 var windowSize = Dimensions.get('window');
+var GLOBAL = require('../common/globals');
 var { StyleSheet } = React;
 
 module.exports = StyleSheet.create({
@@ -32,7 +33,7 @@ module.exports = StyleSheet.create({
         marginLeft: 25,
     },
     signup: {
-        backgroundColor: '#FF3366',
+        backgroundColor:  GLOBAL.COLOR.DARK_PURPLE,
         padding: 20,
         alignItems: 'center'
     },

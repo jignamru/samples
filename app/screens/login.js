@@ -52,7 +52,8 @@ var Login = React.createClass({
         .then((response) => response.json() )
         .then((responseJson) => {
           console.log('Response:', responseJson);
-
+          console.log('username: ', this.state.username);
+          console.log('pwd: ', this.state.password);
           if(responseJson.userId) {
             User._setUserId(responseJson.userId).done();
             this.props.navigator.push({
@@ -77,7 +78,7 @@ var Login = React.createClass({
   render: function() {
     return (
         <View style={styles.container}>
-            <Image style={styles.bg} source={require('../images/bg-12.png')} />
+            <Image style={styles.bg} source={require('../images/bg-login.png')} />
             <View style={styles.header}>
                 <Image style={styles.mark} source={{uri: 'http://i.imgur.com/da4G0Io.png'}} />
             </View>
@@ -85,9 +86,9 @@ var Login = React.createClass({
                 <View style={styles.inputContainer}>
                     <Image style={styles.inputUsername} source={require('../images/icons/name.png')}/>
                     <TextInput
-                        style={[styles.input, styles.whiteFont]}
-                        placeholder="Username"
-                        placeholderTextColor="#FFF"
+                        style={styles.input}
+                        placeholder="Email"
+                        placeholderTextColor="#000"
                         value={this.state.username}
                         onChangeText={text => this.state.username = text}
                     />
@@ -96,27 +97,27 @@ var Login = React.createClass({
                     <Image style={styles.inputPassword} source={require('../images/icons/password.png')}/>
                     <TextInput
                         password={true}
-                        style={[styles.input, styles.whiteFont]}
+                        style={styles.input}
                         placeholder="Password"
-                        placeholderTextColor="#FFF"
+                        placeholderTextColor="#000"
                         value={this.state.password}
                         onChangeText={text => this.state.password = text}
                     />
                 </View>
                 <View style={styles.forgotContainer}>
-                    <Text style={styles.greyFont}>Forgot Password</Text>
+                    <Text>Forgot Password?</Text>
                 </View>
             </View>
             <TouchableHighlight
               onPress={this.handleLogin}>
               <View style={styles.signin}>
-                  <Text style={styles.whiteFont}>Sign In</Text>
+                  <Text style={styles.whiteFont}>SIGN IN</Text>
               </View>
             </TouchableHighlight>
             <TouchableHighlight
               onPress={this.gotoSignup}>
               <View style={styles.signup}>
-                  <Text style={styles.greyFont}>Don't have an account?<Text style={styles.whiteFont}>  Sign Up</Text></Text>
+                  <Text>Don't have an account? <Text style={styles.bold}>Sign Up</Text></Text>
               </View>
             </TouchableHighlight>
         </View>

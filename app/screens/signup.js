@@ -69,7 +69,7 @@ var SignUp = React.createClass({
   render: function() {
     return (
     	<View style={styles.container}>
-            <Image style={styles.bg} source={require('../images/bg-11.png')} />
+            <Image style={styles.bg} source={require('../images/bg-signup.png')} />
             <TouchableHighlight
               onPress={this.goBack}>
               <View style={styles.back}>
@@ -145,7 +145,7 @@ var SignUp = React.createClass({
               style={styles.button}
               onPress={this.handleSignup}>
 	            <View style={styles.signup}>
-	                <Text style={styles.whiteFont}>Done</Text>
+	                <Text style={styles.whiteFont}>DONE</Text>
 	            </View>
             </TouchableHighlight>
             <TouchableHighlight
