@@ -6,7 +6,7 @@ module.exports = {
   	TEAL : '#50d2c2',
   	DARK_PURPLE : '#6563a4',
   	PINK : '#d667cd',
-  	LIGHT_GREEN : '#c2d9c9',
+  	ORANGE : '#FDBC75',
   	GREY : '#8e8e90'
   },
 };

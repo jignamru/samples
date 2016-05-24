@@ -8,6 +8,7 @@ var {
 var LoginScreen = require('./app/screens/login');
 var SignUpScreen = require('./app/screens/signup');
 var HomeScreen = require('./app/screens/home');
+var AddSitterScreen = require('./app/screens/addSitter');
 
 
 var BabysitterApp = React.createClass({
@@ -25,6 +26,8 @@ var BabysitterApp = React.createClass({
         return (<SignUpScreen navigator={nav} title="signup" />);
       case 'home':
         return (<HomeScreen navigator={nav} title="home" />);
+      case 'addSitter':
+        return (<AddSitterScreen navigator={nav} title="add sitter" />);
     }
   }
 });

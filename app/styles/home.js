@@ -58,12 +58,12 @@ module.exports = StyleSheet.create({
     },
     footer: {
         flexDirection: 'row',
-        backgroundColor: GLOBAL.COLOR.LIGHT_GREEN,
-        height: 40,
-        paddingTop: 10
+        backgroundColor: GLOBAL.COLOR.ORANGE,
+        height: 80,
+        paddingTop: 30
     },
     footerItem: {
-        width: windowSize.width / 2,
+        width: windowSize.width / 3,
         alignItems: 'center',
     },
     whiteFont: {

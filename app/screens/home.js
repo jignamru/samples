@@ -22,6 +22,11 @@ var Home = React.createClass({
 		//TODO get user info?
 	},
 
+	goToAddNewSitter: function(){
+		this.props.navigator.push({
+			id: 'addSitter'
+		})
+	},
 	handleLogout: function(){
 		User._logout().done();
 		this.props.navigator.push({
@@ -46,15 +51,24 @@ var Home = React.createClass({
 		        	<View style={[styles.box, styles.requestSitterBox]}>
 		        		<Text style={[styles.boxLabel, styles.whiteFont]}>REQUEST A SITTER</Text>
 		        	</View>
-		        	<View style={[styles.box, styles.addSitterBox]}>
-		        		<Text style={[styles.boxLabel, styles.whiteFont]}>ADD NEW SITTER</Text>
-		        	</View>
+		        	<TouchableHighlight
+		              onPress={this.goToAddNewSitter}>
+			        	<View style={[styles.box, styles.addSitterBox]}>
+			        		<Text style={[styles.boxLabel, styles.whiteFont]}>ADD NEW SITTER</Text>
+			        	</View>
+		        	</TouchableHighlight>
             	</View>
             	<View style={styles.footer}>
-            	<TouchableHighlight
+            		<TouchableHighlight
 		              onPress={this.goToSettings}>
 		              <View style={[styles.logout, styles.footerItem]}>
 		                  <Text>SETTINGS</Text>
+		              </View>
+	            	</TouchableHighlight>
+	            	<TouchableHighlight
+		              onPress={this.goToSettings}>
+		              <View style={[styles.logout, styles.footerItem]}>
+		                  <Text>SITTERS</Text>
 		              </View>
 	            	</TouchableHighlight>
             		<TouchableHighlight

@@ -52,8 +52,8 @@ var Login = React.createClass({
         .then((response) => response.json() )
         .then((responseJson) => {
           console.log('Response:', responseJson);
-          console.log('username: ', this.state.username);
-          console.log('pwd: ', this.state.password);
+          // console.log('username: ', this.state.username);
+          // console.log('pwd: ', this.state.password);
           if(responseJson.userId) {
             User._setUserId(responseJson.userId).done();
             this.props.navigator.push({
