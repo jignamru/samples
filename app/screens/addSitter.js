@@ -3,6 +3,7 @@ var React = require('react-native');
 var GLOBAL = require('../common/globals');
 var User = require('../common/user');
 var styles = require('../styles/addSitter');
+var Button = require('react-native-button');
 
 var {
   AppRegistry,
@@ -21,11 +22,51 @@ var AddSitter = React.createClass({
 		return {
 	      fullname: null,
 	      phone: null,
+	      email: null,
 	      rate: null,
 	      priority: null
     	}
 	},
 
+	handleAddSitter: function(){
+ 	   	var [firstName, lastName] = this.state.fullname.split(' ');
+    	var data = JSON.stringify({
+            firstName:    firstName,
+            lastName:     lastName,
+            phoneNumber:  this.state.phone,
+            emailAddress: this.state.email,
+            priorityOrder: this.state.priority
+          });
+	    console.log(data);
+	    AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
+//	    	console.log('post url is: ' + GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters");
+		    fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters", {
+	          method: "POST",
+	          headers: {
+	            'Accept': 'application/json',
+	            'Content-Type': 'application/json',
+	          },
+	          body: data
+	        })
+	        .then((response) => response.json())
+	        .then((responseJson) => {
+	          console.log('Response:',responseJson);
+	          if(responseJson.id) {
+	          	console.log('sitter was added!');
+	            // User._setUserId(responseJson.id).done();
+	            // this.props.navigator.push({
+	            //   id: 'home'
+	            // })
+	          } else {
+	            console.log('Message:', responseJson.message);
+	            // TODO display error message to user
+	          }
+	        })
+	        .catch((error) => {
+	          console.warn(error);
+	        });
+    	}).done();
+	},
 
     render: function() {
 	    return (
@@ -44,6 +85,16 @@ var AddSitter = React.createClass({
 		                    placeholderTextColor="#FFF"
 		                    value={this.state.fullname}
 	                      onChangeText={text => this.state.fullname = text}
+		                />
+		            </View>
+    	            <View style={styles.inputContainer}>
+		                <Image style={styles.inputEmail} source={require('../images/icons/email.png')}/>
+		                <TextInput 
+		                    style={[styles.input, styles.whiteFont]}
+		                    placeholder="Email"
+		                    placeholderTextColor="#FFF"
+		                    value={this.state.email}
+	                      onChangeText={text => this.state.email = text}
 		                />
 		            </View>
 	                <View style={styles.inputContainer}>
@@ -70,7 +121,6 @@ var AddSitter = React.createClass({
 	              <View style={styles.inputContainer}>
 	                  <Image style={styles.inputPassword} source={require('../images/icons/password.png')}/>
 	                  <TextInput
-	                      password={true}
 	                      style={styles.input}
 	                      placeholder="Priority"
 	                      placeholderTextColor="#FFF"
@@ -79,14 +129,16 @@ var AddSitter = React.createClass({
 	                  />
 	              </View>              
 	    		</View>
-	    		<TouchableHighlight
-	              style={styles.button}
-	              onPress={this.handleAddSitter}>
-		            <View style={styles.signup}>
-		                <Text style={styles.whiteFont}>SUBMIT</Text>
-		            </View>
-            	</TouchableHighlight>
-
+	    		<View style={styles.buttonRow}>
+	    		      <Button
+	    		      	containerStyle={styles.buttonContainer}
+				        style={styles.button}
+				        styleDisabled={{color: 'red'}}
+				        onPress={this.handleAddSitter}
+				      >
+				        ADD SITTER
+				      </Button>
+				</View>
             </View>
 
 	    )

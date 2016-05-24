@@ -65,4 +65,21 @@ module.exports = StyleSheet.create({
         height: 20,
         fontSize: 14
     },
+    buttonRow: {
+        alignItems: 'center'
+    },
+    buttonContainer: {
+        padding:10, 
+        height:45, 
+        overflow:'hidden', 
+        borderRadius:4, 
+        backgroundColor: GLOBAL.COLOR.DARK_PURPLE,
+        width: windowSize.width / 1.5,
+        alignItems: 'center',
+        marginBottom: 50
+    },
+    button: {
+        fontSize: 20,
+        color: '#fff'
+    }
 })
