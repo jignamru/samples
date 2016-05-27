@@ -1,11 +1,7 @@
 'use strict';
-var React = require('react-native');
-var GLOBAL = require('../common/globals');
-var User = require('../common/user');
-var styles = require('../styles/addSitter');
-var Button = require('react-native-button');
-
-var {
+'use strict';
+import React, { 
+  Component, 
   AppRegistry,
   AsyncStorage,
   StyleSheet,
@@ -15,20 +11,27 @@ var {
   Image,
   TouchableHighlight,
   Navigator
-} = React;
+} from 'react-native';
 
-var AddSitter = React.createClass({
-	getInitialState: function() {
-		return {
-	      fullname: null,
-	      phone: null,
-	      email: null,
-	      rate: null,
-	      priority: null
-    	}
-	},
+var GLOBAL = require('../common/globals');
+var User = require('../common/user');
+var styles = require('../styles/addSitter');
+var Button = require('react-native-button');
 
-	handleAddSitter: function(){
+class AddSitter extends Component {
+   constructor() {
+     super();
+     this.state = {
+                    fullname: '',
+                    phone: '',
+                    email: '',
+                    rate: '',
+                    priority: ''
+                  };
+	}
+  
+	handleAddSitter(){
+      console.log('state is ', this.state);
  	   	var [firstName, lastName] = this.state.fullname.split(' ');
     	var data = JSON.stringify({
             firstName:    firstName,
@@ -39,7 +42,6 @@ var AddSitter = React.createClass({
           });
 	    console.log(data);
 	    AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
-//	    	console.log('post url is: ' + GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters");
 		    fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters", {
 	          method: "POST",
 	          headers: {
@@ -53,10 +55,10 @@ var AddSitter = React.createClass({
 	          console.log('Response:',responseJson);
 	          if(responseJson.id) {
 	          	console.log('sitter was added!');
-	            // User._setUserId(responseJson.id).done();
-	            // this.props.navigator.push({
-	            //   id: 'home'
-	            // })
+                // to-do: display success modal/message
+	            this.props.navigator.push({
+	              id: 'sitters'
+	            })
 	          } else {
 	            console.log('Message:', responseJson.message);
 	            // TODO display error message to user
@@ -66,9 +68,9 @@ var AddSitter = React.createClass({
 	          console.warn(error);
 	        });
     	}).done();
-	},
+	}
 
-    render: function() {
+    render() {
 	    return (
 	        <View style={styles.container}>
 	        	<View style={styles.introContainer}>
@@ -84,7 +86,7 @@ var AddSitter = React.createClass({
 		                    placeholder="First and last name"
 		                    placeholderTextColor="#FFF"
 		                    value={this.state.fullname}
-	                      onChangeText={text => this.state.fullname = text}
+                            onChangeText={text => this.setState({fullname:text})}
 		                />
 		            </View>
     	            <View style={styles.inputContainer}>
@@ -94,7 +96,7 @@ var AddSitter = React.createClass({
 		                    placeholder="Email"
 		                    placeholderTextColor="#FFF"
 		                    value={this.state.email}
-	                      onChangeText={text => this.state.email = text}
+                            onChangeText={text => this.setState({email:text})}
 		                />
 		            </View>
 	                <View style={styles.inputContainer}>
@@ -104,7 +106,7 @@ var AddSitter = React.createClass({
 	                        placeholder="Mobile number"
 	                        placeholderTextColor="#FFF"
 	                        value={this.state.phone}
-	                        onChangeText={text => this.state.phone = text}
+                            onChangeText={text => this.setState({phone:text})}
 	                    />
               		</View>
 
@@ -115,7 +117,7 @@ var AddSitter = React.createClass({
 		                    placeholder="Rate"
 		                    placeholderTextColor="#FFF"
 		                    value={this.state.rate}
-	                      onChangeText={text => this.state.rate = text}
+                            onChangeText={text => this.setState({rate:text})}
 		                />
 		            </View>
 	              <View style={styles.inputContainer}>
@@ -125,7 +127,7 @@ var AddSitter = React.createClass({
 	                      placeholder="Priority"
 	                      placeholderTextColor="#FFF"
 	                      value={this.state.priority}
-	                      onChangeText={text => this.state.priority = text}
+                            onChangeText={text => this.setState({priority:text})}
 	                  />
 	              </View>              
 	    		</View>
@@ -134,7 +136,7 @@ var AddSitter = React.createClass({
 	    		      	containerStyle={styles.buttonContainer}
 				        style={styles.button}
 				        styleDisabled={{color: 'red'}}
-				        onPress={this.handleAddSitter}
+				        onPress={this.handleAddSitter.bind(this)}
 				      >
 				        ADD SITTER
 				      </Button>
@@ -143,7 +145,7 @@ var AddSitter = React.createClass({
 
 	    )
 	}
-});
+}
 
 
 module.exports = AddSitter;

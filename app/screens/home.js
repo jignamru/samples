@@ -1,10 +1,6 @@
 'use strict';
-var React = require('react-native');
-var GLOBAL = require('../common/globals');
-var User = require('../common/user');
-var styles = require('../styles/home');
-
-var {
+import React, { 
+  Component, 
   AppRegistry,
   AsyncStorage,
   StyleSheet,
@@ -14,33 +10,57 @@ var {
   Image,
   TouchableHighlight,
   Navigator
-} = React;
+} from 'react-native';
 
-var Home = React.createClass({
-	componentWillMount: function() {
+var GLOBAL = require('../common/globals');
+var User = require('../common/user');
+var styles = require('../styles/home');
+var Button = require('react-native-button');
 
+class Home extends Component {
+    constructor(props) {
+      super(props);
+      this.goToSitterList = this.goToSitterList.bind(this);
+      this.goToAddNewSitter = this.goToAddNewSitter.bind(this);
+      this.goToSettings = this.goToSettings.bind(this);
+      this.goToRequestSitter = this.goToRequestSitter.bind(this);
+      this.state = {};
+    }
+  
+	componentWillMount() {
 		//TODO get user info?
-	},
-
-	goToAddNewSitter: function(){
+	}
+  
+    goToRequestSitter(){
+// 		this.props.navigator.push({
+// 			id: 'requestSitter'
+// 		})
+	}
+    
+	goToAddNewSitter(){
 		this.props.navigator.push({
 			id: 'addSitter'
 		})
-	},
-	handleLogout: function(){
+	}
+	handleLogout(){
 		User._logout().done();
 		this.props.navigator.push({
 			id: 'login'
 		})
-	},
-	goToSettings: function(){
-		// User._logout().done();
+	}
+	goToSettings(){
 		// this.props.navigator.push({
 		// 	id: 'login'
 		// })
-	},
-
-    render: function() {
+	}
+  
+	goToSitterList(){
+		this.props.navigator.push({
+			id: 'sitters'
+		})
+	}
+  
+    render() {
 	    return (
 	        <View style={styles.container}>
 	        	<View style={styles.introContainer}>
@@ -48,15 +68,22 @@ var Home = React.createClass({
 		            <Text style={styles.title}>Welcome!</Text>
 		        </View>
 		        <View style={styles.actionsContainer}>
-		        	<View style={[styles.box, styles.requestSitterBox]}>
-		        		<Text style={[styles.boxLabel, styles.whiteFont]}>REQUEST A SITTER</Text>
-		        	</View>
-		        	<TouchableHighlight
-		              onPress={this.goToAddNewSitter}>
-			        	<View style={[styles.box, styles.addSitterBox]}>
-			        		<Text style={[styles.boxLabel, styles.whiteFont]}>ADD NEW SITTER</Text>
-			        	</View>
-		        	</TouchableHighlight>
+		        	  <Button
+	    		      	containerStyle={[styles.buttonContainer, styles.requestSitterButtonContainer]}
+				        style={styles.button}
+				        styleDisabled={{color: 'red'}}
+				        onPress={this.goToRequestSitter}
+				      >
+				        REQUEST A SITTER
+				      </Button>
+		        	<Button
+	    		      	containerStyle={[styles.buttonContainer, styles.addSitterButtonContainer]}
+				        style={styles.button}
+				        styleDisabled={{color: 'red'}}
+				        onPress={this.goToAddNewSitter}
+				      >
+				        ADD NEW SITTER
+				      </Button>
             	</View>
             	<View style={styles.footer}>
             		<TouchableHighlight
@@ -66,7 +93,9 @@ var Home = React.createClass({
 		              </View>
 	            	</TouchableHighlight>
 	            	<TouchableHighlight
-		              onPress={this.goToSettings}>
+//                     activeOpacity={75 / 100}
+//                     underlayColor={"rgb(210,210,210)"}
+		              onPress={this.goToSitterList}>
 		              <View style={[styles.logout, styles.footerItem]}>
 		                  <Text>SITTERS</Text>
 		              </View>
@@ -77,12 +106,12 @@ var Home = React.createClass({
 		                  <Text>LOG OUT</Text>
 		              </View>
 	            	</TouchableHighlight>
+                  
             	</View>
             </View>
-
 	    )
 	}
-});
+}
 
 
 module.exports = Home;

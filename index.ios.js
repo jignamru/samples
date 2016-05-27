@@ -1,22 +1,23 @@
 'use strict';
-var React = require('react-native');
-var {
+import React, { 
+  Component, 
   AppRegistry,
   Navigator
-} = React;
+} from 'react-native';
 
 var LoginScreen = require('./app/screens/login');
 var SignUpScreen = require('./app/screens/signup');
 var HomeScreen = require('./app/screens/home');
 var AddSitterScreen = require('./app/screens/addSitter');
+var SittersListScreen = require('./app/screens/sittersList');
 
 
-var BabysitterApp = React.createClass({
-  render: function() {
+class BabysitterApp extends Component {
+  render () {
     return <Navigator
             initialRoute={{id: 'login'}}
             renderScene={this.navigatorRenderScene}/>
-  },
+  }
 
   navigatorRenderScene(route, nav) {
     switch (route.id) {
@@ -28,8 +29,10 @@ var BabysitterApp = React.createClass({
         return (<HomeScreen navigator={nav} title="home" />);
       case 'addSitter':
         return (<AddSitterScreen navigator={nav} title="add sitter" />);
+       case 'sitters':
+         return (<SittersListScreen navigator={nav} title="sitters list" />);
     }
   }
-});
+}
 
 AppRegistry.registerComponent('BabysitterApp', () => BabysitterApp);

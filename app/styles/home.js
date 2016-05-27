@@ -46,11 +46,24 @@ module.exports = StyleSheet.create({
     	paddingTop: 40,
     	paddingBottom: 60
     },
-    requestSitterBox: {
-        backgroundColor: GLOBAL.COLOR.TEAL
+    buttonContainer: {
+        padding:20, 
+        height:65, 
+        overflow:'hidden', 
+        borderRadius:4, 
+        width: windowSize.width / 1.5,
+        alignItems: 'center',
+        marginBottom: 50
     },
-    addSitterBox: {
-    	backgroundColor: GLOBAL.COLOR.DARK_PURPLE
+    button: {
+        fontSize: 20,
+        color: '#fff'
+    },
+    addSitterButtonContainer: {
+        backgroundColor: GLOBAL.COLOR.DARK_PURPLE
+    },
+    requestSitterButtonContainer: {
+        backgroundColor: GLOBAL.COLOR.TEAL
     },
     boxLabel: {
     	fontSize: 25,
