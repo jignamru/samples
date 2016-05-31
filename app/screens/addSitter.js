@@ -31,7 +31,6 @@ class AddSitter extends Component {
 	}
   
 	handleAddSitter(){
-      console.log('state is ', this.state);
  	   	var [firstName, lastName] = this.state.fullname.split(' ');
     	var data = JSON.stringify({
             firstName:    firstName,
@@ -40,7 +39,6 @@ class AddSitter extends Component {
             emailAddress: this.state.email,
             priorityOrder: this.state.priority
           });
-	    console.log(data);
 	    AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
 		    fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters", {
 	          method: "POST",
@@ -54,7 +52,7 @@ class AddSitter extends Component {
 	        .then((responseJson) => {
 	          console.log('Response:',responseJson);
 	          if(responseJson.id) {
-	          	console.log('sitter was added!');
+// 	          	console.log('sitter was added!');
                 // to-do: display success modal/message
 	            this.props.navigator.push({
 	              id: 'sitters'
