@@ -16,6 +16,10 @@ var GLOBAL = require('../common/globals');
 var User = require('../common/user');
 var styles = require('../styles/home');
 var Button = require('react-native-button');
+var AddSitterScreen = require('./addSitter');
+var SittersListScreen = require('./sittersList');
+var LoginScreen = require('./login');
+
 
 class Home extends Component {
     constructor(props) {
@@ -32,31 +36,27 @@ class Home extends Component {
 	}
   
     goToRequestSitter(){
-// 		this.props.navigator.push({
-// 			id: 'requestSitter'
-// 		})
+      // todo
 	}
     
 	goToAddNewSitter(){
 		this.props.navigator.push({
-			id: 'addSitter'
+			component: AddSitterScreen
 		})
 	}
 	handleLogout(){
 		User._logout().done();
 		this.props.navigator.push({
-			id: 'login'
+			component: LoginScreen
 		})
 	}
 	goToSettings(){
-		// this.props.navigator.push({
-		// 	id: 'login'
-		// })
+		// todo
 	}
   
 	goToSitterList(){
 		this.props.navigator.push({
-			id: 'sitters'
+			component: SittersListScreen
 		})
 	}
   

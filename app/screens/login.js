@@ -1,10 +1,11 @@
 'use strict';
-var React = require('react-native');
 var GLOBAL = require('../common/globals');
 var User = require('../common/user');
 var SignUpScreen = require('./signup');
+var HomeScreen = require('./home');
 
-var {
+import React, { 
+  Component, 
   AppRegistry,
   AsyncStorage,
   StyleSheet,
@@ -14,30 +15,31 @@ var {
   Image,
   TouchableHighlight,
   Navigator
-} = React;
+} from 'react-native';
 
-var Login = React.createClass({
+class Login extends Component{
 
-  getInitialState: function() {
-    return {
-      username: null,
-      password: null
-    }
-  },
+  constructor(props) {
+      super(props);
+      this.state = {
+        username: null,
+        password: null
+      }
+  }
 
-  componentWillMount: function() {
+  componentWillMount() {
     AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((value) => {
       if( value != null) {
         console.log('User logged in. UserId: ' + value);
         this.props.navigator.push({
-          id: 'home'
+          component: HomeScreen
         })
       }
     }).done();
-  },
+  }
 
 
-  handleLogin: function() {
+  handleLogin() {
     fetch( GLOBAL.BABYSITTER_API_URL + "users/authenticate", {
           method: "POST",
           headers: {
@@ -67,15 +69,15 @@ var Login = React.createClass({
         .catch((error) => {
           console.warn(error);
         });
-  },
+  }
 
-  gotoSignup: function() {
+  gotoSignup() {
     this.props.navigator.push({
-      id: 'signup'
+      component: SignUpScreen
     })
-  },
+  }
 
-  render: function() {
+  render() {
     return (
         <View style={styles.container}>
             <Image style={styles.bg} source={require('../images/bg-login.png')} />
@@ -121,9 +123,9 @@ var Login = React.createClass({
               </View>
             </TouchableHighlight>
         </View>
-    );
+    )
   }
-});
+}
 
 var styles = require('../styles/login');
 
