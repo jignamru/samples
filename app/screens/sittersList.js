@@ -53,7 +53,7 @@ class SittersList extends Component {
     this.props.navigator.push({
       component: SitterDetailsScreen, 
 //       passProps: {
-//         sitterId: '1234'
+//         sitterId: sitterId // make dynamic
 //       }
     })
   }

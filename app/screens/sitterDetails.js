@@ -1,5 +1,11 @@
-import React, { Component, } from 'react'
-import { View, } from 'react-native'
+'use strict';
+import React, { 
+  Component, 
+  View, 
+  Text,
+  TouchableHighlight,
+  Navigator
+} from 'react-native';
 
 class SitterDetails extends Component {
 
@@ -17,4 +23,5 @@ class SitterDetails extends Component {
   }
 }
 
-export default SitterDetails
+
+module.exports = SitterDetails;
