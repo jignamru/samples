@@ -12,7 +12,7 @@ import React, {
 
 var GLOBAL = require('../common/globals');
 var User = require('../common/user');
-var SitterDetailsScreen = require('./app/screens/sitterDetails');
+var SitterDetailsScreen = require('./sitterDetails');
 
 class SittersList extends Component {
   constructor(props) {
@@ -51,10 +51,10 @@ class SittersList extends Component {
   
   goToSitterDetails(){
     this.props.navigator.push({
-      component: SitterDetailsScreen 
-      passProps: {
-        sitterId: '1234'
-      }
+      component: SitterDetailsScreen, 
+//       passProps: {
+//         sitterId: '1234'
+//       }
     })
   }
   
