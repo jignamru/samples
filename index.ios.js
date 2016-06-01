@@ -10,6 +10,7 @@ var SignUpScreen = require('./app/screens/signup');
 var HomeScreen = require('./app/screens/home');
 var AddSitterScreen = require('./app/screens/addSitter');
 var SittersListScreen = require('./app/screens/sittersList');
+var SitterDetailsScreen = require('./app/screens/sitterDetails');
 
 
 class BabysitterApp extends Component {
@@ -29,8 +30,11 @@ class BabysitterApp extends Component {
         return (<HomeScreen navigator={nav} title="home" />);
       case 'addSitter':
         return (<AddSitterScreen navigator={nav} title="add sitter" />);
-       case 'sitters':
-         return (<SittersListScreen navigator={nav} title="sitters list" />);
+      case 'sitters':
+        return (<SittersListScreen navigator={nav} title="sitters list" />);
+      case 'sitterDetails':
+        return (<SitterDetailsScreen navigator={nav} title="sitter details" />);
+        
     }
   }
 }
