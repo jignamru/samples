@@ -10,9 +10,10 @@ import React, {
   Navigator
 } from 'react-native';
 
-var GLOBAL = require('../common/globals');
-var User = require('../common/user');
-var SitterDetailsScreen = require('./sitterDetails');
+import NavigationBar from 'react-native-navbar';
+import GLOBAL from '../common/globals';
+import User from '../common/user';
+import SitterDetailsScreen from './sitterDetails';
 
 class SittersList extends Component {
   constructor(props) {
@@ -67,8 +68,16 @@ class SittersList extends Component {
   }
   
   render() {
+    const leftButtonConfig = {
+      title: 'Back',
+      handler: () => this.props.navigator.pop()
+    };
+      
     return (
       <View>
+        <NavigationBar
+          title={{ title: 'Your Sitters', }}
+          leftButton={leftButtonConfig} />
         <ListView
       	 dataSource={this.state.dataSource}
       	 renderRow={ this.renderRow } />
