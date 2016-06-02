@@ -29,7 +29,6 @@ class SittersList extends Component {
   }
   
   fetchData(){
-    var sitters = [];
     AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
       fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters", {
         method: "GET",
@@ -39,22 +38,19 @@ class SittersList extends Component {
       })
       .then((response) => response.json())
       .then((responseJson) => {
-        for (var i = 0; i < responseJson.length; i++) {
-          sitters.push(responseJson[i].firstName + ' ' + responseJson[i].lastName);
-        }
         this.setState({
-            dataSource : this.state.dataSource.cloneWithRows(sitters),
+            dataSource : this.state.dataSource.cloneWithRows(responseJson),
         });
       })
     }).done();
   }
   
-  goToSitterDetails(){
+  goToSitterDetails(sitterData){
     this.props.navigator.push({
       component: SitterDetailsScreen, 
-//       passProps: {
-//         sitterId: sitterId // make dynamic
-//       }
+      passProps: {
+      	sitter: sitterData
+      }
     })
   }
   
@@ -64,8 +60,8 @@ class SittersList extends Component {
       <TouchableHighlight 
              underlayColor="#ededed" 
              style={{ height:60, backgroundColor: '#efefef', borderBottomWidth:1, borderBottomColor: '#ddd', flexDirection:'row', justifyContent: 'center', alignItems: 'center' }}
-             onPress={this.goToSitterDetails}>
-      	<Text style={{ fontSize:18 }}>{rowData}</Text>
+               onPress={() => this.goToSitterDetails(rowData)}>
+      	<Text style={{ fontSize:18 }}>{rowData.firstName} {rowData.lastName}</Text>
       </TouchableHighlight>
       )
   }

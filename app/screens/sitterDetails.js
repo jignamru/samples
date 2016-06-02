@@ -17,7 +17,9 @@ class SitterDetails extends Component {
   render() {
     return (
       <View>
-          <Text>YOU MADE IT!</Text>
+          <Text 
+            style={{ height:60, backgroundColor: '#efefef', borderBottomWidth:1, borderBottomColor: '#ddd', flexDirection:'row', justifyContent: 'center', alignItems: 'center' }}
+             >YOU MADE IT with id: {this.props.sitter.id}!</Text>
       </View>
     )
   }
