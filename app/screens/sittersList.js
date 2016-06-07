@@ -14,6 +14,8 @@ import NavigationBar from 'react-native-navbar';
 import GLOBAL from '../common/globals';
 import User from '../common/user';
 import SitterDetailsScreen from './sitterDetails';
+import IconTitle from '../components/navbarIconTitle';
+
 
 class SittersList extends Component {
   constructor(props) {
@@ -76,8 +78,11 @@ class SittersList extends Component {
     return (
       <View>
         <NavigationBar
-          title={{ title: 'Your Sitters', }}
+          title={<IconTitle/>}
           leftButton={leftButtonConfig} />
+        <View>
+          <Text>Your Sitters</Text>
+        </View>
         <ListView
       	 dataSource={this.state.dataSource}
       	 renderRow={ this.renderRow } />

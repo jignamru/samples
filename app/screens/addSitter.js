@@ -16,6 +16,8 @@ var GLOBAL = require('../common/globals');
 var User = require('../common/user');
 var styles = require('../styles/addSitter');
 var Button = require('react-native-button');
+import NavigationBar from 'react-native-navbar';
+import IconTitle from '../components/navbarIconTitle';
 
 class AddSitter extends Component {
    constructor() {
@@ -68,8 +70,16 @@ class AddSitter extends Component {
 	}
 
     render() {
+        const leftButtonConfig = {
+          title: 'Back',
+          handler: () => this.props.navigator.pop()
+        };
+      
 	    return (
 	        <View style={styles.container}>
+                <NavigationBar
+                  title={<IconTitle/>}
+                  leftButton={leftButtonConfig} />
 	        	<View style={styles.introContainer}>
 		            <Image style={styles.introBg} source={require('../images/bg-top-welcome.png')} />
 		            <Text style={styles.title}>Add new sitter</Text>
