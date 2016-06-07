@@ -18,16 +18,15 @@ var styles = require('../styles/home');
 var Button = require('react-native-button');
 var AddSitterScreen = require('./addSitter');
 var SittersListScreen = require('./sittersList');
+var RequestSitterScreen = require('./requestSitter');
 var LoginScreen = require('./login');
 
 
 class Home extends Component {
     constructor(props) {
       super(props);
-      this.goToSitterList = this.goToSitterList.bind(this);
-      this.goToAddNewSitter = this.goToAddNewSitter.bind(this);
       this.goToSettings = this.goToSettings.bind(this);
-      this.goToRequestSitter = this.goToRequestSitter.bind(this);
+      this.goToScreen = this.goToScreen.bind(this);
       this.state = {};
     }
   
@@ -35,15 +34,12 @@ class Home extends Component {
 		//TODO get user info?
 	}
   
-    goToRequestSitter(){
-      // todo
-	}
-    
-	goToAddNewSitter(){
-		this.props.navigator.push({
-			component: AddSitterScreen
+    goToScreen(component){
+      this.props.navigator.push({
+			component: component
 		})
 	}
+    
 	handleLogout(){
 		User._logout().done();
 		this.props.navigator.push({
@@ -52,12 +48,6 @@ class Home extends Component {
 	}
 	goToSettings(){
 		// todo
-	}
-  
-	goToSitterList(){
-		this.props.navigator.push({
-			component: SittersListScreen
-		})
 	}
   
     render() {
@@ -72,7 +62,7 @@ class Home extends Component {
 	    		      	containerStyle={[styles.buttonContainer, styles.requestSitterButtonContainer]}
 				        style={styles.button}
 				        styleDisabled={{color: 'red'}}
-				        onPress={this.goToRequestSitter}
+				        onPress={() => this.goToScreen(RequestSitterScreen)}
 				      >
 				        REQUEST A SITTER
 				      </Button>
@@ -80,7 +70,7 @@ class Home extends Component {
 	    		      	containerStyle={[styles.buttonContainer, styles.addSitterButtonContainer]}
 				        style={styles.button}
 				        styleDisabled={{color: 'red'}}
-				        onPress={this.goToAddNewSitter}
+				        onPress={() => this.goToScreen(AddSitterScreen)}
 				      >
 				        ADD NEW SITTER
 				      </Button>
@@ -95,7 +85,7 @@ class Home extends Component {
 	            	<TouchableHighlight
 //                     activeOpacity={75 / 100}
 //                     underlayColor={"rgb(210,210,210)"}
-		              onPress={this.goToSitterList}>
+		              onPress={() => this.goToScreen(SittersListScreen)}>
 		              <View style={[styles.logout, styles.footerItem]}>
 		                  <Text>SITTERS</Text>
 		              </View>
