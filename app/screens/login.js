@@ -111,7 +111,7 @@ class Login extends Component{
                 </View>
             </View>
             <TouchableHighlight
-              onPress={this.handleLogin}>
+              onPress={this.handleLogin.bind(this)}>
               <View style={styles.signin}>
                   <Text style={styles.whiteFont}>SIGN IN</Text>
               </View>
