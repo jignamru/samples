@@ -2,7 +2,7 @@
 var React = require('react-native');
 var Dimensions = require('Dimensions');
 var windowSize = Dimensions.get('window');
-var GLOBAL = require('../common/globals');
+var common = require('../common/styles');
 var { StyleSheet } = React;
 
 module.exports = StyleSheet.create({
@@ -73,7 +73,7 @@ module.exports = StyleSheet.create({
         height:45, 
         overflow:'hidden', 
         borderRadius:4, 
-        backgroundColor: GLOBAL.COLOR.DARK_PURPLE,
+        backgroundColor: common.color.darkPurple,
         width: windowSize.width / 1.5,
         alignItems: 'center',
         marginBottom: 50

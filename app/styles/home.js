@@ -2,7 +2,7 @@
 var React = require('react-native');
 var Dimensions = require('Dimensions');
 var windowSize = Dimensions.get('window');
-var GLOBAL = require('../common/globals');
+var common = require('../common/styles');
 var { StyleSheet } = React;
 
 module.exports = StyleSheet.create({
@@ -33,7 +33,7 @@ module.exports = StyleSheet.create({
 	    fontSize: 40,
 	    fontWeight: 'bold',
 	    letterSpacing: 1,
-        color: GLOBAL.COLOR.GREY
+        color: common.color.grey
     },
     actionsContainer: {
     	flex: 1,
@@ -60,10 +60,10 @@ module.exports = StyleSheet.create({
         color: '#fff'
     },
     addSitterButtonContainer: {
-        backgroundColor: GLOBAL.COLOR.DARK_PURPLE
+        backgroundColor: common.color.darkPurple
     },
     requestSitterButtonContainer: {
-        backgroundColor: GLOBAL.COLOR.TEAL
+        backgroundColor: common.color.teal
     },
     boxLabel: {
     	fontSize: 25,
@@ -71,7 +71,7 @@ module.exports = StyleSheet.create({
     },
     footer: {
         flexDirection: 'row',
-        backgroundColor: GLOBAL.COLOR.ORANGE,
+        backgroundColor: common.color.orange,
         height: 80,
         paddingTop: 30
     },

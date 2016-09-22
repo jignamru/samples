@@ -17,6 +17,8 @@ import React, {
   Navigator
 } from 'react-native';
 
+import SitterDoneText from '../components/sitterDoneText';
+
 class Login extends Component{
 
   constructor(props) {
@@ -80,9 +82,8 @@ class Login extends Component{
   render() {
     return (
         <View style={styles.container}>
-            <Image style={styles.bg} source={require('../images/bg-login.png')} />
             <View style={styles.header}>
-                <Image style={styles.mark} source={{uri: 'http://i.imgur.com/da4G0Io.png'}} />
+                <Image style={styles.mark} source={require('../images/icons/logo.png')} />
             </View>
             <View style={styles.inputs}>
                 <View style={styles.inputContainer}>
@@ -107,19 +108,19 @@ class Login extends Component{
                     />
                 </View>
                 <View style={styles.forgotContainer}>
-                    <Text>Forgot Password?</Text>
+                    <SitterDoneText>Forgot Password?</SitterDoneText>
                 </View>
             </View>
             <TouchableHighlight
               onPress={this.handleLogin.bind(this)}>
               <View style={styles.signin}>
-                  <Text style={styles.whiteFont}>SIGN IN</Text>
+                  <SitterDoneText><Text style={styles.whiteFont}>SIGN IN</Text></SitterDoneText>
               </View>
             </TouchableHighlight>
             <TouchableHighlight
               onPress={this.gotoSignup}>
               <View style={styles.signup}>
-                  <Text>Don't have an account? <Text style={styles.bold}>Sign Up</Text></Text>
+                  <SitterDoneText>Don't have an account? <Text style={styles.bold}>Sign Up</Text></SitterDoneText>
               </View>
             </TouchableHighlight>
         </View>

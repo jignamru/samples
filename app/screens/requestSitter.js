@@ -13,6 +13,7 @@ import React, {
   TouchableOpacity,
   Navigator,
   DatePickerIOS,
+  Modal,
 } from 'react-native'
 
 var GLOBAL = require('../common/globals');
@@ -38,6 +39,7 @@ class RequestSitter extends Component{
   toggleStartDatePicker() {
     var show = this.state.showStartDateTimePicker == false ? true : false;
     this.setState( { showStartDateTimePicker: show } );
+    console.log('show picker: ', show);
   }
   
   toggleEndDatePicker() {
@@ -57,19 +59,36 @@ class RequestSitter extends Component{
     };
     
     var startDatePicker = (
-      <View style={  [styles.datePicker, styles.startDatePicker ]  }>
-
-        <TouchableOpacity onPress={ this.toggleStartDatePicker.bind(this) } style={{ padding: 5, alignItems: 'flex-end' }}>
-          <Text>Done</Text>
-        </TouchableOpacity>
-      
-        <DatePickerIOS
+      <View>      
+          <Modal 
+            animated={true}
+            transparent={false}
+            visible={this.state.showStartDateTimePicker}>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: '#f5fcff',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: 20,
+              }}>
+                <DatePickerIOS
                   date={this.state.startDateTime}
                   mode="datetime"
                   minuteInterval = {15}
                   minimumDate = {new Date()}
                   onDateChange={ text => this.setState({startDateTime:text}) }
                 />
+                <Button
+                  containerStyle={styles.buttonContainer}
+                  style={styles.button}
+                  styleDisabled={{color: 'red'}}
+                  onPress={ this.toggleStartDatePicker.bind(this) }
+                >
+                  SELECT
+                </Button>
+            </View>
+          </Modal>
       </View>
     );    
     var endDatePicker = (

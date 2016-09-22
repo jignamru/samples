@@ -23,6 +23,7 @@ class SitterDetails extends Component {
     };
     
     return (
+      // todo: style, add "request sitter", "delete sitter" and "edit sitter"
       <View>
         <NavigationBar
           title={<IconTitle/>}
