@@ -23,6 +23,7 @@ class Login extends Component{
 
   constructor(props) {
       super(props);
+      this.gotoSignup = this.gotoSignup.bind(this);
       this.state = {
         username: null,
         password: null
@@ -50,7 +51,8 @@ class Login extends Component{
           },
           body: JSON.stringify({
             emailAddress: this.state.username,
-            password:     this.state.password
+            password:     this.state.password,
+            clientId: "karma"
           })
         })
         .then((response) => response.json() )
