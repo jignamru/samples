@@ -20,6 +20,7 @@ var GLOBAL = require('../common/globals');
 var User = require('../common/user');
 var styles = require('../styles/requestSitter');
 var CheckBox = require('react-native-checkbox');
+var SittersListScreen = require('./sittersList');
 
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
@@ -76,6 +77,7 @@ class RequestSitter extends Component{
           if(responseJson.id) {
               Alert.alert('Done!', "Your request has been submitted. We'll keep in touch!");
               // todo: redirect to home?
+
             this.props.navigator.push({
               id: 'sitters'
             })
@@ -165,13 +167,16 @@ class RequestSitter extends Component{
     );
     
     return (
-        <View>
+        <View style={styles.container}>
           <NavigationBar
             title={<IconTitle/>}
             leftButton={leftButtonConfig} />
 
-        <CustomText>Request a Sitter</CustomText>
-        
+            <View style={styles.introContainer}>
+                <Image style={styles.introBg} source={require('../images/bg-top-welcome.png')} />
+                <CustomText style={styles.title}>Request a sitter</CustomText>
+            </View>
+
         <View style={styles.inputs}> 
           <View style={styles.inputContainer}>
               <CustomText>Start date and time:</CustomText>

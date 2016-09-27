@@ -62,7 +62,7 @@ class Login extends Component{
           if(responseJson.userId) {
             User._setUserId(responseJson.userId).done();
             this.props.navigator.push({
-              id: 'home'
+              component: HomeScreen
             })
           } else {
             Alert.alert('Uh oh!', responseJson.message);

@@ -7,9 +7,13 @@ import React, {
   Text,
   ListView,
   TouchableHighlight,
-  Navigator
+  Navigator,
+  Image
 } from 'react-native';
 
+var styles = require('../styles/sittersList');
+
+import CustomText from '../components/customText';
 import NavigationBar from 'react-native-navbar';
 import GLOBAL from '../common/globals';
 import User from '../common/user';
@@ -76,13 +80,14 @@ class SittersList extends Component {
     };
       
     return (
-      <View>
+      <View style={styles.container}>
         <NavigationBar
           title={<IconTitle/>}
           leftButton={leftButtonConfig} />
-        <View>
-          <Text>Your Sitters</Text>
-        </View>
+          <View style={styles.introContainer}>
+            <Image style={styles.introBg} source={require('../images/bg-top-welcome.png')} />
+            <CustomText style={styles.title}>Your sitters</CustomText>
+          </View>
         <ListView
       	 dataSource={this.state.dataSource}
       	 renderRow={ this.renderRow } />

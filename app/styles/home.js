@@ -25,10 +25,6 @@ module.exports = StyleSheet.create({
         width: windowSize.width,
         height: windowSize.height * 0.4
     },
-    // menu: {
-    // 	height: 50,
-    // 	width: 50
-    // },
     title: {
 	    fontSize: 40,
 	    fontWeight: 'bold',

@@ -9,13 +9,18 @@ import React, {
   TextInput,
   Image,
   TouchableHighlight,
-  Navigator
+  Navigator,
+  Alert
 } from 'react-native';
 
 var GLOBAL = require('../common/globals');
 var User = require('../common/user');
 var styles = require('../styles/addSitter');
-var Button = require('react-native-button');
+var SittersListScreen = require('./sittersList');
+
+import CustomTextInput from '../components/customTextInput';
+import CustomText from '../components/customText';
+import CustomButton from '../components/customButton';
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 
@@ -53,14 +58,21 @@ class AddSitter extends Component {
 	        .then((responseJson) => {
 	          console.log('Response:',responseJson);
 	          if(responseJson.id) {
-// 	          	console.log('sitter was added!');
-                // to-do: display success modal/message
+                Alert.alert(
+		            'Yay!',
+		            firstName + " is part of your sitter community!",
+		            [
+		              	{text: 'OK', onPress: () => this.props.navigator.push({
+										              component: SittersListScreen
+										            })
+		          		},
+		            ]
+		          )
 	            this.props.navigator.push({
 	              id: 'sitters'
 	            })
-	          } else {
-	            console.log('Message:', responseJson.message);
-	            // TODO display error message to user
+	          } else {            
+	            Alert.alert('Uh oh!', responseJson.message);
 	          }
 	        })
 	        .catch((error) => {
@@ -82,13 +94,13 @@ class AddSitter extends Component {
                   leftButton={leftButtonConfig} />
 	        	<View style={styles.introContainer}>
 		            <Image style={styles.introBg} source={require('../images/bg-top-welcome.png')} />
-		            <Text style={styles.title}>Add new sitter</Text>
+		            <CustomText style={styles.title}>Add new sitter</CustomText>
 		        </View>
 
 		        <View style={styles.inputs}>
 		            <View style={styles.inputContainer}>
 		                <Image style={styles.inputName} source={require('../images/icons/name.png')}/>
-		                <TextInput 
+		                <CustomTextInput 
 		                    style={styles.input}
 		                    placeholder="First and last name"
 		                    placeholderTextColor="#FFF"
@@ -98,7 +110,7 @@ class AddSitter extends Component {
 		            </View>
     	            <View style={styles.inputContainer}>
 		                <Image style={styles.inputEmail} source={require('../images/icons/email.png')}/>
-		                <TextInput 
+		                <CustomTextInput 
 		                    style={[styles.input, styles.whiteFont]}
 		                    placeholder="Email"
 		                    placeholderTextColor="#FFF"
@@ -108,7 +120,7 @@ class AddSitter extends Component {
 		            </View>
 	                <View style={styles.inputContainer}>
 	                    <Image style={styles.inputPhone} source={require('../images/icons/phone.png')}/>
-	                    <TextInput 
+	                    <CustomTextInput 
 	                        style={styles.input}
 	                        placeholder="Mobile number"
 	                        placeholderTextColor="#FFF"
@@ -119,7 +131,7 @@ class AddSitter extends Component {
 
 		            <View style={styles.inputContainer}>
 		                <Image style={styles.inputEmail} source={require('../images/icons/email.png')}/>
-		                <TextInput 
+		                <CustomTextInput 
 		                    style={styles.input}
 		                    placeholder="Rate"
 		                    placeholderTextColor="#FFF"
@@ -129,7 +141,7 @@ class AddSitter extends Component {
 		            </View>
 	              <View style={styles.inputContainer}>
 	                  <Image style={styles.inputPassword} source={require('../images/icons/password.png')}/>
-	                  <TextInput
+	                  <CustomTextInput
 	                      style={styles.input}
 	                      placeholder="Priority"
 	                      placeholderTextColor="#FFF"
@@ -139,14 +151,14 @@ class AddSitter extends Component {
 	              </View>              
 	    		</View>
 	    		<View style={styles.buttonRow}>
-	    		      <Button
+	    		      <CustomButton
 	    		      	containerStyle={styles.buttonContainer}
 				        style={styles.button}
 				        styleDisabled={{color: 'red'}}
 				        onPress={this.handleAddSitter.bind(this)}
 				      >
 				        ADD SITTER
-				      </Button>
+				      </CustomButton>
 				</View>
             </View>
 

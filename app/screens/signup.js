@@ -16,6 +16,8 @@ var {
   Alert
 } = React;
 
+var HomeScreen = require('./home');
+
 var SignUp = React.createClass({
 
   getInitialState: function() {
@@ -53,7 +55,7 @@ var SignUp = React.createClass({
           if(responseJson.id) {
             User._setUserId(responseJson.id).done();
             this.props.navigator.push({
-              id: 'home'
+              component: HomeScreen
             })
           } else {
             Alert.alert('Uh oh!', responseJson.message);

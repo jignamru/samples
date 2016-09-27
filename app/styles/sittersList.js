@@ -31,39 +31,4 @@ module.exports = StyleSheet.create({
         paddingLeft: 30,
         color: common.color.grey
     },
-
-    inputs: {
-        marginTop: 10,
-        marginBottom: 10,
-    },
-    inputContainer: {
-        padding: 10,
-        marginTop: 20,
-        borderWidth: 1,
-        borderBottomColor: '#CCC',
-        borderColor: 'transparent'
-    },
-    input: {
-      height: 40, 
-      justifyContent: 'center', 
-      padding: 5, 
-      borderColor: 'gray', 
-      borderWidth: 1,
-      marginVertical: 10,
-    },
-    buttonRow: {
-        alignItems: 'center'
-    },
-    buttonContainer: {
-        padding:10, 
-        height:45, 
-        overflow:'hidden', 
-        borderRadius:4, 
-        backgroundColor: common.color.darkPurple,
-        width: windowSize.width / 1.5,
-        alignItems: 'center',
-    },
-    button: {
-        color: '#fff'
-    }
 })
