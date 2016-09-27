@@ -6,7 +6,6 @@ import React, {
   StyleSheet,
   View,
   Text,
-  TextInput,
   Image,
   TouchableHighlight,
   TouchableWithoutFeedback,
@@ -19,9 +18,11 @@ import React, {
 var GLOBAL = require('../common/globals');
 var User = require('../common/user');
 var styles = require('../styles/requestSitter');
-var Button = require('react-native-button');
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
+import CustomButton from '../components/customButton';
+import CustomText from '../components/customText';
+
 
 class RequestSitter extends Component{
 
@@ -79,14 +80,14 @@ class RequestSitter extends Component{
                   minimumDate = {new Date()}
                   onDateChange={ text => this.setState({startDateTime:text}) }
                 />
-                <Button
+                <CustomButton
                   containerStyle={styles.buttonContainer}
                   style={styles.button}
                   styleDisabled={{color: 'red'}}
                   onPress={ this.toggleStartDatePicker.bind(this) }
                 >
                   SELECT
-                </Button>
+                </CustomButton>
             </View>
           </Modal>
       </View>
@@ -95,7 +96,7 @@ class RequestSitter extends Component{
       <View style={ [styles.datePicker, styles.endDatePicker ] }>
 
         <TouchableOpacity onPress={ this.toggleEndDatePicker.bind(this) } style={{ padding: 5, alignItems: 'flex-end' }}>
-          <Text>Done</Text>
+          <CustomText>Done</CustomText>
         </TouchableOpacity>
       
         <DatePickerIOS
@@ -114,17 +115,17 @@ class RequestSitter extends Component{
             title={<IconTitle/>}
             leftButton={leftButtonConfig} />
 
-        <Text>Request a Sitter</Text>
+        <CustomText>Request a Sitter</CustomText>
         
         <View style={styles.inputs}> 
           <View style={styles.inputContainer}>
-              <Text>Start date and time:</Text>
+              <CustomText>Start date and time:</CustomText>
               <TouchableWithoutFeedback onPress={ this.toggleStartDatePicker.bind(this) }>
                 <View style={ styles.input }>
-                  <Text>
+                  <CustomText>
                     {this.state.startDateTime.toLocaleDateString() +
                       ' at ' + this.state.startDateTime.toLocaleTimeString()}
-                    </Text>
+                    </CustomText>
                 </View>
               </TouchableWithoutFeedback>
               { this.state.showStartDateTimePicker == true ? startDatePicker : <View/> }
@@ -132,13 +133,13 @@ class RequestSitter extends Component{
           </View>
           
            <View style={styles.inputContainer}>
-              <Text>End date and time:</Text>
+              <CustomText>End date and time:</CustomText>
               <TouchableWithoutFeedback onPress={ this.toggleEndDatePicker.bind(this) }>
                 <View style={ styles.input }>
-                  <Text>
+                  <CustomText>
                     {this.state.endDateTime.toLocaleDateString() +
                       ' at ' + this.state.endDateTime.toLocaleTimeString()}
-                    </Text>
+                    </CustomText>
                 </View>
               </TouchableWithoutFeedback>
               { this.state.showEndDateTimePicker == true ? endDatePicker : <View/> }
@@ -147,14 +148,14 @@ class RequestSitter extends Component{
       </View>
 
       <View style={styles.buttonRow}>
-            <Button
+            <CustomButton
               containerStyle={styles.buttonContainer}
               style={styles.button}
               styleDisabled={{color: 'red'}}
               onPress={this.handleRequestSitter.bind(this)}
             >
               SEND REQUEST
-            </Button>
+            </CustomButton>
       </View>
         
         </View>

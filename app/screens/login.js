@@ -17,7 +17,7 @@ import React, {
   Navigator
 } from 'react-native';
 
-import SitterDoneText from '../components/sitterDoneText';
+import CustomText from '../components/customText';
 
 class Login extends Component{
 
@@ -110,19 +110,19 @@ class Login extends Component{
                     />
                 </View>
                 <View style={styles.forgotContainer}>
-                    <SitterDoneText>Forgot Password?</SitterDoneText>
+                    <CustomText>Forgot Password?</CustomText>
                 </View>
             </View>
             <TouchableHighlight
               onPress={this.handleLogin.bind(this)}>
               <View style={styles.signin}>
-                  <SitterDoneText><Text style={styles.whiteFont}>SIGN IN</Text></SitterDoneText>
+                  <CustomText><Text style={styles.whiteFont}>SIGN IN</Text></CustomText>
               </View>
             </TouchableHighlight>
             <TouchableHighlight
               onPress={this.gotoSignup}>
               <View style={styles.signup}>
-                  <SitterDoneText>Don't have an account? <Text style={styles.bold}>Sign Up</Text></SitterDoneText>
+                  <CustomText>Don't have an account? <Text style={styles.bold}>Sign Up</Text></CustomText>
               </View>
             </TouchableHighlight>
         </View>
