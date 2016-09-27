@@ -80,7 +80,6 @@ class RequestSitter extends Component{
               id: 'sitters'
             })
           } else {
-            console.log('Message:', responseJson.message);
             Alert.alert('Uh oh!', responseJson.message);
           }
         })
