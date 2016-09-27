@@ -40,7 +40,6 @@ class RequestSitter extends Component{
   toggleStartDatePicker() {
     var show = this.state.showStartDateTimePicker == false ? true : false;
     this.setState( { showStartDateTimePicker: show } );
-    console.log('show picker: ', show);
   }
   
   toggleEndDatePicker() {
@@ -93,19 +92,37 @@ class RequestSitter extends Component{
       </View>
     );    
     var endDatePicker = (
-      <View style={ [styles.datePicker, styles.endDatePicker ] }>
-
-        <TouchableOpacity onPress={ this.toggleEndDatePicker.bind(this) } style={{ padding: 5, alignItems: 'flex-end' }}>
-          <CustomText>Done</CustomText>
-        </TouchableOpacity>
+      <View>      
+          <Modal 
+            animated={true}
+            transparent={false}
+            visible={this.state.showEndDateTimePicker}>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: '#f5fcff',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: 20,
+              }}>
       
-        <DatePickerIOS
-                  date={this.state.endDateTime}
-                  mode="datetime"
-                  minuteInterval = {15}
-                  minimumDate = {this.state.startDateTime}
-                  onDateChange={ text => this.setState({endDateTime:text}) }
-                />
+              <DatePickerIOS
+                        date={this.state.endDateTime}
+                        mode="datetime"
+                        minuteInterval = {15}
+                        minimumDate = {this.state.startDateTime}
+                        onDateChange={ text => this.setState({endDateTime:text}) }
+                      />
+              <CustomButton
+                containerStyle={styles.buttonContainer}
+                style={styles.button}
+                styleDisabled={{color: 'red'}}
+                onPress={ this.toggleEndDatePicker.bind(this) }
+              >
+                SELECT
+              </CustomButton>
+            </View>
+          </Modal>
       </View>
     );
     
