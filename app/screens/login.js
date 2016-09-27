@@ -14,7 +14,8 @@ import React, {
   TextInput,
   Image,
   TouchableHighlight,
-  Navigator
+  Navigator,
+  Alert
 } from 'react-native';
 
 import CustomText from '../components/customText';
@@ -58,16 +59,13 @@ class Login extends Component{
         .then((response) => response.json() )
         .then((responseJson) => {
           console.log('Response:', responseJson);
-          // console.log('username: ', this.state.username);
-          // console.log('pwd: ', this.state.password);
           if(responseJson.userId) {
             User._setUserId(responseJson.userId).done();
             this.props.navigator.push({
               id: 'home'
             })
           } else {
-            console.log('Message:', responseJson.message);
-            // TODO display error message to user
+            Alert.alert('Uh oh!', responseJson.message);
           }
         })
         .catch((error) => {

@@ -13,11 +13,14 @@ import React, {
   Navigator,
   DatePickerIOS,
   Modal,
+  Alert
 } from 'react-native'
 
 var GLOBAL = require('../common/globals');
 var User = require('../common/user');
 var styles = require('../styles/requestSitter');
+var CheckBox = require('react-native-checkbox');
+
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import CustomButton from '../components/customButton';
@@ -33,7 +36,8 @@ class RequestSitter extends Component{
         endDateTime: new Date(),
         type: 'NORMAL',
         showStartDateTimePicker: false,
-        showEndDateTimePicker: false
+        showEndDateTimePicker: false,
+        urgent: false
       }
   }
   
@@ -48,7 +52,42 @@ class RequestSitter extends Component{
   }
   
   handleRequestSitter() {
-    //todo
+    var requestType = this.state.urgent ? 'URGENT' : 'NORMAL';
+    var data = JSON.stringify({
+                startDatetimeIso8601: this.state.startDateTime.toISOString(),
+                endDatetimeIso8601: this.state.endDateTime.toISOString(),
+                type:  requestType,
+                sitterUserIds: [], //todo ?
+                parentUserNotes:  "", //todo ?
+              });
+
+    AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
+      fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters/schedule", {
+          method: "POST",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: data
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          console.log('Response:',responseJson);
+          if(responseJson.id) {
+              Alert.alert('Done!', "Your request has been submitted. We'll keep in touch!");
+              // todo: redirect to home?
+            this.props.navigator.push({
+              id: 'sitters'
+            })
+          } else {
+            console.log('Message:', responseJson.message);
+            Alert.alert('Uh oh!', responseJson.message);
+          }
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+    }).done();
   }
 
 
@@ -161,7 +200,16 @@ class RequestSitter extends Component{
               </TouchableWithoutFeedback>
               { this.state.showEndDateTimePicker == true ? endDatePicker : <View/> }
 
-          </View>   
+          </View>
+          <View style={styles.inputContainer}>
+            <CheckBox
+              label='Urgent'
+              //labelStyle={styles.whiteFont}
+              checked={false}
+              onChange={(checked) => this.state.urgent = checked}
+            />
+          </View>
+   
       </View>
 
       <View style={styles.buttonRow}>

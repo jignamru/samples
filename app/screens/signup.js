@@ -12,7 +12,8 @@ var {
   TextInput,
   Image,
   TouchableHighlight,
-  Navigator
+  Navigator,
+  Alert
 } = React;
 
 var SignUp = React.createClass({
@@ -55,8 +56,7 @@ var SignUp = React.createClass({
               id: 'home'
             })
           } else {
-            console.log('Message:', responseJson.message);
-            // TODO display error message to user
+            Alert.alert('Uh oh!', responseJson.message);
           }
         })
         .catch((error) => {
