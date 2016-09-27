@@ -31,4 +31,12 @@ module.exports = StyleSheet.create({
         paddingLeft: 30,
         color: common.color.grey
     },
+    row: { 
+        height:60, 
+        borderBottomWidth:1, 
+        borderBottomColor: '#ddd', 
+        flexDirection:'row', 
+        justifyContent: 'center', 
+        alignItems: 'center'
+    }
 })

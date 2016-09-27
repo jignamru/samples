@@ -66,9 +66,9 @@ class SittersList extends Component {
   	return (
       <TouchableHighlight 
              underlayColor="#ededed" 
-             style={{ height:60, backgroundColor: '#efefef', borderBottomWidth:1, borderBottomColor: '#ddd', flexDirection:'row', justifyContent: 'center', alignItems: 'center' }}
-               onPress={() => this.goToSitterDetails(rowData)}>
-      	<Text style={{ fontSize:18 }}>{rowData.firstName} {rowData.lastName}</Text>
+             style={styles.row}
+             onPress={() => this.goToSitterDetails(rowData)}>
+      	<CustomText style={{ fontSize:18 }}>{rowData.firstName} {rowData.lastName}</CustomText>
       </TouchableHighlight>
       )
   }

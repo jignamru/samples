@@ -4,10 +4,15 @@ import React, {
   View, 
   Text,
   TouchableHighlight,
-  Navigator
+  Navigator,
+  Image
 } from 'react-native';
+
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
+import CustomText from '../components/customText';
+
+var styles = require('../styles/sitterDetails');
 
 class SitterDetails extends Component {
 
@@ -24,13 +29,21 @@ class SitterDetails extends Component {
     
     return (
       // todo: style, add "request sitter", "delete sitter" and "edit sitter"
-      <View>
+      <View style={styles.container}>
         <NavigationBar
           title={<IconTitle/>}
           leftButton={leftButtonConfig} />
-          <Text 
-            style={{ height:60, backgroundColor: '#efefef', borderBottomWidth:1, borderBottomColor: '#ddd', flexDirection:'row', justifyContent: 'center', alignItems: 'center' }}
-             >YOU MADE IT with name: {this.props.sitter.firstName} {this.props.sitter.lastName} and id: {this.props.sitter.id}!</Text>
+            <View style={styles.introContainer}>
+                <Image style={styles.introBg} source={require('../images/bg-top-welcome.png')} />
+                <CustomText style={styles.title}>Sitter Details</CustomText>
+            </View>
+
+          <CustomText style={styles.sitterInfo}>
+             Name: {this.props.sitter.firstName} {this.props.sitter.lastName} 
+          </CustomText>
+          <CustomText style={styles.sitterInfo}>
+             ID: {this.props.sitter.id}
+          </CustomText>
       </View>
     )
   }
