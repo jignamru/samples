@@ -10,9 +10,12 @@ import React, {
 
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
+import BackArrow from '../components/navbarLeftButton';
 import CustomText from '../components/customText';
 
 var styles = require('../styles/sitterDetails');
+var GLOBAL = require('../common/globals');
+
 
 class SitterDetails extends Component {
 
@@ -22,28 +25,31 @@ class SitterDetails extends Component {
   }
 
   render() {
-    const leftButtonConfig = {
-      title: 'Back',
-      handler: () => this.props.navigator.pop()
-    };
     
     return (
       // todo: style, add "request sitter", "delete sitter" and "edit sitter"
       <View style={styles.container}>
         <NavigationBar
           title={<IconTitle/>}
-          leftButton={leftButtonConfig} />
+          leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
+          />
+
             <View style={styles.introContainer}>
-                <Image style={styles.introBg} source={require('../images/bg-top-welcome.png')} />
-                <CustomText style={styles.title}>Sitter Details</CustomText>
+                <CustomText style={styles.title}>{this.props.sitter.firstName} {this.props.sitter.lastName}</CustomText>
             </View>
 
           <CustomText style={styles.sitterInfo}>
-             Name: {this.props.sitter.firstName} {this.props.sitter.lastName} 
+             Email: {this.props.sitter.emailAddress}
           </CustomText>
           <CustomText style={styles.sitterInfo}>
-             ID: {this.props.sitter.id}
+             phone: {this.props.sitter.phoneNumber}
           </CustomText>
+
+          <View style={styles.iconsContainer}>
+          <Image style={styles.icon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/bell-circle.png')} />
+          <Image style={styles.icon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/edit-circle.png')} />
+          <Image style={styles.icon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/delete-circle.png')} />
+          </View>
       </View>
     )
   }

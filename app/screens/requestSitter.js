@@ -24,6 +24,7 @@ var SittersListScreen = require('./sittersList');
 
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
+import BackArrow from '../components/navbarLeftButton';
 import CustomButton from '../components/customButton';
 import CustomText from '../components/customText';
 
@@ -93,10 +94,6 @@ class RequestSitter extends Component{
 
 
   render() {
-    const leftButtonConfig = {
-      title: 'Back',
-      handler: () => this.props.navigator.pop()
-    };
     
     var startDatePicker = (
       <View>      
@@ -170,10 +167,10 @@ class RequestSitter extends Component{
         <View style={styles.container}>
           <NavigationBar
             title={<IconTitle/>}
-            leftButton={leftButtonConfig} />
+            leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
+           />
 
             <View style={styles.introContainer}>
-                <Image style={styles.introBg} source={require('../images/bg-top-welcome.png')} />
                 <CustomText style={styles.title}>Request a sitter</CustomText>
             </View>
 

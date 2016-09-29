@@ -1,12 +1,14 @@
 'use strict';
 module.exports = {
   color: {
-  	teal : '#50d2c2',
-  	darkPurple : '#6563a4',
-  	pink : '#d667cd',
-  	orange : '#FDBC75',
-  	grey : '#8e8e90',
-    lightestBlue: '#B0D2C2'
+    //palette
+    darkPurple : '#58355E',
+    orange : '#E03616',
+    yellow: '#FFF689',
+    lightGreen: '#CFFFB0',
+    blue: '#42B5C6',
+    lightestBrown: '#EFEBE9',
+    grey: '#616161'
   },
   fontFamily: {
   	base: 'Handlee'

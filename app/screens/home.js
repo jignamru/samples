@@ -18,7 +18,6 @@ var styles = require('../styles/home');
 var AddSitterScreen = require('./addSitter');
 var SittersListScreen = require('./sittersList');
 var RequestSitterScreen = require('./requestSitter');
-var LoginScreen = require('./login');
 
 import CustomButton from '../components/customButton';
 import CustomText from '../components/customText';
@@ -46,19 +45,20 @@ class Home extends Component {
     
 	handleLogout(){
 		User._logout().done();
-		this.props.navigator.push({
-			component: LoginScreen
-		})
+
+		var LoginScreen = require('./login'); // this line is needed here for lazy loading!
+		this.goToScreen(LoginScreen);
 	}
 	goToSettings(){
 		// todo
 	}
+
+// <Image style={styles.introBg} source={require('../images/bg-top-welcome.png')} />
   
     render() {
 	    return (
 	        <View style={styles.container}>
 	        	<View style={styles.introContainer}>
-		            <Image style={styles.introBg} source={require('../images/bg-top-welcome.png')} />
 		            <CustomText style={styles.title}>Welcome!</CustomText>
 		        </View>
 		        <View style={styles.actionsContainer}>
@@ -82,23 +82,23 @@ class Home extends Component {
             	<View style={styles.footer}>
             		<TouchableHighlight
 		              onPress={this.goToSettings}>
-		              <View style={[styles.logout, styles.footerItem]}>
-		                  <CustomText>SETTINGS</CustomText>
-		              </View>
+		              	<View style={[styles.logout, styles.footerItem]}>
+		              		<Image style={styles.footerIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/settings.png')} />
+		              	</View>
 	            	</TouchableHighlight>
 	            	<TouchableHighlight
 //                     activeOpacity={75 / 100}
 //                     underlayColor={"rgb(210,210,210)"}
 		              onPress={() => this.goToScreen(SittersListScreen)}>
-		              <View style={[styles.logout, styles.footerItem]}>
-		                  <CustomText>SITTERS</CustomText>
-		              </View>
+			              <View style={[styles.logout, styles.footerItem]}>
+			              		<Image style={styles.footerIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/people.png')} />
+			              </View>
 	            	</TouchableHighlight>
             		<TouchableHighlight
 		              onPress={this.handleLogout}>
-		              <View style={[styles.logout, styles.footerItem]}>
-		                  <CustomText>LOG OUT</CustomText>
-		              </View>
+	  		              <View style={[styles.logout, styles.footerItem]}>
+   			              		<Image style={styles.footerIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/logout.png')} />
+			              </View>
 	            	</TouchableHighlight>
                   
             	</View>

@@ -19,6 +19,7 @@ import GLOBAL from '../common/globals';
 import User from '../common/user';
 import SitterDetailsScreen from './sitterDetails';
 import IconTitle from '../components/navbarIconTitle';
+import BackArrow from '../components/navbarLeftButton';
 
 
 class SittersList extends Component {
@@ -62,7 +63,6 @@ class SittersList extends Component {
   }
   
   renderRow(rowData) {
-    
   	return (
       <TouchableHighlight 
              underlayColor="#ededed" 
@@ -73,19 +73,14 @@ class SittersList extends Component {
       )
   }
   
-  render() {
-    const leftButtonConfig = {
-      title: 'Back',
-      handler: () => this.props.navigator.pop()
-    };
-      
+  render() {      
     return (
       <View style={styles.container}>
         <NavigationBar
           title={<IconTitle/>}
-          leftButton={leftButtonConfig} />
+          leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
+           />
           <View style={styles.introContainer}>
-            <Image style={styles.introBg} source={require('../images/bg-top-welcome.png')} />
             <CustomText style={styles.title}>Your sitters</CustomText>
           </View>
         <ListView

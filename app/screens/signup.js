@@ -17,6 +17,9 @@ var {
 } = React;
 
 var HomeScreen = require('./home');
+var commonStyles = require('../common/styles');
+import CustomText from '../components/customText';
+import CustomTextInput from '../components/customTextInput';
 
 var SignUp = React.createClass({
 
@@ -71,65 +74,64 @@ var SignUp = React.createClass({
   render: function() {
     return (
     	<View style={styles.container}>
-            <Image style={styles.bg} source={require('../images/bg-signup.png')} />
             <TouchableHighlight
               onPress={this.goBack}>
               <View style={styles.back}>
-                    <Image style={styles.backIcon} source={require('../images/icons/back.png')} />
+                    <Image style={styles.backIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/left-arrow.png')} />
               </View>
             </TouchableHighlight>
 
-    		<Text style={[styles.title, styles.whiteFont]}>Sign Up</Text>
+    		<CustomText style={styles.title}>Sign Up</CustomText>
 	    	<View style={styles.inputs}>
 	            <View style={styles.inputContainer}>
-	                <Image style={styles.inputName} source={require('../images/icons/name.png')}/>
-	                <TextInput 
-	                    style={[styles.input, styles.whiteFont]}
+	                <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/person.png')}/>
+	                <CustomTextInput 
+	                    style={styles.input}
 	                    placeholder="First and last name"
-	                    placeholderTextColor="#FFF"
+	                    placeholderTextColor={commonStyles.color.grey}
 	                    value={this.state.fullname}
                       onChangeText={text => this.state.fullname = text}
 	                />
 	            </View>
                 <View style={styles.inputContainer}>
-                    <Image style={styles.inputPhone} source={require('../images/icons/phone.png')}/>
-                    <TextInput 
-                        style={[styles.input, styles.whiteFont]}
+                    <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/phone.png')}/>
+                    <CustomTextInput 
+                        style={styles.input}
                         placeholder="Mobile number"
-                        placeholderTextColor="#FFF"
+                        placeholderTextColor={commonStyles.color.grey}
                         value={this.state.phone}
                         onChangeText={text => this.state.phone = text}
                     />
               </View>
 
 	            <View style={styles.inputContainer}>
-	                <Image style={styles.inputEmail} source={require('../images/icons/email.png')}/>
-	                <TextInput 
-	                    style={[styles.input, styles.whiteFont]}
+	                <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/email.png')}/>
+	                <CustomTextInput 
+	                    style={styles.input}
 	                    placeholder="Email"
-	                    placeholderTextColor="#FFF"
+	                    placeholderTextColor={commonStyles.color.grey}
 	                    value={this.state.email}
                       onChangeText={text => this.state.email = text}
 	                />
 	            </View>
               <View style={styles.inputContainer}>
-                  <Image style={styles.inputPassword} source={require('../images/icons/password.png')}/>
-                  <TextInput
+                  <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/pwd.png')}/>
+                  <CustomTextInput
                       password={true}
-                      style={[styles.input, styles.whiteFont]}
+                      style={styles.input}
                       placeholder="Password"
-                      placeholderTextColor="#FFF"
+                      placeholderTextColor={commonStyles.color.grey}
                       value={this.state.password}
                       onChangeText={text => this.state.password = text}
                   />
               </View>
               <View style={styles.inputContainer}>
-                  <Image style={styles.inputPassword} source={require('../images/icons/password.png')}/>
-                  <TextInput
+                  <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/pwd-confirm.png')}/>
+                  <CustomTextInput
                       password={true}
-                      style={[styles.input, styles.whiteFont]}
+                      style={styles.input}
                       placeholder="Confirm Password"
-                      placeholderTextColor="#FFF"
+                      placeholderTextColor={commonStyles.color.grey}
                       value={this.state.confirmPassword}
                       onChangeText={text => this.state.confirmPassword = text}
                   />
@@ -137,7 +139,7 @@ var SignUp = React.createClass({
               <View style={styles.inputContainer}>
                 <CheckBox
                   label='I have read and accept the terms of service'
-                  labelStyle={styles.whiteFont}
+                  labelStyle={styles.checkbox}
                   checked={false}
                   onChange={(checked) => this.state.tosAccept = checked}
                 />
@@ -147,14 +149,14 @@ var SignUp = React.createClass({
               style={styles.button}
               onPress={this.handleSignup}>
 	            <View style={styles.signup}>
-	                <Text style={styles.whiteFont}>DONE</Text>
+	                <CustomText style={styles.whiteFont}>DONE</CustomText>
 	            </View>
             </TouchableHighlight>
             <TouchableHighlight
               style={styles.button}
               onPress={this.goBack}>
               <View style={styles.signin}>
-                  <Text style={styles.greyFont}>Already signed up?<Text style={styles.whiteFont}>  Sign In</Text></Text>
+                  <CustomText style={styles.greyFont}>Already signed up? Sign In</CustomText>
               </View>
             </TouchableHighlight>
 

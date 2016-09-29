@@ -19,6 +19,7 @@ import React, {
 } from 'react-native';
 
 import CustomText from '../components/customText';
+import CustomTextInput from '../components/customTextInput';
 
 class Login extends Component{
 
@@ -87,8 +88,8 @@ class Login extends Component{
             </View>
             <View style={styles.inputs}>
                 <View style={styles.inputContainer}>
-                    <Image style={styles.inputUsername} source={require('../images/icons/name.png')}/>
-                    <TextInput
+                    <Image style={styles.inputUsername} source={require('../images/icons/person.png')}/>
+                    <CustomTextInput
                         style={styles.input}
                         placeholder="Email"
                         placeholderTextColor="#000"
@@ -97,8 +98,8 @@ class Login extends Component{
                     />
                 </View>
                 <View style={styles.inputContainer}>
-                    <Image style={styles.inputPassword} source={require('../images/icons/password.png')}/>
-                    <TextInput
+                    <Image style={styles.inputPassword} source={require('../images/icons/pwd.png')}/>
+                    <CustomTextInput
                         password={true}
                         style={styles.input}
                         placeholder="Password"

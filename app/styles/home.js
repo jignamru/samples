@@ -9,10 +9,10 @@ module.exports = StyleSheet.create({
     container: {
       flexDirection: 'column',
       flex: 1,
-      backgroundColor: 'transparent'
+      backgroundColor: common.color.lightestBrown
     },
     introContainer: {
-		backgroundColor: 'transparent',
+		backgroundColor: '#4DB6AC', //temp
     	justifyContent: 'center',
         alignItems: 'center',
         width: windowSize.width,
@@ -28,8 +28,7 @@ module.exports = StyleSheet.create({
     title: {
 	    fontSize: 40,
 	    fontWeight: 'bold',
-	    letterSpacing: 1,
-        color: common.color.grey
+        color: common.color.darkPurple
     },
     actionsContainer: {
     	flex: 1,
@@ -59,7 +58,7 @@ module.exports = StyleSheet.create({
         backgroundColor: common.color.darkPurple
     },
     requestSitterButtonContainer: {
-        backgroundColor: common.color.teal
+        backgroundColor: common.color.orange
     },
     boxLabel: {
     	fontSize: 25,
@@ -67,13 +66,17 @@ module.exports = StyleSheet.create({
     },
     footer: {
         flexDirection: 'row',
-        backgroundColor: common.color.orange,
-        height: 80,
-        paddingTop: 30
+        backgroundColor: common.color.blue,
+        height: 60,
+        paddingTop: 10
     },
     footerItem: {
         width: windowSize.width / 3,
         alignItems: 'center',
+    },
+    footerIcon: {
+        width: 40,
+        height: 40
     },
     whiteFont: {
       color: '#fff'

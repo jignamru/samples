@@ -9,14 +9,7 @@ module.exports = StyleSheet.create({
     container: {
       flexDirection: 'column',
       flex: 1,
-      backgroundColor: 'transparent'
-    },
-    bg: {
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        width: windowSize.width,
-        height: windowSize.height
+      backgroundColor: common.color.lightestBrown
     },
     back: {
         marginTop: 40,
@@ -31,6 +24,7 @@ module.exports = StyleSheet.create({
         marginTop: 50,
         marginBottom: 10,
         marginLeft: 25,
+        color: common.color.darkPurple
     },
     signup: {
         backgroundColor:  common.color.darkPurple,
@@ -48,25 +42,10 @@ module.exports = StyleSheet.create({
         marginBottom: 10,
         flex: .25
     },
-    inputEmail: {
-        marginLeft: 15,
-        width: 24,
-        height: 21
-    },    
-    inputPassword: {
+    inputIcon: {
         marginLeft: 15,
         width: 20,
-        height: 21
-    },
-    inputName: {
-      marginLeft: 15,
-      width: 20,
-      height: 20
-    },
-    inputPhone: {
-      marginLeft: 15,
-      width: 22,
-      height: 29
+        height: 20
     },
     inputContainer: {
         padding: 10,
@@ -88,7 +67,10 @@ module.exports = StyleSheet.create({
       padding: 15,
     },
     greyFont: {
-      color: '#D8D8D8'
+      color: common.color.grey
+    },
+    checkbox: {
+        fontFamily: common.fontFamily.base
     },
     whiteFont: {
       color: '#fff'

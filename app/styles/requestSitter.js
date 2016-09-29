@@ -8,11 +8,11 @@ var { StyleSheet } = React;
 module.exports = StyleSheet.create({
     container: {
       flexDirection: 'column',
-      backgroundColor: common.color.lightestBlue,
+      backgroundColor: common.color.lightestBrown,
       flex: 1
     },
     introContainer: {
-        backgroundColor: 'transparent',
+        backgroundColor: '#4DB6AC', //temp
         width: windowSize.width,
         height: windowSize.height * 0.2,
         justifyContent: 'center'
@@ -27,9 +27,8 @@ module.exports = StyleSheet.create({
     title: {
         fontSize: 30,
         fontWeight: 'bold',
-        letterSpacing: 1,
         paddingLeft: 30,
-        color: common.color.grey
+        color: common.color.darkPurple
     },
 
     inputs: {

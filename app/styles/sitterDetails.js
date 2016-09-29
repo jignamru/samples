@@ -7,9 +7,9 @@ var { StyleSheet } = React;
 
 module.exports = StyleSheet.create({
     container: {
-      flexDirection: 'column',
-      backgroundColor: common.color.lightestBrown,
-      flex: 1
+        flexDirection: 'column',
+        backgroundColor: common.color.lightestBrown,
+        flex: 1
     },
     introContainer: {
         backgroundColor: '#4DB6AC', //temp
@@ -30,12 +30,25 @@ module.exports = StyleSheet.create({
         paddingLeft: 30,
         color: common.color.darkPurple
     },
-    row: { 
-        height:60, 
-        borderBottomWidth:1, 
-        borderBottomColor: '#ddd', 
-        flexDirection:'row', 
+    sitterInfo: { 
+        height:40,
+        fontSize: 16,
         justifyContent: 'center', 
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingLeft: 30,
+        paddingTop: 10
+    },
+    iconsContainer: {
+        flexDirection: 'row',
+        backgroundColor: 'transparent',
+        height: 80,
+        paddingTop: 10,
+        marginLeft: 20
+    },
+    icon: {
+        width: 50,
+        height: 50,
+        marginLeft: 10,
+        marginRight: 10
     }
 })
