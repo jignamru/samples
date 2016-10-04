@@ -171,6 +171,7 @@ class RequestSitter extends Component{
            />
 
             <View style={styles.introContainer}>
+                <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/reading.png')} />
                 <CustomText style={styles.title}>Request a sitter</CustomText>
             </View>
 
@@ -205,8 +206,9 @@ class RequestSitter extends Component{
           <View style={styles.inputContainer}>
             <CheckBox
               label='Urgent'
-              //labelStyle={styles.whiteFont}
-              checked={false}
+              labelStyle={styles.checkbox}
+              uncheckedImage={require('../images/icons/checkbox-false.png')}
+              checkedImage={require('../images/icons/checkbox-true.png')}
               onChange={(checked) => this.state.urgent = checked}
             />
           </View>

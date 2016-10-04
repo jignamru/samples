@@ -8,6 +8,6 @@
   "dependencies": {
     "react-native": "^0.21.0",
     "react-native-button": "^1.6.0",
-    "react-native-checkbox": "^1.0.8"
+    "react-native-checkbox": "^1.0.15"
   }
 }

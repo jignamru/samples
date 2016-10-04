@@ -8,11 +8,10 @@ var { StyleSheet } = React;
 module.exports = StyleSheet.create({
     container: {
       flexDirection: 'column',
-      backgroundColor: common.color.lightestBrown,
       flex: 1
     },
     introContainer: {
-        backgroundColor: '#4DB6AC', //temp
+        backgroundColor: 'transparent',
         width: windowSize.width,
         height: windowSize.height * 0.2,
         justifyContent: 'center'

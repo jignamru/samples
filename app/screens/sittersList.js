@@ -81,6 +81,7 @@ class SittersList extends Component {
           leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
            />
           <View style={styles.introContainer}>
+            <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/butterfly.png')} />
             <CustomText style={styles.title}>Your sitters</CustomText>
           </View>
         <ListView

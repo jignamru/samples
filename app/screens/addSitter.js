@@ -92,6 +92,7 @@ class AddSitter extends Component {
 				/>
 	        	
 	        	<View style={styles.introContainer}>
+					<Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/car.png')} />
 		            <CustomText style={styles.title}>Add new sitter</CustomText>
 		        </View>
 

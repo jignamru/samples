@@ -9,12 +9,10 @@ module.exports = StyleSheet.create({
     container: {
       flexDirection: 'column',
       flex: 1,
-      backgroundColor: common.color.lightestBrown
     },
     introContainer: {
-		backgroundColor: '#4DB6AC', //temp
+		backgroundColor: 'transparent',
     	justifyContent: 'center',
-        alignItems: 'center',
         width: windowSize.width,
         height: windowSize.height * 0.4,
     },
@@ -28,7 +26,8 @@ module.exports = StyleSheet.create({
     title: {
 	    fontSize: 40,
 	    fontWeight: 'bold',
-        color: common.color.darkPurple
+        color: common.color.darkPurple,
+        marginLeft: 30
     },
     actionsContainer: {
     	flex: 1,

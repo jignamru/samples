@@ -53,12 +53,12 @@ class Home extends Component {
 		// todo
 	}
 
-// <Image style={styles.introBg} source={require('../images/bg-top-welcome.png')} />
   
     render() {
 	    return (
 	        <View style={styles.container}>
 	        	<View style={styles.introContainer}>
+					<Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/giraffe.png')} />
 		            <CustomText style={styles.title}>Welcome!</CustomText>
 		        </View>
 		        <View style={styles.actionsContainer}>
