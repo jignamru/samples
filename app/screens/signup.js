@@ -1,5 +1,5 @@
 'use strict';
-var React = require('react-native');
+var React = require('react');
 var CheckBox = require('react-native-checkbox');
 var User = require('../common/user');
 var GLOBAL = require('../common/globals');

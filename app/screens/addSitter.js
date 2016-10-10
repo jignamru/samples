@@ -1,17 +1,6 @@
 'use strict';
-import React, { 
-  Component, 
-  AppRegistry,
-  AsyncStorage,
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  Image,
-  TouchableHighlight,
-  Navigator,
-  Alert
-} from 'react-native';
+import React, {Component} from 'react';
+import {AppRegistry, AsyncStorage, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert} from 'react-native';
 
 var GLOBAL = require('../common/globals');
 var commonStyles = require('../common/styles');

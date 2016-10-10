@@ -1,15 +1,6 @@
 'use strict';
-import React, { 
-  Component, 
-  AppRegistry,
-  AsyncStorage,
-  View, 
-  Text,
-  ListView,
-  TouchableHighlight,
-  Navigator,
-  Image
-} from 'react-native';
+import React, {Component} from 'react';
+import {AppRegistry, AsyncStorage, View, Text, ListView, TouchableHighlight, Navigator, Image} from 'react-native';
 
 var styles = require('../styles/sittersList');
 

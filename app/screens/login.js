@@ -5,19 +5,8 @@ var SignUpScreen = require('./signup');
 var HomeScreen = require('./home');
 var PickerScreen = require('./contactsPicker');
 
-import React, { 
-  Component, 
-  AppRegistry,
-  AsyncStorage,
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  Image,
-  TouchableHighlight,
-  Navigator,
-  Alert
-} from 'react-native';
+import React, {Component} from 'react';
+import {AppRegistry, AsyncStorage, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert} from 'react-native';
 
 import CustomText from '../components/customText';
 import CustomTextInput from '../components/customTextInput';

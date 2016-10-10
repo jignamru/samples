@@ -1,12 +1,6 @@
 'use strict';
-import React, { 
-  Component, 
-  View, 
-  Text,
-  TouchableHighlight,
-  Navigator,
-  Image
-} from 'react-native';
+import React, {Component} from 'react';
+import {View, Text, TouchableHighlight, Navigator, Image} from 'react-native';
 
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
