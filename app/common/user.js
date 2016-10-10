@@ -1,5 +1,5 @@
 'use strict';
-var React = require('react-native');
+var React = require('react');
 var GLOBAL = require('../common/globals');
 
 var {

@@ -12,8 +12,6 @@ var RequestSitterScreen = require('./requestSitter');
 import CustomButton from '../components/customButton';
 import CustomText from '../components/customText';
 
-
-
 class Home extends Component {
     constructor(props) {
       super(props);

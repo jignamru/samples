@@ -1,9 +1,11 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 import _ from 'lodash';
 var common = require('../common/styles');
+
 const {
   TextInput,
-} = React;
+} = ReactNative;
 
 
 export default class CustomTextInput extends TextInput {

@@ -1,4 +1,4 @@
-import React from 'react-native';
+import React from 'react';
 import _ from 'lodash';
 var common = require('../common/styles');
 var Button = require('react-native-button');

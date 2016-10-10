@@ -1,9 +1,14 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
+
 const {
   Component,
-  Image,
-  TouchableOpacity
 } = React;
+
+const {
+  Image,
+  TouchableOpacity,
+} = ReactNative;
 
 export default class BackArrow extends Component {
   render() {

@@ -1,9 +1,6 @@
 'use strict';
-import React, { 
-  Component, 
-  AppRegistry,
-  Navigator
-} from 'react-native';
+import React, {Component} from 'react';
+import {AppRegistry, Navigator} from 'react-native';
 
 var LoginScreen = require('./app/screens/login');
 
