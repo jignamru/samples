@@ -1,10 +1,7 @@
 'use strict';
-var React = require('react');
+import React from 'react';
+import {AsyncStorage} from 'react-native';
 var GLOBAL = require('../common/globals');
-
-var {
-  AsyncStorage
-} = React;
 
 module.exports = {
   /**

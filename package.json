@@ -11,6 +11,6 @@
     "react-native": "^0.34.0",
     "react-native-button": "^1.6.0",
     "react-native-checkbox": "^1.0.15",
-    "react-native-unified-contacts": "^0.5.2"
+    "react-native-unified-contacts": "^1.0.0"
   }
 }

@@ -1,39 +1,29 @@
 'use strict';
-var React = require('react');
+
+import React, {Component} from 'react';
+import {AppRegistry, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert} from 'react-native';
+
 var CheckBox = require('react-native-checkbox');
 var User = require('../common/user');
 var GLOBAL = require('../common/globals');
-
-var {
-  AppRegistry,
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  Image,
-  TouchableHighlight,
-  Navigator,
-  Alert
-} = React;
-
 var HomeScreen = require('./home');
 var commonStyles = require('../common/styles');
 import CustomText from '../components/customText';
 import CustomTextInput from '../components/customTextInput';
 
-var SignUp = React.createClass({
-
-  getInitialState: function() {
-    return {
-      fullname: null,
-      phone: null,
-      email: null,
-      password: null,
-      confirmPassword: null,
-      tosAccept: null
-    }
-  },
-  handleSignup: function() {
+class SignUp extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        fullname: null,
+        phone: null,
+        email: null,
+        password: null,
+        confirmPassword: null,
+        tosAccept: null
+      }
+  }
+  handleSignup() {
     var [firstName, lastName] = this.state.fullname.split(' ');
     var data = JSON.stringify({
             firstName:    firstName,
@@ -67,11 +57,12 @@ var SignUp = React.createClass({
         .catch((error) => {
           console.warn(error);
         });
-  },
-  goBack: function() {
+  }
+  goBack() {
     this.props.navigator.pop();
-  },
-  render: function() {
+  }
+
+  render() {
     return (
     	<View style={styles.container}>
             <TouchableHighlight
@@ -147,7 +138,7 @@ var SignUp = React.createClass({
 	    	</View>
 	    	<TouchableHighlight
               style={styles.button}
-              onPress={this.handleSignup}>
+              onPress={this.handleSignup.bind(this)}>
 	            <View style={styles.signup}>
 	                <CustomText style={styles.whiteFont}>DONE</CustomText>
 	            </View>
@@ -163,7 +154,7 @@ var SignUp = React.createClass({
 	    </View>
 
     )
+  }
 }
-});
 var styles = require('../styles/signup');
 module.exports = SignUp;
