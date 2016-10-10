@@ -13,26 +13,37 @@ const connect = require('connect');
 const cpuProfilerMiddleware = require('./middleware/cpuProfilerMiddleware');
 const getDevToolsMiddleware = require('./middleware/getDevToolsMiddleware');
 const http = require('http');
-const isAbsolutePath = require('absolute-path');
+const jscProfilerMiddleware = require('./middleware/jscProfilerMiddleware');
 const loadRawBodyMiddleware = require('./middleware/loadRawBodyMiddleware');
+const messageSocket = require('./util/messageSocket.js');
 const openStackFrameInEditorMiddleware = require('./middleware/openStackFrameInEditorMiddleware');
+const copyToClipBoardMiddleware = require('./middleware/copyToClipBoardMiddleware');
 const path = require('path');
 const ReactPackager = require('../../packager/react-packager');
 const statusPageMiddleware = require('./middleware/statusPageMiddleware.js');
+const indexPageMiddleware = require('./middleware/indexPage');
 const systraceProfileMiddleware = require('./middleware/systraceProfileMiddleware.js');
+const heapCaptureMiddleware = require('./middleware/heapCaptureMiddleware.js');
 const webSocketProxy = require('./util/webSocketProxy.js');
+const defaultAssetExts = require('../../packager/defaultAssetExts');
 
 function runServer(args, config, readyCallback) {
   var wsProxy = null;
+  var ms = null;
   const packagerServer = getPackagerServer(args, config);
   const app = connect()
     .use(loadRawBodyMiddleware)
     .use(connect.compress())
     .use(getDevToolsMiddleware(args, () => wsProxy && wsProxy.isChromeConnected()))
-    .use(openStackFrameInEditorMiddleware)
+    .use(getDevToolsMiddleware(args, () => ms && ms.isChromeConnected()))
+    .use(openStackFrameInEditorMiddleware(args))
+    .use(copyToClipBoardMiddleware)
     .use(statusPageMiddleware)
     .use(systraceProfileMiddleware)
+    .use(heapCaptureMiddleware)
     .use(cpuProfilerMiddleware)
+    .use(jscProfilerMiddleware)
+    .use(indexPageMiddleware)
     .use(packagerServer.processRequest.bind(packagerServer));
 
   args.projectRoots.forEach(root => app.use(connect.static(root)));
@@ -51,6 +62,7 @@ function runServer(args, config, readyCallback) {
       });
 
       wsProxy = webSocketProxy.attachToServer(serverInstance, '/debugger-proxy');
+      ms = messageSocket.attachToServer(serverInstance, '/message');
       webSocketProxy.attachToServer(serverInstance, '/devtools');
       readyCallback();
     }
@@ -62,10 +74,10 @@ function runServer(args, config, readyCallback) {
 }
 
 function getPackagerServer(args, config) {
-  let transformerPath = args.transformer;
-  if (!isAbsolutePath(transformerPath)) {
-    transformerPath = path.resolve(process.cwd(), transformerPath);
-  }
+  const transformModulePath =
+    args.transformer ? path.resolve(args.transformer) :
+    typeof config.getTransformModulePath === 'function' ? config.getTransformModulePath() :
+    undefined;
 
   return ReactPackager.createServer({
     nonPersistent: args.nonPersistent,
@@ -73,15 +85,11 @@ function getPackagerServer(args, config) {
     blacklistRE: config.getBlacklistRE(),
     cacheVersion: '3',
     getTransformOptionsModulePath: config.getTransformOptionsModulePath,
-    transformModulePath: transformerPath,
+    transformModulePath: transformModulePath,
+    extraNodeModules: config.extraNodeModules,
     assetRoots: args.assetRoots,
-    assetExts: [
-      'bmp', 'gif', 'jpg', 'jpeg', 'png', 'psd', 'svg', 'webp', // Image formats
-      'm4v', 'mov', 'mp4', 'mpeg', 'mpg', 'webm', // Video formats
-      'aac', 'aiff', 'caf', 'm4a', 'mp3', 'wav', // Audio formats
-      'html', // Document formats
-    ],
-    resetCache: args.resetCache || args['reset-cache'],
+    assetExts: defaultAssetExts.concat(args.assetExts),
+    resetCache: args.resetCache,
     verbose: args.verbose,
   });
 }

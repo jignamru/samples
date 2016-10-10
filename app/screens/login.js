@@ -3,6 +3,7 @@ var GLOBAL = require('../common/globals');
 var User = require('../common/user');
 var SignUpScreen = require('./signup');
 var HomeScreen = require('./home');
+var PickerScreen = require('./contactsPicker');
 
 import React, { 
   Component, 
@@ -37,7 +38,8 @@ class Login extends Component{
       if( value != null) {
         console.log('User logged in. UserId: ' + value);
         this.props.navigator.push({
-          component: HomeScreen
+          // component: HomeScreen
+          component: PickerScreen
         })
       }
     }).done();

@@ -6,8 +6,10 @@
     "start": "react-native start"
   },
   "dependencies": {
-    "react-native": "^0.21.0",
+    "react": "^15.3.1",
+    "react-native": "^0.34.0",
     "react-native-button": "^1.6.0",
-    "react-native-checkbox": "^1.0.15"
+    "react-native-checkbox": "^1.0.15",
+    "react-native-unified-contacts": "^0.5.2"
   }
 }
