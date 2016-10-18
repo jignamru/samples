@@ -3,7 +3,6 @@ var GLOBAL = require('../common/globals');
 var User = require('../common/user');
 var SignUpScreen = require('./signup');
 var HomeScreen = require('./home');
-var PickerScreen = require('./contactsPicker');
 
 import React, {Component} from 'react';
 import {AppRegistry, AsyncStorage, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert} from 'react-native';
@@ -27,8 +26,7 @@ class Login extends Component{
       if( value != null) {
         console.log('User logged in. UserId: ' + value);
         this.props.navigator.push({
-          // component: HomeScreen
-          component: PickerScreen
+          component: HomeScreen
         })
       }
     }).done();

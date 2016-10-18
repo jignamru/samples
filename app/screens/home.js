@@ -5,7 +5,7 @@ import {AppRegistry, AsyncStorage, StyleSheet, View, Text, TextInput, Image, Tou
 var GLOBAL = require('../common/globals');
 var User = require('../common/user');
 var styles = require('../styles/home');
-var AddSitterScreen = require('./addSitter');
+var AddSitterOptionsScreen = require('./addSitterOptions');
 var SittersListScreen = require('./sittersList');
 var RequestSitterScreen = require('./requestSitter');
 
@@ -62,7 +62,7 @@ class Home extends Component {
 	    		      	containerStyle={[styles.buttonContainer, styles.addSitterButtonContainer]}
 				        style={styles.button}
 				        styleDisabled={{color: 'red'}}
-				        onPress={() => this.goToScreen(AddSitterScreen)}
+				        onPress={() => this.goToScreen(AddSitterOptionsScreen)}
 				      >
 				        ADD NEW SITTER
 				      </CustomButton>

@@ -31,7 +31,7 @@ local.properties
 
 # node.js
 #
-node_modules/
+#node_modules/
 npm-debug.log
 
 # BUCK
@@ -40,9 +40,10 @@ buck-out/
 android/app/libs
 android/keystores/debug.keystore
 
-#node_modules/*
+node_modules/*
 !node_modules/react/
 !node_modules/react-native/
 !node_modules/react-native-button/
 !node_modules/react-native-checkbox/
 !node_modules/react-native-navbar/
+!node_modules/react-native-contacts-wrapper/

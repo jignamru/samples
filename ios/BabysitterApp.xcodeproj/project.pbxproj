@@ -23,7 +23,8 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		96451D361DAC543400A205B9 /* RNUnifiedContacts in Resources */ = {isa = PBXBuildFile; fileRef = 96451D351DAC543400A205B9 /* RNUnifiedContacts */; };
+		96D9E6801DB6CCE8009A6EC8 /* libRCTContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D9E67F1DB6CCB0009A6EC8 /* libRCTContacts.a */; };
+		96D9E6871DB6D670009A6EC8 /* libRCTContactsWrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D9E6861DB6D659009A6EC8 /* libRCTContactsWrapper.a */; };
 		96EFD65B1DAC23B000090ED6 /* Handlee regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96EFD65A1DAC23B000090ED6 /* Handlee regular.ttf */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +106,20 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		96D9E67E1DB6CCB0009A6EC8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 96D9E67A1DB6CCB0009A6EC8 /* RCTContacts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1441618E1BD0A79300FA4F59;
+			remoteInfo = RCTContacts;
+		};
+		96D9E6851DB6D659009A6EC8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 96D9E6811DB6D659009A6EC8 /* ContactsWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2B58405A1D10DE8700235F31;
+			remoteInfo = RCTContactsWrapper;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -129,7 +144,8 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		96451D351DAC543400A205B9 /* RNUnifiedContacts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = RNUnifiedContacts; path = "../node_modules/react-native-unified-contacts/RNUnifiedContacts"; sourceTree = "<group>"; };
+		96D9E67A1DB6CCB0009A6EC8 /* RCTContacts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTContacts.xcodeproj; path = "../node_modules/react-native-contacts/ios/RCTContacts.xcodeproj"; sourceTree = "<group>"; };
+		96D9E6811DB6D659009A6EC8 /* ContactsWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ContactsWrapper.xcodeproj; path = "../node_modules/react-native-contacts-wrapper/ios/ContactsWrapper.xcodeproj"; sourceTree = "<group>"; };
 		96EFD65A1DAC23B000090ED6 /* Handlee regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Handlee regular.ttf"; path = "../app/fonts/Handlee regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,6 +162,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96D9E6871DB6D670009A6EC8 /* libRCTContactsWrapper.a in Frameworks */,
+				96D9E6801DB6CCE8009A6EC8 /* libRCTContacts.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -268,6 +286,8 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				96D9E6811DB6D659009A6EC8 /* ContactsWrapper.xcodeproj */,
+				96D9E67A1DB6CCB0009A6EC8 /* RCTContacts.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -293,7 +313,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				96451D351DAC543400A205B9 /* RNUnifiedContacts */,
 				96EFD65A1DAC23B000090ED6 /* Handlee regular.ttf */,
 				13B07FAE1A68108700A75B9A /* BabysitterApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -309,6 +328,22 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* BabysitterApp.app */,
 				00E356EE1AD99517003FC87E /* BabysitterAppTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		96D9E67B1DB6CCB0009A6EC8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				96D9E67F1DB6CCB0009A6EC8 /* libRCTContacts.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		96D9E6821DB6D659009A6EC8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				96D9E6861DB6D659009A6EC8 /* libRCTContactsWrapper.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -380,8 +415,16 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 96D9E6821DB6D659009A6EC8 /* Products */;
+					ProjectRef = 96D9E6811DB6D659009A6EC8 /* ContactsWrapper.xcodeproj */;
+				},
+				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
+				},
+				{
+					ProductGroup = 96D9E67B1DB6CCB0009A6EC8 /* Products */;
+					ProjectRef = 96D9E67A1DB6CCB0009A6EC8 /* RCTContacts.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302B61ABCB90400DB3ED1 /* Products */;
@@ -499,6 +542,20 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		96D9E67F1DB6CCB0009A6EC8 /* libRCTContacts.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTContacts.a;
+			remoteRef = 96D9E67E1DB6CCB0009A6EC8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		96D9E6861DB6D659009A6EC8 /* libRCTContactsWrapper.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTContactsWrapper.a;
+			remoteRef = 96D9E6851DB6D659009A6EC8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -513,7 +570,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96451D361DAC543400A205B9 /* RNUnifiedContacts in Resources */,
 				96EFD65B1DAC23B000090ED6 /* Handlee regular.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
@@ -621,6 +677,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = BabysitterApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -628,6 +685,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = BabysitterApp;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -643,6 +701,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = BabysitterApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -650,6 +709,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = BabysitterApp;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

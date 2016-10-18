@@ -16,8 +16,8 @@ import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
 
 class AddSitter extends Component {
-   constructor() {
-     super();
+   constructor(props) {
+     super(props);
      this.state = {
                     fullname: '',
                     phone: '',
@@ -92,7 +92,7 @@ class AddSitter extends Component {
 		                    style={styles.input}
 		                    placeholder="First and last name"
 		                    placeholderTextColor={commonStyles.color.grey}
-		                    value={this.state.fullname}
+		                    value={this.props.contact ? this.props.contact.name : this.state.fullname}
                             onChangeText={text => this.setState({fullname:text})}
 		                />
 		            </View>
@@ -102,7 +102,7 @@ class AddSitter extends Component {
 		                    style={styles.input}
 		                    placeholder="Email"
 		                    placeholderTextColor={commonStyles.color.grey}
-		                    value={this.state.email}
+		                    value={this.props.contact ? this.props.contact.email : this.state.email}
                             onChangeText={text => this.setState({email:text})}
 		                />
 		            </View>
@@ -112,7 +112,7 @@ class AddSitter extends Component {
 	                        style={styles.input}
 	                        placeholder="Mobile number"
 	                        placeholderTextColor={commonStyles.color.grey}
-	                        value={this.state.phone}
+	                        value={this.props.contact ? this.props.contact.phone : this.state.phone}
                             onChangeText={text => this.setState({phone:text})}
 	                    />
               		</View>
