@@ -30,8 +30,7 @@ class AddSitter extends Component {
 	    });
 	}
   
-	goToAddSitter(){
-		console.log('trying!');
+	goToAddSitter(contact){
 		this.props.navigator.push({
 			component: AddSitterScreen, 
 			passProps: {
@@ -43,8 +42,7 @@ class AddSitter extends Component {
 	openContacts(){
 		ContactsWrapper.getContact()
 	        .then((contact) => {
-                console.log('You selected: ', contact);
-	            this.goToAddSitter();    
+	            this.goToAddSitter(contact);    
 	        })
 	        .catch((error) => {
 	            Alert.alert("Uh Oh!", error.message);
