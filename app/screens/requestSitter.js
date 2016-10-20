@@ -158,7 +158,7 @@ class RequestSitter extends Component{
 
             <View style={styles.introContainer}>
                 <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/reading.png')} />
-                <CustomText style={styles.title}>Request a sitter</CustomText>
+                <CustomText isHeading={true} style={styles.title}>Request a sitter</CustomText>
             </View>
 
         <View style={styles.inputs}> 

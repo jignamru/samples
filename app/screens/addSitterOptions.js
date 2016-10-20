@@ -61,30 +61,33 @@ class AddSitter extends Component {
 	        	
 	        	<View style={styles.introContainer}>
 					<Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/car.png')} />
-		            <CustomText style={styles.title}>Add new sitter</CustomText>
+		            <CustomText isHeading={true} style={styles.title}>Add new sitter</CustomText>
 		        </View>
 
-	    		<View style={styles.buttonRow}>
-	    		      <CustomButton
-	    		      	containerStyle={styles.buttonContainer}
-				        style={styles.button}
-				        styleDisabled={{color: 'red'}}
-				        onPress={this.openContacts.bind(this)}
-				      >
-				        SELECT FROM CONTACTS
-				      </CustomButton>
-				</View>
+		        <View style={styles.buttonsBox}>
+
+		    		<View style={styles.buttonRow}>
+		    		      <CustomButton
+		    		      	containerStyle={styles.buttonContainer}
+					        style={styles.button}
+					        styleDisabled={{color: 'red'}}
+					        onPress={this.openContacts.bind(this)}
+					      >
+					        SELECT FROM CONTACTS
+					      </CustomButton>
+					</View>
 
 
-	    		<View style={styles.buttonRow}>
-	    		      <CustomButton
-	    		      	containerStyle={styles.buttonContainer}
-				        style={styles.button}
-				        styleDisabled={{color: 'red'}}
-				        onPress={this.goToManualAddSitter.bind(this)}
-				      >
-				        ADD MANUALLY
-				      </CustomButton>
+		    		<View style={styles.buttonRow}>
+		    		      <CustomButton
+		    		      	containerStyle={styles.buttonContainer}
+					        style={styles.button}
+					        styleDisabled={{color: 'red'}}
+					        onPress={this.goToManualAddSitter.bind(this)}
+					      >
+					        ADD MANUALLY
+					      </CustomButton>
+					</View>
 				</View>
             </View>
 

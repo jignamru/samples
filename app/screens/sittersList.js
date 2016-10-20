@@ -73,7 +73,7 @@ class SittersList extends Component {
            />
           <View style={styles.introContainer}>
             <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/butterfly.png')} />
-            <CustomText style={styles.title}>Your sitters</CustomText>
+            <CustomText isHeading={true} style={styles.title}>Your sitters</CustomText>
           </View>
         <ListView
       	 dataSource={this.state.dataSource}

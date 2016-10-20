@@ -47,7 +47,7 @@ class Home extends Component {
 	        <View style={styles.container}>
 	        	<View style={styles.introContainer}>
 					<Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/giraffe.png')} />
-		            <CustomText style={styles.title}>Welcome!</CustomText>
+		            <CustomText isHeading={true} style={styles.title}>Welcome!</CustomText>
 		        </View>
 		        <View style={styles.actionsContainer}>
 		        	  <CustomButton

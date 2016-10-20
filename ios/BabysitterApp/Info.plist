@@ -6,6 +6,7 @@
 	<string>access to Contacts</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Fredericka the Great regular.ttf</string>
 		<string>Handlee regular.ttf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>

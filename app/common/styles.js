@@ -11,6 +11,7 @@ module.exports = {
     grey: '#616161'
   },
   fontFamily: {
-  	base: 'Handlee'
+  	base: 'Handlee',
+    heading: 'Fredericka the Great'
   }
 };

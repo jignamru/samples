@@ -8,7 +8,7 @@ var { StyleSheet } = React;
 module.exports = StyleSheet.create({
     container: {
       flexDirection: 'column',
-      flex: 1
+      flex: 1,
     },
     introContainer: {
         backgroundColor: 'transparent',
@@ -29,40 +29,20 @@ module.exports = StyleSheet.create({
         paddingLeft: 30,
         color: common.color.darkPurple
     },
-    inputs: {
-        marginTop: 10,
-        marginBottom: 10,
-    },
-    inputIcon: {
-        marginLeft: 15,
-        width: 20,
-        height: 20
-    }, 
-    inputContainer: {
-        padding: 10,
-        marginTop: 20,
-        borderWidth: 1,
-        borderBottomColor: '#CCC',
-        borderColor: 'transparent'
-    },
-    input: {
-        position: 'absolute',
-        left: 61,
-        top: 12,
-        right: 0,
-        height: 20,
-        fontSize: 14
+    buttonsBox: {
+        marginTop: 100
     },
     buttonRow: {
         alignItems: 'center'
     },
     buttonContainer: {
-        padding:10, 
-        height:45, 
+        paddingTop:20,
+        paddingBottom:20, 
+        height:60, 
         overflow:'hidden', 
         borderRadius:4, 
         backgroundColor: common.color.darkPurple,
-        width: windowSize.width / 1.5,
+        width: windowSize.width / 1.3,
         alignItems: 'center',
         marginBottom: 50
     },
