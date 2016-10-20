@@ -26,6 +26,14 @@ class AddSitter extends Component {
                     priority: ''
                   };
 	}
+
+	componentWillMount() {
+		if(this.props.contact){
+			this.state.fullname = this.props.contact.name;
+			this.state.phone = this.props.contact.phone;
+			this.state.email = this.props.contact.email;
+		}
+	}
   
 	handleAddSitter(){
  	   	var [firstName, lastName] = this.state.fullname.split(' ');
@@ -36,6 +44,7 @@ class AddSitter extends Component {
             emailAddress: this.state.email,
             priorityOrder: this.state.priority
           });
+    	console.log("data", data);
 	    AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
 		    fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters", {
 	          method: "POST",
@@ -92,7 +101,8 @@ class AddSitter extends Component {
 		                    style={styles.input}
 		                    placeholder="First and last name"
 		                    placeholderTextColor={commonStyles.color.grey}
-		                    value={this.props.contact ? this.props.contact.name : this.state.fullname}
+		                    autoCapitalize="words"
+		                    defaultValue={this.state.fullname}
                             onChangeText={text => this.setState({fullname:text})}
 		                />
 		            </View>
@@ -102,7 +112,8 @@ class AddSitter extends Component {
 		                    style={styles.input}
 		                    placeholder="Email"
 		                    placeholderTextColor={commonStyles.color.grey}
-		                    value={this.props.contact ? this.props.contact.email : this.state.email}
+		                    keyboardType="email-address"
+		                    defaultValue={this.state.email}
                             onChangeText={text => this.setState({email:text})}
 		                />
 		            </View>
@@ -112,7 +123,8 @@ class AddSitter extends Component {
 	                        style={styles.input}
 	                        placeholder="Mobile number"
 	                        placeholderTextColor={commonStyles.color.grey}
-	                        value={this.props.contact ? this.props.contact.phone : this.state.phone}
+	                        keyboardType="phone-pad"
+	                        defaultValue={this.state.phone}
                             onChangeText={text => this.setState({phone:text})}
 	                    />
               		</View>
@@ -123,20 +135,22 @@ class AddSitter extends Component {
 		                    style={styles.input}
 		                    placeholder="Hourly rate"
 		                    placeholderTextColor={commonStyles.color.grey}
+	                        keyboardType="numeric"
 		                    value={this.state.rate}
                             onChangeText={text => this.setState({rate:text})}
 		                />
 		            </View>
-	              <View style={styles.inputContainer}>
-	                  <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/like.png')}/>
-	                  <CustomTextInput
-	                      style={styles.input}
-	                      placeholder="Likeability"
-	                      placeholderTextColor={commonStyles.color.grey}
-	                      value={this.state.priority}
-                            onChangeText={text => this.setState({priority:text})}
-	                  />
-	              </View>              
+		              <View style={styles.inputContainer}>
+		                  <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/like.png')}/>
+		                  <CustomTextInput
+		                      style={styles.input}
+		                      placeholder="Likeability"
+		                      placeholderTextColor={commonStyles.color.grey}
+		                      keyboardType="numeric"
+		                      value={this.state.priority}
+	                            onChangeText={text => this.setState({priority:text})}
+		                  />
+		              </View>              
 	    		</View>
 	    		<View style={styles.buttonRow}>
 	    		      <CustomButton
