@@ -28,6 +28,10 @@ class RequestSitter extends Component{
         urgent: false
       }
   }
+
+  componentWillMount() {
+    this.state.endDateTime.setHours(this.state.endDateTime.getHours() + 2);
+  }
   
   toggleStartDatePicker() {
     var show = this.state.showStartDateTimePicker == false ? true : false;
@@ -84,17 +88,11 @@ class RequestSitter extends Component{
     var startDatePicker = (
       <View>      
           <Modal 
-            animated={true}
+            animationType="slide"
             transparent={false}
             visible={this.state.showStartDateTimePicker}>
             <View
-              style={{
-                flex: 1,
-                backgroundColor: '#f5fcff',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: 20,
-              }}>
+              style={styles.modal}>
                 <DatePickerIOS
                   date={this.state.startDateTime}
                   mode="datetime"
@@ -117,17 +115,11 @@ class RequestSitter extends Component{
     var endDatePicker = (
       <View>      
           <Modal 
-            animated={true}
+            animationType="slide"
             transparent={false}
             visible={this.state.showEndDateTimePicker}>
             <View
-              style={{
-                flex: 1,
-                backgroundColor: '#f5fcff',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: 20,
-              }}>
+              style={styles.modal}>
       
               <DatePickerIOS
                         date={this.state.endDateTime}
@@ -136,6 +128,7 @@ class RequestSitter extends Component{
                         minimumDate = {this.state.startDateTime}
                         onDateChange={ text => this.setState({endDateTime:text}) }
                       />
+
               <CustomButton
                 containerStyle={styles.buttonContainer}
                 style={styles.button}
@@ -168,7 +161,7 @@ class RequestSitter extends Component{
                 <View style={ styles.input }>
                   <CustomText>
                     {this.state.startDateTime.toLocaleDateString() +
-                      ' at ' + this.state.startDateTime.toLocaleTimeString()}
+                      ' at ' + this.state.startDateTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                     </CustomText>
                 </View>
               </TouchableWithoutFeedback>
@@ -182,7 +175,7 @@ class RequestSitter extends Component{
                 <View style={ styles.input }>
                   <CustomText>
                     {this.state.endDateTime.toLocaleDateString() +
-                      ' at ' + this.state.endDateTime.toLocaleTimeString()}
+                      ' at ' + this.state.endDateTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                     </CustomText>
                 </View>
               </TouchableWithoutFeedback>

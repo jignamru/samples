@@ -67,4 +67,10 @@ module.exports = StyleSheet.create({
     checkbox: {
         fontFamily: common.fontFamily.base
     },
+    modal: {
+        flex: 1,
+        backgroundColor: '#f5fcff',
+        justifyContent: 'center',
+        padding: 20
+    }
 })
