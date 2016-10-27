@@ -66,7 +66,7 @@ class SignUp extends Component {
     return (
     	<View style={styles.container}>
             <TouchableHighlight
-              onPress={this.goBack}>
+              onPress={this.goBack.bind(this)}>
               <View style={styles.back}>
                     <Image style={styles.backIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/left-arrow.png')} />
               </View>
@@ -81,6 +81,7 @@ class SignUp extends Component {
 	                    placeholder="First and last name"
 	                    placeholderTextColor={commonStyles.color.grey}
 	                    value={this.state.fullname}
+                      autoCapitalize="words"
                       onChangeText={text => this.state.fullname = text}
 	                />
 	            </View>
@@ -91,6 +92,7 @@ class SignUp extends Component {
                         placeholder="Mobile number"
                         placeholderTextColor={commonStyles.color.grey}
                         value={this.state.phone}
+                        keyboardType="phone-pad"                        
                         onChangeText={text => this.state.phone = text}
                     />
               </View>
@@ -101,6 +103,7 @@ class SignUp extends Component {
 	                    style={styles.input}
 	                    placeholder="Email"
 	                    placeholderTextColor={commonStyles.color.grey}
+                      autoCapitalize="none"
 	                    value={this.state.email}
                       onChangeText={text => this.state.email = text}
 	                />
@@ -145,7 +148,7 @@ class SignUp extends Component {
             </TouchableHighlight>
             <TouchableHighlight
               style={styles.button}
-              onPress={this.goBack}>
+              onPress={this.goBack.bind(this)}>
               <View style={styles.signin}>
                   <CustomText style={styles.greyFont}>Already signed up? Sign In</CustomText>
               </View>

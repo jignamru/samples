@@ -11,13 +11,12 @@ var RequestSitterScreen = require('./requestSitter');
 
 import CustomButton from '../components/customButton';
 import CustomText from '../components/customText';
+import BottomIconBar from '../components/bottomIconBar'
 
 class Home extends Component {
     constructor(props) {
       super(props);
-      this.goToSettings = this.goToSettings.bind(this);
       this.goToScreen = this.goToScreen.bind(this);
-      this.handleLogout = this.handleLogout.bind(this);
       this.state = {};
     }
   
@@ -31,17 +30,7 @@ class Home extends Component {
 		})
 	}
     
-	handleLogout(){
-		User._logout().done();
-
-		var LoginScreen = require('./login'); // this line is needed here for lazy loading!
-		this.goToScreen(LoginScreen);
-	}
-	goToSettings(){
-		// todo
-	}
-
-  
+    // todo: only show the 'request' button if user has sitters count > 0  
     render() {
 	    return (
 	        <View style={styles.container}>
@@ -67,29 +56,7 @@ class Home extends Component {
 				        ADD NEW SITTER
 				      </CustomButton>
             	</View>
-            	<View style={styles.footer}>
-            		<TouchableHighlight
-		              onPress={this.goToSettings}>
-		              	<View style={[styles.logout, styles.footerItem]}>
-		              		<Image style={styles.footerIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/settings.png')} />
-		              	</View>
-	            	</TouchableHighlight>
-	            	<TouchableHighlight
-//                     activeOpacity={75 / 100}
-//                     underlayColor={"rgb(210,210,210)"}
-		              onPress={() => this.goToScreen(SittersListScreen)}>
-			              <View style={[styles.logout, styles.footerItem]}>
-			              		<Image style={styles.footerIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/people.png')} />
-			              </View>
-	            	</TouchableHighlight>
-            		<TouchableHighlight
-		              onPress={this.handleLogout}>
-	  		              <View style={[styles.logout, styles.footerItem]}>
-   			              		<Image style={styles.footerIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/logout.png')} />
-			              </View>
-	            	</TouchableHighlight>
-                  
-            	</View>
+            	<BottomIconBar navigator={this.props.navigator} />
             </View>
 	    )
 	}

@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import {AppRegistry, Navigator} from 'react-native';
 
-var LoginScreen = require('./app/screens/login');
+import LoginScreen from'./app/screens/login';
 
 class BabysitterApp extends Component {
   renderScene(route, navigator) {

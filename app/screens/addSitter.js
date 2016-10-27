@@ -6,7 +6,6 @@ var GLOBAL = require('../common/globals');
 var commonStyles = require('../common/styles');
 var User = require('../common/user');
 var styles = require('../styles/addSitter');
-var SittersListScreen = require('./sittersList');
 
 import CustomTextInput from '../components/customTextInput';
 import CustomText from '../components/customText';
@@ -14,6 +13,7 @@ import CustomButton from '../components/customButton';
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
+import SittersListScreen from './sittersList';
 
 class AddSitter extends Component {
    constructor(props) {
@@ -113,6 +113,7 @@ class AddSitter extends Component {
 		                    placeholder="Email"
 		                    placeholderTextColor={commonStyles.color.grey}
 		                    keyboardType="email-address"
+		                    autoCapitalize="none"
 		                    defaultValue={this.state.email}
                             onChangeText={text => this.setState({email:text})}
 		                />
