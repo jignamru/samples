@@ -71,8 +71,7 @@ class SignUp extends Component {
                     <Image style={styles.backIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/left-arrow.png')} />
               </View>
             </TouchableHighlight>
-
-    		<CustomText style={styles.title}>Sign Up</CustomText>
+            <CustomText isHeading={true} style={styles.title}>Sign Up</CustomText>
 	    	<View style={styles.inputs}>
 	            <View style={styles.inputContainer}>
 	                <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/person.png')}/>

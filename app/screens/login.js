@@ -3,6 +3,7 @@ var GLOBAL = require('../common/globals');
 var User = require('../common/user');
 var SignUpScreen = require('./signup');
 var HomeScreen = require('./home');
+var ForgotPasswordScreen = require('./forgotPassword');
 
 import React, {Component} from 'react';
 import {AppRegistry, AsyncStorage, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert} from 'react-native';
@@ -14,7 +15,6 @@ class Login extends Component{
 
   constructor(props) {
       super(props);
-      this.gotoSignup = this.gotoSignup.bind(this);
       this.state = {
         username: null,
         password: null
@@ -63,9 +63,9 @@ class Login extends Component{
         });
   }
 
-  gotoSignup() {
-    this.props.navigator.push({
-      component: SignUpScreen
+  goToScreen(component){
+      this.props.navigator.push({
+      component: component
     })
   }
 
@@ -97,9 +97,12 @@ class Login extends Component{
                         onChangeText={text => this.state.password = text}
                     />
                 </View>
-                <View style={styles.forgotContainer}>
+                <TouchableHighlight
+                  onPress={() => this.goToScreen(ForgotPasswordScreen)}>
+                  <View style={styles.forgotContainer}>
                     <CustomText>Forgot Password?</CustomText>
-                </View>
+                  </View>
+                </TouchableHighlight>
             </View>
             <TouchableHighlight
               onPress={this.handleLogin.bind(this)}>
@@ -108,7 +111,7 @@ class Login extends Component{
               </View>
             </TouchableHighlight>
             <TouchableHighlight
-              onPress={this.gotoSignup}>
+              onPress={() => this.goToScreen(SignUpScreen)}>
               <View style={styles.signup}>
                   <CustomText>Don't have an account? <Text style={styles.bold}>Sign Up</Text></CustomText>
               </View>
