@@ -79,7 +79,6 @@ class SignUp extends Component {
             <CustomText isHeading={true} style={styles.title}>Sign Up</CustomText>
         </View>
         <ScrollView
-          onScroll={() => { console.log('onScroll!'); }}
           scrollEventThrottle={200}
           contentInset={{top: -50}}
           style={styles.scrollView}>
