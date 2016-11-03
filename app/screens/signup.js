@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {AppRegistry, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert} from 'react-native';
+import {AppRegistry, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert, ScrollView} from 'react-native';
 
 var CheckBox = require('react-native-checkbox');
 var User = require('../common/user');
@@ -10,6 +10,9 @@ var HomeScreen = require('./home');
 var commonStyles = require('../common/styles');
 import CustomText from '../components/customText';
 import CustomTextInput from '../components/customTextInput';
+import NavigationBar from 'react-native-navbar';
+import IconTitle from '../components/navbarIconTitle';
+import BackArrow from '../components/navbarLeftButton';
 
 class SignUp extends Component {
     constructor(props) {
@@ -58,101 +61,110 @@ class SignUp extends Component {
           console.warn(error);
         });
   }
+
   goBack() {
     this.props.navigator.pop();
   }
 
   render() {
     return (
-    	<View style={styles.container}>
-            <TouchableHighlight
-              onPress={this.goBack.bind(this)}>
-              <View style={styles.back}>
-                    <Image style={styles.backIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/left-arrow.png')} />
-              </View>
-            </TouchableHighlight>
+      <View style={styles.container}>
+        <NavigationBar
+          title={<IconTitle/>}
+          leftButton={<BackArrow onPress={this.goBack.bind(this)}/>}
+         />
+
+        <View style={styles.introContainer}>
+            <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/reading.png')} />
             <CustomText isHeading={true} style={styles.title}>Sign Up</CustomText>
-	    	<View style={styles.inputs}>
-	            <View style={styles.inputContainer}>
-	                <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/person.png')}/>
-	                <CustomTextInput 
-	                    style={styles.input}
-	                    placeholder="First and last name"
-	                    placeholderTextColor={commonStyles.color.grey}
-	                    value={this.state.fullname}
-                      autoCapitalize="words"
-                      onChangeText={text => this.state.fullname = text}
-	                />
-	            </View>
-                <View style={styles.inputContainer}>
-                    <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/phone.png')}/>
-                    <CustomTextInput 
-                        style={styles.input}
-                        placeholder="Mobile number"
-                        placeholderTextColor={commonStyles.color.grey}
-                        value={this.state.phone}
-                        keyboardType="phone-pad"                        
-                        onChangeText={text => this.state.phone = text}
+        </View>
+        <ScrollView
+          onScroll={() => { console.log('onScroll!'); }}
+          scrollEventThrottle={200}
+          contentInset={{top: -50}}
+          style={styles.scrollView}>
+    	    	<View style={styles.inputs}>
+    	            <View style={styles.inputContainer}>
+    	                <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/person.png')}/>
+    	                <CustomTextInput 
+    	                    style={styles.input}
+    	                    placeholder="First and last name"
+    	                    placeholderTextColor={commonStyles.color.grey}
+    	                    value={this.state.fullname}
+                          autoCapitalize="words"
+                          onChangeText={text => this.state.fullname = text}
+    	                />
+    	            </View>
+                    <View style={styles.inputContainer}>
+                        <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/phone.png')}/>
+                        <CustomTextInput 
+                            style={styles.input}
+                            placeholder="Mobile number"
+                            placeholderTextColor={commonStyles.color.grey}
+                            value={this.state.phone}
+                            keyboardType="phone-pad"                        
+                            onChangeText={text => this.state.phone = text}
+                        />
+                  </View>
+
+    	            <View style={styles.inputContainer}>
+    	                <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/email.png')}/>
+    	                <CustomTextInput 
+    	                    style={styles.input}
+    	                    placeholder="Email"
+    	                    placeholderTextColor={commonStyles.color.grey}
+                          autoCapitalize="none"
+    	                    value={this.state.email}
+                          onChangeText={text => this.state.email = text}
+    	                />
+    	            </View>
+                  <View style={styles.inputContainer}>
+                      <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/pwd.png')}/>
+                      <CustomTextInput
+                          password={true}
+                          style={styles.input}
+                          placeholder="Password"
+                          placeholderTextColor={commonStyles.color.grey}
+                          value={this.state.password}
+                          onChangeText={text => this.state.password = text}
+                      />
+                  </View>
+                  <View style={styles.inputContainer}>
+                      <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/pwd-confirm.png')}/>
+                      <CustomTextInput
+                          password={true}
+                          style={styles.input}
+                          placeholder="Confirm Password"
+                          placeholderTextColor={commonStyles.color.grey}
+                          value={this.state.confirmPassword}
+                          onChangeText={text => this.state.confirmPassword = text}
+                      />
+                  </View>
+                  <View style={styles.inputContainer}>
+                    <CheckBox
+                      label='I have read and accept the terms of service'
+                      labelStyle={styles.checkbox}
+                      checked={false}
+                      onChange={(checked) => this.state.tosAccept = checked}
                     />
-              </View>
-
-	            <View style={styles.inputContainer}>
-	                <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/email.png')}/>
-	                <CustomTextInput 
-	                    style={styles.input}
-	                    placeholder="Email"
-	                    placeholderTextColor={commonStyles.color.grey}
-                      autoCapitalize="none"
-	                    value={this.state.email}
-                      onChangeText={text => this.state.email = text}
-	                />
-	            </View>
-              <View style={styles.inputContainer}>
-                  <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/pwd.png')}/>
-                  <CustomTextInput
-                      password={true}
-                      style={styles.input}
-                      placeholder="Password"
-                      placeholderTextColor={commonStyles.color.grey}
-                      value={this.state.password}
-                      onChangeText={text => this.state.password = text}
-                  />
-              </View>
-              <View style={styles.inputContainer}>
-                  <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/pwd-confirm.png')}/>
-                  <CustomTextInput
-                      password={true}
-                      style={styles.input}
-                      placeholder="Confirm Password"
-                      placeholderTextColor={commonStyles.color.grey}
-                      value={this.state.confirmPassword}
-                      onChangeText={text => this.state.confirmPassword = text}
-                  />
-              </View>
-              <View style={styles.inputContainer}>
-                <CheckBox
-                  label='I have read and accept the terms of service'
-                  labelStyle={styles.checkbox}
-                  checked={false}
-                  onChange={(checked) => this.state.tosAccept = checked}
-                />
-              </View>
-	    	</View>
-	    	<TouchableHighlight
-              style={styles.button}
-              onPress={this.handleSignup.bind(this)}>
-	            <View style={styles.signup}>
-	                <CustomText style={styles.whiteFont}>DONE</CustomText>
-	            </View>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.button}
-              onPress={this.goBack.bind(this)}>
-              <View style={styles.signin}>
-                  <CustomText style={styles.greyFont}>Already signed up? Sign In</CustomText>
-              </View>
-            </TouchableHighlight>
-
+                  </View>
+    	    	</View>
+        
+  	      <TouchableHighlight
+            style={styles.button}
+            onPress={this.handleSignup.bind(this)}>
+            <View style={styles.signup}>
+                <CustomText style={styles.whiteFont}>DONE</CustomText>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+            onPress={this.goBack.bind(this)}>
+            <View style={styles.signin}>
+                <CustomText style={styles.greyFont}>Already signed up? Sign In</CustomText>
+            </View>
+          </TouchableHighlight>
+        </ScrollView>
 	    </View>
 
     )

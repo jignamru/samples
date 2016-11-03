@@ -7,6 +7,10 @@ import {AppRegistry, AsyncStorage, StyleSheet, View, Text, TextInput, Image, Tou
 
 import CustomText from '../components/customText';
 import CustomTextInput from '../components/customTextInput';
+import NavigationBar from 'react-native-navbar';
+import IconTitle from '../components/navbarIconTitle';
+import BackArrow from '../components/navbarLeftButton';
+
 
 class ForgotPassword extends Component{
 
@@ -56,13 +60,15 @@ class ForgotPassword extends Component{
   render() {
     return (
       <View style={styles.container}>
-        <TouchableHighlight
-          onPress={this.goBack.bind(this)}>
-          <View style={styles.back}>
-                <Image style={styles.backIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/left-arrow.png')} />
-          </View>
-        </TouchableHighlight>
-        <CustomText isHeading={true} style={styles.title}>Reset Password</CustomText>
+        <NavigationBar
+          title={<IconTitle/>}
+          leftButton={<BackArrow onPress={this.goBack.bind(this)}/>}
+         />
+
+        <View style={styles.introContainer}>
+            <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/reading.png')} />
+            <CustomText isHeading={true} style={styles.title}>Reset Password</CustomText>
+        </View>
       
         <View style={styles.inputs}>
             <View style={styles.inputContainer}>
@@ -72,6 +78,7 @@ class ForgotPassword extends Component{
                     placeholder="Email"
                     placeholderTextColor="#000"
                     value={this.state.username}
+                    autoCapitalize="none"
                     onChangeText={text => this.state.username = text}
                 />
             </View>

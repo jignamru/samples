@@ -9,21 +9,24 @@ module.exports = StyleSheet.create({
     container: {
       flexDirection: 'column',
       flex: 1,
-      backgroundColor: common.color.lightestBrown
     },
-    back: {
-        marginTop: 40,
-        marginLeft: 20,
+    introContainer: {
+        backgroundColor: 'transparent',
+        width: windowSize.width,
+        height: windowSize.height * 0.2,
+        justifyContent: 'center'
     },
-    backIcon: {
-        height: 21,
-        width: 21
+    introBg: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        width: windowSize.width,
+        height: windowSize.height * 0.2
     },
     title: {
-        fontSize: 40,
-        marginTop: 50,
-        marginBottom: 10,
-        marginLeft: 25,
+        fontSize: 30,
+        fontWeight: 'bold',
+        paddingLeft: 30,
         color: common.color.darkPurple
     },
     signup: {
@@ -35,12 +38,10 @@ module.exports = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
       padding: 20,
-      flex: .15
     },
     inputs: {
-        marginTop: 10,
-        marginBottom: 10,
-        flex: .25
+        marginTop: 40,
+        marginBottom: 40,
     },
     inputIcon: {
         marginLeft: 15,
@@ -49,7 +50,6 @@ module.exports = StyleSheet.create({
     },
     inputContainer: {
         padding: 10,
-        marginTop: 20,
         borderWidth: 1,
         borderBottomColor: '#CCC',
         borderColor: 'transparent'
@@ -61,10 +61,6 @@ module.exports = StyleSheet.create({
         right: 0,
         height: 20,
         fontSize: 14
-    },
-    forgotContainer: {
-      alignItems: 'flex-end',
-      padding: 15,
     },
     greyFont: {
       color: common.color.grey

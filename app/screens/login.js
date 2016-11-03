@@ -83,6 +83,7 @@ class Login extends Component{
                         placeholder="Email"
                         placeholderTextColor="#000"
                         value={this.state.username}
+                        autoCapitalize="none"
                         onChangeText={text => this.state.username = text}
                     />
                 </View>

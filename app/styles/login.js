@@ -9,7 +9,6 @@ module.exports = StyleSheet.create({
     container: {
       flexDirection: 'column',
       flex: 1,
-      backgroundColor: common.color.lightestBrown
     },
     bg: {
         position: 'absolute',
