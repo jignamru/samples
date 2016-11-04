@@ -11,45 +11,43 @@ import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
 
+var LoginScreen = require('./login');
 
 class ForgotPassword extends Component{
 
   constructor(props) {
       super(props);
       this.state = {
-        email: null,
+        emailAddress: null,
       }
   }
 
 
   handlePasswordReset() {
-    // fetch( GLOBAL.BABYSITTER_API_URL + "users/authenticate", {
-    //       method: "POST",
-    //       headers: {
-    //         'Accept': 'application/json',
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify({
-    //         emailAddress: this.state.username,
-    //         password:     this.state.password,
-    //         clientId: "karma"
-    //       })
-    //     })
-    //     .then((response) => response.json() )
-    //     .then((responseJson) => {
-    //       console.log('Response:', responseJson);
-    //       if(responseJson.userId) {
-    //         User._setUserId(responseJson.userId).done();
-    //         this.props.navigator.push({
-    //           component: HomeScreen
-    //         })
-    //       } else {
-    //         Alert.alert('Uh oh!', responseJson.message);
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       console.warn(error);
-    //     });
+    fetch( GLOBAL.BABYSITTER_API_URL + "/users/password/requestReset", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        emailAddress: this.state.emailAddress,
+      })
+    })
+    .then((response) => response.json() )
+    .then((responseJson) => {
+      if(responseJson.message) {
+        Alert.alert('Uh oh!', responseJson.message);
+      } else {
+        Alert.alert('Thanks!', "Check the email we've just sent to you for further instructions on how to reset your password.")
+        this.props.navigator.push({
+          component: LoginScreen
+        })
+      }
+    })
+    .catch((error) => {
+      console.warn(error);
+    });
   }
 
   goBack() {
@@ -77,9 +75,9 @@ class ForgotPassword extends Component{
                     style={styles.input}
                     placeholder="Email"
                     placeholderTextColor="#000"
-                    value={this.state.username}
+                    value={this.state.emailAddress}
                     autoCapitalize="none"
-                    onChangeText={text => this.state.username = text}
+                    onChangeText={text => this.state.emailAddress = text}
                 />
             </View>
         </View>

@@ -24,7 +24,7 @@ class Login extends Component{
   componentWillMount() {
     AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((value) => {
       if( value != null) {
-        console.log('User logged in. UserId: ' + value);
+        //console.log('User logged in. UserId: ' + value);
         this.props.navigator.push({
           component: HomeScreen
         })
