@@ -8,6 +8,7 @@ var styles = require('../styles/home');
 var AddSitterOptionsScreen = require('./addSitterOptions');
 var SittersListScreen = require('./sittersList');
 var RequestSitterScreen = require('./requestSitter');
+var OpenRequestsListScreen = require('./openRequestsList');
 
 import CustomButton from '../components/customButton';
 import CustomText from '../components/customText';
@@ -86,7 +87,7 @@ class Home extends Component {
 		  	containerStyle={[styles.buttonContainer, styles.addSitterButtonContainer]}
 		    style={styles.button}
 		    styleDisabled={{color: 'red'}}
-		    onPress={() => this.goToScreen(AddSitterOptionsScreen)}
+		    onPress={() => this.goToScreen(OpenRequestsListScreen)}
 		  >
 		    SEE OPEN REQUESTS
 		  </CustomButton>
