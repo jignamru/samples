@@ -17,11 +17,34 @@ class Home extends Component {
     constructor(props) {
       super(props);
       this.goToScreen = this.goToScreen.bind(this);
-      this.state = {};
+      this.state = {
+      	user: ''
+      };
     }
+  	
+    componentDidMount() {
+  	  this.getUserInfo();
+  	}	
   
-	componentWillMount() {
-		//TODO get user info?
+    getUserInfo(){
+	    AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {	
+		  fetch( GLOBAL.BABYSITTER_API_URL + "users/" + userId, {
+	          method: "GET",
+	          headers: {
+	            'Accept': 'application/json',
+	            'Content-Type': 'application/json',
+	          }
+	        })
+	        .then((response) => response.json() )
+	        .then((responseJson) => {
+	          this.setState({
+	          	user: responseJson
+	          });
+	        })
+	        .catch((error) => {
+	          console.warn(error);
+	        });
+		}).done();
 	}
   
     goToScreen(component){
@@ -30,35 +53,60 @@ class Home extends Component {
 		})
 	}
     
-    // todo: only show the 'request' button if user has sitters count > 0  
     render() {
-	    return (
-	        <View style={styles.container}>
-	        	<View style={styles.introContainer}>
+  	  console.log('user:', this.state.user);
+  	  var requestButton = (
+		  <CustomButton
+	      	containerStyle={[styles.buttonContainer, styles.requestSitterButtonContainer]}
+	        style={styles.button}
+	        styleDisabled={{color: 'red'}}
+	        onPress={() => this.goToScreen(RequestSitterScreen)}
+	      >
+	        REQUEST A SITTER
+	      </CustomButton>
+  	  );
+
+  	  var addSitterButton = (
+		<CustomButton
+		  	containerStyle={[styles.buttonContainer, styles.addSitterButtonContainer]}
+		    style={styles.button}
+		    styleDisabled={{color: 'red'}}
+		    onPress={() => this.goToScreen(AddSitterOptionsScreen)}
+		  >
+		    ADD NEW SITTER
+		  </CustomButton>
+  	  );
+
+  	  var zeroSittersMessage = (
+  	  	<CustomText style={styles.message}>Let us start by adding new sitters.</CustomText>
+  	  );
+
+  	  var openRequestsButton = (
+  	  	<CustomButton
+		  	containerStyle={[styles.buttonContainer, styles.addSitterButtonContainer]}
+		    style={styles.button}
+		    styleDisabled={{color: 'red'}}
+		    onPress={() => this.goToScreen(AddSitterOptionsScreen)}
+		  >
+		    SEE OPEN REQUESTS
+		  </CustomButton>
+  	  );
+
+		return (
+		    <View style={styles.container}>
+		    	<View style={styles.introContainer}>
 					<Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/giraffe.png')} />
-		            <CustomText isHeading={true} style={styles.title}>Welcome!</CustomText>
+		            <CustomText isHeading={true} style={styles.title}>Hi {this.state.user.firstName}!</CustomText>
 		        </View>
 		        <View style={styles.actionsContainer}>
-		        	  <CustomButton
-	    		      	containerStyle={[styles.buttonContainer, styles.requestSitterButtonContainer]}
-				        style={styles.button}
-				        styleDisabled={{color: 'red'}}
-				        onPress={() => this.goToScreen(RequestSitterScreen)}
-				      >
-				        REQUEST A SITTER
-				      </CustomButton>
-		        	<CustomButton
-	    		      	containerStyle={[styles.buttonContainer, styles.addSitterButtonContainer]}
-				        style={styles.button}
-				        styleDisabled={{color: 'red'}}
-				        onPress={() => this.goToScreen(AddSitterOptionsScreen)}
-				      >
-				        ADD NEW SITTER
-				      </CustomButton>
-            	</View>
-            	<BottomIconBar navigator={this.props.navigator} />
-            </View>
-	    )
+		        	{ this.state.user.hasOpenRequests ? openRequestsButton : <View/> }
+		        	{ this.state.user.hasSitters ? requestButton : zeroSittersMessage }
+
+		        	{addSitterButton}
+		    	</View>
+		    	<BottomIconBar navigator={this.props.navigator} />
+		    </View>
+		)
 	}
 }
 

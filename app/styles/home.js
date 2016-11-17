@@ -41,13 +41,14 @@ module.exports = StyleSheet.create({
     	paddingBottom: 60
     },
     buttonContainer: {
-        padding:20, 
-        height:65, 
+        paddingTop:20, 
+        paddingBottom:20, 
+        height:60, 
         overflow:'hidden', 
         borderRadius:4, 
         width: windowSize.width / 1.5,
         alignItems: 'center',
-        marginBottom: 50
+        marginBottom: 40,
     },
     button: {
         fontSize: 20,

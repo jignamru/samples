@@ -10,7 +10,6 @@ module.exports = {
   async _setUserId(userId) {
      try {
        await AsyncStorage.setItem(GLOBAL.STORAGE_KEY, userId);
-       console.log('Saved user ID to disk.')
      } catch (error) {
        console.log('AsyncStorage error: ', error.message);
      }
