@@ -6,7 +6,7 @@ var GLOBAL = require('../common/globals');
 var User = require('../common/user');
 var styles = require('../styles/requestSitter');
 var CheckBox = require('react-native-checkbox');
-var SittersListScreen = require('./sittersList');
+var HomeScreen = require('./home');
 
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
@@ -64,14 +64,17 @@ class RequestSitter extends Component{
         })
         .then((response) => response.json())
         .then((responseJson) => {
-          console.log('Response:',responseJson);
           if(responseJson.id) {
-              Alert.alert('Done!', "Your request has been submitted. We'll keep in touch!");
-              // todo: redirect to home?
-
-            this.props.navigator.push({
-              id: 'sitters'
-            })
+              Alert.alert(
+                'Done!', 
+                "Your request has been submitted. We'll keep in touch!",
+                [ 
+                  {
+                    text: 'OK', 
+                    onPress: () => this.props.navigator.pop() 
+                  }
+                ]
+                );
           } else {
             Alert.alert('Uh oh!', responseJson.message);
           }
@@ -81,7 +84,6 @@ class RequestSitter extends Component{
         });
     }).done();
   }
-
 
   render() {
     
