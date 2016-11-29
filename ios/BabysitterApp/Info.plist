@@ -42,7 +42,6 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Fredericka the Great regular.ttf</string>
-		<string>Handlee regular.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

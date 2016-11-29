@@ -30,9 +30,13 @@ module.exports = StyleSheet.create({
         color: common.color.darkPurple
     },
     signup: {
-        backgroundColor:  common.color.darkPurple,
+        backgroundColor:  common.color.orange,
         padding: 20,
         alignItems: 'center'
+    },
+    signupText: {
+        fontSize: 18,
+        fontWeight: '400',
     },
     signin: {
       justifyContent: 'center',
@@ -67,6 +71,9 @@ module.exports = StyleSheet.create({
     },
     checkbox: {
         fontFamily: common.fontFamily.base
+    },
+    bold: {
+        fontWeight: '500'
     },
     whiteFont: {
       color: '#fff'

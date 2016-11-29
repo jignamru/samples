@@ -3,7 +3,7 @@ module.exports = {
   color: {
     //palette
     darkPurple : '#58355E',
-    orange : '#E03616',
+    orange : '#ef9413',
     yellow: '#FFF689',
     lightGreen: '#CFFFB0',
     blue: '#42B5C6',
@@ -11,7 +11,7 @@ module.exports = {
     grey: '#616161'
   },
   fontFamily: {
-  	base: 'Handlee',
+  	base: 'GillSans-Light',
     heading: 'Fredericka the Great'
   }
 };

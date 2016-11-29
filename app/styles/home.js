@@ -49,16 +49,12 @@ module.exports = StyleSheet.create({
         width: windowSize.width / 1.5,
         alignItems: 'center',
         marginBottom: 40,
+        backgroundColor: common.color.orange
     },
     button: {
-        fontSize: 20,
+        fontSize: 18,
+        fontWeight: '400',
         color: '#fff'
-    },
-    addSitterButtonContainer: {
-        backgroundColor: common.color.darkPurple
-    },
-    requestSitterButtonContainer: {
-        backgroundColor: common.color.orange
     },
     boxLabel: {
     	fontSize: 25,

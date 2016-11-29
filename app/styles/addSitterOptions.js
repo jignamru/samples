@@ -41,13 +41,14 @@ module.exports = StyleSheet.create({
         height:60, 
         overflow:'hidden', 
         borderRadius:4, 
-        backgroundColor: common.color.darkPurple,
+        backgroundColor: common.color.orange,
         width: windowSize.width / 1.3,
         alignItems: 'center',
         marginBottom: 50
     },
     button: {
-        fontSize: 20,
+        fontSize: 18,
+        fontWeight: '400',
         color: '#fff'
     }
 })

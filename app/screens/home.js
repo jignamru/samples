@@ -55,10 +55,9 @@ class Home extends Component {
 	}
     
     render() {
-  	  console.log('user:', this.state.user);
   	  var requestButton = (
 		  <CustomButton
-	      	containerStyle={[styles.buttonContainer, styles.requestSitterButtonContainer]}
+	      	containerStyle={styles.buttonContainer}
 	        style={styles.button}
 	        styleDisabled={{color: 'red'}}
 	        onPress={() => this.goToScreen(RequestSitterScreen)}
@@ -69,7 +68,7 @@ class Home extends Component {
 
   	  var addSitterButton = (
 		<CustomButton
-		  	containerStyle={[styles.buttonContainer, styles.addSitterButtonContainer]}
+		  	containerStyle={styles.buttonContainer}
 		    style={styles.button}
 		    styleDisabled={{color: 'red'}}
 		    onPress={() => this.goToScreen(AddSitterOptionsScreen)}
@@ -84,7 +83,7 @@ class Home extends Component {
 
   	  var openRequestsButton = (
   	  	<CustomButton
-		  	containerStyle={[styles.buttonContainer, styles.addSitterButtonContainer]}
+		  	containerStyle={styles.buttonContainer}
 		    style={styles.button}
 		    styleDisabled={{color: 'red'}}
 		    onPress={() => this.goToScreen(OpenRequestsListScreen)}

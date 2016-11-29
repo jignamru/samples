@@ -153,14 +153,14 @@ class SignUp extends Component {
             style={styles.button}
             onPress={this.handleSignup.bind(this)}>
             <View style={styles.signup}>
-                <CustomText style={styles.whiteFont}>DONE</CustomText>
+                <CustomText style={[styles.signupText, styles.whiteFont]}>DONE</CustomText>
             </View>
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.button}
             onPress={this.goBack.bind(this)}>
             <View style={styles.signin}>
-                <CustomText style={styles.greyFont}>Already signed up? Sign In</CustomText>
+                <CustomText style={styles.greyFont}>Already signed up? <Text style={styles.bold}>Sign In</Text></CustomText>
             </View>
           </TouchableHighlight>
         </ScrollView>
