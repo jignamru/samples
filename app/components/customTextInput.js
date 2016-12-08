@@ -1,14 +1,10 @@
 import React from 'react';
 import ReactNative from 'react-native';
 import _ from 'lodash';
+import {InputField} from 'react-native-form-generator';
 var common = require('../common/styles');
 
-const {
-  TextInput,
-} = ReactNative;
-
-
-export default class CustomTextInput extends TextInput {
+export default class CustomTextInput extends InputField {
   render() {
 	var props = _.clone(this.props);
 
