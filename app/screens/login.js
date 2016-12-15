@@ -2,6 +2,7 @@
 var GLOBAL = require('../common/globals');
 var User = require('../common/user');
 var Validators = require('../common/formFieldValidators');
+var ErrorMessages = require('../common/errorMessages');
 var SignUpScreen = require('./signup');
 var HomeScreen = require('./home');
 var ForgotPasswordScreen = require('./forgotPassword');
@@ -58,14 +59,14 @@ class Login extends Component{
         })
         .then((response) => response.json() )
         .then((responseJson) => {
-          console.log('Response:', responseJson);
+//          console.log('Response:', responseJson);
           if(responseJson.userId) {
             User._setUserId(responseJson.userId).done();
             this.props.navigator.push({
               component: HomeScreen
             })
           } else {
-            Alert.alert('Uh oh!', responseJson.message);
+            Alert.alert('Hmm!', ErrorMessages.login[responseJson.errorCode]);
           }
         })
         .catch((error) => {
