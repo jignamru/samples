@@ -106,7 +106,7 @@ class Login extends Component{
                   helpText={((self)=>{
                     if(Object.keys(self.refs).length !== 0){
                       if(!self.refs.loginForm.refs.username.valid){
-                        return self.refs.loginForm.refs.username.validationErrors.join("\n");
+                        return <CustomText style={styles.errors}>{self.refs.loginForm.refs.username.validationErrors.join("\n")}</CustomText>;
                       }
                     }
                   })(this)}
@@ -122,7 +122,7 @@ class Login extends Component{
                   helpText={((self)=>{
                     if(Object.keys(self.refs).length !== 0){
                       if(!self.refs.loginForm.refs.password.valid){
-                        return self.refs.loginForm.refs.password.validationErrors.join("\n");
+                        return <CustomText style={styles.errors}>{self.refs.loginForm.refs.password.validationErrors.join("\n")}</CustomText>;
                       }
                     }
                   })(this)}

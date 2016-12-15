@@ -57,6 +57,9 @@ module.exports = StyleSheet.create({
     input: {
         fontSize: 14
     },
+    errors: {
+        color: 'red'
+    },
     forgotContainer: {
       alignItems: 'flex-end',
       padding: 15,
