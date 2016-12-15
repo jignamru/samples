@@ -30,43 +30,32 @@ module.exports = StyleSheet.create({
         color: common.color.darkPurple
     },
     submit: {
-        backgroundColor:  common.color.darkPurple,
+        marginTop: 20,
+        backgroundColor:  common.color.orange,
         padding: 20,
         alignItems: 'center'
     },
-    inputs: {
-        marginTop: 10,
-        marginBottom: 40
-    },
     inputIcon: {
-        marginLeft: 15,
+        marginLeft: 20,
+        alignSelf:'center',
         width: 20,
         height: 20
     },
-    inputContainer: {
-        padding: 10,
-        marginTop: 20,
-        borderWidth: 1,
-        borderBottomColor: '#CCC',
-        borderColor: 'transparent'
-    },
     input: {
-        position: 'absolute',
-        left: 61,
-        top: 12,
-        right: 0,
-        height: 20,
         fontSize: 14
     },
-    submit: {
-        backgroundColor: common.color.darkPurple,
-        padding: 20,
-        alignItems: 'center'
+    errors: {
+        color: 'red'
     },
     greyFont: {
       color: common.color.grey
     },
     whiteFont: {
       color: '#fff'
+    },
+    buttonText: {
+        fontSize: 18,
+        fontWeight: '400',
     }
+
 })

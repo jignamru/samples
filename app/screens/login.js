@@ -103,7 +103,7 @@ class Login extends Component{
                   placeholder='email address'
                   autoCapitalize="none"
                   validationFunction={ value => Validators.validateEmail(value)}
-                  helpText={((self)=>{
+                  helpTextComponent={((self)=>{
                     if(Object.keys(self.refs).length !== 0){
                       if(!self.refs.loginForm.refs.username.valid){
                         return <CustomText style={styles.errors}>{self.refs.loginForm.refs.username.validationErrors.join("\n")}</CustomText>;
@@ -119,7 +119,7 @@ class Login extends Component{
                   password={true}
                   style={styles.input}
                   validationFunction={ value => Validators.validatePassword(value)}
-                  helpText={((self)=>{
+                  helpTextComponent={((self)=>{
                     if(Object.keys(self.refs).length !== 0){
                       if(!self.refs.loginForm.refs.password.valid){
                         return <CustomText style={styles.errors}>{self.refs.loginForm.refs.password.validationErrors.join("\n")}</CustomText>;
