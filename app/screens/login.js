@@ -19,7 +19,8 @@ class Login extends Component{
   constructor(props) {
       super(props);
       this.state = {
-        formData: {}
+        formData: {},
+        disableButton: true
       }
   }
 
@@ -36,15 +37,6 @@ class Login extends Component{
 
 
   handleLogin() {
-
-    if( !this.state.formData.username || !this.refs.loginForm.refs.username.valid ){
-      return Alert.alert('Uh oh!', this.refs.loginForm.refs.username.validationErrors.join("\n"));
-    }
-
-    if( !this.state.formData.password || !this.refs.loginForm.refs.password.valid){
-      return Alert.alert('Uh oh!', this.refs.loginForm.refs.password.validationErrors.join("\n"));
-    }
-
     fetch( GLOBAL.BABYSITTER_API_URL + "users/authenticate", {
           method: "POST",
           headers: {
@@ -83,9 +75,31 @@ class Login extends Component{
   handleFormChange(formData){
     this.setState({formData:formData});
     this.props.onFormChange && this.props.onFormChange(formData);
+
+    if( (this.refs.loginForm.refs.username && this.refs.loginForm.refs.username.valid) &&
+      (this.refs.loginForm.refs.password && this.refs.loginForm.refs.password.valid)
+    ){
+      this.state.disableButton = false;
+    } else {
+      this.state.disableButton = true;
+    }
+
   }
 
   render() {
+    var disabledButton = (
+      <View style={[styles.signin, styles.signinDisabled]}>
+          <CustomText style={[styles.signinTextDisabled, styles.signinText]}>SIGN IN</CustomText>
+      </View>
+    );
+
+    var activeButton = (
+      <View style={[styles.signin, styles.signinActive]}>
+          <CustomText style={[styles.signinTextActive, styles.signinText]}>SIGN IN</CustomText>
+      </View>
+
+    );
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -137,11 +151,12 @@ class Login extends Component{
             </TouchableHighlight>
             
             <TouchableHighlight
-              onPress={this.handleLogin.bind(this)}>
-              <View style={styles.signin}>
-                  <CustomText style={[styles.whiteFont, styles.signinText]}>SIGN IN</CustomText>
-              </View>
+              onPress={this.handleLogin.bind(this)}
+              disabled={this.state.disableButton}>
+              { this.state.disableButton ? disabledButton : activeButton }
             </TouchableHighlight>
+
+
             <TouchableHighlight
               onPress={() => this.goToScreen(SignUpScreen)}>
               <View style={styles.signup}>

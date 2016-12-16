@@ -65,10 +65,10 @@ class SignUp extends Component {
     this.props.onFormChange && this.props.onFormChange(formData);
 
     if( (this.refs.signupForm.refs.fullname && this.refs.signupForm.refs.fullname.valid) &&
-      (this.refs.signupForm.refs.phone && this.refs.signupForm.refs.phone) &&
-      (this.refs.signupForm.refs.email && this.refs.signupForm.refs.email) &&
-      (this.refs.signupForm.refs.password && this.refs.signupForm.refs.password) &&
-      (this.refs.signupForm.refs.confirmPassword && this.refs.signupForm.refs.confirmPassword) &&
+      (this.refs.signupForm.refs.phone && this.refs.signupForm.refs.phone.valid) &&
+      (this.refs.signupForm.refs.email && this.refs.signupForm.refs.email.valid) &&
+      (this.refs.signupForm.refs.password && this.refs.signupForm.refs.password.valid) &&
+      (this.refs.signupForm.refs.confirmPassword && this.refs.signupForm.refs.confirmPassword.valid) &&
       (this.refs.signupForm.values.acceptedTerms)
     ){
       this.state.disableButton = false;
