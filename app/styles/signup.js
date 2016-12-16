@@ -30,52 +30,50 @@ module.exports = StyleSheet.create({
         color: common.color.darkPurple
     },
     signup: {
-        backgroundColor:  common.color.orange,
         padding: 20,
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 20
+    },
+    signupActive: {
+        backgroundColor:  common.color.orange,
+    },
+    signupDisabled: {
+        backgroundColor: common.color.lightGrey,
     },
     signupText: {
         fontSize: 18,
         fontWeight: '400',
+    },
+    signupTextActive: {
+        color: '#fff'
+    },
+    signupTextDisabled: {
+        color: '#DCD'
     },
     signin: {
       justifyContent: 'center',
       alignItems: 'center',
       padding: 20,
     },
-    inputs: {
-        marginTop: 40,
-        marginBottom: 40,
-    },
     inputIcon: {
         marginLeft: 15,
         width: 20,
-        height: 20
-    },
-    inputContainer: {
-        padding: 10,
-        borderWidth: 1,
-        borderBottomColor: '#CCC',
-        borderColor: 'transparent'
+        height: 20,
+        alignSelf:'center'
     },
     input: {
-        position: 'absolute',
-        left: 61,
-        top: 12,
-        right: 0,
-        height: 20,
+        fontSize: 14
+    },
+    errors: {
+        color: 'red'
+    },
+    terms: {
         fontSize: 14
     },
     greyFont: {
       color: common.color.grey
     },
-    checkbox: {
-        fontFamily: common.fontFamily.base
-    },
     bold: {
         fontWeight: '500'
-    },
-    whiteFont: {
-      color: '#fff'
     }
 })

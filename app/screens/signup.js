@@ -2,12 +2,14 @@
 
 import React, {Component} from 'react';
 import {AppRegistry, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert, ScrollView} from 'react-native';
+import { Form, SwitchField } from 'react-native-form-generator';
 
-var CheckBox = require('react-native-checkbox');
 var User = require('../common/user');
 var GLOBAL = require('../common/globals');
 var HomeScreen = require('./home');
 var commonStyles = require('../common/styles');
+var Validators = require('../common/formFieldValidators');
+
 import CustomText from '../components/customText';
 import CustomTextInput from '../components/customTextInput';
 import NavigationBar from 'react-native-navbar';
@@ -18,25 +20,21 @@ class SignUp extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        fullname: null,
-        phone: null,
-        email: null,
-        password: null,
-        confirmPassword: null,
-        tosAccept: null
+        formData: {},
+        disableButton: true
       }
   }
   handleSignup() {
-    var [firstName, lastName] = this.state.fullname.split(' ');
+    var [firstName, lastName] = this.state.formData.fullname.split(' ');
     var data = JSON.stringify({
             firstName:    firstName,
             lastName:     lastName,
-            phoneNumber:  this.state.phone,
-            emailAddress: this.state.email,
-            newPassword:  this.state.password,
-            tosAccept:    this.state.tosAccept
+            phoneNumber:  this.state.formData.phone,
+            emailAddress: this.state.formData.email,
+            newPassword:  this.state.formData.password,
+            tosAccept:    this.state.formData.acceptedTerms
           });
-    console.log(data);
+
     fetch( GLOBAL.BABYSITTER_API_URL + "users/", {
           method: "POST",
           headers: {
@@ -62,11 +60,50 @@ class SignUp extends Component {
         });
   }
 
+  handleFormChange(formData){
+    this.setState({formData:formData});
+    this.props.onFormChange && this.props.onFormChange(formData);
+
+    if( (this.refs.signupForm.refs.fullname && this.refs.signupForm.refs.fullname.valid) &&
+      (this.refs.signupForm.refs.phone && this.refs.signupForm.refs.phone) &&
+      (this.refs.signupForm.refs.email && this.refs.signupForm.refs.email) &&
+      (this.refs.signupForm.refs.password && this.refs.signupForm.refs.password) &&
+      (this.refs.signupForm.refs.confirmPassword && this.refs.signupForm.refs.confirmPassword) &&
+      (this.refs.signupForm.values.acceptedTerms)
+    ){
+      this.state.disableButton = false;
+    } else {
+      this.state.disableButton = true;
+    }
+  }
+
+  validateConfirmPassword(value) {
+    if(!value || value == '') return "Password confirmation is required.";
+
+    if( this.state.formData.password != value )
+      return "Passwords don't match."
+
+    return true;
+  }
+
   goBack() {
     this.props.navigator.pop();
   }
 
+
   render() {
+    var disabledButton = (
+      <View style={[styles.signup, styles.signupDisabled]}>
+          <CustomText style={[styles.signupText, styles.signupTextDisabled]}>DONE</CustomText>
+      </View>  
+    );
+
+    var activeButton = (
+      <View style={[styles.signup, styles.signupActive]}>
+        <CustomText style={[styles.signupText, styles.signupTextActive]}>DONE</CustomText>
+      </View>
+    );
+
     return (
       <View style={styles.container}>
         <NavigationBar
@@ -78,84 +115,105 @@ class SignUp extends Component {
             <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/reading.png')} />
             <CustomText isHeading={true} style={styles.title}>Sign Up</CustomText>
         </View>
-        <ScrollView
-          scrollEventThrottle={200}
-          contentInset={{top: -50}}
-          style={styles.scrollView}>
-    	    	<View style={styles.inputs}>
-    	            <View style={styles.inputContainer}>
-    	                <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/person.png')}/>
-    	                <CustomTextInput 
-    	                    style={styles.input}
-    	                    placeholder="First and last name"
-    	                    placeholderTextColor={commonStyles.color.grey}
-    	                    value={this.state.fullname}
-                          autoCapitalize="words"
-                          onChangeText={text => this.state.fullname = text}
-    	                />
-    	            </View>
-                    <View style={styles.inputContainer}>
-                        <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/phone.png')}/>
-                        <CustomTextInput 
-                            style={styles.input}
-                            placeholder="Mobile number"
-                            placeholderTextColor={commonStyles.color.grey}
-                            value={this.state.phone}
-                            keyboardType="phone-pad"                        
-                            onChangeText={text => this.state.phone = text}
-                        />
-                  </View>
 
-    	            <View style={styles.inputContainer}>
-    	                <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/email.png')}/>
-    	                <CustomTextInput 
-    	                    style={styles.input}
-    	                    placeholder="Email"
-    	                    placeholderTextColor={commonStyles.color.grey}
-                          autoCapitalize="none"
-    	                    value={this.state.email}
-                          onChangeText={text => this.state.email = text}
-    	                />
-    	            </View>
-                  <View style={styles.inputContainer}>
-                      <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/pwd.png')}/>
-                      <CustomTextInput
-                          password={true}
-                          style={styles.input}
-                          placeholder="Password"
-                          placeholderTextColor={commonStyles.color.grey}
-                          value={this.state.password}
-                          onChangeText={text => this.state.password = text}
-                      />
-                  </View>
-                  <View style={styles.inputContainer}>
-                      <Image style={styles.inputIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/pwd-confirm.png')}/>
-                      <CustomTextInput
-                          password={true}
-                          style={styles.input}
-                          placeholder="Confirm Password"
-                          placeholderTextColor={commonStyles.color.grey}
-                          value={this.state.confirmPassword}
-                          onChangeText={text => this.state.confirmPassword = text}
-                      />
-                  </View>
-                  <View style={styles.inputContainer}>
-                    <CheckBox
-                      label='I have read and accept the terms of service'
-                      labelStyle={styles.checkbox}
-                      checked={false}
-                      onChange={(checked) => this.state.tosAccept = checked}
-                    />
-                  </View>
-    	    	</View>
+        <ScrollView keyboardShouldPersistTaps={true} style={styles.scrollView}>
+          <Form ref='signupForm' 
+            onChange={this.handleFormChange.bind(this)}
+            label="Login">
+
+            <CustomTextInput 
+              ref='fullname' 
+              style={styles.input}
+              iconLeft={<Image size={20} style={styles.inputIcon} source={require('../images/icons/person.png')}/>}
+              placeholder='First and last name'
+              validationFunction={ value => Validators.validateFullname(value)}
+              autoCapitalize="words"
+              helpTextComponent={((self)=>{
+                if(Object.keys(self.refs).length !== 0){
+                  if(!self.refs.signupForm.refs.fullname.valid){
+                    return <CustomText style={styles.errors}>{self.refs.signupForm.refs.fullname.validationErrors.join("\n")}</CustomText>;
+                  }
+                }
+              })(this)}
+            />
+
+            <CustomTextInput 
+              ref='phone' 
+              style={styles.input}
+              iconLeft={<Image size={20} style={styles.inputIcon} source={require('../images/icons/phone.png')}/>}
+              keyboardType='phone-pad'
+              placeholder='Mobile number'
+              validationFunction={ value => Validators.validatePhone(value)}
+              helpTextComponent={((self)=>{
+                if(Object.keys(self.refs).length !== 0){
+                  if(!self.refs.signupForm.refs.phone.valid){
+                    return <CustomText style={styles.errors}>{self.refs.signupForm.refs.phone.validationErrors.join("\n")}</CustomText>;
+                  }
+                }
+              })(this)}
+            />
+
+            <CustomTextInput 
+              ref='email' 
+              style={styles.input}
+              iconLeft={<Image size={20} style={styles.inputIcon} source={require('../images/icons/email.png')}/>}
+              keyboardType='email-address'
+              placeholder='email address'
+              autoCapitalize="none"
+              validationFunction={ value => Validators.validateEmail(value)}
+              helpTextComponent={((self)=>{
+                if(Object.keys(self.refs).length !== 0){
+                  if(!self.refs.signupForm.refs.email.valid){
+                    return <CustomText style={styles.errors}>{self.refs.signupForm.refs.email.validationErrors.join("\n")}</CustomText>;
+                  }
+                }
+              })(this)}
+            />
+
+            <CustomTextInput 
+              ref='password' 
+              iconLeft={<Image size={20} style={styles.inputIcon} source={require('../images/icons/pwd.png')}/>}
+              placeholder='password' 
+              password={true}
+              style={styles.input}
+              validationFunction={ value => Validators.validatePassword(value)}
+              helpTextComponent={((self)=>{
+                if(Object.keys(self.refs).length !== 0){
+                  if(!self.refs.signupForm.refs.password.valid){
+                    return <CustomText style={styles.errors}>{self.refs.signupForm.refs.password.validationErrors.join("\n")}</CustomText>;
+                  }
+                }
+              })(this)}
+            />   
+
+            <CustomTextInput 
+              ref='confirmPassword' 
+              iconLeft={<Image size={20} style={styles.inputIcon} source={require('../images/icons/pwd-confirm.png')}/>}
+              placeholder='Confirm password' 
+              password={true}
+              style={styles.input}
+              validationFunction={ value => this.validateConfirmPassword(value)}
+              helpTextComponent={((self)=>{
+                if(Object.keys(self.refs).length !== 0){
+                  if(!self.refs.signupForm.refs.confirmPassword.valid){
+                    return <CustomText style={styles.errors}>{self.refs.signupForm.refs.confirmPassword.validationErrors.join("\n")}</CustomText>;
+                  }
+                }
+              })(this)}
+            />
+
+            <SwitchField label={<CustomText style={styles.terms}>I accept Terms & Conditions</CustomText>}
+              ref="acceptedTerms"
+            />
+          </Form>
         
   	      <TouchableHighlight
             style={styles.button}
-            onPress={this.handleSignup.bind(this)}>
-            <View style={styles.signup}>
-                <CustomText style={[styles.signupText, styles.whiteFont]}>DONE</CustomText>
-            </View>
+            onPress={this.handleSignup.bind(this)}
+            disabled={this.state.disableButton}>
+              { this.state.disableButton ? disabledButton : activeButton }
           </TouchableHighlight>
+
           <TouchableHighlight
             style={styles.button}
             onPress={this.goBack.bind(this)}>
