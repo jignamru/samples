@@ -14,6 +14,7 @@ import CustomTextInput from '../components/customTextInput';
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 class ForgotPassword extends Component{
@@ -87,7 +88,7 @@ class ForgotPassword extends Component{
                 <CustomTextInput 
                   ref='emailAddress' 
                   style={styles.input}
-                  iconLeft={<Image size={20} style={styles.inputIcon} source={require('../images/icons/person.png')}/>}
+                  iconLeft={<Icon name="user-o" size={20} style={styles.inputIcon} />}
                   keyboardType='email-address'
                   placeholder='email address'
                   autoCapitalize="none"

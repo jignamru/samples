@@ -15,6 +15,7 @@ import CustomTextInput from '../components/customTextInput';
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class SignUp extends Component {
     constructor(props) {
@@ -124,7 +125,7 @@ class SignUp extends Component {
             <CustomTextInput 
               ref='fullname' 
               style={styles.input}
-              iconLeft={<Image size={20} style={styles.inputIcon} source={require('../images/icons/person.png')}/>}
+              iconLeft={<Icon name="user-o" size={15} style={styles.inputIcon} />}
               placeholder='First and last name'
               validationFunction={ value => Validators.validateFullname(value)}
               autoCapitalize="words"
@@ -140,7 +141,7 @@ class SignUp extends Component {
             <CustomTextInput 
               ref='phone' 
               style={styles.input}
-              iconLeft={<Image size={20} style={styles.inputIcon} source={require('../images/icons/phone.png')}/>}
+              iconLeft={<Icon name="mobile" size={20} style={styles.inputIcon} />}
               keyboardType='phone-pad'
               placeholder='Mobile number'
               validationFunction={ value => Validators.validatePhone(value)}
@@ -156,7 +157,7 @@ class SignUp extends Component {
             <CustomTextInput 
               ref='email' 
               style={styles.input}
-              iconLeft={<Image size={20} style={styles.inputIcon} source={require('../images/icons/email.png')}/>}
+              iconLeft={<Icon name="envelope-o" size={15} style={styles.inputIcon} />}
               keyboardType='email-address'
               placeholder='email address'
               autoCapitalize="none"
@@ -172,7 +173,7 @@ class SignUp extends Component {
 
             <CustomTextInput 
               ref='password' 
-              iconLeft={<Image size={20} style={styles.inputIcon} source={require('../images/icons/pwd.png')}/>}
+              iconLeft={<Icon name="lock" size={20} style={styles.inputIcon} />}
               placeholder='password' 
               password={true}
               style={styles.input}
@@ -188,7 +189,7 @@ class SignUp extends Component {
 
             <CustomTextInput 
               ref='confirmPassword' 
-              iconLeft={<Image size={20} style={styles.inputIcon} source={require('../images/icons/pwd-confirm.png')}/>}
+              iconLeft={<Icon name="lock" size={20} style={styles.inputIcon} />}
               placeholder='Confirm password' 
               password={true}
               style={styles.input}
@@ -202,7 +203,7 @@ class SignUp extends Component {
               })(this)}
             />
 
-            <SwitchField label={<CustomText style={styles.terms}>I accept Terms & Conditions</CustomText>}
+            <SwitchField label={<CustomText style={styles.terms}><Icon name="legal" size={15} style={styles.inputIcon} />&nbsp;&nbsp;&nbsp;&nbsp;I accept Terms & Conditions</CustomText>}
               ref="acceptedTerms"
             />
           </Form>

@@ -54,13 +54,7 @@ module.exports = StyleSheet.create({
       flex: .15,
       padding: 20
     },
-    iconPassword: {
-        marginLeft: 20,
-        alignSelf:'center',
-        width: 20,
-        height: 21
-    },
-    iconUsername: {
+    inputIcon: {
         marginLeft: 20,
         alignSelf:'center',
         width: 20,

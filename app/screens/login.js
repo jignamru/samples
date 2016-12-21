@@ -13,6 +13,7 @@ import { Form } from 'react-native-form-generator';
 
 import CustomText from '../components/customText';
 import CustomTextInput from '../components/customTextInput';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Login extends Component{
 
@@ -112,7 +113,7 @@ class Login extends Component{
                 <CustomTextInput 
                   ref='username' 
                   style={styles.input}
-                  iconLeft={<Image size={20} style={styles.iconUsername} source={require('../images/icons/person.png')}/>}
+                  iconLeft={<Icon name="user-o" size={15} style={styles.inputIcon} />}
                   keyboardType='email-address'
                   placeholder='email address'
                   autoCapitalize="none"
@@ -128,7 +129,7 @@ class Login extends Component{
 
                 <CustomTextInput 
                   ref='password' 
-                  iconLeft={<Image size={20} style={styles.iconPassword} source={require('../images/icons/pwd.png')}/>}
+                  iconLeft={<Icon name="lock" size={20} style={styles.inputIcon} />}
                   placeholder='password' 
                   password={true}
                   style={styles.input}
