@@ -29,50 +29,43 @@ module.exports = StyleSheet.create({
         paddingLeft: 30,
         color: common.color.darkPurple
     },
-
-    inputs: {
-        marginTop: 10,
-        marginBottom: 10,
-    },
-    inputContainer: {
-        padding: 10,
-        marginTop: 20,
-        borderWidth: 1,
-        borderBottomColor: '#CCC',
-        borderColor: 'transparent'
-    },
-    input: {
-      height: 40, 
-      justifyContent: 'center', 
-      padding: 5, 
-      borderColor: 'gray', 
-      borderWidth: 1,
-      marginVertical: 10,
-    },
-    buttonRow: {
-        alignItems: 'center'
-    },
-    buttonContainer: {
-        padding:10, 
-        height:45, 
-        overflow:'hidden', 
-        borderRadius:4, 
-        backgroundColor: common.color.orange,
-        width: windowSize.width / 1.5,
-        alignItems: 'center',
-    },
-    button: {
-        fontSize: 18,
-        fontWeight: '400',
-        color: '#fff'
-    },
-    checkbox: {
+    placeholderStyle: {
+        fontSize: 15,
+        alignSelf: 'center',
         fontFamily: common.fontFamily.base
     },
-    modal: {
-        flex: 1,
-        backgroundColor: '#f5fcff',
-        justifyContent: 'center',
-        padding: 20
+    valueStyle: {
+        color: 'black',
+        fontSize: 14,
+        alignSelf: 'center',
+        fontFamily: common.fontFamily.base
+    },
+    urgent: {
+        fontSize: 15,
+    },
+    urgentHelpText: {
+        margin: 10,
+        color: common.color.grey
+    },
+    button: {
+        padding: 20,
+        alignItems: 'center',
+        width: windowSize.width
+    },
+    buttonActive: {
+        backgroundColor:  common.color.orange,
+    },
+    buttonDisabled: {
+        backgroundColor: common.color.lightGrey,
+    },
+    buttonText: {
+        fontSize: 18,
+        fontWeight: '400',
+    },
+    buttonTextActive: {
+        color: '#fff'
+    },
+    buttonTextDisabled: {
+        color: '#DCD'
     }
 })

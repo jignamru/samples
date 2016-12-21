@@ -1,6 +1,7 @@
 'use strict';
 import React, {Component} from 'react';
-import {AppRegistry, AsyncStorage, StyleSheet, View, Text, Image, TouchableHighlight, TouchableWithoutFeedback, TouchableOpacity, Navigator, DatePickerIOS, Modal, Alert} from 'react-native';
+import {AppRegistry, AsyncStorage, StyleSheet, View, Text, Image, TouchableHighlight, TouchableWithoutFeedback, TouchableOpacity,Alert} from 'react-native';
+import { Form, SwitchField, DatePickerField } from 'react-native-form-generator';
 
 var GLOBAL = require('../common/globals');
 var User = require('../common/user');
@@ -11,8 +12,8 @@ var HomeScreen = require('./home');
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
-import CustomButton from '../components/customButton';
 import CustomText from '../components/customText';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 class RequestSitter extends Component{
@@ -20,34 +21,27 @@ class RequestSitter extends Component{
   constructor(props) {
       super(props);
       this.state = {
-        startDateTime: new Date(),
-        endDateTime: new Date(),
-        type: 'NORMAL',
-        showStartDateTimePicker: false,
-        showEndDateTimePicker: false,
-        urgent: false
+        formData: {
+          startDateTime: new Date(),
+          endDateTime: new Date(),
+          urgent: false
+        },
+        disableButton: true
       }
   }
 
   componentWillMount() {
-    this.state.endDateTime.setHours(this.state.endDateTime.getHours() + 2);
+    this.state.formData.endDateTime.setHours(this.state.formData.endDateTime.getHours() + 2);
   }
-  
-  toggleStartDatePicker() {
-    var show = this.state.showStartDateTimePicker == false ? true : false;
-    this.setState( { showStartDateTimePicker: show } );
-  }
-  
-  toggleEndDatePicker() {
-    var show = this.state.showEndDateTimePicker == false ? true : false;
-    this.setState( { showEndDateTimePicker: show } );
-  }
-  
+    
   handleRequestSitter() {
-    var requestType = this.state.urgent ? 'URGENT' : 'NORMAL';
+    var requestType = this.state.formData.urgent ? 'URGENT' : 'NORMAL';
+    var startDT = new Date(this.state.formData.startDateTime);
+    var endDT = new Date(this.state.formData.endDateTime);
+
     var data = JSON.stringify({
-                startDatetimeIso8601: this.state.startDateTime.toISOString(),
-                endDatetimeIso8601: this.state.endDateTime.toISOString(),
+                startDatetimeIso8601: startDT.toISOString(),
+                endDatetimeIso8601: endDT.toISOString(),
                 type:  requestType,
                 sitterUserIds: [], //todo ?
                 parentUserNotes:  "", //todo ?
@@ -85,62 +79,40 @@ class RequestSitter extends Component{
     }).done();
   }
 
-  render() {
-    
-    var startDatePicker = (
-      <View>      
-          <Modal 
-            animationType="slide"
-            transparent={false}
-            visible={this.state.showStartDateTimePicker}>
-            <View
-              style={styles.modal}>
-                <DatePickerIOS
-                  date={this.state.startDateTime}
-                  mode="datetime"
-                  minuteInterval = {15}
-                  minimumDate = {new Date()}
-                  onDateChange={ text => this.setState({startDateTime:text}) }
-                />
-                <CustomButton
-                  containerStyle={styles.buttonContainer}
-                  style={styles.button}
-                  styleDisabled={{color: 'red'}}
-                  onPress={ this.toggleStartDatePicker.bind(this) }
-                >
-                  SELECT
-                </CustomButton>
-            </View>
-          </Modal>
-      </View>
-    );    
-    var endDatePicker = (
-      <View>      
-          <Modal 
-            animationType="slide"
-            transparent={false}
-            visible={this.state.showEndDateTimePicker}>
-            <View
-              style={styles.modal}>
-      
-              <DatePickerIOS
-                        date={this.state.endDateTime}
-                        mode="datetime"
-                        minuteInterval = {15}
-                        minimumDate = {this.state.startDateTime}
-                        onDateChange={ text => this.setState({endDateTime:text}) }
-                      />
+  handleFormChange(newData){
+    var data = {};
+    data.startDateTime = newData.startDateTime ? newData.startDateTime : this.state.formData.startDateTime;
+    data.endDateTime = newData.endDateTime ? newData.endDateTime : this.state.formData.endDateTime;
+    data.urgent = newData.urgent ? newData.urgent: this.state.formData.urgent;
 
-              <CustomButton
-                containerStyle={styles.buttonContainer}
-                style={styles.button}
-                styleDisabled={{color: 'red'}}
-                onPress={ this.toggleEndDatePicker.bind(this) }
-              >
-                SELECT
-              </CustomButton>
-            </View>
-          </Modal>
+    this.setState({formData:data});
+    this.props.onFormChange && this.props.onFormChange(newData);
+
+    if( this.refs.requestSitterForm.values.startDateTime &&
+        this.refs.requestSitterForm.values.endDateTime 
+      ) {
+      this.state.disableButton = false;
+    } else {
+      this.state.disableButton = true;
+    }
+  }
+
+  formatDate(d) {
+    var formatted =  d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    return formatted;
+  }
+
+  render() {
+
+    var disabledButton = (
+      <View style={[styles.button, styles.buttonDisabled]}>
+          <CustomText style={[styles.buttonText, styles.buttonTextDisabled]}>REQUEST SITTER</CustomText>
+      </View>  
+    );
+
+    var activeButton = (
+      <View style={[styles.button, styles.buttonActive]}>
+        <CustomText style={[styles.buttonText, styles.buttonTextActive]}>REQUEST SITTER</CustomText>
       </View>
     );
     
@@ -156,56 +128,48 @@ class RequestSitter extends Component{
                 <CustomText isHeading={true} style={styles.title}>Request a sitter</CustomText>
             </View>
 
-        <View style={styles.inputs}> 
-          <View style={styles.inputContainer}>
-              <CustomText>Start date and time:</CustomText>
-              <TouchableWithoutFeedback onPress={ this.toggleStartDatePicker.bind(this) }>
-                <View style={ styles.input }>
-                  <CustomText>
-                    {this.state.startDateTime.toLocaleDateString() +
-                      ' at ' + this.state.startDateTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
-                    </CustomText>
-                </View>
-              </TouchableWithoutFeedback>
-              { this.state.showStartDateTimePicker == true ? startDatePicker : <View/> }
+            <Form ref='requestSitterForm' 
+            onChange={this.handleFormChange.bind(this)}>
 
-          </View>
-          
-           <View style={styles.inputContainer}>
-              <CustomText>End date and time:</CustomText>
-              <TouchableWithoutFeedback onPress={ this.toggleEndDatePicker.bind(this) }>
-                <View style={ styles.input }>
-                  <CustomText>
-                    {this.state.endDateTime.toLocaleDateString() +
-                      ' at ' + this.state.endDateTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
-                    </CustomText>
-                </View>
-              </TouchableWithoutFeedback>
-              { this.state.showEndDateTimePicker == true ? endDatePicker : <View/> }
+              <DatePickerField ref='startDateTime'
+                iconLeft={<Icon style={{alignSelf:'center', marginLeft:10}} name='calendar' size={15} />}
+                date={this.state.formData.startDateTime}
+                mode="datetime"
+                minuteInterval = {15}
+                minimumDate = {new Date()}
+                prettyPrint={true}
+                dateTimeFormat = { date => { return this.formatDate(date) }}
+                placeholderStyle = {styles.placeholderStyle}
+                valueStyle = {styles.valueStyle}
+                placeholder='Start Date & Time'/>
 
-          </View>
-          <View style={styles.inputContainer}>
-            <CheckBox
-              label='Urgent'
-              labelStyle={styles.checkbox}
-              uncheckedImage={require('../images/icons/checkbox-false.png')}
-              checkedImage={require('../images/icons/checkbox-true.png')}
-              onChange={(checked) => this.state.urgent = checked}
+              <DatePickerField ref='endDateTime'
+                iconLeft={<Icon style={{alignSelf:'center', marginLeft:10}} name='calendar' size={15} />}
+                date={this.state.formData.endDateTime}
+                mode="datetime"
+                minuteInterval = {15}
+                minimumDate = {new Date()}
+                prettyPrint={true}
+                dateTimeFormat = { date => { return this.formatDate(date) }}
+                labelStyle = {styles.labelStyle}
+                valueStyle = {styles.valueStyle}
+                placeholderStyle = {styles.placeholderStyle}
+                placeholder='End Date & Time'/>
+
+                <SwitchField 
+                  label={<CustomText style={styles.urgent}><Icon name="bullhorn" size={15} style={styles.inputIcon} />&nbsp;&nbsp;Urgent Request</CustomText>}
+                  helpTextComponent={<CustomText style={[styles.urgent, styles.urgentHelpText]}>Urgent requests will notify *all* sitters at once (vs. by priority)</CustomText>}
+                  ref="urgent"
             />
-          </View>
-   
-      </View>
 
-      <View style={styles.buttonRow}>
-            <CustomButton
-              containerStyle={styles.buttonContainer}
+            </Form>
+
+            <TouchableHighlight
               style={styles.button}
-              styleDisabled={{color: 'red'}}
               onPress={this.handleRequestSitter.bind(this)}
-            >
-              SEND REQUEST
-            </CustomButton>
-      </View>
+              disabled={this.state.disableButton}>
+                { this.state.disableButton ? disabledButton : activeButton }
+            </TouchableHighlight>
         
         </View>
     )
