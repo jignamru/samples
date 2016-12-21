@@ -10,6 +10,7 @@
     "react-native": "^0.34.0",
     "react-native-button": "^1.6.0",
     "react-native-checkbox": "^1.0.15",
-    "react-native-contacts-wrapper": "^0.2.2"
+    "react-native-contacts-wrapper": "^0.2.2",
+    "react-native-vector-icons": "^3.0.0"
   }
 }

@@ -25,6 +25,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		96D9E6871DB6D670009A6EC8 /* libRCTContactsWrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D9E6861DB6D659009A6EC8 /* libRCTContactsWrapper.a */; };
 		96D9E68C1DB92BF0009A6EC8 /* Fredericka the Great regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96D9E68B1DB92BF0009A6EC8 /* Fredericka the Great regular.ttf */; };
+		96F6F8C21E09DB3B00F7A089 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96F6F8C11E09DB3B00F7A089 /* FontAwesome.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,7 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		96D9E6811DB6D659009A6EC8 /* ContactsWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ContactsWrapper.xcodeproj; path = "../node_modules/react-native-contacts-wrapper/ios/ContactsWrapper.xcodeproj"; sourceTree = "<group>"; };
 		96D9E68B1DB92BF0009A6EC8 /* Fredericka the Great regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Fredericka the Great regular.ttf"; path = "../app/fonts/Fredericka the Great regular.ttf"; sourceTree = "<group>"; };
+		96F6F8C11E09DB3B00F7A089 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +304,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				96F6F8C11E09DB3B00F7A089 /* FontAwesome.ttf */,
 				96D9E68B1DB92BF0009A6EC8 /* Fredericka the Great regular.ttf */,
 				13B07FAE1A68108700A75B9A /* BabysitterApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -541,6 +544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96D9E68C1DB92BF0009A6EC8 /* Fredericka the Great regular.ttf in Resources */,
+				96F6F8C21E09DB3B00F7A089 /* FontAwesome.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);

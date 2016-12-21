@@ -29,46 +29,53 @@ module.exports = StyleSheet.create({
         paddingLeft: 30,
         color: common.color.darkPurple
     },
-    inputs: {
-        marginTop: 10,
-        marginBottom: 10,
-    },
     inputIcon: {
         marginLeft: 15,
         width: 20,
-        height: 20
-    }, 
-    inputContainer: {
-        padding: 10,
-        marginTop: 20,
-        borderWidth: 1,
-        borderBottomColor: '#CCC',
-        borderColor: 'transparent'
+        height: 20,
+        alignSelf: 'center',
+        color: common.color.darkPurple
     },
     input: {
-        position: 'absolute',
-        left: 61,
-        top: 12,
-        right: 0,
-        height: 20,
         fontSize: 14
     },
-    buttonRow: {
-        alignItems: 'center'
-    },
-    buttonContainer: {
-        padding:10, 
-        height:45, 
-        overflow:'hidden', 
-        borderRadius:4, 
-        backgroundColor: common.color.orange,
-        width: windowSize.width / 1.5,
-        alignItems: 'center',
-        marginBottom: 50
+    iconRight: {
+        position: 'absolute',
+        right: 0,
+        top: 10,
+        color: common.color.grey
     },
     button: {
+        padding: 20,
+        alignItems: 'center',
+        marginTop: 20,
+        width: windowSize.width
+    },
+    buttonActive: {
+        backgroundColor:  common.color.orange,
+    },
+    buttonDisabled: {
+        backgroundColor:  common.color.lightGrey,
+    },
+    buttonText: {
         fontSize: 18,
         fontWeight: '400',
+    },
+    buttonTextActive: {
         color: '#fff'
-    }
+    },
+    buttonTextDisabled: {
+        color: '#DCD'
+    },
+    pickerFieldValue: {
+        fontFamily: common.fontFamily.base,
+        color: 'black'        
+    },
+    pickerFieldOptions: {
+        
+    },
+    errors: {
+        color: 'red'
+    },
+
 })
