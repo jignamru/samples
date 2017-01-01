@@ -13,6 +13,6 @@ module.exports = {
   },
   fontFamily: {
   	base: 'GillSans-Light',
-    heading: 'Fredericka the Great'
+    heading: 'GillSans-Light' //'Fredericka the Great'
   }
 };
