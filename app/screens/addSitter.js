@@ -42,7 +42,7 @@ class AddSitter extends Component {
 			this.setState({formData : data});
 		}
 	}
-  
+
 	handleAddSitter(){
  	   	var [firstName, lastName] = this.state.formData.fullname.split(' ');
     	var data = JSON.stringify({
@@ -54,6 +54,7 @@ class AddSitter extends Component {
           });
 
 	    AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
+            console.log(`Creating/adding sitter to userId: ${userId}`, data)
 		    fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters", {
 	          method: "POST",
 	          headers: {
@@ -64,8 +65,8 @@ class AddSitter extends Component {
 	        })
 	        .then((response) => response.json())
 	        .then((responseJson) => {
-	          // console.log('Response:',responseJson);
-	          if(responseJson.id) {
+	          console.log('Response:',responseJson);
+	          if(responseJson.sitterUserId) {
                 Alert.alert(
 		            'Yay!',
 		            firstName + " is part of your sitter community!",
@@ -79,7 +80,7 @@ class AddSitter extends Component {
 	            this.props.navigator.push({
 	              id: 'sitters'
 	            })
-	          } else {            
+	          } else {
 	            Alert.alert('Uh oh!', responseJson.message);
 	          }
 	        })
@@ -114,7 +115,7 @@ class AddSitter extends Component {
 	    var disabledButton = (
 	      <View style={[styles.button, styles.buttonDisabled]}>
 	          <CustomText style={[styles.buttonText, styles.buttonTextDisabled]}>ADD SITTER</CustomText>
-	      </View>  
+	      </View>
 	    );
 
 	    var activeButton = (
@@ -129,20 +130,20 @@ class AddSitter extends Component {
                   title={<IconTitle/>}
                   leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
 				/>
-	        	
+
 	        	<View style={styles.introContainer}>
 					<Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/elephant.png')} />
 		            <CustomText isHeading={true} style={styles.title}>Add new sitter</CustomText>
 		        </View>
 
 		<ScrollView keyboardShouldPersistTaps={true} style={styles.scrollView}>
-          <Form ref='addSitterForm' 
+          <Form ref='addSitterForm'
           	// onFocus={this.handleFormFocus.bind(this)}
             onChange={this.handleFormChange.bind(this)}
             label="Login">
 
-            <CustomTextInput 
-              ref='fullname' 
+            <CustomTextInput
+              ref='fullname'
               style={styles.input}
               iconLeft={<Icon name="user" size={20} style={styles.inputIcon} />}
               placeholder='First and last name'
@@ -158,14 +159,14 @@ class AddSitter extends Component {
               })(this)}
             />
 
-            <CustomTextInput 
-              ref='phone' 
+            <CustomTextInput
+              ref='phone'
               style={styles.input}
               iconLeft={<Icon name="mobile" size={20} style={styles.inputIcon} />}
               keyboardType='phone-pad'
               placeholder='Mobile number'
               value={this.state.formData.phone}
-              validationFunction={ value => Validators.validatePhone(value) } 
+              validationFunction={ value => Validators.validatePhone(value) }
               helpTextComponent={((self)=>{
                 if(Object.keys(self.refs).length !== 0){
                   if(!self.refs.addSitterForm.refs.phone.valid){
@@ -175,8 +176,8 @@ class AddSitter extends Component {
               })(this)}
             />
 
-            <CustomTextInput 
-              ref='email' 
+            <CustomTextInput
+              ref='email'
               style={styles.input}
               iconLeft={<Icon name="at" size={20} style={styles.inputIcon} />}
               keyboardType='email-address'
@@ -206,7 +207,7 @@ class AddSitter extends Component {
 				pickerWrapper={<View style={styles.pickerFieldOptions}>this.props.children</View>}
 				/>
           </Form>
-        
+
   	      <TouchableHighlight
             style={styles.button}
             onPress={this.handleAddSitter.bind(this)}
