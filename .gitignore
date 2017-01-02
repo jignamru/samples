@@ -31,7 +31,7 @@ local.properties
 
 # node.js
 #
-node_modules/
+node_modules/**
 npm-debug.log
 
 # BUCK
@@ -41,3 +41,6 @@ android/app/libs
 *.keystore
 .buckconfig
 .flowconfig
+.watchmanconfig
+android/app/src/main/assets/fonts
+BUCK

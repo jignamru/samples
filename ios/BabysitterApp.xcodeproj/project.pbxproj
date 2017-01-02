@@ -22,8 +22,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		2C2D07D31E18C78B001DE190 /* Fredericka the Great.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C2D07D21E18C78B001DE190 /* Fredericka the Great.ttf */; };
-		2C2D07D41E18C78B001DE190 /* Fredericka the Great.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C2D07D21E18C78B001DE190 /* Fredericka the Great.ttf */; };
 		32AF27CCB8EE4BFBB25D36BD /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CCF18612BDE946BC9E91D60B /* EvilIcons.ttf */; };
 		47EA444875494B0EB431524D /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8AEE96F396349F6B34265C7 /* libRNVectorIcons.a */; };
 		5C7752C623A94307918136EE /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE017C5227E64C48810951FE /* Octicons.ttf */; };
@@ -203,7 +201,6 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BabysitterApp/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		194936B0451244169C2C044A /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
-		2C2D07D21E18C78B001DE190 /* Fredericka the Great.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredericka the Great.ttf"; sourceTree = "<group>"; };
 		3816F01F308945AE90FEC21C /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		39DD6B13E71E4EE18985E01D /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		5954EBAFCECB4A3DB01B9C7A /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -371,7 +368,6 @@
 			children = (
 				6A1AE568E09E4DA3BBAF8463 /* Entypo.ttf */,
 				CCF18612BDE946BC9E91D60B /* EvilIcons.ttf */,
-				2C2D07D21E18C78B001DE190 /* Fredericka the Great.ttf */,
 				39DD6B13E71E4EE18985E01D /* FontAwesome.ttf */,
 				194936B0451244169C2C044A /* Foundation.ttf */,
 				8C72D93A43014733BF553B9B /* Ionicons.ttf */,
@@ -706,7 +702,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C2D07D41E18C78B001DE190 /* Fredericka the Great.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,7 +713,6 @@
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				DDC444E284694DC8BD8D75A8 /* Entypo.ttf in Resources */,
 				32AF27CCB8EE4BFBB25D36BD /* EvilIcons.ttf in Resources */,
-				2C2D07D31E18C78B001DE190 /* Fredericka the Great.ttf in Resources */,
 				DC5D4A40DA5140039BD9F85E /* FontAwesome.ttf in Resources */,
 				F875AD40C21C4865B45F5AAB /* Foundation.ttf in Resources */,
 				C20000510B654801B04699CF /* Ionicons.ttf in Resources */,
