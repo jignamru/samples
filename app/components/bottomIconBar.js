@@ -1,20 +1,11 @@
-import React from 'react';
-import ReactNative from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, View, TouchableHighlight} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 var User = require('../common/user');
 var styles = require('../styles/bottomIconBar');
 var SittersListScreen = require('../screens/sittersList');
-
-const {
-  Component,
-} = React;
-
-const {
-  Image,
-  TouchableHighlight,
-  View
-} = ReactNative;
+var HomeScreen = require('../screens/home');
 
 export default class BottomIconBar extends Component {
     
@@ -23,11 +14,9 @@ export default class BottomIconBar extends Component {
 
     var LoginScreen = require('../screens/login'); // this line is needed here for lazy loading!
     
-    this.props.navigator.push({
-      component: LoginScreen
-    });
+    this.goToScreen(LoginScreen);
   }  
- 
+
   goToScreen(component){
       this.props.navigator.push({
       component: component
@@ -35,23 +24,30 @@ export default class BottomIconBar extends Component {
   }
 
   render() {
+    var homeIcon = (
+      <TouchableHighlight
+        style={styles.footerItem}
+        onPress={() => this.goToScreen(HomeScreen)}>
+          <View>
+            <Icon style={styles.footerIcon} name='home' size={30} />
+          </View>
+      </TouchableHighlight>
+    );
+
     return (
               <View style={styles.footer}>
+                { this.props.hideHomeIcon ? <View/> : homeIcon }                
                 <TouchableHighlight
-                  onPress={this.goToSettings}>
-                    <View style={[styles.logout, styles.footerItem]}>
-                      <Icon style={styles.footerIcon} name='home' size={30} />
-                    </View>
-                </TouchableHighlight>
-                <TouchableHighlight
+                  style={styles.footerItem}
                   onPress={() => this.goToScreen(SittersListScreen)}>
-                    <View style={[styles.logout, styles.footerItem]}>
+                    <View>
                       <Icon style={styles.footerIcon} name='users' size={25} />
                     </View>
                 </TouchableHighlight>
                 <TouchableHighlight
-                  onPress={this.handleLogout}>
-                      <View style={[styles.logout, styles.footerItem]}>
+                  style={styles.footerItem}
+                  onPress={this.handleLogout.bind(this)}>
+                      <View>
                       <Icon style={styles.footerIcon} name='sign-out' size={30} />
                     </View>
                 </TouchableHighlight>

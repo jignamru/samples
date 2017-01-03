@@ -104,7 +104,7 @@ class Home extends Component {
 
 		        	{addSitterButton}
 		    	</View>
-		    	<BottomIconBar navigator={this.props.navigator} />
+		    	<BottomIconBar navigator={this.props.navigator} hideHomeIcon={true}/>
 		    </View>
 		)
 	}

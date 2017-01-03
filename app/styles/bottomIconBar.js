@@ -7,18 +7,16 @@ var { StyleSheet } = React;
 
 module.exports = StyleSheet.create({
     footer: {
+        flex: 0.18,
         flexDirection: 'row',
         backgroundColor: common.color.blue,
-        height: 60,
-        paddingTop: 10
     },
     footerItem: {
-        width: windowSize.width / 3,
-        alignItems: 'center',
+        flex: 1,
+        alignSelf:'center',
     },
     footerIcon: {
         color: 'white',
-        marginTop: 5
-        // alignSelf: 'center'
+        alignSelf:'center',
     }
 })
