@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactNative from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 var User = require('../common/user');
 var styles = require('../styles/bottomIconBar');
@@ -16,18 +17,21 @@ const {
 } = ReactNative;
 
 export default class BottomIconBar extends Component {
-  
-  goToScreen(component){
-      this.props.navigator.push({
-      component: component
-    })
-  }
     
   handleLogout(){
     User._logout().done();
 
     var LoginScreen = require('../screens/login'); // this line is needed here for lazy loading!
-    this.goToScreen(LoginScreen);
+    
+    this.props.navigator.push({
+      component: LoginScreen
+    });
+  }  
+ 
+  goToScreen(component){
+      this.props.navigator.push({
+      component: component
+    })
   }
 
   render() {
@@ -36,19 +40,19 @@ export default class BottomIconBar extends Component {
                 <TouchableHighlight
                   onPress={this.goToSettings}>
                     <View style={[styles.logout, styles.footerItem]}>
-                      <Image style={styles.footerIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/settings.png')} />
+                      <Icon style={styles.footerIcon} name='home' size={30} />
                     </View>
                 </TouchableHighlight>
                 <TouchableHighlight
                   onPress={() => this.goToScreen(SittersListScreen)}>
                     <View style={[styles.logout, styles.footerItem]}>
-                        <Image style={styles.footerIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/people.png')} />
+                      <Icon style={styles.footerIcon} name='users' size={25} />
                     </View>
                 </TouchableHighlight>
                 <TouchableHighlight
                   onPress={this.handleLogout}>
                       <View style={[styles.logout, styles.footerItem]}>
-                          <Image style={styles.footerIcon} resizeMode={Image.resizeMode.contain} source={require('../images/icons/logout.png')} />
+                      <Icon style={styles.footerIcon} name='sign-out' size={30} />
                     </View>
                 </TouchableHighlight>
                   

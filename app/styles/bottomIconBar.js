@@ -17,7 +17,8 @@ module.exports = StyleSheet.create({
         alignItems: 'center',
     },
     footerIcon: {
-        width: 40,
-        height: 40
+        color: 'white',
+        marginTop: 5
+        // alignSelf: 'center'
     }
 })
