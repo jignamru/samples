@@ -49,6 +49,7 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Fredericka the Great regular.ttf</string>
 		<string>FontAwesome.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>

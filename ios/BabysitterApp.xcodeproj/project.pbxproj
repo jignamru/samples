@@ -29,6 +29,7 @@
 		81E73C6E1F1748E8A9267E3C /* libRCTContactsWrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3D2F2395503412C9018AAB9 /* libRCTContactsWrapper.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		833F3E2B987843ED925D40E5 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E58A13C5946F48A9BCA251E7 /* SimpleLineIcons.ttf */; };
+		96A846931E1C45110067056F /* Fredericka the Great regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96A846921E1C45110067056F /* Fredericka the Great regular.ttf */; };
 		AC185BBC39A84C57BBE8E300 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07F5C91062C946C5A11CA20A /* Zocial.ttf */; };
 		C20000510B654801B04699CF /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C72D93A43014733BF553B9B /* Ionicons.ttf */; };
 		DC5D4A40DA5140039BD9F85E /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39DD6B13E71E4EE18985E01D /* FontAwesome.ttf */; };
@@ -208,6 +209,7 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8C72D93A43014733BF553B9B /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		96A846921E1C45110067056F /* Fredericka the Great regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Fredericka the Great regular.ttf"; path = "../app/fonts/Fredericka the Great regular.ttf"; sourceTree = "<group>"; };
 		A8AEE96F396349F6B34265C7 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		AE017C5227E64C48810951FE /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		BFEDAA8F11BC4FEFB9F531EC /* ContactsWrapper.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ContactsWrapper.xcodeproj; path = "../node_modules/react-native-contacts-wrapper/ios/ContactsWrapper.xcodeproj"; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				96A846921E1C45110067056F /* Fredericka the Great regular.ttf */,
 				13B07FAE1A68108700A75B9A /* BabysitterApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* BabysitterAppTests */,
@@ -713,6 +716,7 @@
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				DDC444E284694DC8BD8D75A8 /* Entypo.ttf in Resources */,
 				32AF27CCB8EE4BFBB25D36BD /* EvilIcons.ttf in Resources */,
+				96A846931E1C45110067056F /* Fredericka the Great regular.ttf in Resources */,
 				DC5D4A40DA5140039BD9F85E /* FontAwesome.ttf in Resources */,
 				F875AD40C21C4865B45F5AAB /* Foundation.ttf in Resources */,
 				C20000510B654801B04699CF /* Ionicons.ttf in Resources */,
