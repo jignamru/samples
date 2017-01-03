@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 var User = require('../common/user');
 var styles = require('../styles/bottomIconBar');
 var SittersListScreen = require('../screens/sittersList');
-var HomeScreen = require('../screens/home');
 
 export default class BottomIconBar extends Component {
     
@@ -17,6 +16,11 @@ export default class BottomIconBar extends Component {
     this.goToScreen(LoginScreen);
   }  
 
+  goHome(){
+    var HomeScreen = require('../screens/home'); // this line is needed here for lazy loading!
+    this.goToScreen(HomeScreen);
+  }
+
   goToScreen(component){
       this.props.navigator.push({
       component: component
@@ -27,7 +31,7 @@ export default class BottomIconBar extends Component {
     var homeIcon = (
       <TouchableHighlight
         style={styles.footerItem}
-        onPress={() => this.goToScreen(HomeScreen)}>
+        onPress={this.goHome.bind(this)}>
           <View>
             <Icon style={styles.footerIcon} name='home' size={30} />
           </View>

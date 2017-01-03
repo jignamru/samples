@@ -11,7 +11,7 @@ import User from '../common/user';
 import SitterDetailsScreen from './sitterDetails';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
-
+import BottomIconBar from '../components/bottomIconBar';
 
 class SittersList extends Component {
   constructor(props) {
@@ -76,8 +76,11 @@ class SittersList extends Component {
             <CustomText isHeading={true} style={styles.title}>Your sitters</CustomText>
           </View>
         <ListView
+         enableEmptySections={true}
       	 dataSource={this.state.dataSource}
       	 renderRow={ this.renderRow } />
+
+         <BottomIconBar navigator={this.props.navigator} />
       </View>
     )
   }
