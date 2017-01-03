@@ -12,3 +12,7 @@ Hit ⌘-R in your iOS simulator to reload the app and see your change!
 If you get errors about fonts, you may need to run the following from the project root:
 
     $react-native link
+
+To add a reference to a new font (ex: Fredericka the Great) in Xcode, follow steps 1-4 on this page:
+https://medium.com/@dabit3/adding-custom-fonts-to-react-native-b266b41bff7f#.sv8ujdn8f
+
