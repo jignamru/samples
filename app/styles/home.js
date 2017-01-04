@@ -29,6 +29,10 @@ module.exports = StyleSheet.create({
         color: common.color.darkPurple,
         marginLeft: 30
     },
+    message: {
+        fontSize: 25,
+        marginBottom: 40
+    },
     actionsContainer: {
     	flex: 1,
     	justifyContent: 'center',

@@ -29,6 +29,12 @@ module.exports = StyleSheet.create({
         paddingLeft: 30,
         color: common.color.darkPurple
     },
+    message: {
+        fontSize: 25,
+        marginTop: 30,
+        marginBottom: 30,
+        alignSelf: 'center'
+    },
     row: { 
         height:60, 
         borderBottomWidth:1, 
@@ -36,5 +42,22 @@ module.exports = StyleSheet.create({
         flexDirection:'row', 
         justifyContent: 'center', 
         alignItems: 'center'
-    }
+    },
+    buttonContainer: {
+        paddingTop:20, 
+        paddingBottom:20, 
+        height:60, 
+        overflow:'hidden', 
+        borderRadius:4, 
+        width: windowSize.width / 1.5,
+        alignItems: 'center',
+        marginBottom: 40,
+        backgroundColor: common.color.orange,
+        alignSelf: 'center'
+    },
+    button: {
+        fontSize: 18,
+        fontWeight: '400',
+        color: '#fff'
+    },
 })

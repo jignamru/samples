@@ -12,6 +12,8 @@ import SitterDetailsScreen from './sitterDetails';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
 import BottomIconBar from '../components/bottomIconBar';
+import CustomButton from '../components/customButton';
+
 
 class SittersList extends Component {
   constructor(props) {
@@ -64,7 +66,21 @@ class SittersList extends Component {
       )
   }
   
-  render() {      
+  render() {
+    var zeroSittersMessage = (
+      <View>
+      <CustomText style={styles.message}>Let us start by adding new sitters.</CustomText>
+      <CustomButton
+        containerStyle={styles.buttonContainer}
+        style={styles.button}
+        styleDisabled={{color: 'red'}}
+        onPress={() => this.goToScreen(AddSitterOptionsScreen)}
+      >
+        ADD NEW SITTER
+      </CustomButton>
+      </View>
+    );
+      
     return (
       <View style={styles.container}>
         <NavigationBar
@@ -75,10 +91,13 @@ class SittersList extends Component {
             <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/butterfly.png')} />
             <CustomText isHeading={true} style={styles.title}>Your sitters</CustomText>
           </View>
-        <ListView
-         enableEmptySections={true}
-      	 dataSource={this.state.dataSource}
-      	 renderRow={ this.renderRow } />
+          {this.state.dataSource.getRowCount() < 1 ? zeroSittersMessage : <View/>}           
+
+          <ListView
+           enableEmptySections={true}
+        	 dataSource={this.state.dataSource}
+        	 renderRow={ this.renderRow } />
+
 
          <BottomIconBar navigator={this.props.navigator} />
       </View>
