@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {AppRegistry, AsyncStorage, View, Text, ListView, TouchableHighlight, Navigator, Image} from 'react-native';
 
 var styles = require('../styles/sittersList');
+var AddSitterOptionsScreen = require('./addSitterOptions');
 
 import CustomText from '../components/customText';
 import NavigationBar from 'react-native-navbar';
@@ -54,6 +55,13 @@ class SittersList extends Component {
       }
     })
   }
+
+  goToScreen(component){
+      this.props.navigator.push({
+      component: component
+    })
+  }
+
   
   renderRow(rowData) {
   	return (
