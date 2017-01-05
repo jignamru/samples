@@ -6,13 +6,13 @@ import { Form, SwitchField, DatePickerField } from 'react-native-form-generator'
 var GLOBAL = require('../common/globals');
 var User = require('../common/user');
 var styles = require('../styles/requestSitter');
-var CheckBox = require('react-native-checkbox');
 var HomeScreen = require('./home');
 
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
 import CustomText from '../components/customText';
+import CustomModal from '../components/customModal';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
@@ -138,6 +138,7 @@ class RequestSitter extends Component{
                 minuteInterval = {15}
                 minimumDate = {new Date()}
                 prettyPrint={true}
+                pickerWrapper={<CustomModal modalTitle="Choose a start date and time" />}
                 dateTimeFormat = { date => { return this.formatDate(date) }}
                 placeholderStyle = {styles.placeholderStyle}
                 valueStyle = {styles.valueStyle}
@@ -150,6 +151,7 @@ class RequestSitter extends Component{
                 minuteInterval = {15}
                 minimumDate = {new Date()}
                 prettyPrint={true}
+                pickerWrapper={<CustomModal modalTitle="Choose an end date and time" />}                
                 dateTimeFormat = { date => { return this.formatDate(date) }}
                 labelStyle = {styles.labelStyle}
                 valueStyle = {styles.valueStyle}
