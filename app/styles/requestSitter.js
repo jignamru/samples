@@ -46,26 +46,5 @@ module.exports = StyleSheet.create({
     urgentHelpText: {
         margin: 10,
         color: common.color.grey
-    },
-    button: {
-        padding: 20,
-        alignItems: 'center',
-        width: windowSize.width
-    },
-    buttonActive: {
-        backgroundColor:  common.color.orange,
-    },
-    buttonDisabled: {
-        backgroundColor: common.color.lightGrey,
-    },
-    buttonText: {
-        fontSize: 18,
-        fontWeight: '400',
-    },
-    buttonTextActive: {
-        color: '#fff'
-    },
-    buttonTextDisabled: {
-        color: '#DCD'
     }
 })

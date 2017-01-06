@@ -13,6 +13,7 @@ import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
 import CustomText from '../components/customText';
 import CustomModal from '../components/customModal';
+import CustomButton from '../components/customButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
@@ -102,20 +103,7 @@ class RequestSitter extends Component{
     return formatted;
   }
 
-  render() {
-
-    var disabledButton = (
-      <View style={[styles.button, styles.buttonDisabled]}>
-          <CustomText style={[styles.buttonText, styles.buttonTextDisabled]}>REQUEST SITTER</CustomText>
-      </View>  
-    );
-
-    var activeButton = (
-      <View style={[styles.button, styles.buttonActive]}>
-        <CustomText style={[styles.buttonText, styles.buttonTextActive]}>REQUEST SITTER</CustomText>
-      </View>
-    );
-    
+  render() {    
     return (
         <View style={styles.container}>
           <NavigationBar
@@ -166,12 +154,10 @@ class RequestSitter extends Component{
 
             </Form>
 
-            <TouchableHighlight
-              style={styles.button}
+            <CustomButton
               onPress={this.handleRequestSitter.bind(this)}
-              disabled={this.state.disableButton}>
-                { this.state.disableButton ? disabledButton : activeButton }
-            </TouchableHighlight>
+              disabled={this.state.disableButton}
+              label="REQUEST SITTER"/>
         
         </View>
     )

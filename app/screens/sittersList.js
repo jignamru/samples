@@ -64,6 +64,7 @@ class SittersList extends Component {
 
   
   renderRow(rowData) {
+    console.log('rowData', rowData);
   	return (
       <TouchableHighlight 
              underlayColor="#ededed" 
@@ -77,15 +78,12 @@ class SittersList extends Component {
   render() {
     var zeroSittersMessage = (
       <View>
-      <CustomText style={styles.message}>Let us start by adding new sitters.</CustomText>
-      <CustomButton
-        containerStyle={styles.buttonContainer}
-        style={styles.button}
-        styleDisabled={{color: 'red'}}
-        onPress={() => this.goToScreen(AddSitterOptionsScreen)}
-      >
-        ADD NEW SITTER
-      </CustomButton>
+        <CustomText style={styles.message}>Let us start by adding new sitters.</CustomText>
+        <CustomButton
+          type="small"
+          label="ADD NEW SITTER"
+          onPress={() => this.goToScreen(AddSitterOptionsScreen)}
+        />
       </View>
     );
       

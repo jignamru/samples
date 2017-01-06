@@ -66,25 +66,19 @@ class AddSitter extends Component {
 
 		    		<View style={styles.buttonRow}>
 		    		      <CustomButton
-		    		      	containerStyle={styles.buttonContainer}
-					        style={styles.button}
-					        styleDisabled={{color: 'red'}}
+		    		      	type="small"
+		    		      	label="SELECT FROM CONTACTS"
 					        onPress={this.openContacts.bind(this)}
-					      >
-					        SELECT FROM CONTACTS
-					      </CustomButton>
+					      />
 					</View>
 
 
 		    		<View style={styles.buttonRow}>
 		    		      <CustomButton
-		    		      	containerStyle={styles.buttonContainer}
-					        style={styles.button}
-					        styleDisabled={{color: 'red'}}
+		    		      	type="small"
+		    		      	label="ADD MANUALLY"
 					        onPress={this.goToManualAddSitter.bind(this)}
-					      >
-					        ADD MANUALLY
-					      </CustomButton>
+					      />
 					</View>
 				</View>
             </View>

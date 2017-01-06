@@ -44,22 +44,6 @@ module.exports = StyleSheet.create({
     	paddingTop: 40,
     	paddingBottom: 60
     },
-    buttonContainer: {
-        paddingTop:20, 
-        paddingBottom:20, 
-        height:60, 
-        overflow:'hidden', 
-        borderRadius:4, 
-        width: windowSize.width / 1.5,
-        alignItems: 'center',
-        marginBottom: 40,
-        backgroundColor: common.color.orange
-    },
-    button: {
-        fontSize: 18,
-        fontWeight: '400',
-        color: '#fff'
-    },
     boxLabel: {
     	fontSize: 25,
     	textAlign: 'center'

@@ -57,24 +57,18 @@ class Home extends Component {
     render() {
   	  var requestButton = (
 		  <CustomButton
-	      	containerStyle={styles.buttonContainer}
-	        style={styles.button}
-	        styleDisabled={{color: 'red'}}
+		  	type="small"
+		  	label="REQUEST A SITTER"
 	        onPress={() => this.goToScreen(RequestSitterScreen)}
-	      >
-	        REQUEST A SITTER
-	      </CustomButton>
+	      />
   	  );
 
   	  var addSitterButton = (
 		<CustomButton
-		  	containerStyle={styles.buttonContainer}
-		    style={styles.button}
-		    styleDisabled={{color: 'red'}}
+			type="small"
 		    onPress={() => this.goToScreen(AddSitterOptionsScreen)}
-		  >
-		    ADD NEW SITTER
-		  </CustomButton>
+		    label="ADD NEW SITTER"
+		  />
   	  );
 
   	  var zeroSittersMessage = (
@@ -83,13 +77,10 @@ class Home extends Component {
 
   	  var openRequestsButton = (
   	  	<CustomButton
-		  	containerStyle={styles.buttonContainer}
-		    style={styles.button}
-		    styleDisabled={{color: 'red'}}
+  	  		type="small"
+  	  		label="SEE OPEN REQUESTS"
 		    onPress={() => this.goToScreen(OpenRequestsListScreen)}
-		  >
-		    SEE OPEN REQUESTS
-		  </CustomButton>
+		  />
   	  );
 
 		return (

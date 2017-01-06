@@ -1,23 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import _ from 'lodash';
+import { StyleSheet, Modal, TouchableHighlight, View } from 'react-native';
+import CustomText from '../components/customText';
+
 var common = require('../common/styles');
-var Button = require('react-native-button');
+var styles = require('../styles/customButton');
 
-export default class CustomButton extends Button {
+
+export default class CustomButton extends Component {
   render() {
-	var props = _.clone(this.props);
+    var buttonStyle = [styles.button];
+    var labelStyle = [styles.buttonText];
 
-    if (_.isArray(this.props.style)){
-      props.style.push({fontFamily: common.fontFamily.base});
-    } else if (props.style) {
-      props.style = [props.style, {fontFamily: common.fontFamily.base}];
-    } else {
-      props.style = {fontFamily: common.fontFamily.base};
+    if(this.props.type == 'small'){
+      buttonStyle.push(styles.small);
     }
 
-    this.props = props;
+    if(this.props.disabled){
+      buttonStyle.push(styles.buttonDisabled);
+      labelStyle.push(styles.buttonTextDisabled);
+    } else {
+      buttonStyle.push(styles.buttonActive);
+      labelStyle.push(styles.buttonTextActive);
+    }
 
-    return super.render();
+    return (
+      <TouchableHighlight
+        onPress={this.props.onPress}
+        disabled={this.props.disabled}
+        underlayColor={common.color.lightGrey}
+        >
+        <View style={buttonStyle}>
+          <CustomText style={labelStyle}>{this.props.label}</CustomText>
+      </View>
+      </TouchableHighlight>
+    );
   }
 }
 

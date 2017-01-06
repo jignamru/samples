@@ -1,8 +1,5 @@
 'use strict';
 var React = require('react-native');
-var Dimensions = require('Dimensions');
-var windowSize = Dimensions.get('window');
-var common = require('../common/styles');
 var { StyleSheet } = React;
 
 module.exports = StyleSheet.create({
