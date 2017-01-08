@@ -60,6 +60,7 @@ class Login extends Component{
             })
           } else {
             Alert.alert('Hmm!', ErrorMessages.login[responseJson.errorCode]);
+            console.warn('login failed with errorCode: ', responseJson.errorCode);
           }
         })
         .catch((error) => {

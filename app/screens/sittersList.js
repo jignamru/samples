@@ -64,13 +64,15 @@ class SittersList extends Component {
 
   
   renderRow(rowData) {
-    console.log('rowData', rowData);
+    var unverifiedText = (
+      <CustomText style={styles.unverified}>(waiting for verification)</CustomText>
+      );
   	return (
       <TouchableHighlight 
              underlayColor="#ededed" 
              style={styles.row}
              onPress={() => this.goToSitterDetails(rowData)}>
-      	<CustomText style={{ fontSize:18 }}>{rowData.firstName} {rowData.lastName}</CustomText>
+      	<CustomText style={{ fontSize:18 }}>{rowData.firstName} {rowData.lastName} { rowData.isVerified ? <Text/> : unverifiedText }</CustomText>
       </TouchableHighlight>
       )
   }

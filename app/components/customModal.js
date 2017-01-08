@@ -15,7 +15,6 @@ export default class CustomModal extends Component {
   }
 
   setModalVisible(visible) {
-    console.log("modalVisible", this.state.modalVisible);
     this.setState({modalVisible: visible});
   }
 

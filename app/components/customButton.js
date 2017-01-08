@@ -24,12 +24,15 @@ export default class CustomButton extends Component {
       labelStyle.push(styles.buttonTextActive);
     }
 
+    if(this.props.buttonStyle){
+      buttonStyle.push(this.props.buttonStyle);
+    }
+
     return (
       <TouchableHighlight
         onPress={this.props.onPress}
         disabled={this.props.disabled}
-        underlayColor={common.color.lightGrey}
-        >
+        underlayColor={common.color.lightGrey}>
         <View style={buttonStyle}>
           <CustomText style={labelStyle}>{this.props.label}</CustomText>
       </View>
