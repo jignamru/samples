@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {AppRegistry, AsyncStorage, StyleSheet, View, Text, Image, TouchableHighlight, TouchableWithoutFeedback, TouchableOpacity,Alert} from 'react-native';
 import { Form, SwitchField, DatePickerField } from 'react-native-form-generator';
+import moment from 'moment';
 
 var GLOBAL = require('../common/globals');
 var User = require('../common/user');
@@ -23,29 +24,27 @@ class RequestSitter extends Component{
       super(props);
       this.state = {
         formData: {
-          startDateTime: new Date(),
-          endDateTime: new Date(),
+          startDateTime: moment().add(1,'h'),
+          endDateTime: moment().add(2,'h'),
           urgent: false
         },
-        disableButton: true
+        disableButton: true,
+        errorMessage: ''
       }
-  }
-
-  componentWillMount() {
-    this.state.formData.endDateTime.setHours(this.state.formData.endDateTime.getHours() + 2);
   }
     
   handleRequestSitter() {
     var requestType = this.state.formData.urgent ? 'URGENT' : 'NORMAL';
-    var startDT = new Date(this.state.formData.startDateTime);
-    var endDT = new Date(this.state.formData.endDateTime);
+    var startDT = this.state.formData.startDateTime;
+    var endDT = this.state.formData.endDateTime;
+
 
     var data = JSON.stringify({
                 startDatetimeIso8601: startDT.toISOString(),
                 endDatetimeIso8601: endDT.toISOString(),
                 type:  requestType,
                 sitterUserIds: [], //todo ?
-                parentUserNotes:  "", //todo ?
+                parentUserNotes:  "", //todo: add textbox field
               });
 
     AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
@@ -72,6 +71,7 @@ class RequestSitter extends Component{
                 );
           } else {
             Alert.alert('Uh oh!', responseJson.message);
+            console.log('errorResponse', responseJson);
           }
         })
         .catch((error) => {
@@ -82,16 +82,29 @@ class RequestSitter extends Component{
 
   handleFormChange(newData){
     var data = {};
-    data.startDateTime = newData.startDateTime ? newData.startDateTime : this.state.formData.startDateTime;
-    data.endDateTime = newData.endDateTime ? newData.endDateTime : this.state.formData.endDateTime;
+    data.startDateTime = newData.startDateTime ? moment(newData.startDateTime) : this.state.formData.startDateTime;
+    data.endDateTime = newData.endDateTime ? moment(newData.endDateTime) : this.state.formData.endDateTime;
     data.urgent = newData.urgent ? newData.urgent: this.state.formData.urgent;
+
+    var datesDiff = data.endDateTime.diff(data.startDateTime);
+    // update endTime only if its value is before startTime
+    if( datesDiff < 1){  
+      data.endDateTime = data.startDateTime;
+      data.endDateTime.add(1,'h');
+      this.state.errorMessage = "Please pick an end date and time that's ahead of your start date and time.";
+      // to-do: update the displayed endDate (for some reason it's not updating automatically.)
+      // this.refs.requestSitterForm.values.endDateTime = data.endDateTime.format();
+    } else {
+      this.state.errorMessage = '';
+    }
 
     this.setState({formData:data});
     this.props.onFormChange && this.props.onFormChange(newData);
 
     if( this.refs.requestSitterForm.values.startDateTime &&
-        this.refs.requestSitterForm.values.endDateTime 
-      ) {
+        this.refs.requestSitterForm.values.endDateTime &&
+        ( datesDiff > 0 )
+        ) {
       this.state.disableButton = false;
     } else {
       this.state.disableButton = true;
@@ -99,8 +112,7 @@ class RequestSitter extends Component{
   }
 
   formatDate(d) {
-    var formatted =  d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    return formatted;
+    return d.format('ddd MMM D    h:mm a');
   }
 
   render() {    
@@ -125,9 +137,8 @@ class RequestSitter extends Component{
                 mode="datetime"
                 minuteInterval = {15}
                 minimumDate = {new Date()}
-                prettyPrint={true}
                 pickerWrapper={<CustomModal modalTitle="Choose a start date and time" />}
-                dateTimeFormat = { date => { return this.formatDate(date) }}
+                dateTimeFormat = { date => { return this.formatDate(moment(date)) }}
                 placeholderStyle = {styles.placeholderStyle}
                 valueStyle = {styles.valueStyle}
                 placeholder='Start Date & Time'/>
@@ -137,10 +148,9 @@ class RequestSitter extends Component{
                 date={this.state.formData.endDateTime}
                 mode="datetime"
                 minuteInterval = {15}
-                minimumDate = {new Date()}
-                prettyPrint={true}
+                minimumDate = {new Date(this.state.formData.startDateTime.toISOString())}
                 pickerWrapper={<CustomModal modalTitle="Choose an end date and time" />}                
-                dateTimeFormat = { date => { return this.formatDate(date) }}
+                dateTimeFormat = { date => { return this.formatDate(moment(date)) }}
                 labelStyle = {styles.labelStyle}
                 valueStyle = {styles.valueStyle}
                 placeholderStyle = {styles.placeholderStyle}
@@ -153,7 +163,7 @@ class RequestSitter extends Component{
             />
 
             </Form>
-
+            <CustomText style={styles.error}>{this.state.errorMessage}</CustomText>
             <CustomButton
               onPress={this.handleRequestSitter.bind(this)}
               disabled={this.state.disableButton}
