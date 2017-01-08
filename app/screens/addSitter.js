@@ -13,6 +13,7 @@ var Validators = require('../common/formFieldValidators');
 import CustomTextInput from '../components/customTextInput';
 import CustomText from '../components/customText';
 import CustomButton from '../components/customButton';
+import CustomModal from '../components/customModal';
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
@@ -66,7 +67,7 @@ class AddSitter extends Component {
 	        .then((response) => response.json())
 	        .then((responseJson) => {
 	          console.log('Response:',responseJson);
-	          if(responseJson.sitterUserId) {
+	          if(responseJson.id) {
                 Alert.alert(
 		            'Yay!',
 		            firstName + " is part of your sitter community!",
@@ -112,18 +113,6 @@ class AddSitter extends Component {
 	}
 
     render() {
-	    var disabledButton = (
-	      <View style={[styles.button, styles.buttonDisabled]}>
-	          <CustomText style={[styles.buttonText, styles.buttonTextDisabled]}>ADD SITTER</CustomText>
-	      </View>
-	    );
-
-	    var activeButton = (
-	      <View style={[styles.button, styles.buttonActive]}>
-	        <CustomText style={[styles.buttonText, styles.buttonTextActive]}>ADD SITTER</CustomText>
-	      </View>
-	    );
-
 	    return (
 	        <View style={styles.container}>
                 <NavigationBar
@@ -204,16 +193,14 @@ class AddSitter extends Component {
 					5: 'Medium priority',
 					1: 'Low priority'
 				}}
-				pickerWrapper={<View style={styles.pickerFieldOptions}>this.props.children</View>}
+                pickerWrapper={<CustomModal modalTitle="Choose your priority level for this sitter" />}
 				/>
           </Form>
 
-  	      <TouchableHighlight
-            style={styles.button}
-            onPress={this.handleAddSitter.bind(this)}
-            disabled={this.state.disableButton}>
-              { this.state.disableButton ? disabledButton : activeButton }
-          </TouchableHighlight>
+          <CustomButton
+              onPress={this.handleAddSitter.bind(this)}
+              disabled={this.state.disableButton}
+              label="ADD SITTER"/>
 
         </ScrollView>
 

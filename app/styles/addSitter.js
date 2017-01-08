@@ -45,34 +45,9 @@ module.exports = StyleSheet.create({
         top: 10,
         color: common.color.grey
     },
-    button: {
-        padding: 20,
-        alignItems: 'center',
-        marginTop: 20,
-        width: windowSize.width
-    },
-    buttonActive: {
-        backgroundColor:  common.color.orange,
-    },
-    buttonDisabled: {
-        backgroundColor:  common.color.lightGrey,
-    },
-    buttonText: {
-        fontSize: 18,
-        fontWeight: '400',
-    },
-    buttonTextActive: {
-        color: '#fff'
-    },
-    buttonTextDisabled: {
-        color: '#DCD'
-    },
     pickerFieldValue: {
         fontFamily: common.fontFamily.base,
         color: 'black'        
-    },
-    pickerFieldOptions: {
-        
     },
     errors: {
         color: 'red'
