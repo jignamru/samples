@@ -30,24 +30,28 @@ module.exports = StyleSheet.create({
         color: common.color.darkPurple
     },
     sitterInfo: { 
-        height:40,
-        fontSize: 16,
-        justifyContent: 'center', 
-        alignItems: 'center',
+        alignItems: 'flex-start',
         paddingLeft: 30,
-        paddingTop: 10
+        paddingTop: 20,
+        paddingBottom: 20,
+        borderBottomWidth:1, 
+        borderBottomColor: '#ddd'
     },
-    iconsContainer: {
-        flexDirection: 'row',
-        backgroundColor: 'transparent',
-        height: 80,
-        paddingTop: 10,
-        marginLeft: 20
+    sitterInfoText: {
+        fontSize: 16
     },
     icon: {
-        width: 50,
-        height: 50,
-        marginLeft: 10,
-        marginRight: 10
+        alignSelf: 'center',
+        color: common.color.darkPurple
+    },
+    buttonsRow: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingTop: 10,
+    },
+    iconButton: {
+        borderRadius: 60,
+        width: 60
     }
 })

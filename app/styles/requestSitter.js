@@ -46,5 +46,9 @@ module.exports = StyleSheet.create({
     urgentHelpText: {
         margin: 10,
         color: common.color.grey
+    },
+    error: {
+        color: 'red',
+        margin: 20
     }
 })

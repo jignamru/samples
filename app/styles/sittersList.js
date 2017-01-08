@@ -42,5 +42,9 @@ module.exports = StyleSheet.create({
         flexDirection:'row', 
         justifyContent: 'center', 
         alignItems: 'center'
+    },
+    unverified: {
+        fontSize: 14,
+        fontStyle: 'italic'
     }
 })

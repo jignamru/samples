@@ -51,7 +51,6 @@ module.exports = StyleSheet.create({
     signup: {
       justifyContent: 'center',
       alignItems: 'center',
-      flex: .15,
       padding: 20
     },
     inputIcon: {
