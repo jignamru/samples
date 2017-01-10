@@ -7,6 +7,7 @@ import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
 import CustomText from '../components/customText';
 import CustomButton from '../components/customButton';
+import EditSitterScreen from './editSitter';
 
 var styles = require('../styles/sitterDetails');
 var GLOBAL = require('../common/globals');
@@ -87,6 +88,15 @@ class SitterDetails extends Component {
     return label;
   }
 
+  goToEditSitter(sitterData){
+    this.props.navigator.push({
+      component: EditSitterScreen, 
+      passProps: {
+        sitter: sitterData
+      }
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -115,7 +125,7 @@ class SitterDetails extends Component {
               type="small"
               buttonStyle={styles.iconButton}
               containerStyle={styles.iconButtonContainer}
-              // onPress={this.goToEditSitter.bind(this)}
+              onPress={() => this.goToEditSitter(this.props.sitter)}
               label={<Icon name="pencil" size={20} color="white"/>}/>
 
             <CustomButton
