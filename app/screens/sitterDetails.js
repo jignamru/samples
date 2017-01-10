@@ -1,6 +1,6 @@
 'use strict';
 import React, {Component} from 'react';
-import {View, Text, TouchableHighlight, Navigator, Image} from 'react-native';
+import {View, Text, TouchableHighlight, Navigator, Image, Alert, AsyncStorage} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
@@ -17,6 +17,55 @@ class SitterDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {}
+  }
+
+  confirmDelete(){
+    Alert.alert(
+                'Please Confirm',
+                'Are you sure you want to delete ' + this.props.sitter.firstName + ' ' + this.props.sitter.lastName + '?',
+                [
+                  { 
+                    text: 'Yes', 
+                    onPress: () => this.handleDeleteSitter()
+                  },
+                  {
+                    text: 'No'
+                  }
+                ]
+              );
+  }
+
+  handleDeleteSitter(){
+    AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
+      fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters/" + this.props.sitter.id, {
+          method: "DELETE",
+          headers: {
+            'Accept': 'application/json',
+          }
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          console.log('Response:',responseJson);
+          if(responseJson.errorCode) {
+            Alert.alert('Uh oh!', "Something went wrong. Try again later?");
+            console.warn(responseJson.message);
+          } else {
+            Alert.alert(
+              'All done!',
+              this.props.sitter.firstName + ' ' + this.props.sitter.lastName + " has been deleted",
+              [
+                {
+                  text: 'OK', 
+                  onPress: () => this.props.navigator.push({ component: SittersListScreen })
+                }
+              ]
+            )
+          }
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+      }).done();
   }
 
   getPriorityLabel(order){
@@ -39,7 +88,6 @@ class SitterDetails extends Component {
 
   render() {
     return (
-      // todo: style, add "request sitter", "delete sitter" and "edit sitter"
       <View style={styles.container}>
         <NavigationBar
           title={<IconTitle/>}
@@ -73,7 +121,7 @@ class SitterDetails extends Component {
               type="small"
               buttonStyle={styles.iconButton}
               containerStyle={styles.iconButtonContainer}
-              // onPress={this.handleDeleteSitter.bind(this)}
+              onPress={this.confirmDelete.bind(this)}
               label={<Icon name="trash" size={20} color="white"/>}/>
           </View>
       </View>
