@@ -5,8 +5,6 @@ import { Form, PickerField } from 'react-native-form-generator';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 var GLOBAL = require('../common/globals');
-var commonStyles = require('../common/styles');
-var User = require('../common/user');
 var styles = require('../styles/addSitter');
 var Validators = require('../common/formFieldValidators');
 
@@ -74,7 +72,8 @@ class AddSitter extends Component {
           			component: SittersListScreen
         		})
 	          } else {
-	            Alert.alert('Uh oh!', responseJson.message);
+	            Alert.alert('Uh oh!', "We weren't able to add your sitter. Totally our fault, sorry! Maybe you can try again later?");
+	            console.warn(responseJson.message);
 	          }
 	        })
 	        .catch((error) => {
