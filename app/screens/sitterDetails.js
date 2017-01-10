@@ -50,6 +50,7 @@ class SitterDetails extends Component {
             Alert.alert('Uh oh!', "Something went wrong. Try again later?");
             console.warn(responseJson.message);
           } else {
+            var SittersListScreen = require('./sittersList'); // need this here for lazy loading
             Alert.alert(
               'All done!',
               this.props.sitter.firstName + ' ' + this.props.sitter.lastName + " has been deleted",
