@@ -17,7 +17,6 @@ import CustomModal from '../components/customModal';
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
-import SittersListScreen from './sittersList';
 
 class AddSitter extends Component {
    constructor(props) {
@@ -27,7 +26,7 @@ class AddSitter extends Component {
         	fullname: '',
         	phone: '',
         	email: '',
-        	priority: ''
+        	priority: '5'
         },
         disableButton: true
 		}
@@ -55,7 +54,6 @@ class AddSitter extends Component {
           });
 
 	    AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
-            console.log(`Creating/adding sitter to userId: ${userId}`, data)
 		    fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters", {
 	          method: "POST",
 	          headers: {
@@ -66,21 +64,15 @@ class AddSitter extends Component {
 	        })
 	        .then((response) => response.json())
 	        .then((responseJson) => {
-	          console.log('Response:',responseJson);
-	          if(responseJson.id) {
+	          if(responseJson.firstName) {
                 Alert.alert(
 		            'Yay!',
-		            firstName + " is part of your sitter community!",
-		            [
-		              	{text: 'OK', onPress: () => this.props.navigator.push({
-										              component: SittersListScreen
-										            })
-		          		},
-		            ]
-		          )
-	            this.props.navigator.push({
-	              id: 'sitters'
-	            })
+		            firstName + " is part of your sitter community!" 
+		           );
+                var SittersListScreen = require('./sittersList'); // need this here for lazy loading
+                this.props.navigator.push({
+          			component: SittersListScreen
+        		})
 	          } else {
 	            Alert.alert('Uh oh!', responseJson.message);
 	          }
@@ -103,8 +95,7 @@ class AddSitter extends Component {
 
 	    if( (this.refs.addSitterForm.refs.fullname && this.refs.addSitterForm.refs.fullname.valid) &&
 	      (this.refs.addSitterForm.refs.phone && this.refs.addSitterForm.refs.phone.valid) &&
-	      (this.refs.addSitterForm.refs.email && this.refs.addSitterForm.refs.email.valid) &&
-	      this.refs.addSitterForm.values.priority
+	      (this.refs.addSitterForm.refs.email && this.refs.addSitterForm.refs.email.valid) 
 	    ){
 	      this.state.disableButton = false;
 	    } else {
@@ -188,6 +179,7 @@ class AddSitter extends Component {
 				iconRight={<Icon name="angle-right" size={20} style={[ styles.inputIcon, styles.iconRight ]} />}
 				placeholder= 'Priority'
 				valueStyle={[ styles.input, styles.pickerFieldValue ]}
+				value={this.state.formData.priority}
 				options={{
 					10: 'High priority',
 					5: 'Medium priority',
