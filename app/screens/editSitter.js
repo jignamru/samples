@@ -25,6 +25,7 @@ class EditSitter extends Component {
         	email: '',
         	priority: ''
         },
+        sitterId: '',
         disableButton: true
 		}
 	}
@@ -38,6 +39,7 @@ class EditSitter extends Component {
 				email: sitter.emailAddress
 			}
 			this.setState({formData : data});
+			this.setState({sitterId: sitter.id})
 		}
 	}
 
@@ -50,11 +52,8 @@ class EditSitter extends Component {
             priorityOrder: this.state.formData.priority
           });
 
-    	console.log('data', data);
-    	return;
-    	
 	    AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
-		    fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters", {
+    	    fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters/" + this.state.sitterId, {
 	          method: "PUT",
 	          headers: {
 	            'Accept': 'application/json',
@@ -64,7 +63,7 @@ class EditSitter extends Component {
 	        })
 	        .then((response) => response.json())
 	        .then((responseJson) => {
-	          if(responseJson.firstName) {
+  	          if(responseJson.firstName) {
                 Alert.alert(
 		            'Yay!',
 		            firstName + "'s info has been updated." 
@@ -73,7 +72,7 @@ class EditSitter extends Component {
                 this.props.navigator.push({
 			      component: SitterDetailsScreen, 
 			      passProps: {
-			      	sitter: sitterData
+			      	sitter: responseJson
 			      }
         		})
 	          } else {
