@@ -11,7 +11,7 @@ import CustomButton from '../components/customButton';
 import StatusMessages from '../common/statusMessages';
 import DateFunctions from '../common/dateFunctions';
 
-var styles = require('../styles/sitterDetails');
+var styles = require('../styles/requestDetails');
 var GLOBAL = require('../common/globals');
 
 
@@ -36,8 +36,6 @@ class SitterDetails extends Component {
         sitters: details.requestSitters
       }
       this.setState({details : data});
-
-      // todo: get sitter info by sitterId.
     }
   }
 
@@ -93,6 +91,13 @@ class SitterDetails extends Component {
 
 
   render() {
+    var parentNotes = (
+      <View style={styles.section}>
+        <CustomText style={styles.label}>Note for sitter:</CustomText>
+        <CustomText style={styles.textLong}>{this.state.details.parentNotes}</CustomText>
+      </View>
+    );
+
     return (
       <View style={styles.container}>
         <NavigationBar
@@ -105,39 +110,22 @@ class SitterDetails extends Component {
                 <CustomText isHeading={true} style={styles.title}>Request details</CustomText>
             </View>
 
-          <View style={styles.sitterInfo}>
-             <CustomText style={styles.sitterInfoText}><Icon name="clock-o" size={15} style={styles.icon} />   {StatusMessages.request.status[this.state.details.status]}</CustomText>
+          <View style={[styles.section,styles.row]}>
+            <CustomText style={styles.label}>Status:</CustomText>
+            <CustomText style={styles.textShort}>{StatusMessages.request.status[this.state.details.status]}</CustomText>
           </View>
-          <View style={styles.sitterInfo}>
-             <CustomText style={styles.sitterInfoText}><Icon name="calendar" size={25} style={styles.icon} />   {DateFunctions.formatDate(this.state.details.startDateTime)}</CustomText>
+          <View style={[styles.section,styles.row]}>
+            <CustomText style={styles.label}>Start date and time:</CustomText>
+            <CustomText style={styles.textShort}>{DateFunctions.formatDate(this.state.details.startDateTime)}</CustomText>
           </View>
-          <View style={styles.sitterInfo}>
-             <CustomText style={styles.sitterInfoText}><Icon name="calendar" size={25} style={styles.icon} />   {DateFunctions.formatDate(this.state.details.endDateTime)}</CustomText>
+          <View style={[styles.section,styles.row]}>
+            <CustomText style={styles.label}>End date and time:</CustomText>
+            <CustomText style={styles.textShort}>{DateFunctions.formatDate(this.state.details.endDateTime)}</CustomText>
           </View>
-          <View style={styles.sitterInfo}>
-             <CustomText style={styles.sitterInfoText}><Icon name="comment-o" size={15} style={styles.icon} />   {this.state.details.parentNotes}</CustomText>
-          </View>
-          <View style={styles.sitterInfo}>
-             <CustomText style={styles.sitterInfoText}><Icon name="bullhorn" size={15} style={styles.icon} />   {StatusMessages.request.type[this.state.details.type]}</CustomText>
-          </View>
-          <View style={styles.sitterInfo}>
-             <CustomText style={styles.sitterInfoText}><Icon name="users" size={15} style={styles.icon} />   sitter list</CustomText>
-          </View>
-
-          <View style={styles.buttonsRow}>
-            <CustomButton
-              type="small"
-              buttonStyle={styles.iconButton}
-              containerStyle={styles.iconButtonContainer}
-              // onPress={() => this.goToEditSitter(this.props.sitter)}
-              label={<Icon name="pencil" size={20} color="white"/>}/>
-
-            <CustomButton
-              type="small"
-              buttonStyle={styles.iconButton}
-              containerStyle={styles.iconButtonContainer}
-              onPress={this.confirmDelete.bind(this)}
-              label={<Icon name="trash" size={20} color="white"/>}/>
+          {this.state.details.parentNotes ? parentNotes : <View/>}
+          <View style={styles.section}>
+            <CustomText style={styles.label}>Request type:</CustomText>
+            <CustomText style={styles.textLong}>{StatusMessages.request.type[this.state.details.type]}</CustomText>
           </View>
       </View>
     )

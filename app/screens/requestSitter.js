@@ -47,6 +47,8 @@ class RequestSitter extends Component{
                 parentUserNotes:  "", //todo: add textbox field
               });
 
+    console.log(data);
+
     AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
       fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters/schedule", {
           method: "POST",
