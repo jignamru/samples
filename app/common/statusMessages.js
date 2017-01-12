@@ -3,7 +3,9 @@
 module.exports = {
 	request: {
 		status: {
-			COULD_NOT_FIND_SITTER: "Sorry, we could not find a sitter for this request",
+			COULD_NOT_FIND_SITTER: "None of your sitters are available",
+			IN_PROGRESS: "We're working on it...",
+			BOOKED: "You got a sitter! Woohoo!"
 		},
 		type: {
 			NORMAL: 'Non urgent request (We sent a request to your sitters by priority)',
