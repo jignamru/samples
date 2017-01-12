@@ -1,6 +1,7 @@
 'use strict';
 import React, {Component} from 'react';
 import {AppRegistry, AsyncStorage, View, Text, ListView, TouchableHighlight, Navigator, Image} from 'react-native';
+import moment from 'moment';
 
 var styles = require('../styles/sittersList');
 
@@ -8,10 +9,12 @@ import CustomText from '../components/customText';
 import NavigationBar from 'react-native-navbar';
 import GLOBAL from '../common/globals';
 import User from '../common/user';
-import SitterDetailsScreen from './sitterDetails';
+import RequestDetailsScreen from './requestDetails';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
 import BottomIconBar from '../components/bottomIconBar';
+import DateFunctions from '../common/dateFunctions';
+
 
 class OpenRequestsList extends Component {
   constructor(props) {
@@ -19,7 +22,6 @@ class OpenRequestsList extends Component {
     this.state = {
       dataSource : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     }
-    this.goToSitterDetails = this.goToSitterDetails.bind(this);
     this.renderRow = this.renderRow.bind(this);
   }
   
@@ -44,11 +46,11 @@ class OpenRequestsList extends Component {
     }).done();
   }
   
-  goToSitterDetails(sitterData){
+  goToRequestDetails(data){
     this.props.navigator.push({
-      component: SitterDetailsScreen, 
+      component: RequestDetailsScreen, 
       passProps: {
-      	sitter: sitterData
+      	requestDetails: data
       }
     })
   }
@@ -58,9 +60,9 @@ class OpenRequestsList extends Component {
       <TouchableHighlight 
              underlayColor="#ededed" 
              style={styles.row}
-             onPress={() => this.goToSitterDetails(rowData)}>
-      	<CustomText style={{ fontSize:16 }}>{rowData.formattedDate} at {rowData.formattedStartTime} 
-          <CustomText style={{ fontSize:12 }}> (status: {rowData.status})</CustomText>
+             onPress={() => this.goToRequestDetails(rowData)}>
+      	<CustomText style={{ fontSize:16 }}>{DateFunctions.formatDate(moment(rowData.startDatetime))} 
+          <CustomText style={{ fontSize:12 }}> (click to see progress details)</CustomText>
         </CustomText>
         
       </TouchableHighlight>
