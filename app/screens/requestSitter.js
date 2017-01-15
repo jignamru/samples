@@ -26,7 +26,8 @@ class RequestSitter extends Component{
         formData: {
           startDateTime: moment().add(1,'h'),
           endDateTime: moment().add(2,'h'),
-          urgent: false
+          urgent: false,
+          parentUserNotes: ''
         },
         disableButton: true,
         errorMessage: ''
@@ -38,16 +39,13 @@ class RequestSitter extends Component{
     var startDT = this.state.formData.startDateTime;
     var endDT = this.state.formData.endDateTime;
 
-
     var data = JSON.stringify({
-                startDatetimeIso8601: startDT.toISOString(),
-                endDatetimeIso8601: endDT.toISOString(),
+                startDatetimeIso8601: startDT.format(),
+                endDatetimeIso8601: endDT.format(),
                 type:  requestType,
                 sitterUserIds: [], //todo ?
-                parentUserNotes:  "", //todo: add textbox field
+                parentUserNotes:  this.state.formData.parentUserNotes, //todo: add textbox field
               });
-
-    console.log(data);
 
     AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
       fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters/schedule", {
