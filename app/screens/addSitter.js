@@ -1,6 +1,6 @@
 'use strict';
 import React, {Component} from 'react';
-import {AppRegistry, AsyncStorage, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert, ScrollView, Modal} from 'react-native';
+import {AppRegistry, AsyncStorage, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert, ScrollView, Modal, KeyboardAvoidingView} from 'react-native';
 import { Form, PickerField } from 'react-native-form-generator';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -105,97 +105,98 @@ class AddSitter extends Component {
     render() {
 	    return (
 	        <View style={styles.container}>
-                <NavigationBar
-                  title={<IconTitle/>}
-                  leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
-				/>
+            <NavigationBar
+              title={<IconTitle/>}
+              leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
+		        />
 
-	        	<View style={styles.introContainer}>
-					<Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/elephant.png')} />
-		            <CustomText isHeading={true} style={styles.title}>Add new sitter</CustomText>
+  	        <View style={styles.introContainer}>
+  					  <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/elephant.png')} />
+	            <CustomText isHeading={true} style={styles.title}>Add new sitter</CustomText>
 		        </View>
 
-		<ScrollView keyboardShouldPersistTaps={true} style={styles.scrollView}>
-          <Form ref='addSitterForm'
-          	// onFocus={this.handleFormFocus.bind(this)}
-            onChange={this.handleFormChange.bind(this)}
-            label="Login">
+		      <ScrollView keyboardShouldPersistTaps={true} style={styles.scrollView}>
+            <KeyboardAvoidingView behavior='padding'>
+              <Form ref='addSitterForm'
+              	// onFocus={this.handleFormFocus.bind(this)}
+                onChange={this.handleFormChange.bind(this)}
+                label="Login">
 
-            <CustomTextInput
-              ref='fullname'
-              style={styles.input}
-              iconLeft={<Icon name="user" size={20} style={styles.inputIcon} />}
-              placeholder='First and last name'
-              value={this.state.formData.fullname}
-              validationFunction={ value => Validators.validateFullname(value) }
-              autoCapitalize="words"
-              helpTextComponent={((self)=>{
-                if(Object.keys(self.refs).length !== 0){
-                  if(!self.refs.addSitterForm.refs.fullname.valid){
-                    return <CustomText style={styles.errors}>{self.refs.addSitterForm.refs.fullname.validationErrors.join("\n")}</CustomText>;
-                  }
-                }
-              })(this)}
-            />
+                <CustomTextInput
+                  ref='fullname'
+                  style={styles.input}
+                  iconLeft={<Icon name="user" size={20} style={styles.inputIcon} />}
+                  placeholder='First and last name'
+                  value={this.state.formData.fullname}
+                  validationFunction={ value => Validators.validateFullname(value) }
+                  autoCapitalize="words"
+                  helpTextComponent={((self)=>{
+                    if(Object.keys(self.refs).length !== 0){
+                      if(!self.refs.addSitterForm.refs.fullname.valid){
+                        return <CustomText style={styles.errors}>{self.refs.addSitterForm.refs.fullname.validationErrors.join("\n")}</CustomText>;
+                      }
+                    }
+                  })(this)}
+                />
 
-            <CustomTextInput
-              ref='phone'
-              style={styles.input}
-              iconLeft={<Icon name="mobile" size={20} style={styles.inputIcon} />}
-              keyboardType='phone-pad'
-              placeholder='Mobile number'
-              value={this.state.formData.phone}
-              validationFunction={ value => Validators.validatePhone(value) }
-              helpTextComponent={((self)=>{
-                if(Object.keys(self.refs).length !== 0){
-                  if(!self.refs.addSitterForm.refs.phone.valid){
-                    return <CustomText style={styles.errors}>{self.refs.addSitterForm.refs.phone.validationErrors.join("\n")}</CustomText>;
-                  }
-                }
-              })(this)}
-            />
+                <CustomTextInput
+                  ref='phone'
+                  style={styles.input}
+                  iconLeft={<Icon name="mobile" size={20} style={styles.inputIcon} />}
+                  keyboardType='phone-pad'
+                  placeholder='Mobile number'
+                  value={this.state.formData.phone}
+                  validationFunction={ value => Validators.validatePhone(value) }
+                  helpTextComponent={((self)=>{
+                    if(Object.keys(self.refs).length !== 0){
+                      if(!self.refs.addSitterForm.refs.phone.valid){
+                        return <CustomText style={styles.errors}>{self.refs.addSitterForm.refs.phone.validationErrors.join("\n")}</CustomText>;
+                      }
+                    }
+                  })(this)}
+                />
 
-            <CustomTextInput
-              ref='email'
-              style={styles.input}
-              iconLeft={<Icon name="at" size={20} style={styles.inputIcon} />}
-              keyboardType='email-address'
-              placeholder='Email address'
-              value={this.state.formData.email}
-              autoCapitalize="none"
-              validationFunction={ value => Validators.validateEmail(value) }
-              helpTextComponent={((self)=>{
-                if(Object.keys(self.refs).length !== 0){
-                  if(!self.refs.addSitterForm.refs.email.valid){
-                    return <CustomText style={styles.errors}>{self.refs.addSitterForm.refs.email.validationErrors.join("\n")}</CustomText>;
-                  }
-                }
-              })(this)}
-            />
+                <CustomTextInput
+                  ref='email'
+                  style={styles.input}
+                  iconLeft={<Icon name="at" size={20} style={styles.inputIcon} />}
+                  keyboardType='email-address'
+                  placeholder='Email address'
+                  value={this.state.formData.email}
+                  autoCapitalize="none"
+                  validationFunction={ value => Validators.validateEmail(value) }
+                  helpTextComponent={((self)=>{
+                    if(Object.keys(self.refs).length !== 0){
+                      if(!self.refs.addSitterForm.refs.email.valid){
+                        return <CustomText style={styles.errors}>{self.refs.addSitterForm.refs.email.validationErrors.join("\n")}</CustomText>;
+                      }
+                    }
+                  })(this)}
+                />
 
-			<PickerField ref='priority'
-				iconLeft={<Icon name="heart-o" size={20} style={styles.inputIcon} />}
-				iconRight={<Icon name="angle-right" size={20} style={[ styles.inputIcon, styles.iconRight ]} />}
-				placeholder= 'Priority'
-				valueStyle={[ styles.input, styles.pickerFieldValue ]}
-				value={this.state.formData.priority}
-				options={{
-					10: 'High priority',
-					5: 'Medium priority',
-					1: 'Low priority'
-				}}
-                pickerWrapper={<CustomModal modalTitle="Choose your priority level for this sitter" />}
-				/>
-          </Form>
+          			<PickerField ref='priority'
+          				iconLeft={<Icon name="heart-o" size={20} style={styles.inputIcon} />}
+          				iconRight={<Icon name="angle-right" size={20} style={[ styles.inputIcon, styles.iconRight ]} />}
+          				placeholder= 'Priority'
+          				valueStyle={[ styles.input, styles.pickerFieldValue ]}
+          				value={this.state.formData.priority}
+          				options={{
+          					10: 'High priority',
+          					5: 'Medium priority',
+          					1: 'Low priority'
+          				}}
+                  pickerWrapper={<CustomModal modalTitle="Choose your priority level for this sitter" />}
+          				/>
+              </Form>
+            </KeyboardAvoidingView>
 
-          <CustomButton
+            <CustomButton
               onPress={this.handleAddSitter.bind(this)}
               disabled={this.state.disableButton}
               label="ADD SITTER"/>
 
-        </ScrollView>
-
-            </View>
+          </ScrollView>
+        </View>
 
 	    )
 	}

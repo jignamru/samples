@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {AppRegistry, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert, ScrollView} from 'react-native';
+import {AppRegistry, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert, ScrollView, KeyboardAvoidingView} from 'react-native';
 import { Form, SwitchField } from 'react-native-form-generator';
 
 var User = require('../common/user');
@@ -118,95 +118,97 @@ class SignUp extends Component {
         </View>
 
         <ScrollView keyboardShouldPersistTaps={true} style={styles.scrollView}>
-          <Form ref='signupForm' 
-            onChange={this.handleFormChange.bind(this)}
-            label="Login">
+          <KeyboardAvoidingView behavior='padding'>
+            <Form ref='signupForm' 
+              onChange={this.handleFormChange.bind(this)}
+              label="Login">
 
-            <CustomTextInput 
-              ref='fullname' 
-              style={styles.input}
-              iconLeft={<Icon name="user-o" size={15} style={styles.inputIcon} />}
-              placeholder='First and last name'
-              validationFunction={ value => Validators.validateFullname(value)}
-              autoCapitalize="words"
-              helpTextComponent={((self)=>{
-                if(Object.keys(self.refs).length !== 0){
-                  if(!self.refs.signupForm.refs.fullname.valid){
-                    return <CustomText style={styles.errors}>{self.refs.signupForm.refs.fullname.validationErrors.join("\n")}</CustomText>;
+              <CustomTextInput 
+                ref='fullname' 
+                style={styles.input}
+                iconLeft={<Icon name="user-o" size={15} style={styles.inputIcon} />}
+                placeholder='First and last name'
+                validationFunction={ value => Validators.validateFullname(value)}
+                autoCapitalize="words"
+                helpTextComponent={((self)=>{
+                  if(Object.keys(self.refs).length !== 0){
+                    if(!self.refs.signupForm.refs.fullname.valid){
+                      return <CustomText style={styles.errors}>{self.refs.signupForm.refs.fullname.validationErrors.join("\n")}</CustomText>;
+                    }
                   }
-                }
-              })(this)}
-            />
+                })(this)}
+              />
 
-            <CustomTextInput 
-              ref='phone' 
-              style={styles.input}
-              iconLeft={<Icon name="mobile" size={20} style={styles.inputIcon} />}
-              keyboardType='phone-pad'
-              placeholder='Mobile number'
-              validationFunction={ value => Validators.validatePhone(value)}
-              helpTextComponent={((self)=>{
-                if(Object.keys(self.refs).length !== 0){
-                  if(!self.refs.signupForm.refs.phone.valid){
-                    return <CustomText style={styles.errors}>{self.refs.signupForm.refs.phone.validationErrors.join("\n")}</CustomText>;
+              <CustomTextInput 
+                ref='phone' 
+                style={styles.input}
+                iconLeft={<Icon name="mobile" size={20} style={styles.inputIcon} />}
+                keyboardType='phone-pad'
+                placeholder='Mobile number'
+                validationFunction={ value => Validators.validatePhone(value)}
+                helpTextComponent={((self)=>{
+                  if(Object.keys(self.refs).length !== 0){
+                    if(!self.refs.signupForm.refs.phone.valid){
+                      return <CustomText style={styles.errors}>{self.refs.signupForm.refs.phone.validationErrors.join("\n")}</CustomText>;
+                    }
                   }
-                }
-              })(this)}
-            />
+                })(this)}
+              />
 
-            <CustomTextInput 
-              ref='email' 
-              style={styles.input}
-              iconLeft={<Icon name="envelope-o" size={15} style={styles.inputIcon} />}
-              keyboardType='email-address'
-              placeholder='email address'
-              autoCapitalize="none"
-              validationFunction={ value => Validators.validateEmail(value)}
-              helpTextComponent={((self)=>{
-                if(Object.keys(self.refs).length !== 0){
-                  if(!self.refs.signupForm.refs.email.valid){
-                    return <CustomText style={styles.errors}>{self.refs.signupForm.refs.email.validationErrors.join("\n")}</CustomText>;
+              <CustomTextInput 
+                ref='email' 
+                style={styles.input}
+                iconLeft={<Icon name="envelope-o" size={15} style={styles.inputIcon} />}
+                keyboardType='email-address'
+                placeholder='email address'
+                autoCapitalize="none"
+                validationFunction={ value => Validators.validateEmail(value)}
+                helpTextComponent={((self)=>{
+                  if(Object.keys(self.refs).length !== 0){
+                    if(!self.refs.signupForm.refs.email.valid){
+                      return <CustomText style={styles.errors}>{self.refs.signupForm.refs.email.validationErrors.join("\n")}</CustomText>;
+                    }
                   }
-                }
-              })(this)}
-            />
+                })(this)}
+              />
 
-            <CustomTextInput 
-              ref='password' 
-              iconLeft={<Icon name="lock" size={20} style={styles.inputIcon} />}
-              placeholder='password' 
-              password={true}
-              style={styles.input}
-              validationFunction={ value => Validators.validatePassword(value)}
-              helpTextComponent={((self)=>{
-                if(Object.keys(self.refs).length !== 0){
-                  if(!self.refs.signupForm.refs.password.valid){
-                    return <CustomText style={styles.errors}>{self.refs.signupForm.refs.password.validationErrors.join("\n")}</CustomText>;
+              <CustomTextInput 
+                ref='password' 
+                iconLeft={<Icon name="lock" size={20} style={styles.inputIcon} />}
+                placeholder='password' 
+                password={true}
+                style={styles.input}
+                validationFunction={ value => Validators.validatePassword(value)}
+                helpTextComponent={((self)=>{
+                  if(Object.keys(self.refs).length !== 0){
+                    if(!self.refs.signupForm.refs.password.valid){
+                      return <CustomText style={styles.errors}>{self.refs.signupForm.refs.password.validationErrors.join("\n")}</CustomText>;
+                    }
                   }
-                }
-              })(this)}
-            />   
+                })(this)}
+              />   
 
-            <CustomTextInput 
-              ref='confirmPassword' 
-              iconLeft={<Icon name="lock" size={20} style={styles.inputIcon} />}
-              placeholder='Confirm password' 
-              password={true}
-              style={styles.input}
-              validationFunction={ value => this.validateConfirmPassword(value)}
-              helpTextComponent={((self)=>{
-                if(Object.keys(self.refs).length !== 0){
-                  if(!self.refs.signupForm.refs.confirmPassword.valid){
-                    return <CustomText style={styles.errors}>{self.refs.signupForm.refs.confirmPassword.validationErrors.join("\n")}</CustomText>;
+              <CustomTextInput 
+                ref='confirmPassword' 
+                iconLeft={<Icon name="lock" size={20} style={styles.inputIcon} />}
+                placeholder='Confirm password' 
+                password={true}
+                style={styles.input}
+                validationFunction={ value => this.validateConfirmPassword(value)}
+                helpTextComponent={((self)=>{
+                  if(Object.keys(self.refs).length !== 0){
+                    if(!self.refs.signupForm.refs.confirmPassword.valid){
+                      return <CustomText style={styles.errors}>{self.refs.signupForm.refs.confirmPassword.validationErrors.join("\n")}</CustomText>;
+                    }
                   }
-                }
-              })(this)}
-            />
+                })(this)}
+              />
 
-            <SwitchField label={<CustomText style={styles.terms}><Icon name="legal" size={15} style={styles.inputIcon} />&nbsp;&nbsp;&nbsp;&nbsp;I accept Terms & Conditions</CustomText>}
-              ref="acceptedTerms"
-            />
-          </Form>
+              <SwitchField label={<CustomText style={styles.terms}><Icon name="legal" size={15} style={styles.inputIcon} />&nbsp;&nbsp;&nbsp;&nbsp;I accept Terms & Conditions</CustomText>}
+                ref="acceptedTerms"
+              />
+            </Form>
+          </KeyboardAvoidingView>
         
   	      <TouchableHighlight
             style={styles.button}

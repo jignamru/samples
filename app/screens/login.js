@@ -8,7 +8,7 @@ var HomeScreen = require('./home');
 var ForgotPasswordScreen = require('./forgotPassword');
 
 import React, {Component} from 'react';
-import {AppRegistry, AsyncStorage, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert} from 'react-native';
+import {AppRegistry, AsyncStorage, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert, KeyboardAvoidingView} from 'react-native';
 import { Form } from 'react-native-form-generator';
 
 import CustomText from '../components/customText';
@@ -108,6 +108,7 @@ class Login extends Component{
                 <Image style={styles.mark} source={require('../images/icons/logo.png')} />
             </View>
 
+            <KeyboardAvoidingView behavior='padding'>
               <Form ref='loginForm' 
                 onChange={this.handleFormChange.bind(this)}
                 label="Login">
@@ -144,7 +145,8 @@ class Login extends Component{
                   })(this)}
                 />            
               </Form>
-
+            </KeyboardAvoidingView>
+              
             <TouchableHighlight
               onPress={() => this.goToScreen(ForgotPasswordScreen)}>
               <View style={styles.forgotContainer}>
