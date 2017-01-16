@@ -22,6 +22,7 @@ class EditSitter extends Component {
      this.state = {
         formData: {
         	fullname: '',
+        	phone: '',        	
         	email: '',
         	priority: ''
         },
@@ -32,9 +33,11 @@ class EditSitter extends Component {
 
 	componentWillMount() {
 		var sitter = this.props.sitter;
+
 		if(sitter){
 			var data = {
 				fullname: sitter.firstName + ' ' + sitter.lastName,
+				phone: sitter.phoneNumber, 
 				priority: sitter.priorityOrder,
 				email: sitter.emailAddress
 			}
@@ -48,6 +51,7 @@ class EditSitter extends Component {
     	var data = JSON.stringify({
             firstName:    firstName,
             lastName:     lastName,
+            phoneNumber:  this.state.formData.phone,
             emailAddress: this.state.formData.email,
             priorityOrder: this.state.formData.priority
           });
@@ -89,6 +93,7 @@ class EditSitter extends Component {
 	handleFormChange(newData){
 		var data = {};
 		data.fullname = newData.fullname ? newData.fullname : this.state.formData.fullname;
+		data.phone = newData.phone ? newData.phone : this.state.formData.phone;		
 		data.email = newData.email ? newData.email : this.state.formData.email;
 		data.priority = newData.priority ? newData.priority: this.state.formData.priority;
 
@@ -96,6 +101,7 @@ class EditSitter extends Component {
 	    this.props.onFormChange && this.props.onFormChange(newData);
 
 	    if( (this.refs.editSitterForm.refs.fullname && this.refs.editSitterForm.refs.fullname.valid) &&
+			(this.refs.editSitterForm.refs.phone && this.refs.editSitterForm.refs.phone.valid) &&
    	        (this.refs.editSitterForm.refs.email && this.refs.editSitterForm.refs.email.valid) 
 	    ){
 	      this.state.disableButton = false;
@@ -138,6 +144,23 @@ class EditSitter extends Component {
                 }
               })(this)}
             />
+
+                <CustomTextInput
+                  ref='phone'
+                  style={styles.input}
+                  iconLeft={<Icon name="mobile" size={20} style={styles.inputIcon} />}
+                  keyboardType='phone-pad'
+                  placeholder='Mobile number'
+                  value={this.state.formData.phone}
+                  validationFunction={ value => Validators.validatePhone(value) }
+                  helpTextComponent={((self)=>{
+                    if(Object.keys(self.refs).length !== 0){
+                      if(!self.refs.editSitterForm.refs.phone.valid){
+                        return <CustomText style={styles.errors}>{self.refs.editSitterForm.refs.phone.validationErrors.join("\n")}</CustomText>;
+                      }
+                    }
+                  })(this)}
+                />            
 
             <CustomTextInput
               ref='email'
