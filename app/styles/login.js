@@ -27,27 +27,6 @@ module.exports = StyleSheet.create({
         width: 150,
         height: 180
     },
-    signin: {
-        padding: 20,
-        alignItems: 'center'
-    },
-    signinActive: {
-        backgroundColor:  common.color.orange,
-    },
-    signinDisabled: {
-        backgroundColor: common.color.lightGrey,
-    },
-
-    signinText: {
-        fontSize: 18,
-        fontWeight: '400',
-    },
-    signinTextActive: {
-        color: "#fff"
-    },
-    signinTextDisabled: {
-        color: '#DCD'
-    },
     signup: {
       justifyContent: 'center',
       alignItems: 'center',

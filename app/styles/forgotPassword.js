@@ -29,12 +29,6 @@ module.exports = StyleSheet.create({
         paddingLeft: 30,
         color: common.color.darkPurple
     },
-    submit: {
-        marginTop: 20,
-        backgroundColor:  common.color.orange,
-        padding: 20,
-        alignItems: 'center'
-    },
     inputIcon: {
         marginLeft: 20,
         alignSelf:'center',
@@ -47,15 +41,5 @@ module.exports = StyleSheet.create({
     errors: {
         color: 'red'
     },
-    greyFont: {
-      color: common.color.grey
-    },
-    whiteFont: {
-      color: '#fff'
-    },
-    buttonText: {
-        fontSize: 18,
-        fontWeight: '400',
-    }
 
 })

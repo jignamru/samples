@@ -31,11 +31,6 @@ class ForgotPassword extends Component{
 
 
   handlePasswordReset() {
-
-    if( !this.state.formData.emailAddress || !this.refs.forgotPasswordForm.refs.emailAddress.valid ){
-      return Alert.alert('Uh oh!', this.refs.forgotPasswordForm.refs.emailAddress.validationErrors.join("\n"));
-    }
-
     fetch( GLOBAL.BABYSITTER_API_URL + "users/password/requestReset", {
       method: "POST",
       headers: {
