@@ -13,6 +13,7 @@ import { Form } from 'react-native-form-generator';
 
 import CustomText from '../components/customText';
 import CustomTextInput from '../components/customTextInput';
+import CustomButton from '../components/customButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Login extends Component{
@@ -89,19 +90,6 @@ class Login extends Component{
   }
 
   render() {
-    var disabledButton = (
-      <View style={[styles.signin, styles.signinDisabled]}>
-          <CustomText style={[styles.signinTextDisabled, styles.signinText]}>SIGN IN</CustomText>
-      </View>
-    );
-
-    var activeButton = (
-      <View style={[styles.signin, styles.signinActive]}>
-          <CustomText style={[styles.signinTextActive, styles.signinText]}>SIGN IN</CustomText>
-      </View>
-
-    );
-
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -153,13 +141,11 @@ class Login extends Component{
                 <CustomText>Forgot Password?</CustomText>
               </View>
             </TouchableHighlight>
-            
-            <TouchableHighlight
-              onPress={this.handleLogin.bind(this)}
-              disabled={this.state.disableButton}>
-              { this.state.disableButton ? disabledButton : activeButton }
-            </TouchableHighlight>
 
+            <CustomButton
+              onPress={this.handleLogin.bind(this)}
+              disabled={this.state.disableButton}
+              label="SIGN IN"/>
 
             <TouchableHighlight
               onPress={() => this.goToScreen(SignUpScreen)}>
