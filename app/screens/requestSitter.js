@@ -13,6 +13,7 @@ import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
 import CustomText from '../components/customText';
+import CustomTextInput from '../components/customTextInput';
 import CustomModal from '../components/customModal';
 import CustomButton from '../components/customButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -27,7 +28,7 @@ class RequestSitter extends Component{
           startDateTime: moment().add(1,'h'),
           endDateTime: moment().add(2,'h'),
           urgent: false,
-          parentUserNotes: ''
+          parentNotes: ''
         },
         disableButton: true,
         errorMessage: ''
@@ -44,7 +45,7 @@ class RequestSitter extends Component{
                 endDatetimeIso8601: endDT.format(),
                 type:  requestType,
                 sitterUserIds: [], //todo ?
-                parentUserNotes:  this.state.formData.parentUserNotes, //todo: add textbox field
+                parentUserNotes:  this.state.formData.parentNotes,
               });
 
     AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
@@ -85,6 +86,7 @@ class RequestSitter extends Component{
     data.startDateTime = newData.startDateTime ? moment(newData.startDateTime) : this.state.formData.startDateTime;
     data.endDateTime = newData.endDateTime ? moment(newData.endDateTime) : this.state.formData.endDateTime;
     data.urgent = newData.urgent ? newData.urgent: this.state.formData.urgent;
+    data.parentNotes = newData.parentNotes ? newData.parentNotes : this.state.formData.parentNotes;
 
     var datesDiff = data.endDateTime.diff(data.startDateTime);
     // update endTime only if its value is before startTime
@@ -156,11 +158,19 @@ class RequestSitter extends Component{
                 placeholderStyle = {styles.placeholderStyle}
                 placeholder='End Date & Time'/>
 
-                <SwitchField 
-                  label={<CustomText style={styles.urgent}><Icon name="bullhorn" size={15} style={styles.inputIcon} />&nbsp;&nbsp;Urgent Request</CustomText>}
-                  helpTextComponent={<CustomText style={[styles.urgent, styles.urgentHelpText]}>Urgent requests will notify *all* sitters at once (vs. by priority)</CustomText>}
-                  ref="urgent"
-            />
+              <CustomTextInput
+                multiline={true}
+                ref='parentNotes'
+                iconLeft={<Icon style={{alignSelf:'center', marginLeft:10}} name='comment-o' size={15} />}
+                placeholder='Include an optional note'
+                style = {styles.valueStyle}
+              />
+
+              <SwitchField 
+                label={<CustomText style={styles.urgent}><Icon name="bullhorn" size={15} style={styles.inputIcon} />&nbsp;&nbsp;Urgent Request</CustomText>}
+                helpTextComponent={<CustomText style={[styles.urgent, styles.urgentHelpText]}>Urgent requests will notify *all* sitters at once (vs. by priority)</CustomText>}
+                ref="urgent"
+              />
 
             </Form>
             <CustomText style={styles.error}>{this.state.errorMessage}</CustomText>
