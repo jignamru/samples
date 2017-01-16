@@ -1,7 +1,6 @@
 'use strict';
 var GLOBAL = require('../common/globals');
 var User = require('../common/user');
-var LoginScreen = require('./login');
 var Validators = require('../common/formFieldValidators');
 
 
@@ -11,6 +10,7 @@ import { Form } from 'react-native-form-generator';
 
 import CustomText from '../components/customText';
 import CustomTextInput from '../components/customTextInput';
+import CustomButton from '../components/customButton';
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
@@ -22,7 +22,10 @@ class ForgotPassword extends Component{
   constructor(props) {
       super(props);
       this.state = {
-        formData: {}
+        formData: {
+          emailAddress: ''
+        },
+        disableButton: true
       }
   }
 
@@ -33,22 +36,24 @@ class ForgotPassword extends Component{
       return Alert.alert('Uh oh!', this.refs.forgotPasswordForm.refs.emailAddress.validationErrors.join("\n"));
     }
 
-    fetch( GLOBAL.BABYSITTER_API_URL + "/users/password/requestReset", {
+    fetch( GLOBAL.BABYSITTER_API_URL + "users/password/requestReset", {
       method: "POST",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        emailAddress: this.state.emailAddress,
+        emailAddress: this.state.formData.emailAddress,
       })
     })
     .then((response) => response.json() )
     .then((responseJson) => {
       if(responseJson.message) {
         Alert.alert('Uh oh!', "We didn't find an account under this email address.");
+        console.warn(responseJson);
       } else {
         Alert.alert('Thanks!', "Check the email we've just sent to you for further instructions on how to reset your password.")
+        var LoginScreen = require('./login'); // need this here for lazy loading
         this.props.navigator.push({
           component: LoginScreen
         })
@@ -62,6 +67,12 @@ class ForgotPassword extends Component{
   handleFormChange(formData){
     this.setState({formData:formData});
     this.props.onFormChange && this.props.onFormChange(formData);
+
+    if (this.refs.forgotPasswordForm.refs.emailAddress && this.refs.forgotPasswordForm.refs.emailAddress.valid){
+      this.state.disableButton = false;
+    } else {
+      this.state.disableButton = true;
+    }
   }
 
   goBack() {
@@ -103,12 +114,10 @@ class ForgotPassword extends Component{
                 />           
               </Form>
       
-        <TouchableHighlight
-          onPress={this.handlePasswordReset.bind(this)}>
-          <View style={styles.submit}>
-              <CustomText><Text style={[styles.whiteFont, styles.buttonText]}>SUBMIT</Text></CustomText>
-          </View>
-        </TouchableHighlight>
+        <CustomButton
+          onPress={this.handlePasswordReset.bind(this)}
+          disabled={this.state.disableButton}
+          label="SUBMIT"/>
       </View>
     )
   }
