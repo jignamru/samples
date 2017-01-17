@@ -2,7 +2,6 @@
 import React, {Component} from 'react';
 import {View, Text, TouchableHighlight, Navigator, Image, Alert, AsyncStorage} from 'react-native';
 import moment from 'moment';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
@@ -36,6 +35,7 @@ class SitterDetails extends Component {
         sitters: details.requestSitters
       }
       this.setState({details : data});
+      console.log(data);
     }
   }
 

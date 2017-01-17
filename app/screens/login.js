@@ -6,9 +6,10 @@ var ErrorMessages = require('../common/errorMessages');
 var SignUpScreen = require('./signup');
 var HomeScreen = require('./home');
 var ForgotPasswordScreen = require('./forgotPassword');
+import RequestDetailsScreen from './requestDetails';
 
 import React, {Component} from 'react';
-import {AppRegistry, AsyncStorage, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert, KeyboardAvoidingView} from 'react-native';
+import {AppRegistry, AsyncStorage, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert, KeyboardAvoidingView, Linking} from 'react-native';
 import { Form } from 'react-native-form-generator';
 
 import CustomText from '../components/customText';
@@ -26,10 +27,58 @@ class Login extends Component{
       }
   }
 
+  componentDidMount() {
+      Linking.addEventListener('url', this.handleDeepLink.bind(this));
+  }
+
+  componentWillUnmount() {
+    Linking.removeEventListener('url', this.handleDeepLink.bind(this));
+  }
+
+  handleDeepLink(event) {
+    // sitterdone://requestDetails?id=7b4edd1c-cd86-4347-b67c-e40532dc9b14
+      var url = event.url.replace('sitterdone://', '').split('?');
+      var path = url[0];
+      var params = url[1];
+      var id = params.replace('id=', '');
+
+      // get request details by id and navigate to requestDetails screen
+
+      if( (path == "requestDetails") && id){
+        AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
+          fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/openRequests", {
+            method: "GET",
+            headers: {
+              'Accept': 'application/json',
+            }
+          })
+          .then((response) => response.json())
+          .then((responseJson) => {
+            var details = null;
+            for(var i = 0; i < responseJson.length; i++) {
+              if(responseJson[i].id == id){
+                details = responseJson[i];   
+                break;        
+              }
+            }
+            if( details ){
+              return this.props.navigator.push({
+                component: RequestDetailsScreen, 
+                passProps: {
+                  requestDetails: details
+                }
+              });
+            } else {
+              console.warn("Couldn't find open request with id: " + id);
+            }          
+          })
+        }).done();
+      }
+  }
+
   componentWillMount() {
     AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((value) => {
       if( value != null) {
-        //console.log('User logged in. UserId: ' + value);
         this.props.navigator.push({
           component: HomeScreen
         })
