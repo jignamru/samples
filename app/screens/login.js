@@ -36,7 +36,7 @@ class Login extends Component{
   }
 
   handleDeepLink(event) {
-    // sitterdone://requestDetails?id=7b4edd1c-cd86-4347-b67c-e40532dc9b14
+    // ex: sitterdone://requestDetails?id=7b4edd1c-cd86-4347-b67c-e40532dc9b14
       var url = event.url.replace('sitterdone://', '').split('?');
       var path = url[0];
       var params = url[1];
