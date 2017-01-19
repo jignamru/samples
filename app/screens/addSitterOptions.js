@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {AppRegistry, AsyncStorage, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert} from 'react-native';
 import ContactsWrapper from 'react-native-contacts-wrapper';
+import Permissions from 'react-native-permissions';
 
 var GLOBAL = require('../common/globals');
 var commonStyles = require('../common/styles');
@@ -19,10 +20,45 @@ import BackArrow from '../components/navbarLeftButton';
 class AddSitter extends Component {
    constructor(props) {
       	super(props);
-     	this.state = {};
+     	this.state = {
+     		contactsPermission: ''
+     	};
      	this.goToAddSitter = this.goToAddSitter.bind(this);
 
 	}
+	
+	componentDidMount() {
+		Permissions.getPermissionStatus('contacts')
+	      .then(response => {
+	        //response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+	        this.setState({ contactsPermission: response })
+	      });
+	}
+
+	requestPermission() {
+		Permissions.requestPermission('contacts')
+	      .then(response => {
+	        //response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+	        this.setState({ contactsPermission: response })
+      	}).catch(e => console.warn(e));
+	}
+
+	alertForContactsPermission() {
+		if( this.state.contactsPermission == 'undetermined' ){
+			this.requestPermission();
+		} else {
+		    Alert.alert(
+		      "Can't Access Your Contacts",
+		      "We need access so you can select a sitter from your address book.\n" +
+			    "\n" +
+			    " Click on 'Open Settings' to enable access to your contacts, then come back to try again!",
+		      [
+		        { text: 'No' },
+          		{ text: 'Open Settings', onPress: Permissions.openSettings }
+		      ]
+		    )
+		}
+	  }
 
 	goToManualAddSitter(){
 		this.props.navigator.push({
@@ -40,13 +76,17 @@ class AddSitter extends Component {
 	}
 
 	openContacts(){
-		ContactsWrapper.getContact()
-	        .then((contact) => {
-	            this.goToAddSitter(contact);    
-	        })
-	        .catch((error) => {
-	            Alert.alert("Uh Oh!", error.message);
-	        });
+		if( this.state.contactsPermission == 'authorized'){
+			ContactsWrapper.getContact()
+		        .then((contact) => {
+		            this.goToAddSitter(contact);    
+		        })
+		        .catch((error) => {
+		            Alert.alert("Uh Oh!", error.message);
+		        });
+	    } else {
+	    	this.alertForContactsPermission();
+	    }
 	}
 
     render() {
