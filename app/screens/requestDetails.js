@@ -32,21 +32,21 @@ class SitterDetails extends Component {
         parentNotes: details.parentUserNotes,
         status: details.status,
         type: details.type,
-        sitters: details.requestSitters
+        sitters: details.requestSitters,
+        requestId: details.id
       }
       this.setState({details : data});
-      console.log(data);
     }
   }
 
-  confirmDelete(){
+  confirmCancel(){
     Alert.alert(
                 'Please Confirm',
-                'Are you sure you want to delete ' + this.props.sitter.firstName + ' ' + this.props.sitter.lastName + '?',
+                'Are you sure you want to cancel this request?',
                 [
                   { 
                     text: 'Yes', 
-                    onPress: () => this.handleDeleteRequest()
+                    onPress: () => this.handleCancelRequest()
                   },
                   {
                     text: 'No'
@@ -55,38 +55,44 @@ class SitterDetails extends Component {
               );
   }
 
-  handleDeleteRequest(){
-    // AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
-    //   fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters/" + this.props.sitter.id, {
-    //       method: "DELETE",
-    //       headers: {
-    //         'Accept': 'application/json',
-    //       }
-    //     })
-    //     .then((response) => response.json())
-    //     .then((responseJson) => {
-    //       console.log('Response:',responseJson);
-    //       if(responseJson.errorCode) {
-    //         Alert.alert('Uh oh!', "Something went wrong. Try again later?");
-    //         console.warn(responseJson.message);
-    //       } else {
-    //         var SittersListScreen = require('./sittersList'); // need this here for lazy loading
-    //         Alert.alert(
-    //           'All done!',
-    //           this.props.sitter.firstName + ' ' + this.props.sitter.lastName + " has been deleted",
-    //           [
-    //             {
-    //               text: 'OK', 
-    //               onPress: () => this.props.navigator.push({ component: SittersListScreen })
-    //             }
-    //           ]
-    //         )
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       console.warn(error);
-    //     });
-    //   }).done();
+  handleCancelRequest(){
+    var data = JSON.stringify({
+      cancellationReason: 'reason not given' // todo: at a reason text field at some point?
+    });
+
+    AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
+      fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters/schedule/" + this.state.details.requestId + "/cancel", {
+          method: "POST",
+          headers: { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: data
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          // console.log('Response:',responseJson);
+          if(responseJson.errorCode) {
+            Alert.alert('Uh oh!', "Something went wrong. Try again later?");
+            console.warn(responseJson.message);
+          } else {
+            var OpenRequestsListScreen = require('./openRequestsList'); // need this here for lazy loading
+            Alert.alert(
+              'All done!',
+              "This request has been canceled.",
+              [
+                {
+                  text: 'OK', 
+                  onPress: () => this.props.navigator.push({ component: OpenRequestsListScreen })
+                }
+              ]
+            )
+          }
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+      }).done();
   }
 
 
@@ -127,6 +133,10 @@ class SitterDetails extends Component {
             <CustomText style={styles.label}>Request type:</CustomText>
             <CustomText style={styles.textLong}>{StatusMessages.request.type[this.state.details.type]}</CustomText>
           </View>
+          <CustomButton
+            type="small"
+            onPress={() => this.confirmCancel()}
+            label="CANCEL REQUEST"/>
       </View>
     )
   }
