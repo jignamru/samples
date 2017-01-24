@@ -10,15 +10,34 @@ export default class CustomModal extends Component {
   constructor(props) {
       super(props);
       this.state = {
-        modalVisible: true
+        modalVisible: ''
       }
   }
 
-  setModalVisible(visible) {
+  componentWillMount(){
+    var visible = this.props.visible ? this.props.visible : true;
     this.setState({modalVisible: visible});
   }
 
+  componentWillReceiveProps(nextProps) { // used from the Terms & Condition modal
+    if( (nextProps.visible == false) ||
+        (nextProps.visible == true) ){
+      this.setState({ modalVisible: nextProps.visible });
+    }
+  }
+
+  setModalVisible() {
+    this.setState({ modalVisible: !this.state.modalVisible });
+  }
+
   render() {
+    var button = (
+      <CustomButton
+        onPress={this.setModalVisible.bind(this)}
+        type="small"
+        label="OK"/>
+    );
+
     return (
       <Modal
           animationType={"slide"}
@@ -30,10 +49,8 @@ export default class CustomModal extends Component {
             
             {this.props.children}
 
-            <CustomButton
-              onPress={() => {this.setModalVisible(!this.state.modalVisible)}}
-              type="small"
-              label="OK"/>
+            {this.props.hideButton ? <View/> : button}
+
           </View>
         </View>
     </Modal>

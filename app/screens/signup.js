@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {AppRegistry, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert, ScrollView, KeyboardAvoidingView} from 'react-native';
+import {AppRegistry, StyleSheet, View, Text, TextInput, Image, TouchableHighlight, Navigator, Alert, ScrollView, KeyboardAvoidingView,TouchableWithoutFeedback} from 'react-native';
 import { Form, SwitchField } from 'react-native-form-generator';
 
 var User = require('../common/user');
@@ -12,19 +12,24 @@ var Validators = require('../common/formFieldValidators');
 
 import CustomText from '../components/customText';
 import CustomTextInput from '../components/customTextInput';
+import CustomButton from '../components/customButton';
+import CustomModal from '../components/customModal';
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import TCModal from '../components/termsAndConditionsModal';
 
 class SignUp extends Component {
     constructor(props) {
       super(props);
       this.state = {
         formData: {},
-        disableButton: true
+        disableButton: true,
+        tcModalVisible: false
       }
-  }
+    }
+
   handleSignup() {
     var [firstName, lastName] = this.state.formData.fullname.split(' ');
     var data = JSON.stringify({
@@ -91,20 +96,12 @@ class SignUp extends Component {
     this.props.navigator.pop();
   }
 
+  toggleTCPicker() {
+    this.setState( { tcModalVisible: !this.state.tcModalVisible } );
+  }
+
 
   render() {
-    var disabledButton = (
-      <View style={[styles.signup, styles.signupDisabled]}>
-          <CustomText style={[styles.signupText, styles.signupTextDisabled]}>DONE</CustomText>
-      </View>  
-    );
-
-    var activeButton = (
-      <View style={[styles.signup, styles.signupActive]}>
-        <CustomText style={[styles.signupText, styles.signupTextActive]}>DONE</CustomText>
-      </View>
-    );
-
     return (
       <View style={styles.container}>
         <NavigationBar
@@ -204,18 +201,28 @@ class SignUp extends Component {
                 })(this)}
               />
 
-              <SwitchField label={<CustomText style={styles.terms}><Icon name="legal" size={15} style={styles.inputIcon} />&nbsp;&nbsp;&nbsp;&nbsp;I accept Terms & Conditions</CustomText>}
-                ref="acceptedTerms"
-              />
+              <SwitchField 
+                label={
+                  <CustomText style={styles.terms}>
+                    <Icon name="legal" size={15} style={styles.inputIcon} />
+                    <CustomText 
+                      onPress={ this.toggleTCPicker.bind(this) }
+                      style={styles.button}>
+                      &nbsp;&nbsp;&nbsp;&nbsp;I accept the <Text style={styles.bold}>Terms & Conditions</Text>
+                    </CustomText>
+                  </CustomText>
+                }
+                ref="acceptedTerms" />
+
             </Form>
           </KeyboardAvoidingView>
-        
-  	      <TouchableHighlight
-            style={styles.button}
+
+          { this.state.tcModalVisible == true ? <TCModal/> : <View/>}
+
+          <CustomButton
             onPress={this.handleSignup.bind(this)}
-            disabled={this.state.disableButton}>
-              { this.state.disableButton ? disabledButton : activeButton }
-          </TouchableHighlight>
+            disabled={this.state.disableButton}
+            label="DONE"/>
 
           <TouchableHighlight
             style={styles.button}
