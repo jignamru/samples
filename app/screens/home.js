@@ -72,7 +72,7 @@ class Home extends Component {
   	  );
 
   	  var zeroSittersMessage = (
-  	  	<CustomText style={styles.message}>Let us start by adding new sitters.</CustomText>
+  	  	<CustomText style={styles.message}>Let's start by adding new sitters.</CustomText>
   	  );
 
   	  var openRequestsButton = (

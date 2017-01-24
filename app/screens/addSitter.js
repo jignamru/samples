@@ -65,7 +65,7 @@ class AddSitter extends Component {
 	          if(responseJson.firstName) {
                 Alert.alert(
 		            'Yay!',
-		            firstName + " is part of your sitter community!" 
+		            firstName + " has been invited to your sitter community!" 
 		           );
                 var SittersListScreen = require('./sittersList'); // need this here for lazy loading
                 this.props.navigator.push({
