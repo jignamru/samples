@@ -29,6 +29,9 @@ module.exports = StyleSheet.create({
         color: common.color.darkPurple,
         marginLeft: 30
     },
+    messageContainer: {
+        alignItems: 'center',
+    },
     message: {
         fontSize: 25,
         marginBottom: 40

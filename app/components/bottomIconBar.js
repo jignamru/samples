@@ -38,16 +38,20 @@ export default class BottomIconBar extends Component {
       </TouchableHighlight>
     );
 
+    var sittersListIcon = (
+      <TouchableHighlight
+        style={styles.footerItem}
+        onPress={() => this.goToScreen(SittersListScreen)}>
+          <View>
+            <Icon style={styles.footerIcon} name='users' size={25} />
+          </View>
+      </TouchableHighlight>
+    );
+
     return (
               <View style={styles.footer}>
                 { this.props.hideHomeIcon ? <View/> : homeIcon }                
-                <TouchableHighlight
-                  style={styles.footerItem}
-                  onPress={() => this.goToScreen(SittersListScreen)}>
-                    <View>
-                      <Icon style={styles.footerIcon} name='users' size={25} />
-                    </View>
-                </TouchableHighlight>
+                { this.props.hideSittersListIcon ? <View/> : sittersListIcon } 
                 <TouchableHighlight
                   style={styles.footerItem}
                   onPress={this.handleLogout.bind(this)}>

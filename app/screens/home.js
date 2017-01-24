@@ -75,6 +75,13 @@ class Home extends Component {
   	  	<CustomText style={styles.message}>Let's start by adding new sitters.</CustomText>
   	  );
 
+	  var unverifiedAccountMessage = (
+	  	<View style={styles.messageContainer}>
+  	  	<CustomText style={styles.message}>You're almost ready!</CustomText>
+  	  	<CustomText style={styles.message}>Check your email or SMS to verify your account.</CustomText>
+  	  	</View>
+	  	);
+
   	  var openRequestsButton = (
   	  	<CustomButton
   	  		type="small"
@@ -91,11 +98,11 @@ class Home extends Component {
 		        </View>
 		        <View style={styles.actionsContainer}>
 		        	{ this.state.user.hasOpenRequests ? openRequestsButton : <View/> }
-		        	{ this.state.user.hasSitters ? requestButton : zeroSittersMessage }
-
-		        	{addSitterButton}
+		        	{ this.state.user.hasSitters ? requestButton : <View/> }
+		        	{ (this.state.user.phoneNumberIsVerified && !this.state.user.hasSitters) ? zeroSittersMessage : <View/>}
+		        	{ this.state.user.phoneNumberIsVerified ? addSitterButton : unverifiedAccountMessage}
 		    	</View>
-		    	<BottomIconBar navigator={this.props.navigator} hideHomeIcon={true}/>
+		    	<BottomIconBar navigator={this.props.navigator} hideHomeIcon={true} hideSittersListIcon={!this.state.user.phoneNumberIsVerified}/>
 		    </View>
 		)
 	}
