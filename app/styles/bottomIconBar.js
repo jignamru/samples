@@ -7,9 +7,13 @@ var { StyleSheet } = React;
 
 module.exports = StyleSheet.create({
     footer: {
-        flex: 0.18,
+        width: windowSize.width,
+        height: 60,
         flexDirection: 'row',
         backgroundColor: common.color.blue,
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
     },
     footerItem: {
         flex: 1,

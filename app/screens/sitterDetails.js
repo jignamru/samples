@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
+import BottomIconBar from '../components/bottomIconBar';
 import CustomText from '../components/customText';
 import CustomButton from '../components/customButton';
 import EditSitterScreen from './editSitter';
@@ -135,6 +136,8 @@ class SitterDetails extends Component {
               onPress={this.confirmDelete.bind(this)}
               label={<Icon name="trash" size={20} color="white"/>}/>
           </View>
+
+          <BottomIconBar navigator={this.props.navigator}/>
       </View>
     )
   }

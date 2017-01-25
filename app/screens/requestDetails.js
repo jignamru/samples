@@ -5,6 +5,7 @@ import moment from 'moment';
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
+import BottomIconBar from '../components/bottomIconBar';
 import CustomText from '../components/customText';
 import CustomButton from '../components/customButton';
 import StatusMessages from '../common/statusMessages';
@@ -137,6 +138,8 @@ class SitterDetails extends Component {
             type="small"
             onPress={() => this.confirmCancel()}
             label="CANCEL REQUEST"/>
+
+            <BottomIconBar navigator={this.props.navigator}/>
       </View>
     )
   }

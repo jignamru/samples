@@ -12,6 +12,7 @@ var HomeScreen = require('./home');
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
+import BottomIconBar from '../components/bottomIconBar';
 import CustomText from '../components/customText';
 import CustomTextInput from '../components/customTextInput';
 import CustomModal from '../components/customModal';
@@ -178,6 +179,8 @@ class RequestSitter extends Component{
               onPress={this.handleRequestSitter.bind(this)}
               disabled={this.state.disableButton}
               label="REQUEST SITTER"/>
+
+              <BottomIconBar navigator={this.props.navigator}/>
         
         </View>
     )

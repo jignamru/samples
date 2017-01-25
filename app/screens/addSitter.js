@@ -15,6 +15,7 @@ import CustomModal from '../components/customModal';
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
+import BottomIconBar from '../components/bottomIconBar';
 
 class AddSitter extends Component {
    constructor(props) {
@@ -196,6 +197,7 @@ class AddSitter extends Component {
               label="ADD SITTER"/>
 
           </ScrollView>
+          <BottomIconBar navigator={this.props.navigator}/>
         </View>
 
 	    )

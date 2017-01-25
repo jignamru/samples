@@ -16,6 +16,7 @@ import CustomButton from '../components/customButton';
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
+import BottomIconBar from '../components/bottomIconBar';
 
 class AddSitter extends Component {
    constructor(props) {
@@ -121,6 +122,7 @@ class AddSitter extends Component {
 					      />
 					</View>
 				</View>
+				<BottomIconBar navigator={this.props.navigator}/>
             </View>
 
 	    )
