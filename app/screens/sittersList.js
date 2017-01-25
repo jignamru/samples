@@ -107,7 +107,7 @@ class SittersList extends Component {
         	 renderRow={ this.renderRow } />
 
 
-         <BottomIconBar navigator={this.props.navigator} />
+         <BottomIconBar navigator={this.props.navigator} hideSittersListIcon={true}/>
       </View>
     )
   }

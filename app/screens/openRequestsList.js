@@ -81,6 +81,7 @@ class OpenRequestsList extends Component {
             <CustomText isHeading={true} style={styles.title}>Your Open Requests</CustomText>
           </View>
         <ListView
+         enableEmptySections={true}
       	 dataSource={this.state.dataSource}
       	 renderRow={ this.renderRow } />
          
