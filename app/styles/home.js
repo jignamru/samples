@@ -30,6 +30,7 @@ module.exports = StyleSheet.create({
         marginLeft: 30
     },
     messageContainer: {
+        marginTop: 40,
         alignItems: 'center',
     },
     message: {
@@ -38,34 +39,6 @@ module.exports = StyleSheet.create({
     },
     actionsContainer: {
     	flex: 1,
-    	justifyContent: 'center',
     	alignItems: 'center'
-    },
-    box: {
-        flex: 1,
-    	width: windowSize.width,
-    	paddingTop: 40,
-    	paddingBottom: 60
-    },
-    boxLabel: {
-    	fontSize: 25,
-    	textAlign: 'center'
-    },
-    footer: {
-        flexDirection: 'row',
-        backgroundColor: common.color.blue,
-        height: 60,
-        paddingTop: 10
-    },
-    footerItem: {
-        width: windowSize.width / 3,
-        alignItems: 'center',
-    },
-    footerIcon: {
-        width: 40,
-        height: 40
-    },
-    whiteFont: {
-      color: '#fff'
     }
 })

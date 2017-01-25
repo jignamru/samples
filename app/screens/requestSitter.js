@@ -7,7 +7,6 @@ import moment from 'moment';
 var GLOBAL = require('../common/globals');
 var User = require('../common/user');
 var styles = require('../styles/requestSitter');
-var HomeScreen = require('./home');
 
 import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
@@ -61,16 +60,17 @@ class RequestSitter extends Component{
         .then((response) => response.json())
         .then((responseJson) => {
           if(responseJson.id) {
-              Alert.alert(
-                'Done!', 
-                "Your request has been submitted. We'll keep in touch!",
-                [ 
-                  {
-                    text: 'OK', 
-                    onPress: () => this.props.navigator.pop() 
-                  }
-                ]
-                );
+            var HomeScreen = require('./home'); //for lazy loading
+            Alert.alert(
+              'Done!', 
+              "Your request has been submitted. We'll keep in touch!",
+              [ 
+                {
+                  text: 'OK', 
+                  onPress: () => this.props.navigator.push({ component: HomeScreen }) 
+                }
+              ]
+              );
           } else {
             Alert.alert('Uh oh!', responseJson.message);
             console.log('errorResponse', responseJson);
