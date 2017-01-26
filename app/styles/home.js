@@ -32,6 +32,8 @@ module.exports = StyleSheet.create({
     messageContainer: {
         marginTop: 40,
         alignItems: 'center',
+        paddingLeft: 20,
+        paddingRight: 20
     },
     message: {
         fontSize: 25,

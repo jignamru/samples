@@ -84,6 +84,12 @@ class Home extends Component {
 			</View>
 		);
 
+		var unverifiedSitterMessage = (
+			<View style={styles.messageContainer}>
+				<CustomText style={styles.message}>We're waiting for your sitter to verify their account before you can start making a sitter request.</CustomText>
+			</View>
+		);
+
 		var openRequestsButton = (
 			<CustomButton
 				type="small"
@@ -100,8 +106,9 @@ class Home extends Component {
 		        </View>
 		        <View style={styles.actionsContainer}>
 					{ this.state.user.hasOpenRequests ? openRequestsButton : <View/> }
-                    { this.state.user.hasSitters ? requestButton : <View/> }
+                    { this.state.user.hasVerifiedSitters ? requestButton : <View/> }
                     { (this.state.user.phoneNumberIsVerified && !this.state.user.hasSitters) ? zeroSittersMessage : <View/>}
+                    { (this.state.user.hasSitters && !this.state.user.hasVerifiedSitters) ? unverifiedSitterMessage: <View/>}
                     { this.state.user.phoneNumberIsVerified ? addSitterButton : unverifiedAccountMessage}	        	
 		    	</View>
 		    	<BottomIconBar navigator={this.props.navigator} hideHomeIcon={true} hideSittersListIcon={!this.state.user.phoneNumberIsVerified}/>
