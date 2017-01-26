@@ -47,5 +47,9 @@ module.exports = StyleSheet.create({
     },
     textLong: {
         paddingTop: 10
+    },
+    success: {
+        color: 'green',
+        fontWeight: '600',
     }
 })
