@@ -59,8 +59,8 @@ class RequestSitter extends Component{
         })
         .then((response) => response.json())
         .then((responseJson) => {
+          var HomeScreen = require('./home'); //for lazy loading
           if(responseJson.id) {
-            var HomeScreen = require('./home'); //for lazy loading
             Alert.alert(
               'Done!', 
               "Your request has been submitted. We'll keep in touch!",
@@ -72,7 +72,14 @@ class RequestSitter extends Component{
               ]
               );
           } else {
-            Alert.alert('Uh oh!', responseJson.message);
+            Alert.alert('Uh oh!', "Something went wrong. Try again later?",
+              [ 
+                {
+                  text: 'OK', 
+                  onPress: () => this.props.navigator.push({ component: HomeScreen }) 
+                }
+              ]
+              );
             console.log('errorResponse', responseJson);
           }
         })
