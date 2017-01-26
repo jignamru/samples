@@ -168,6 +168,7 @@ class RequestSitter extends Component{
 
               <CustomTextInput
                 multiline={true}
+                blurOnSubmit={true}
                 ref='parentNotes'
                 iconLeft={<Icon style={{alignSelf:'center', marginLeft:10}} name='comment-o' size={15} />}
                 placeholder='Include an optional note'
