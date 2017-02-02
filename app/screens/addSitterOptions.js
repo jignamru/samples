@@ -41,6 +41,15 @@ class AddSitter extends Component {
 	      .then(response => {
 	        //response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
 	        this.setState({ contactsPermission: response })
+	        if( this.state.contactsPermission == 'authorized'){
+				ContactsWrapper.getContact()
+			        .then((contact) => {
+			            this.goToAddSitter(contact);    
+			        })
+			        .catch((error) => {
+			            Alert.alert("Uh Oh!", error.message);
+			        });
+	    	}
       	}).catch(e => console.warn(e));
 	}
 
