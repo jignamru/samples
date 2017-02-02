@@ -35,7 +35,7 @@ class AddSitter extends Component {
 		if(this.props.contact){
 			var data = {
 				fullname: this.props.contact.name,
-				phone: this.props.contact.phone,
+				phone: this.props.contact.phone.replace(/\s+/g, ''), //strip all spaces
 				email: this.props.contact.email
 			}
 			this.setState({formData : data});
