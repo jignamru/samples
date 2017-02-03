@@ -32,13 +32,23 @@ class AddSitter extends Component {
 	}
 
 	componentWillMount() {
-		if(this.props.contact){
+		if(this.props.contact){ //coming from ContactsWrapper
 			var data = {
 				fullname: this.props.contact.name,
 				phone: this.props.contact.phone.replace(/\s+/g, ''), //strip all spaces
-				email: this.props.contact.email
+				email: this.props.contact.email,
+        priority: this.state.formData.priority
 			}
 			this.setState({formData : data});
+
+      //check and validate required fields: name, phone and email
+      if( (data.fullname && Validators.validateFullname(data.fullname)) &&
+          (data.phone && Validators.validatePhone(data.phone)) &&
+          (data.email && Validators.validateEmail(data.email))
+        ){
+        this.state.disableButton = false;
+      }
+
 		}
 	}
 
