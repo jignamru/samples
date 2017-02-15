@@ -36,8 +36,12 @@ class SitterDetails extends Component {
         type: details.type,
         sitters: details.requestSitters,
         requestId: details.id,
-        sitterFullname: details.bookedSitter.firstName + ' ' + details.bookedSitter.lastName
       }
+
+      if(details.bookedSitter){
+        data.sitterFullname = details.bookedSitter.firstName + ' ' + details.bookedSitter.lastName;
+      }
+
       this.setState({details : data});
     }
   }
