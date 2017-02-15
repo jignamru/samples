@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, TouchableHighlight} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import CustomText from '../components/customText';
 
 var User = require('../common/user');
 var styles = require('../styles/bottomIconBar');
@@ -34,6 +35,7 @@ export default class BottomIconBar extends Component {
         onPress={this.goHome.bind(this)}>
           <View>
             <Icon style={styles.footerIcon} name='home' size={30} />
+            <CustomText style={styles.footerIconText}>HOME</CustomText>
           </View>
       </TouchableHighlight>
     );
@@ -43,7 +45,8 @@ export default class BottomIconBar extends Component {
         style={styles.footerItem}
         onPress={() => this.goToScreen(SittersListScreen)}>
           <View>
-            <Icon style={styles.footerIcon} name='users' size={25} />
+            <Icon style={[styles.footerIcon, styles.footerIconSitters]} name='users' size={25} />
+            <CustomText style={styles.footerIconText}>SITTERS</CustomText>
           </View>
       </TouchableHighlight>
     );
@@ -57,6 +60,7 @@ export default class BottomIconBar extends Component {
                   onPress={this.handleLogout.bind(this)}>
                       <View>
                       <Icon style={styles.footerIcon} name='sign-out' size={30} />
+                      <CustomText style={styles.footerIconText}>SIGN OUT</CustomText>
                     </View>
                 </TouchableHighlight>
                   

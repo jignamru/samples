@@ -22,5 +22,14 @@ module.exports = StyleSheet.create({
     footerIcon: {
         color: 'white',
         alignSelf:'center',
+    },
+    footerIconText: {
+        fontSize: 12,
+        color: 'white',
+        fontWeight: '500',
+        alignSelf:'center',
+    },
+    footerIconSitters: {
+        marginTop: 5
     }
 })
