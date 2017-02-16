@@ -38,7 +38,7 @@ module.exports = StyleSheet.create({
         borderBottomColor: '#ddd'
     },
     sitterInfoText: {
-        fontSize: 16
+        // fontSize: 16
     },
     icon: {
         alignSelf: 'center',

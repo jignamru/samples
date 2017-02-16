@@ -36,9 +36,6 @@ module.exports = StyleSheet.create({
         alignSelf: 'center',
         color: common.color.darkPurple
     },
-    input: {
-        fontSize: 14
-    },
     iconRight: {
         position: 'absolute',
         right: 0,

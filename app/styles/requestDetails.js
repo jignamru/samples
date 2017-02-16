@@ -39,7 +39,7 @@ module.exports = StyleSheet.create({
         justifyContent: 'space-between',
     },
     label: {
-        fontSize: 16,
+        // fontSize: 16,
         fontWeight: '400',
     },
     textShort: {

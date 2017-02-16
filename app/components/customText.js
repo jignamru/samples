@@ -13,13 +13,14 @@ export default class CustomText extends Text {
   render() {
 	  var props = _.clone(this.props);
     var fontFamily = this.props.isHeading ? common.fontFamily.heading : common.fontFamily.base;
+    var customStyles = {fontFamily: fontFamily, fontSize: 17};
 
     if (_.isArray(this.props.style)){
-      props.style.push({fontFamily: fontFamily});
+      props.style.push({customStyles});
     } else if (props.style) {
-      props.style = [props.style, {fontFamily: fontFamily}];
+      props.style = [customStyles, props.style];
     } else {
-      props.style = {fontFamily: fontFamily};
+      props.style = {customStyles};
     }
 
     this.props = props;

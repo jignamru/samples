@@ -38,9 +38,6 @@ module.exports = StyleSheet.create({
         width: 20,
         height: 20
     },
-    input: {
-        fontSize: 14
-    },
     errors: {
         color: 'red'
     },

@@ -62,13 +62,13 @@ module.exports = StyleSheet.create({
         alignSelf:'center'
     },
     input: {
-        fontSize: 14
+        // fontSize: 14
     },
     errors: {
         color: 'red'
     },
     terms: {
-        fontSize: 14
+        // fontSize: 14
     },
     greyFont: {
       color: common.color.grey

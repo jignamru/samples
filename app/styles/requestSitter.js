@@ -30,20 +30,20 @@ module.exports = StyleSheet.create({
         color: common.color.darkPurple
     },
     placeholderStyle: {
-        fontSize: 15,
         alignSelf: 'center',
         fontFamily: common.fontFamily.base
     },
     valueStyle: {
         color: 'black',
-        fontSize: 14,
         alignSelf: 'center',
         fontFamily: common.fontFamily.base
     },
     urgent: {
-        fontSize: 15,
+        fontWeight: "300"
     },
     urgentHelpText: {
+        fontSize: 13,
+        fontStyle: 'italic',
         margin: 10,
         color: common.color.grey
     },
