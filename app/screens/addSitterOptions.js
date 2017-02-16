@@ -117,7 +117,7 @@ class AddSitter extends Component {
 		    		<View style={styles.buttonRow}>
 		    		      <CustomButton
 		    		      	type="small"
-		    		      	label="SELECT FROM CONTACTS"
+		    		      	label="ADD FROM CONTACTS"
 					        onPress={this.openContacts.bind(this)}
 					      />
 					</View>
