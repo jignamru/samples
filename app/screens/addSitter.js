@@ -178,10 +178,13 @@ class AddSitter extends Component {
               </Form>
             </KeyboardAvoidingView>
 
+            <CustomText style={styles.disclaimer}>By clicking on "ADD SITTER", you agree that your sitter is at least 13 years old. We will not spam or sell your sitter details!</CustomText>
+
             <CustomButton
               onPress={this.handleAddSitter.bind(this)}
               disabled={this.state.disableButton}
               label="ADD SITTER"/>
+
 
           </ScrollView>
           <BottomIconBar navigator={this.props.navigator}/>

@@ -49,5 +49,12 @@ module.exports = StyleSheet.create({
     errors: {
         color: 'red'
     },
+    disclaimer: {
+        fontSize: 13,
+        fontStyle: 'italic',
+        marginTop: 40,
+        marginLeft: 20,
+        color: common.color.grey
+    },
 
 })
