@@ -54,6 +54,7 @@ module.exports = StyleSheet.create({
         fontStyle: 'italic',
         marginTop: 40,
         marginLeft: 20,
+        marginRight: 20,
         color: common.color.grey
     },
 
