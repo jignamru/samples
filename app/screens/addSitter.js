@@ -24,7 +24,6 @@ class AddSitter extends Component {
         formData: {
         	fullname: '',
         	phone: '',
-        	email: '',
         	priority: '5'
         },
         disableButton: true
@@ -36,15 +35,13 @@ class AddSitter extends Component {
 			var data = {
 				fullname: this.props.contact.name,
 				phone: this.props.contact.phone.replace(/\s+/g, ''), //strip all spaces
-				email: this.props.contact.email,
         priority: this.state.formData.priority
 			}
 			this.setState({formData : data});
 
-      //check and validate required fields: name, phone and email
+      //check and validate required fields: name, phone
       if( (data.fullname && Validators.validateFullname(data.fullname)) &&
-          (data.phone && Validators.validatePhone(data.phone)) &&
-          (data.email && Validators.validateEmail(data.email))
+          (data.phone && Validators.validatePhone(data.phone))
         ){
         this.state.disableButton = false;
       }
@@ -58,8 +55,8 @@ class AddSitter extends Component {
             firstName:    firstName,
             lastName:     lastName,
             phoneNumber:  this.state.formData.phone,
-            emailAddress: this.state.formData.email,
-            priorityOrder: this.state.formData.priority
+            priorityOrder: this.state.formData.priority,
+            emailAddress: ''
           });
 
 	    AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
@@ -76,7 +73,7 @@ class AddSitter extends Component {
 	          if(responseJson.firstName) {
                 Alert.alert(
 		            'Yay!',
-		            firstName + " has been invited to your sitter community!" 
+		            'We have sent a text inviting ' + firstName + " to join your sitter community." 
 		           );
                 var SittersListScreen = require('./sittersList'); // need this here for lazy loading
                 this.props.navigator.push({
@@ -97,15 +94,13 @@ class AddSitter extends Component {
 		var data = {};
 		data.fullname = newData.fullname ? newData.fullname : this.state.formData.fullname;
 		data.phone = newData.phone ? newData.phone : this.state.formData.phone;
-		data.email = newData.email ? newData.email : this.state.formData.email;
 		data.priority = newData.priority ? newData.priority: this.state.formData.priority;
 
 	    this.setState({formData:data});
 	    this.props.onFormChange && this.props.onFormChange(newData);
 
 	    if( (this.refs.addSitterForm.refs.fullname && this.refs.addSitterForm.refs.fullname.valid) &&
-	      (this.refs.addSitterForm.refs.phone && this.refs.addSitterForm.refs.phone.valid) &&
-	      (this.refs.addSitterForm.refs.email && this.refs.addSitterForm.refs.email.valid) 
+	      (this.refs.addSitterForm.refs.phone && this.refs.addSitterForm.refs.phone.valid)
 	    ){
 	      this.state.disableButton = false;
 	    } else {
@@ -162,24 +157,6 @@ class AddSitter extends Component {
                     if(Object.keys(self.refs).length !== 0){
                       if(!self.refs.addSitterForm.refs.phone.valid){
                         return <CustomText style={styles.errors}>{self.refs.addSitterForm.refs.phone.validationErrors.join("\n")}</CustomText>;
-                      }
-                    }
-                  })(this)}
-                />
-
-                <CustomTextInput
-                  ref='email'
-                  style={styles.input}
-                  iconLeft={<Icon name="at" size={20} style={styles.inputIcon} />}
-                  keyboardType='email-address'
-                  placeholder='Email address'
-                  value={this.state.formData.email}
-                  autoCapitalize="none"
-                  validationFunction={ value => Validators.validateEmail(value) }
-                  helpTextComponent={((self)=>{
-                    if(Object.keys(self.refs).length !== 0){
-                      if(!self.refs.addSitterForm.refs.email.valid){
-                        return <CustomText style={styles.errors}>{self.refs.addSitterForm.refs.email.validationErrors.join("\n")}</CustomText>;
                       }
                     }
                   })(this)}
