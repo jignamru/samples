@@ -23,7 +23,8 @@ class Login extends Component{
       super(props);
       this.state = {
         formData: {},
-        disableButton: true
+        disableButton: true,
+        showSpinner: false
       }
   }
 
@@ -88,6 +89,8 @@ class Login extends Component{
 
 
   handleLogin() {
+    this.setState( { showSpinner: true } );
+
     fetch( GLOBAL.BABYSITTER_API_URL + "users/authenticate", {
           method: "POST",
           headers: {
@@ -109,6 +112,7 @@ class Login extends Component{
               component: HomeScreen
             })
           } else {
+            this.setState( { showSpinner: false } );
             Alert.alert('Hmm!', ErrorMessages.login[responseJson.errorCode]);
             console.warn('login failed with errorCode: ', responseJson.errorCode);
           }
@@ -194,6 +198,7 @@ class Login extends Component{
             <CustomButton
               onPress={this.handleLogin.bind(this)}
               disabled={this.state.disableButton}
+              showSpinner={this.state.showSpinner}
               label="SIGN IN"/>
 
             <TouchableHighlight
