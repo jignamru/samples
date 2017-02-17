@@ -35,5 +35,15 @@ module.exports = StyleSheet.create({
     },
     buttonTextDisabled: {
         color: '#DCD'
+    },
+    activityIndicatorContainer: {
+        flexDirection: 'row'
+    },
+    activityIndicator: {
+        transform: [{ scale: 1.5 }]
+    },
+    activityIndicatorText: {
+        color: common.color.grey,
+        marginLeft: 20
     }
 })
