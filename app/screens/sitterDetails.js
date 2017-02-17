@@ -18,10 +18,13 @@ class SitterDetails extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      showSpinner: false
+    }
   }
 
   confirmDelete(){
+    this.setState( { showSpinner: true } );  
     Alert.alert(
                 'Please Confirm',
                 'Are you sure you want to delete ' + this.props.sitter.firstName + ' ' + this.props.sitter.lastName + '?',
@@ -31,7 +34,8 @@ class SitterDetails extends Component {
                     onPress: () => this.handleDeleteSitter()
                   },
                   {
-                    text: 'No'
+                    text: 'No', 
+                    onPress: () => this.setState( { showSpinner: false } )
                   }
                 ]
               );
@@ -47,8 +51,8 @@ class SitterDetails extends Component {
         })
         .then((response) => response.json())
         .then((responseJson) => {
-          console.log('Response:',responseJson);
           if(responseJson.errorCode) {
+            this.setState( { showSpinner: false } ); 
             Alert.alert('Uh oh!', "Something went wrong. Try again later?");
             console.warn(responseJson.message);
           } else {
@@ -112,9 +116,6 @@ class SitterDetails extends Component {
             </View>
 
           <View style={styles.sitterInfo}>
-             <CustomText style={styles.sitterInfoText}><Icon name="at" size={15} style={styles.icon} />   {this.props.sitter.emailAddress}</CustomText>
-          </View>
-          <View style={styles.sitterInfo}>
              <CustomText style={styles.sitterInfoText}><Icon name="mobile" size={25} style={styles.icon} />   {this.props.sitter.phoneNumber}</CustomText>
           </View>
           <View style={styles.sitterInfo}>
@@ -133,6 +134,7 @@ class SitterDetails extends Component {
               type="small"
               buttonStyle={styles.iconButton}
               containerStyle={styles.iconButtonContainer}
+              showSpinner={this.state.showSpinner}
               onPress={this.confirmDelete.bind(this)}
               label={<Icon name="trash" size={20} color="white"/>}/>
           </View>

@@ -10,6 +10,8 @@ import CustomText from '../components/customText';
 import CustomButton from '../components/customButton';
 import StatusMessages from '../common/statusMessages';
 import DateFunctions from '../common/dateFunctions';
+import ActivityIndicatorModal from '../components/activityIndicatorModal';
+
 
 var styles = require('../styles/requestDetails');
 var GLOBAL = require('../common/globals');
@@ -20,7 +22,8 @@ class SitterDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      details: {}
+      details: {},
+      showSpinner: false
     }
   }
 
@@ -47,19 +50,21 @@ class SitterDetails extends Component {
   }
 
   confirmCancel(){
+    this.setState( { showSpinner: true } );
     Alert.alert(
                 'Please Confirm',
                 'Are you sure you want to cancel this request?',
                 [
                   { 
                     text: 'Yes', 
-                    onPress: () => this.handleCancelRequest()
+                    onPress: () => { this.handleCancelRequest() }
                   },
                   {
-                    text: 'No'
+                    text: 'No', 
+                    onPress: () => { this.setState( { showSpinner: false } ); }
                   }
                 ]
-              );
+              )
   }
 
   handleCancelRequest(){
@@ -159,6 +164,7 @@ class SitterDetails extends Component {
               <CustomButton
                 type="small"
                 onPress={() => this.confirmCancel()}
+                showSpinner={this.state.showSpinner}
                 label="CANCEL REQUEST"/>
               </ScrollView>
 

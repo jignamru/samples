@@ -22,12 +22,12 @@ class EditSitter extends Component {
      this.state = {
         formData: {
         	fullname: '',
-        	phone: '',        	
-        	email: '',
+        	phone: '',
         	priority: ''
         },
         sitterId: '',
-        disableButton: true
+        disableButton: true,
+        showSpinner: false
 		}
 	}
 
@@ -38,8 +38,7 @@ class EditSitter extends Component {
 			var data = {
 				fullname: sitter.firstName + ' ' + sitter.lastName,
 				phone: sitter.phoneNumber, 
-				priority: sitter.priorityOrder,
-				email: sitter.emailAddress
+				priority: sitter.priorityOrder
 			}
 			this.setState({formData : data});
 			this.setState({sitterId: sitter.id})
@@ -47,12 +46,14 @@ class EditSitter extends Component {
 	}
 
 	handleEditSitter(){
+      this.setState( { showSpinner: true } );  
+
  	   	var [firstName, lastName] = this.state.formData.fullname.split(' ');
     	var data = JSON.stringify({
             firstName:    firstName,
             lastName:     lastName,
             phoneNumber:  this.state.formData.phone,
-            emailAddress: this.state.formData.email,
+            emailAddress: '',
             priorityOrder: this.state.formData.priority
           });
 
@@ -74,12 +75,13 @@ class EditSitter extends Component {
 		           );
                 var SitterDetailsScreen = require('./sitterDetails'); // need this here for lazy loading
                 this.props.navigator.push({
-			      component: SitterDetailsScreen, 
-			      passProps: {
-			      	sitter: responseJson
-			      }
-        		})
+      			      component: SitterDetailsScreen, 
+        			      passProps: {
+        			      	sitter: responseJson
+        			      }
+              		})
 	          } else {
+              this.setState( { showSpinner: false } );  
 	            Alert.alert('Uh oh!', "We weren't able to update your sitter's information. Totally our fault, sorry! Maybe you can try again later?");
 	            console.warn(responseJson.message);
 	          }
@@ -93,16 +95,14 @@ class EditSitter extends Component {
 	handleFormChange(newData){
 		var data = {};
 		data.fullname = newData.fullname ? newData.fullname : this.state.formData.fullname;
-		data.phone = newData.phone ? newData.phone : this.state.formData.phone;		
-		data.email = newData.email ? newData.email : this.state.formData.email;
+		data.phone = newData.phone ? newData.phone : this.state.formData.phone;	
 		data.priority = newData.priority ? newData.priority: this.state.formData.priority;
 
 	    this.setState({formData:data});
 	    this.props.onFormChange && this.props.onFormChange(newData);
 
 	    if( (this.refs.editSitterForm.refs.fullname && this.refs.editSitterForm.refs.fullname.valid) &&
-			(this.refs.editSitterForm.refs.phone && this.refs.editSitterForm.refs.phone.valid) &&
-   	        (this.refs.editSitterForm.refs.email && this.refs.editSitterForm.refs.email.valid) 
+  			(this.refs.editSitterForm.refs.phone && this.refs.editSitterForm.refs.phone.valid) 
 	    ){
 	      this.state.disableButton = false;
 	    } else {
@@ -162,23 +162,6 @@ class EditSitter extends Component {
                   })(this)}
                 />            
 
-            <CustomTextInput
-              ref='email'
-              style={styles.input}
-              iconLeft={<Icon name="at" size={20} style={styles.inputIcon} />}
-              keyboardType='email-address'
-              placeholder='Email address'
-              value={this.state.formData.email}
-              autoCapitalize="none"
-              validationFunction={ value => Validators.validateEmail(value) }
-              helpTextComponent={((self)=>{
-                if(Object.keys(self.refs).length !== 0){
-                  if(!self.refs.editSitterForm.refs.email.valid){
-                    return <CustomText style={styles.errors}>{self.refs.editSitterForm.refs.email.validationErrors.join("\n")}</CustomText>;
-                  }
-                }
-              })(this)}
-            />
 
 			<PickerField ref='priority'
 				iconLeft={<Icon name="heart-o" size={20} style={styles.inputIcon} />}
@@ -198,6 +181,7 @@ class EditSitter extends Component {
           <CustomButton
               onPress={this.handleEditSitter.bind(this)}
               disabled={this.state.disableButton}
+              showSpinner={this.state.showSpinner}
               label="SAVE"/>
 
         </ScrollView>

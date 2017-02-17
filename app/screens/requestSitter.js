@@ -31,11 +31,14 @@ class RequestSitter extends Component{
           parentNotes: ''
         },
         disableButton: true,
-        errorMessage: ''
+        errorMessage: '',
+        showSpinner: false
       }
   }
     
   handleRequestSitter() {
+    this.setState( { showSpinner: true } );
+
     var requestType = this.state.formData.urgent ? 'URGENT' : 'NORMAL';
     var startDT = this.state.formData.startDateTime;
     var endDT = this.state.formData.endDateTime;
@@ -72,6 +75,8 @@ class RequestSitter extends Component{
               ]
               );
           } else {
+            this.setState( { showSpinner: false } );
+
             Alert.alert('Uh oh!', "Something went wrong. Try again later?",
               [ 
                 {
@@ -186,6 +191,7 @@ class RequestSitter extends Component{
             <CustomButton
               onPress={this.handleRequestSitter.bind(this)}
               disabled={this.state.disableButton}
+              showSpinner={this.state.showSpinner}
               label="REQUEST SITTER"/>
 
               <BottomIconBar navigator={this.props.navigator}/>

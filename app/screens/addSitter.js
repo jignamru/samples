@@ -26,7 +26,8 @@ class AddSitter extends Component {
         	phone: '',
         	priority: '5'
         },
-        disableButton: true
+        disableButton: true,
+        showSpinner: false
 		}
 	}
 
@@ -50,6 +51,8 @@ class AddSitter extends Component {
 	}
 
 	handleAddSitter(){
+      this.setState( { showSpinner: true } );
+
  	   	var [firstName, lastName] = this.state.formData.fullname.split(' ');
     	var data = JSON.stringify({
             firstName:    firstName,
@@ -80,6 +83,7 @@ class AddSitter extends Component {
           			component: SittersListScreen
         		})
 	          } else {
+              this.setState( { showSpinner: false } );
 	            Alert.alert('Uh oh!', "We weren't able to add your sitter. Totally our fault, sorry! Maybe you can try again later?");
 	            console.warn(responseJson.message);
 	          }
@@ -183,6 +187,7 @@ class AddSitter extends Component {
             <CustomButton
               onPress={this.handleAddSitter.bind(this)}
               disabled={this.state.disableButton}
+              showSpinner={this.state.showSpinner}
               label="ADD SITTER"/>
 
 
