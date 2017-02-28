@@ -21,8 +21,8 @@ export default class CustomButton extends Component {
   }
 
   componentWillReceiveProps(nextProps) { 
-    if( typeof nextProps.showSpinner !== "undefined" ) {
-      this.setState({disabled: nextProps.showSpinner});
+    if( nextProps.showSpinner === true ) {
+      this.setState({disabled: true});
     } else if( typeof nextProps.disabled !== "undefined" ) {
       this.setState({disabled: nextProps.disabled});
     }
