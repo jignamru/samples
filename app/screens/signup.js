@@ -26,11 +26,13 @@ class SignUp extends Component {
       this.state = {
         formData: {},
         disableButton: true,
-        tcModalVisible: false
+        tcModalVisible: false,
+        showSpinner: false
       }
     }
 
   handleSignup() {
+    this.setState( { showSpinner: true } );
     var [firstName, lastName] = this.state.formData.fullname.split(' ');
     var data = JSON.stringify({
             firstName:    firstName,
@@ -51,13 +53,13 @@ class SignUp extends Component {
         })
         .then((response) => response.json())
         .then((responseJson) => {
-          console.log('Response:',responseJson);
           if(responseJson.id) {
             User._setUserId(responseJson.id).done();
             this.props.navigator.push({
               component: HomeScreen
             })
           } else {
+            this.setState( { showSpinner: false } );
             Alert.alert('Uh oh!', responseJson.message);
           }
         })
@@ -222,6 +224,7 @@ class SignUp extends Component {
           <CustomButton
             onPress={this.handleSignup.bind(this)}
             disabled={this.state.disableButton}
+            showSpinner={this.state.showSpinner}
             label="DONE"/>
 
           <TouchableHighlight
