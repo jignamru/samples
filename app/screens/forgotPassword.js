@@ -25,12 +25,14 @@ class ForgotPassword extends Component{
         formData: {
           emailAddress: ''
         },
-        disableButton: true
+        disableButton: true,
+        showSpinner: false
       }
   }
 
 
   handlePasswordReset() {
+    this.setState( { showSpinner: true } ); 
     fetch( GLOBAL.BABYSITTER_API_URL + "users/password/requestReset", {
       method: "POST",
       headers: {
@@ -44,6 +46,7 @@ class ForgotPassword extends Component{
     .then((response) => response.json() )
     .then((responseJson) => {
       if(responseJson.message) {
+        this.setState( { showSpinner: false } );
         Alert.alert('Uh oh!', "We didn't find an account under this email address.");
         console.warn(responseJson);
       } else {
@@ -112,6 +115,7 @@ class ForgotPassword extends Component{
         <CustomButton
           onPress={this.handlePasswordReset.bind(this)}
           disabled={this.state.disableButton}
+          showSpinner={this.state.showSpinner}
           label="SUBMIT"/>
       </View>
     )
