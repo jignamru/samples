@@ -80,7 +80,7 @@ class Home extends Component {
 		var unverifiedAccountMessage = (
 			<View style={styles.messageContainer}>
 				<CustomText style={styles.message}>You're almost ready!</CustomText>
-				<CustomText style={styles.message}>Check your email or SMS to verify your account.</CustomText>
+				<CustomText style={styles.message}>Check the SMS we sent you to verify your phone number.</CustomText>
 			</View>
 		);
 
@@ -97,7 +97,6 @@ class Home extends Component {
 				onPress={() => this.goToScreen(OpenRequestsListScreen)}
 			/>
 		);
-
 		return (
 		    <View style={styles.container}>
 		    	<View style={styles.introContainer}>
