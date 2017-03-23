@@ -23,7 +23,7 @@ class ForgotPassword extends Component{
       super(props);
       this.state = {
         formData: {
-          emailAddress: ''
+          phoneNumber: ''
         },
         disableButton: true,
         showSpinner: false
@@ -40,17 +40,17 @@ class ForgotPassword extends Component{
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        emailAddress: this.state.formData.emailAddress,
+        phoneNumber: this.state.formData.phoneNumber,
       })
     })
     .then((response) => response.json() )
     .then((responseJson) => {
       if(responseJson.message) {
         this.setState( { showSpinner: false } );
-        Alert.alert('Uh oh!', "We didn't find an account under this email address.");
+        Alert.alert('Uh oh!', "We didn't find an account under this phone number.");
         console.warn(responseJson);
       } else {
-        Alert.alert('Thanks!', "Check the email we've just sent to you for further instructions on how to reset your password.")
+        Alert.alert('Thanks!', "Check the SMS we've just sent to you for further instructions on how to reset your password.")
         var LoginScreen = require('./login'); // need this here for lazy loading
         this.props.navigator.push({
           component: LoginScreen
@@ -66,7 +66,7 @@ class ForgotPassword extends Component{
     this.setState({formData:formData});
     this.props.onFormChange && this.props.onFormChange(formData);
 
-    if (this.refs.forgotPasswordForm.refs.emailAddress && this.refs.forgotPasswordForm.refs.emailAddress.valid){
+    if (this.refs.forgotPasswordForm.refs.phoneNumber && this.refs.forgotPasswordForm.refs.phoneNumber.valid){
       this.state.disableButton = false;
     } else {
       this.state.disableButton = true;
@@ -95,17 +95,17 @@ class ForgotPassword extends Component{
                 onChange={this.handleFormChange.bind(this)}
                 label="Login">
                 <CustomTextInput 
-                  ref='emailAddress' 
+                  ref='phoneNumber' 
                   style={styles.input}
-                  iconLeft={<Icon name="user-o" size={20} style={styles.inputIcon} />}
-                  keyboardType='email-address'
-                  placeholder='email address'
+                  iconLeft={<Icon name="mobile" size={20} style={styles.inputIcon} />}
+                  keyboardType='phone-pad'
+                  placeholder='mobile number'
                   autoCapitalize="none"
-                  validationFunction={ value => Validators.validateEmail(value)}
+                  validationFunction={ value => Validators.validatePhone(value)}
                   helpTextComponent={((self)=>{
                     if(Object.keys(self.refs).length !== 0){
-                      if(!self.refs.forgotPasswordForm.refs.emailAddress.valid){
-                        return <CustomText style={styles.errors}>{self.refs.forgotPasswordForm.refs.emailAddress.validationErrors.join("\n")}</CustomText>;
+                      if(!self.refs.forgotPasswordForm.refs.phoneNumber.valid){
+                        return <CustomText style={styles.errors}>{self.refs.forgotPasswordForm.refs.phoneNumber.validationErrors.join("\n")}</CustomText>;
                       }
                     }
                   })(this)}

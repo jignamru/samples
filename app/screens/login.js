@@ -98,7 +98,7 @@ class Login extends Component{
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            emailAddress: this.state.formData.username,
+            phoneNumber: this.state.formData.username,
             password:     this.state.formData.password,
             clientId: "karma"
           })
@@ -156,11 +156,10 @@ class Login extends Component{
                 <CustomTextInput 
                   ref='username' 
                   style={styles.input}
-                  iconLeft={<Icon name="user-o" size={15} style={styles.inputIcon} />}
-                  keyboardType='email-address'
-                  placeholder='email address'
-                  autoCapitalize="none"
-                  validationFunction={ value => Validators.validateEmail(value)}
+                  iconLeft={<Icon name="mobile" size={20} style={styles.inputIcon} />}
+                  keyboardType='phone-pad'
+                  placeholder='mobile number'
+                  validationFunction={ value => Validators.validatePhone(value)}
                   helpTextComponent={((self)=>{
                     if(Object.keys(self.refs).length !== 0){
                       if(!self.refs.loginForm.refs.username.valid){
