@@ -96,7 +96,7 @@ class SittersList extends Component {
           leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
            />
           <View style={styles.introContainer}>
-            <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/butterfly.png')} />
+            <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/dogOnPier.jpg')} />
             <CustomText isHeading={true} style={styles.title}>Your sitters</CustomText>
           </View>
           {this.state.dataSource.getRowCount() < 1 ? zeroSittersMessage : <View/>}           

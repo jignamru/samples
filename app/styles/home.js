@@ -26,18 +26,22 @@ module.exports = StyleSheet.create({
     title: {
 	    fontSize: 40,
 	    fontWeight: 'bold',
-        color: common.color.darkPurple,
+        color: 'white',
         marginLeft: 30
     },
     messageContainer: {
-        marginTop: 40,
+        margin: 10,
         alignItems: 'center',
-        paddingLeft: 20,
-        paddingRight: 20
+        padding: 20,
+        backgroundColor: common.color.lightGrey,
+        borderRadius: 5,
+        width: windowSize.width * 0.9
     },
     message: {
-        fontSize: 25,
-        marginBottom: 40
+        fontSize: 18,
+    },
+    bold: {
+        fontWeight: "400"
     },
     actionsContainer: {
     	flex: 1,

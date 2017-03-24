@@ -77,7 +77,7 @@ class OpenRequestsList extends Component {
           leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
            />
           <View style={styles.introContainer}>
-            <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/butterfly.png')} />
+            <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/dogRunning.jpg')} />
             <CustomText isHeading={true} style={styles.title}>Your Open Requests</CustomText>
           </View>
         <ListView

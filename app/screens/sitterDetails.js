@@ -111,7 +111,7 @@ class SitterDetails extends Component {
           />
 
             <View style={styles.introContainer}>
-                <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/ladybug.png')} />
+                <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/kidWriting.jpg')} />
                 <CustomText isHeading={true} style={styles.title}>{this.props.sitter.firstName} {this.props.sitter.lastName}</CustomText>
             </View>
 

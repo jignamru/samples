@@ -27,7 +27,7 @@ module.exports = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
         paddingLeft: 30,
-        color: common.color.darkPurple
+        color: "white"
     },
     inputIcon: {
         marginLeft: 15,

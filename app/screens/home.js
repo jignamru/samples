@@ -73,14 +73,21 @@ class Home extends Component {
 
 		var zeroSittersMessage = (
 			<View style={styles.messageContainer}>
-				<CustomText style={styles.message}>Let's start by adding new sitters.</CustomText>
+				<CustomText style={[styles.message, styles.bold]}>Let's start by adding new sitters.</CustomText>
 			</View>
 		);
 
 		var unverifiedAccountMessage = (
 			<View style={styles.messageContainer}>
-				<CustomText style={styles.message}>You're almost ready!</CustomText>
+				<CustomText style={[styles.message, styles.bold]}>You're almost ready!</CustomText>
 				<CustomText style={styles.message}>Check the SMS we sent you to verify your phone number.</CustomText>
+			</View>
+		);
+
+		var unverifiedEmailMessage = (
+			<View style={styles.messageContainer}>
+				<CustomText style={[styles.message, styles.bold]}>Please verify your email address!</CustomText>
+				<CustomText style={styles.message}>You can follow the instructions in the email we sent you.</CustomText>
 			</View>
 		);
 
@@ -97,20 +104,23 @@ class Home extends Component {
 				onPress={() => this.goToScreen(OpenRequestsListScreen)}
 			/>
 		);
+
 		return (
 		    <View style={styles.container}>
 		    	<View style={styles.introContainer}>
-					<Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/giraffe.png')} />
+					<Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/home.jpg')} />
 		            <CustomText isHeading={true} style={styles.title}>Hi {this.state.user.firstName}!</CustomText>
 		        </View>
 		        <View style={styles.actionsContainer}>
 					{ this.state.user.hasOpenRequests ? openRequestsButton : <View/> }
                     { this.state.user.hasVerifiedSitters ? requestButton : <View/> }
                     { (this.state.user.phoneNumberIsVerified && !this.state.user.hasSitters) ? zeroSittersMessage : <View/>}
-                    { (this.state.user.hasSitters && !this.state.user.hasVerifiedSitters) ? unverifiedSitterMessage: <View/>}
-                    { this.state.user.phoneNumberIsVerified ? addSitterButton : unverifiedAccountMessage}	        	
-		    	</View>
+                    { (this.state.user.hasSitters && !this.state.user.hasVerifiedSitters) ? unverifiedSitterMessage : <View/>}
+                    { this.state.user.phoneNumberIsVerified ? addSitterButton : unverifiedAccountMessage}
+                    { !this.state.user.emailIsVerified ? unverifiedEmailMessage : <View/>}
 		    	<BottomIconBar navigator={this.props.navigator} hideHomeIcon={true} hideSittersListIcon={!this.state.user.phoneNumberIsVerified}/>
+
+		    	</View>
 		    </View>
 		)
 	}

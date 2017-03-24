@@ -139,7 +139,7 @@ class SitterDetails extends Component {
           />
 
             <View style={styles.introContainer}>
-                <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/ladybug.png')} />
+                <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/wine.jpg')} />
                 <CustomText isHeading={true} style={styles.title}>Request details</CustomText>
             </View>
 
