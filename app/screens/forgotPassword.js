@@ -87,7 +87,7 @@ class ForgotPassword extends Component{
          />
 
         <View style={styles.introContainer}>
-            <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/reading.png')} />
+            <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/cuppa.jpg')} />
             <CustomText isHeading={true} style={styles.title}>Reset Password</CustomText>
         </View>
 

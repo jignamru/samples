@@ -119,7 +119,7 @@ class EditSitter extends Component {
 				/>
 
 	        	<View style={styles.introContainer}>
-					<Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/elephant.png')} />
+					<Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/cuppa.jpg')} />
 		            <CustomText isHeading={true} style={styles.title}>Edit sitter</CustomText>
 		        </View>
 

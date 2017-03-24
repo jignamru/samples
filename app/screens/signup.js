@@ -112,7 +112,7 @@ class SignUp extends Component {
          />
 
         <View style={styles.introContainer}>
-            <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/reading.png')} />
+            <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/dogRunning.jpg')} />
             <CustomText isHeading={true} style={styles.title}>Sign Up</CustomText>
         </View>
 
