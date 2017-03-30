@@ -23,6 +23,10 @@ module.exports = StyleSheet.create({
         width: windowSize.width,
         height: windowSize.height * 0.2
     },
+    introText: {
+        padding: 30,
+        alignSelf:'center'
+    },
     title: {
         fontSize: 30,
         fontWeight: 'bold',
@@ -30,7 +34,7 @@ module.exports = StyleSheet.create({
         color: "white"
     },
     buttonsBox: {
-        marginTop: 100
+        marginTop: 10
     },
     buttonRow: {
         alignItems: 'center'

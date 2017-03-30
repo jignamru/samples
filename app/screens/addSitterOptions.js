@@ -112,6 +112,11 @@ class AddSitter extends Component {
 		            <CustomText isHeading={true} style={styles.title}>Add new sitter</CustomText>
 		        </View>
 
+		        <CustomText style={styles.introText}>
+		        	Choose one of the following ways to invite someone to your sitter community. 
+		        	We will text your sitter to confirm their phone number... and we will not spam or sell their information!
+		        </CustomText>
+
 		        <View style={styles.buttonsBox}>
 
 		    		<View style={styles.buttonRow}>
