@@ -16,11 +16,11 @@ export default class CustomText extends Text {
     var customStyles = {fontFamily: fontFamily, fontSize: 17};
 
     if (_.isArray(this.props.style)){
-      props.style.push({customStyles});
+      props.style.push(customStyles);
     } else if (props.style) {
       props.style = [customStyles, props.style];
     } else {
-      props.style = {customStyles};
+      props.style = [customStyles];
     }
 
     this.props = props;
