@@ -8,8 +8,8 @@ module.exports = StyleSheet.create({
     introContainer: {
         backgroundColor: 'transparent',
         width: windowSize.width,
-        height: windowSize.height * 0.2,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        height: windowSize.height * 0.2
     },
     introBg: {
         position: 'absolute',
@@ -18,10 +18,19 @@ module.exports = StyleSheet.create({
         width: windowSize.width,
         height: windowSize.height * 0.2
     },
+    tallBannerHeight: {
+        height: windowSize.height * 0.4
+    },
     title: {
         fontSize: 30,
         fontWeight: 'bold',
         paddingLeft: 30,
-        color: "white"
-    }
+        color: "white",
+    },
+    largeTitle: { // had to dupe from title as fontSize was getting lost in the nested styles approach :\
+        fontSize: 40,
+        fontWeight: 'bold',
+        paddingLeft: 30,
+        color: "white",    }
+
 })

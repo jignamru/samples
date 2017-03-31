@@ -7,10 +7,20 @@ var styles = require('../styles/topBannerBox');
 
 export default class CustomModal extends Component {
   render() {
+  	var introContainerStyle = styles.introContainer;
+  	var introBgStyle = styles.introBg;
+  	var titleStyle = styles.title;
+
+  	if(this.props.isTallBanner){
+		introContainerStyle = [introContainerStyle, styles.tallBannerHeight];
+		introBgStyle = [introBgStyle, styles.tallBannerHeight];
+		titleStyle = styles.largeTitle;
+  	} 
+
     return (
-      <View style={styles.introContainer}>
-        <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={this.props.imageSource} />
-        <CustomText isHeading={true} style={styles.title}>{this.props.title}</CustomText>
+      <View style={introContainerStyle}>
+        <Image style={introBgStyle} resizeMode={Image.resizeMode.cover} source={this.props.imageSource} />
+        <CustomText isHeading={true} style={titleStyle}>{this.props.title}</CustomText>
       </View>
     );
   }
