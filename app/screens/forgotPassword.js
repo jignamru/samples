@@ -15,6 +15,7 @@ import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import TopBannerBox from '../components/topBannerBox';
 
 
 class ForgotPassword extends Component{
@@ -86,10 +87,10 @@ class ForgotPassword extends Component{
           leftButton={<BackArrow onPress={this.goBack.bind(this)}/>}
          />
 
-        <View style={styles.introContainer}>
-            <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/cuppa.jpg')} />
-            <CustomText isHeading={true} style={styles.title}>Reset Password</CustomText>
-        </View>
+        <TopBannerBox
+          imageSource={require('../images/bg/cuppa.jpg')}
+          title="Reset password"
+        />
 
         <Form ref='forgotPasswordForm' 
                 onChange={this.handleFormChange.bind(this)}

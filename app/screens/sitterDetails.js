@@ -9,6 +9,7 @@ import BottomIconBar from '../components/bottomIconBar';
 import CustomText from '../components/customText';
 import CustomButton from '../components/customButton';
 import EditSitterScreen from './editSitter';
+import TopBannerBox from '../components/topBannerBox';
 
 var styles = require('../styles/sitterDetails');
 var GLOBAL = require('../common/globals');
@@ -110,10 +111,10 @@ class SitterDetails extends Component {
           leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
           />
 
-            <View style={styles.introContainer}>
-                <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/kidWriting.jpg')} />
-                <CustomText isHeading={true} style={styles.title}>{this.props.sitter.firstName} {this.props.sitter.lastName}</CustomText>
-            </View>
+        <TopBannerBox
+          imageSource={require('../images/bg/kidWriting.jpg')}
+          title={this.props.sitter.firstName + ' ' + this.props.sitter.lastName}
+        />
 
           <View style={styles.sitterInfo}>
              <CustomText style={styles.sitterInfoText}><Icon name="mobile" size={25} style={styles.icon} />   {this.props.sitter.phoneNumber}</CustomText>

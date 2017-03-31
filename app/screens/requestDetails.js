@@ -11,6 +11,7 @@ import CustomButton from '../components/customButton';
 import StatusMessages from '../common/statusMessages';
 import DateFunctions from '../common/dateFunctions';
 import ActivityIndicatorModal from '../components/activityIndicatorModal';
+import TopBannerBox from '../components/topBannerBox';
 
 
 var styles = require('../styles/requestDetails');
@@ -138,10 +139,10 @@ class SitterDetails extends Component {
           leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
           />
 
-            <View style={styles.introContainer}>
-                <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/wine.jpg')} />
-                <CustomText isHeading={true} style={styles.title}>Request details</CustomText>
-            </View>
+          <TopBannerBox
+            imageSource={require('../images/bg/wine.jpg')}
+            title="Request details"
+          />
 
             <ScrollView>
               <View style={[styles.section,styles.row]}>

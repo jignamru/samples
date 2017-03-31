@@ -17,6 +17,7 @@ import CustomTextInput from '../components/customTextInput';
 import CustomModal from '../components/customModal';
 import CustomButton from '../components/customButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import TopBannerBox from '../components/topBannerBox';
 
 
 class RequestSitter extends Component{
@@ -138,10 +139,10 @@ class RequestSitter extends Component{
             leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
            />
 
-            <View style={styles.introContainer}>
-                <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/party.jpg')} />
-                <CustomText isHeading={true} style={styles.title}>Request a sitter</CustomText>
-            </View>
+          <TopBannerBox
+            imageSource={require('../images/bg/party.jpg')}
+            title="Request a sitter"
+          />
 
             <Form ref='requestSitterForm' 
             onChange={this.handleFormChange.bind(this)}>

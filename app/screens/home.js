@@ -12,7 +12,8 @@ var OpenRequestsListScreen = require('./openRequestsList');
 
 import CustomButton from '../components/customButton';
 import CustomText from '../components/customText';
-import BottomIconBar from '../components/bottomIconBar'
+import BottomIconBar from '../components/bottomIconBar';
+import TopBannerBox from '../components/topBannerBox';
 
 class Home extends Component {
     constructor(props) {
@@ -107,10 +108,11 @@ class Home extends Component {
 
 		return (
 		    <View style={styles.container}>
-		    	<View style={styles.introContainer}>
-					<Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/home.jpg')} />
-		            <CustomText isHeading={true} style={styles.title}>Hi {this.state.user.firstName}!</CustomText>
-		        </View>
+	            <TopBannerBox
+	              isTallBanner={true}
+	              imageSource={require('../images/bg/home.jpg')}
+	              title={'Hi ' + this.state.user.firstName + '!'}
+	            />
 		        <View style={styles.actionsContainer}>
 					{ this.state.user.hasOpenRequests ? openRequestsButton : <View/> }
                     { this.state.user.hasVerifiedSitters ? requestButton : <View/> }

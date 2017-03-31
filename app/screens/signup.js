@@ -19,6 +19,7 @@ import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import TCModal from '../components/termsAndConditionsModal';
+import TopBannerBox from '../components/topBannerBox';
 
 class SignUp extends Component {
     constructor(props) {
@@ -111,10 +112,10 @@ class SignUp extends Component {
           leftButton={<BackArrow onPress={this.goBack.bind(this)}/>}
          />
 
-        <View style={styles.introContainer}>
-            <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/dogRunning.jpg')} />
-            <CustomText isHeading={true} style={styles.title}>Sign Up</CustomText>
-        </View>
+        <TopBannerBox
+          imageSource={require('../images/bg/dogRunning.jpg')}
+          title="Sign up"
+        />
 
         <ScrollView keyboardShouldPersistTaps={true} style={styles.scrollView}>
           <KeyboardAvoidingView behavior='padding'>

@@ -14,6 +14,7 @@ import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
 import BottomIconBar from '../components/bottomIconBar';
 import DateFunctions from '../common/dateFunctions';
+import TopBannerBox from '../components/topBannerBox';
 
 
 class OpenRequestsList extends Component {
@@ -76,10 +77,12 @@ class OpenRequestsList extends Component {
           title={<IconTitle/>}
           leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
            />
-          <View style={styles.introContainer}>
-            <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/dogRunning.jpg')} />
-            <CustomText isHeading={true} style={styles.title}>Your Open Requests</CustomText>
-          </View>
+
+          <TopBannerBox
+            imageSource={require('../images/bg/dogRunning.jpg')}
+            title="Your open requests"
+          />
+
         <ListView
          enableEmptySections={true}
       	 dataSource={this.state.dataSource}

@@ -17,6 +17,7 @@ import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
 import BottomIconBar from '../components/bottomIconBar';
+import TopBannerBox from '../components/topBannerBox';
 
 class AddSitter extends Component {
    constructor(props) {
@@ -106,15 +107,14 @@ class AddSitter extends Component {
                   title={<IconTitle/>}
                   leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
 				/>
-	        	
-	        	<View style={styles.introContainer}>
-					<Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/bubble.jpg')} />
-		            <CustomText isHeading={true} style={styles.title}>Add new sitter</CustomText>
-		        </View>
+
+				<TopBannerBox
+					imageSource={require('../images/bg/bubble.jpg')}
+					title="Add new sitter"
+				/>
 
 		        <CustomText style={styles.introText}>
-		        	Choose one of the following ways to invite someone to your sitter community. 
-		        	We will text your sitter to confirm their phone number... and we will not spam or sell their information!
+		        	Choose one of the following ways to invite someone to your sitter community. We will text your sitter to confirm their phone number... and we will not spam or sell their information!
 		        </CustomText>
 
 		        <View style={styles.buttonsBox}>

@@ -10,25 +10,6 @@ module.exports = StyleSheet.create({
       flexDirection: 'column',
       flex: 1,
     },
-    introContainer: {
-		backgroundColor: 'transparent',
-    	justifyContent: 'center',
-        width: windowSize.width,
-        height: windowSize.height * 0.4,
-    },
-    introBg: {
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        width: windowSize.width,
-        height: windowSize.height * 0.4
-    },
-    title: {
-	    fontSize: 40,
-	    fontWeight: 'bold',
-        color: 'white',
-        marginLeft: 30
-    },
     messageContainer: {
         margin: 10,
         alignItems: 'center',

@@ -16,6 +16,7 @@ import NavigationBar from 'react-native-navbar';
 import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
 import BottomIconBar from '../components/bottomIconBar';
+import TopBannerBox from '../components/topBannerBox';
 
 class AddSitter extends Component {
    constructor(props) {
@@ -120,10 +121,10 @@ class AddSitter extends Component {
               leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
 		        />
 
-  	        <View style={styles.introContainer}>
-  					  <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/cuppa.jpg')} />
-	            <CustomText isHeading={true} style={styles.title}>Add new sitter</CustomText>
-		        </View>
+            <TopBannerBox
+              imageSource={require('../images/bg/cuppa.jpg')}
+              title="Add new sitter"
+            />
 
 		      <ScrollView keyboardShouldPersistTaps={true} style={styles.scrollView}>
             <KeyboardAvoidingView behavior='padding'>

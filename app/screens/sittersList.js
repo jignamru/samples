@@ -14,6 +14,7 @@ import IconTitle from '../components/navbarIconTitle';
 import BackArrow from '../components/navbarLeftButton';
 import BottomIconBar from '../components/bottomIconBar';
 import CustomButton from '../components/customButton';
+import TopBannerBox from '../components/topBannerBox';
 
 
 class SittersList extends Component {
@@ -95,10 +96,12 @@ class SittersList extends Component {
           title={<IconTitle/>}
           leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
            />
-          <View style={styles.introContainer}>
-            <Image style={styles.introBg} resizeMode={Image.resizeMode.cover} source={require('../images/bg/dogOnPier.jpg')} />
-            <CustomText isHeading={true} style={styles.title}>Your sitters</CustomText>
-          </View>
+
+          <TopBannerBox
+            imageSource={require('../images/bg/dogOnPier.jpg')}
+            title="Your sitters"
+          /> 
+
           {this.state.dataSource.getRowCount() < 1 ? zeroSittersMessage : <View/>}           
 
           <ListView
