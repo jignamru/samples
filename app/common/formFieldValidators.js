@@ -13,8 +13,22 @@ module.exports = {
 	    return true;
 	},
 
-	validatePassword: function(value) {
+	validatePassword: function(value, isNew) {
 	    if(!value || value == '') return "Please enter your password";
+
+	    // NEW PASSWORD NEEDS TO HAVE:
+	 	// - min of 6 characters and max of 15
+		// - at least one alphabet character
+		// - at least one digit
+		// - no whitespaces
+		// - non-alpha character allowed/optional
+
+		if( isNew ){
+		    var re = /^(?=.[a-zA-Z])(?=.*[0-9])\S{6,15}$/;
+
+		    var matches = re.test(value);
+		    if (!matches) return "Please enter a valid password with a min of 6 characters (max of 15), at least one alphabet letter and at least one digit.";
+		}
 
 	    return true;
 	},

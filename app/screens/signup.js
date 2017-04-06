@@ -178,7 +178,7 @@ class SignUp extends Component {
                 placeholder='password' 
                 password={true}
                 style={styles.input}
-                validationFunction={ value => Validators.validatePassword(value)}
+                validationFunction={ value => Validators.validatePassword(value,true)}
                 helpTextComponent={((self)=>{
                   if(Object.keys(self.refs).length !== 0){
                     if(!self.refs.signupForm.refs.password.valid){
