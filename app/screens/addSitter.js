@@ -126,7 +126,7 @@ class AddSitter extends Component {
               title="Add new sitter"
             />
 
-		      <ScrollView keyboardShouldPersistTaps={true} style={styles.scrollView}>
+		      <ScrollView keyboardShouldPersistTaps="handled" style={styles.scrollView}>
             <KeyboardAvoidingView behavior='padding'>
               <Form ref='addSitterForm'
               	// onFocus={this.handleFormFocus.bind(this)}

@@ -117,7 +117,7 @@ class SignUp extends Component {
           title="Sign up"
         />
 
-        <ScrollView keyboardShouldPersistTaps={true} style={styles.scrollView}>
+        <ScrollView keyboardShouldPersistTaps="handled" style={styles.scrollView}>
           <KeyboardAvoidingView behavior='padding'>
             <Form ref='signupForm' 
               onChange={this.handleFormChange.bind(this)}

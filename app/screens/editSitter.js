@@ -124,7 +124,7 @@ class EditSitter extends Component {
           title="Edit sitter"
         />
 
-		<ScrollView keyboardShouldPersistTaps={true} style={styles.scrollView}>
+		<ScrollView keyboardShouldPersistTaps="handled" style={styles.scrollView}>
           <Form ref='editSitterForm'
             onChange={this.handleFormChange.bind(this)}
             label="Login">
