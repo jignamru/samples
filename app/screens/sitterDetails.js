@@ -103,7 +103,25 @@ class SitterDetails extends Component {
     })
   }
 
+  getSitterTypeLabel(){
+    var sitterType = this.props.sitter.type.toLowerCase();
+
+    if(sitterType == 'other') {
+      sitterType = this.props.sitter.typeDescription ? this.props.sitter.typeDescription : "sitter";
+    } else {
+      sitterType += " sitter";
+    }
+    
+    return sitterType;    
+  }
+
   render() {
+    var userNotes = (
+      <View style={styles.sitterInfo}>
+        <CustomText style={styles.sitterInfoText}><Icon name="pencil-square-o" size={15} style={styles.icon} />   {this.props.sitter.userNotes}</CustomText>
+      </View>
+    );
+
     return (
       <View style={styles.container}>
         <NavigationBar
@@ -116,31 +134,37 @@ class SitterDetails extends Component {
           title={this.props.sitter.firstName + ' ' + this.props.sitter.lastName}
         />
 
-          <View style={styles.sitterInfo}>
-             <CustomText style={styles.sitterInfoText}><Icon name="mobile" size={25} style={styles.icon} />   {this.props.sitter.phoneNumber}</CustomText>
-          </View>
-          <View style={styles.sitterInfo}>
-             <CustomText style={styles.sitterInfoText}><Icon name="heart-o" size={15} style={styles.icon} />   {this.getPriorityLabel(this.props.sitter.priorityOrder)}</CustomText>
-          </View>
+        <View style={styles.sitterInfo}>
+           <CustomText style={styles.sitterInfoText}><Icon name="handshake-o" size={15} style={styles.icon} />   {this.getSitterTypeLabel()}</CustomText>
+        </View>
+        
+        { this.props.sitter.userNotes ? userNotes : <View/> }
 
-          <View style={styles.buttonsRow}>
-            <CustomButton
-              type="small"
-              buttonStyle={styles.iconButton}
-              containerStyle={styles.iconButtonContainer}
-              onPress={() => this.goToEditSitter(this.props.sitter)}
-              label={<Icon name="pencil" size={20} color="white"/>}/>
+        <View style={styles.sitterInfo}>
+           <CustomText style={styles.sitterInfoText}><Icon name="mobile" size={25} style={styles.icon} />   {this.props.sitter.phoneNumber}</CustomText>
+        </View>
+        <View style={styles.sitterInfo}>
+           <CustomText style={styles.sitterInfoText}><Icon name="heart-o" size={15} style={styles.icon} />   {this.getPriorityLabel(this.props.sitter.priorityOrder)}</CustomText>
+        </View>
 
-            <CustomButton
-              type="small"
-              buttonStyle={styles.iconButton}
-              containerStyle={styles.iconButtonContainer}
-              showSpinner={this.state.showSpinner}
-              onPress={this.confirmDelete.bind(this)}
-              label={<Icon name="trash" size={20} color="white"/>}/>
-          </View>
+        <View style={styles.buttonsRow}>
+          <CustomButton
+            type="small"
+            buttonStyle={styles.iconButton}
+            containerStyle={styles.iconButtonContainer}
+            onPress={() => this.goToEditSitter(this.props.sitter)}
+            label={<Icon name="pencil" size={20} color="white"/>}/>
 
-          <BottomIconBar navigator={this.props.navigator}/>
+          <CustomButton
+            type="small"
+            buttonStyle={styles.iconButton}
+            containerStyle={styles.iconButtonContainer}
+            showSpinner={this.state.showSpinner}
+            onPress={this.confirmDelete.bind(this)}
+            label={<Icon name="trash" size={20} color="white"/>}/>
+        </View>
+
+        <BottomIconBar navigator={this.props.navigator}/>
       </View>
     )
   }

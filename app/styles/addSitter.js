@@ -38,5 +38,10 @@ module.exports = StyleSheet.create({
         marginRight: 20,
         color: common.color.grey
     },
+    typeDescriptionLabel: {
+        alignSelf: 'center',
+        fontStyle: 'italic',
+        fontWeight: '400'
+    }
 
 })

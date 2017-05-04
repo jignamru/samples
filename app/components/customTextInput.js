@@ -16,6 +16,14 @@ export default class CustomTextInput extends InputField {
       props.style = {fontFamily: common.fontFamily.base};
     }
 
+    if (_.isArray(this.props.labelStyle)){
+      props.labelStyle.push({fontFamily: common.fontFamily.base});
+    } else if (props.labelStyle) {
+      props.labelStyle = [props.labelStyle, {fontFamily: common.fontFamily.base}];
+    } else {
+      props.labelStyle = {fontFamily: common.fontFamily.base};
+    }
+
     this.props = props;
 
     return super.render();
