@@ -16,16 +16,27 @@ module.exports = StyleSheet.create({
         marginBottom: 30,
         alignSelf: 'center'
     },
+    sectionHeader: {
+        padding: 10,
+        backgroundColor: common.color.lightGrey
+    },
     row: { 
-        height:60, 
+        padding: 10,
+        paddingLeft: 30,
         borderBottomWidth:1, 
-        borderBottomColor: '#ddd', 
+        borderBottomColor: common.color.lightGrey, 
         flexDirection:'row', 
-        justifyContent: 'center', 
-        alignItems: 'center'
+        flex: 1,
+        justifyContent: 'space-between'
+    },
+    rowText: {
+        paddingTop: 5
     },
     unverified: {
         fontSize: 14,
-        fontStyle: 'italic'
+        fontStyle: 'italic',
+    },
+    iconRight: {
+        fontSize: 30
     }
 })
