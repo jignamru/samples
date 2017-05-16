@@ -183,7 +183,6 @@ class EditSitter extends Component {
             <PickerField ref='type'
               iconLeft={<Icon name="handshake-o" size={15} style={styles.inputIcon} />}
               iconRight={<Icon name="angle-right" size={20} style={[ styles.inputIcon, styles.iconRight ]} />}
-              placeholder= 'Priority'
               valueStyle={styles.pickerFieldValue}
               value={this.state.formData.type}
               options={{

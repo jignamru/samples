@@ -25,10 +25,14 @@ class AddSitter extends Component {
         formData: {
         	fullname: '',
         	phone: '',
-        	priority: '5'
+        	priority: '5',
+          notes: '',
+          type: 'CHILD',
+          typeDescription: ''
         },
         disableButton: true,
-        showSpinner: false
+        showSpinner: false,
+        showTypeDescriptionInput: false
 		}
 	}
 
@@ -37,7 +41,10 @@ class AddSitter extends Component {
 			var data = {
 				fullname: this.props.contact.name,
 				phone: this.props.contact.phone.replace(/\s+/g, ''), //strip all spaces
-        priority: this.state.formData.priority
+        priority: this.state.formData.priority,
+        userNotes: this.state.formData.userNotes,
+        type: this.state.formData.type,
+        typeDescription: this.state.formData.typeDescription
 			}
 			this.setState({formData : data});
 
@@ -60,7 +67,9 @@ class AddSitter extends Component {
             lastName:     lastName,
             phoneNumber:  this.state.formData.phone,
             priorityOrder: this.state.formData.priority,
-            emailAddress: ''
+            userNotes: this.state.formData.notes,
+            type: this.state.formData.type,
+            typeDescription: this.state.formData.typeDescription
           });
 
 	    AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
@@ -96,13 +105,24 @@ class AddSitter extends Component {
 	}
 
 	handleFormChange(newData){
+    var showTypeDescription = false;
 		var data = {};
 		data.fullname = newData.fullname ? newData.fullname : this.state.formData.fullname;
 		data.phone = newData.phone ? newData.phone : this.state.formData.phone;
 		data.priority = newData.priority ? newData.priority: this.state.formData.priority;
+    data.notes = newData.notes ? newData.notes: this.state.formData.notes;
+    data.type = newData.type ? newData.type: this.state.formData.type;
+    data.typeDescription = newData.typeDescription ? newData.typeDescription: this.state.formData.typeDescription;
 
-	    this.setState({formData:data});
-	    this.props.onFormChange && this.props.onFormChange(newData);
+    this.setState({formData:data});
+    this.props.onFormChange && this.props.onFormChange(newData);
+
+    if( data.type == "OTHER" ){
+      showTypeDescription = true;
+    }
+    this.setState({
+      showTypeDescriptionInput: showTypeDescription
+    });
 
 	    if( (this.refs.addSitterForm.refs.fullname && this.refs.addSitterForm.refs.fullname.valid) &&
 	      (this.refs.addSitterForm.refs.phone && this.refs.addSitterForm.refs.phone.valid)
@@ -114,20 +134,30 @@ class AddSitter extends Component {
 	}
 
     render() {
+      var typeDescriptionInput = (
+        <CustomTextInput
+          ref='typeDescription'
+          labelStyle={styles.typeDescriptionLabel}
+          label='Custom sitter type: '
+          placeholder='start typing here...'
+          value={this.state.formData.userNotes}
+        />
+      );
+
 	    return (
 	        <View style={styles.container}>
             <NavigationBar
               title={<IconTitle/>}
               leftButton={<BackArrow onPress={() => this.props.navigator.pop()}/>}
 		        />
+          <ScrollView keyboardShouldPersistTaps="handled" style={styles.scrollView}>
+            <KeyboardAvoidingView behavior='padding'>
 
             <TopBannerBox
               imageSource={require('../images/bg/cuppa.jpg')}
               title="Add new sitter"
             />
 
-		      <ScrollView keyboardShouldPersistTaps="handled" style={styles.scrollView}>
-            <KeyboardAvoidingView behavior='padding'>
               <Form ref='addSitterForm'
               	// onFocus={this.handleFormFocus.bind(this)}
                 onChange={this.handleFormChange.bind(this)}
@@ -166,6 +196,29 @@ class AddSitter extends Component {
                     }
                   })(this)}
                 />
+
+                <PickerField ref='type'
+                  iconLeft={<Icon name="handshake-o" size={15} style={styles.inputIcon} />}
+                  iconRight={<Icon name="angle-right" size={20} style={[ styles.inputIcon, styles.iconRight ]} />}
+                  valueStyle={styles.pickerFieldValue}
+                  value={this.state.formData.type}
+                  options={{
+                    'CHILD': 'Child sitter',
+                    'PET': 'Pet sitter',
+                    'HOUSE': 'House sitter',
+                    'OTHER': 'Custom'
+                  }}
+                  pickerWrapper={<CustomModal modalTitle="Choose sitter type" />}
+                /> 
+
+                { this.state.showTypeDescriptionInput ? typeDescriptionInput : <View/> }
+
+                 <CustomTextInput
+                    ref='notes'
+                    iconLeft={<Icon name="pencil-square-o" size={15} style={styles.inputIcon} />}
+                    placeholder='Your private notes about this sitter (optional)'
+                    value={this.state.formData.userNotes}
+                  />
 
           			<PickerField ref='priority'
           				iconLeft={<Icon name="heart-o" size={20} style={styles.inputIcon} />}
