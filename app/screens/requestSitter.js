@@ -1,7 +1,7 @@
 'use strict';
 import React, {Component} from 'react';
 import {AppRegistry, AsyncStorage, StyleSheet, View, Text, Image, TouchableHighlight, TouchableWithoutFeedback, TouchableOpacity,Alert} from 'react-native';
-import { Form, SwitchField, DatePickerField } from 'react-native-form-generator';
+import { Form, SwitchField, DatePickerField, PickerField } from 'react-native-form-generator';
 import moment from 'moment';
 
 var GLOBAL = require('../common/globals');
@@ -29,7 +29,8 @@ class RequestSitter extends Component{
           startDateTime: moment().add(1,'h'),
           endDateTime: moment().add(2,'h'),
           urgent: false,
-          parentNotes: ''
+          parentNotes: '',
+          sitterType: "CHILD"
         },
         disableButton: true,
         errorMessage: '',
@@ -48,10 +49,11 @@ class RequestSitter extends Component{
                 startDatetimeIso8601: startDT.format(),
                 endDatetimeIso8601: endDT.format(),
                 type:  requestType,
-                sitterUserIds: [], //todo ?
+                userNotes: "", // unsure why this is in the API. Ask MW.
                 parentUserNotes:  this.state.formData.parentNotes,
+                sitterType: this.state.formData.sitterType
               });
-
+    
     AsyncStorage.getItem(GLOBAL.STORAGE_KEY).then((userId) => {
       fetch( GLOBAL.BABYSITTER_API_URL + "users/"+ userId + "/sitters/schedule", {
           method: "POST",
@@ -101,6 +103,8 @@ class RequestSitter extends Component{
     data.endDateTime = newData.endDateTime ? moment(newData.endDateTime) : this.state.formData.endDateTime;
     data.urgent = newData.urgent ? newData.urgent: this.state.formData.urgent;
     data.parentNotes = newData.parentNotes ? newData.parentNotes : this.state.formData.parentNotes;
+    data.sitterType = newData.sitterType ? newData.sitterType: this.state.formData.sitterType;
+
 
     var datesDiff = data.endDateTime.diff(data.startDateTime);
     // update endTime only if its value is before startTime
@@ -172,11 +176,25 @@ class RequestSitter extends Component{
                 placeholderStyle = {styles.placeholderStyle}
                 placeholder='End Date & Time'/>
 
+                <PickerField ref='sitterType'
+                  iconLeft={<Icon name="handshake-o" size={15} style={styles.inputIcon} />}
+                  iconRight={<Icon name="angle-right" size={20} style={[ styles.inputIcon, styles.iconRight ]} />}
+                  valueStyle={styles.pickerFieldValue}
+                  value={this.state.formData.sitterType}
+                  options={{
+                    'CHILD': 'Child sitter',
+                    'PET': 'Pet sitter',
+                    'HOUSE': 'House sitter',
+                    'OTHER': 'Other'
+                  }}
+                  pickerWrapper={<CustomModal modalTitle="Choose sitter type" />}
+                /> 
+
               <CustomTextInput
                 multiline={true}
                 blurOnSubmit={true}
                 ref='parentNotes'
-                iconLeft={<Icon style={{alignSelf:'center', marginLeft:10}} name='comment-o' size={15} />}
+                iconLeft={<Icon style={styles.optionalNoteIcon} name='comment-o' size={15} />}
                 placeholder='Include an optional note'
                 style = {styles.valueStyle}
               />

@@ -31,5 +31,25 @@ module.exports = StyleSheet.create({
     error: {
         color: 'red',
         margin: 20
+    },
+    inputIcon: {
+        marginLeft: 15,
+        width: 20,
+        height: 20,
+        alignSelf: 'center',
+    },
+    iconRight: {
+        position: 'absolute',
+        right: 0,
+        top: 10,
+        color: common.color.grey
+    },
+    pickerFieldValue: {
+        fontFamily: common.fontFamily.base,
+        color: 'black'        
+    },
+    optionalNoteIcon: {
+        alignSelf:'center',
+        marginLeft:10
     }
 })
